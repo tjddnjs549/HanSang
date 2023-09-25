@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F040ACC2AC1A3AC00719CDD /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC22AC1A3AC00719CDD /* User+CoreDataClass.swift */; };
+		3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC42AC1A3AC00719CDD /* Content+CoreDataClass.swift */; };
+		3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */; };
+		3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */; };
+		3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */; };
 		637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C42AC1793000E59D1F /* AppDelegate.swift */; };
 		637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C62AC1793000E59D1F /* SceneDelegate.swift */; };
 		637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C82AC1793000E59D1F /* TabbarViewController.swift */; };
@@ -25,6 +30,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F040AC22AC1A3AC00719CDD /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3F040AC42AC1A3AC00719CDD /* Content+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Materials+CoreDataClass.swift"; sourceTree = "<group>"; };
 		637119C12AC1793000E59D1F /* HanSang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HanSang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637119C42AC1793000E59D1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		637119C62AC1793000E59D1F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +65,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F040AD62AC1A3D700719CDD /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		3F040AD72AC1A41600719CDD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				637119C82AC1793000E59D1F /* TabbarViewController.swift */,
+				637119CA2AC1793000E59D1F /* Main.storyboard */,
+				637119DC2AC1796B00E59D1F /* LoginPage */,
+				637119DD2AC1798400E59D1F /* MainPage */,
+				637119EF2AC180C500E59D1F /* TimerPage */,
+				637119E02AC179DD00E59D1F /* BookMarkPage */,
+				637119DF2AC179C600E59D1F /* CreatePage */,
+				637119DE2AC179B000E59D1F /* DetailPage */,
+				637119DB2AC1795700E59D1F /* MyPage */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		637119B82AC1793000E59D1F = {
 			isa = PBXGroup;
 			children = (
@@ -78,16 +111,9 @@
 				637119F52AC182E500E59D1F /* Extension */,
 				637119F42AC182C300E59D1F /* Util */,
 				637119F32AC182AC00E59D1F /* Application */,
-				637119C82AC1793000E59D1F /* TabbarViewController.swift */,
+				3F040AD62AC1A3D700719CDD /* Manager */,
 				637119F22AC182A200E59D1F /* Model */,
-				637119EF2AC180C500E59D1F /* TimerPage */,
-				637119E02AC179DD00E59D1F /* BookMarkPage */,
-				637119DF2AC179C600E59D1F /* CreatePage */,
-				637119DE2AC179B000E59D1F /* DetailPage */,
-				637119DD2AC1798400E59D1F /* MainPage */,
-				637119DC2AC1796B00E59D1F /* LoginPage */,
-				637119DB2AC1795700E59D1F /* MyPage */,
-				637119CA2AC1793000E59D1F /* Main.storyboard */,
+				3F040AD72AC1A41600719CDD /* View */,
 				637119D02AC1793100E59D1F /* Assets.xcassets */,
 				637119D22AC1793100E59D1F /* LaunchScreen.storyboard */,
 				637119D52AC1793100E59D1F /* Info.plist */,
@@ -155,6 +181,11 @@
 		637119F22AC182A200E59D1F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3F040AC22AC1A3AC00719CDD /* User+CoreDataClass.swift */,
+				3F040AC42AC1A3AC00719CDD /* Content+CoreDataClass.swift */,
+				3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */,
+				3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */,
+				3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,14 +286,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				637119EA2AC17C9500E59D1F /* CreateViewController.swift in Sources */,
+				3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */,
 				637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */,
+				3F040ACC2AC1A3AC00719CDD /* User+CoreDataClass.swift in Sources */,
 				637119CF2AC1793000E59D1F /* HanSang.xcdatamodeld in Sources */,
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
+				3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */,
 				637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */,
 				637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */,
 				637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */,
 				637119E42AC17BDC00E59D1F /* MainViewController.swift in Sources */,
 				637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */,
+				3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */,
+				3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */,
 				637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */,
 				637119E82AC17C5900E59D1F /* DetailViewController.swift in Sources */,
 			);
