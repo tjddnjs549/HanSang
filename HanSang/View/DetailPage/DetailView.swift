@@ -9,7 +9,8 @@ import UIKit
 
 final class DetailView: UIView {
 
-    
+    var material: [String] = ["스테이크용 소고기", "아스파라거스", "새송이 버섯", "감자", "소스", "돼지고기", "와인", "야파"]
+    var unit: [String] =  ["1개", "2개", "3개", "4개", "5개", "6개", "7개", "8개"]
     
     
     var isLiked: Bool = false
@@ -91,12 +92,18 @@ final class DetailView: UIView {
         return label
     }()
     
+    //❗️❗️❗️❗️❗️❗️❗️
     private lazy var likeButton: UIButton = {
         let like = UIButton(type: .custom)
         like.buttonImageMakeUI(image: "heart", selectedImage: "heart.fill", color: .red)
         like.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return like
     }()
+    @objc func likeButtonTapped() {
+        likeButton.isSelected.toggle() // 선택 상태를 토글합니다.
+        isLiked = likeButton.isSelected // isLiked 값을 업데이트합니다.
+        print(likeButton.isSelected)
+    }
     
     private let divider: UIView = {
         let divider = UIView()
@@ -112,15 +119,47 @@ final class DetailView: UIView {
         return label
     }()
     
-    private lazy var materialTableView: UITableView = {
+    lazy var materialTableView: UITableView = {
         let table = UITableView()
-        table.delegate = self
-        table.dataSource = self
+        table.separatorStyle = .none
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.layer.borderWidth = 2.0
-        table.layer.borderColor = UIColor.black.cgColor
         return table
     }()
+    
+    private let recipeLabel: UILabel = {
+        let label = UILabel()
+        label.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 20))
+        label.text = "조리 방법"
+        return label
+    }()
+    
+    private lazy var kickView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 10.0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var kickLabel: UILabel = {
+        let label = UILabel()
+        label.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 18))
+        label.text = "레시피 Kick!"
+        return label
+    }()
+    
+    lazy var makeKickLabel: UILabel = {
+        let label = UILabel()
+        label.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 16))
+        label.text = """
+                    이 레시피의 킥은 이것입니다!
+                    이것을 조리할 때 빼먹지말고 넣어주세요.
+                    만약 없다면 oo 이것으로 대체해도 무방합니다!
+                    """
+        return label
+    }()
+    
     
     // MARK: - init
 
@@ -133,14 +172,18 @@ final class DetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        scrollView.contentSize = CGSize(width: bounds.width, height: kickView.frame.maxY + 100)
+        print(materialTableView.frame)
+        
+        
+    }
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        self.profileImageView.layer.borderWidth = 1.0
-        self.profileImageView.layer.borderColor = UIColor.black.cgColor
         self.profileImageView.clipsToBounds = true
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width / 2
-        
     }
 
 }
@@ -154,6 +197,8 @@ private extension DetailView {
         labelMakeUI()
         userInfoMakeUI()
         materialMakeUI()
+        tableViewSetting()
+        kickMakeUI()
     }
     
     
@@ -238,40 +283,87 @@ private extension DetailView {
         ])
     }
     
-    //레시피 재료 레이아웃
+    //재료 레이아웃
     func materialMakeUI() {
         self.contentView.addSubview(materialLabel)
         self.contentView.addSubview(materialTableView)
+        self.contentView.addSubview(recipeLabel)
         
         NSLayoutConstraint.activate([
             materialLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             materialLabel.topAnchor.constraint(equalTo: self.divider.bottomAnchor, constant: 20),
-            materialLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
-        
+            
             materialTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             materialTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
-            materialTableView.topAnchor.constraint(equalTo: self.materialLabel.bottomAnchor, constant: 20)
+            materialTableView.topAnchor.constraint(equalTo: self.materialLabel.bottomAnchor, constant: 20),
+            materialTableView.heightAnchor.constraint(equalToConstant: 250),
+            //❗️❗️❗️
+            //materialTableView.bottomAnchor.constraint(equalTo: self.recipeLabel.topAnchor, constant: -20),
+            
+            recipeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            recipeLabel.topAnchor.constraint(equalTo: self.materialTableView.bottomAnchor, constant: 20),
+        ])
+    }
+
+    //킥 부분
+    func kickMakeUI() {
+        self.contentView.addSubview(kickView)
+        self.contentView.addSubview(kickLabel)
+        self.contentView.addSubview(makeKickLabel)
+        
+        
+        NSLayoutConstraint.activate([
+            kickView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            kickView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
+            kickView.topAnchor.constraint(equalTo: self.recipeLabel.bottomAnchor, constant: 20),
+            
+            kickLabel.leadingAnchor.constraint(equalTo: self.kickView.leadingAnchor, constant: 20),
+            kickLabel.topAnchor.constraint(equalTo: self.kickView.topAnchor, constant: 15),
+            
+            makeKickLabel.topAnchor.constraint(equalTo: self.kickLabel.bottomAnchor, constant: 10),
+            makeKickLabel.leadingAnchor.constraint(equalTo: self.kickView.leadingAnchor, constant: 20),
+            makeKickLabel.trailingAnchor.constraint(equalTo: self.kickView.trailingAnchor, constant: -20),
+            makeKickLabel.bottomAnchor.constraint(equalTo: self.kickView.bottomAnchor, constant: -20)
+            
+            
         ])
     }
 }
 
+// MARK: - tableView 세팅
+
+private extension DetailView {
+    
+    func tableViewSetting() {
+        materialTableView.delegate = self
+        materialTableView.dataSource = self
+        materialTableView.register(MaterialTableViewCell.self, forCellReuseIdentifier: "MaterialTableViewCell")
+    }
+    
+}
 
 // MARK: - table UITableViewDelegate / UITableViewDataSource
 
 
 extension DetailView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return material.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MaterialTableViewCell", for: indexPath) as! MaterialTableViewCell
+        cell.materialLabel.text = material[indexPath.row]
+        cell.unitLabel.text = unit[indexPath.row]
+        cell.selectionStyle = .none
+        return cell
     }
 }
 
 
 extension DetailView: UITableViewDelegate {
-    
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 30
+        }
 }
 
 
@@ -283,9 +375,6 @@ extension DetailView: UITableViewDelegate {
 
 extension DetailView {
     
-    @objc func likeButtonTapped() {
-        isLiked.toggle()
-        likeButton.isSelected = isLiked // 버튼의 선택 상태를 업데이트
-    }
+
 }
 

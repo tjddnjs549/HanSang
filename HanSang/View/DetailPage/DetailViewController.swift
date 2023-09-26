@@ -13,10 +13,12 @@ final class DetailViewController: UIViewController {
     
     override func loadView() {
         view = detailView
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       detailView.materialTableView.reloadData()
     }
 
     
