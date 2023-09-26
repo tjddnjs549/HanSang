@@ -16,7 +16,7 @@ final class DetailView: UIView {
         scroll.isScrollEnabled = true
         scroll.showsVerticalScrollIndicator = true
         scroll.translatesAutoresizingMaskIntoConstraints = false
-        scroll.backgroundColor = .brown
+        scroll.backgroundColor = .white
         scroll.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return scroll
     }()
@@ -35,6 +35,44 @@ final class DetailView: UIView {
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
+    
+    lazy var titleLabel: UILabel = {
+        let title = UILabel()
+        title.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 24))
+        title.text = "집에서도 미디움레어가 가능한 스테이크 레시피"
+        return title
+    }()
+    
+    private lazy var timeLabel: UILabel = {
+        let time = UILabel()
+        time.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 16))
+        time.text = "시간:"
+        return time
+    }()
+    
+    lazy var makeTimeLabel: UILabel = {
+        let time = UILabel()
+        time.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 16))
+        time.text = "1시간30분"
+        return time
+    }()
+    
+    private lazy var difficultyLabel: UILabel = {
+        let difficulty = UILabel()
+        difficulty.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 16))
+        difficulty.text = "난이도:"
+        return difficulty
+    }()
+    
+    lazy var makeDifficultyLabel: UILabel = {
+        let difficulty = UILabel()
+        difficulty.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 16))
+        difficulty.text = "초보중간"
+        return difficulty
+    }()
+    
+    
+   
     
     // MARK: - init
 
@@ -56,7 +94,7 @@ private extension DetailView {
     
     func configureUI() {
         scrollViewMakeUI()
-        
+        labelMakeUI()
     }
     
     
@@ -65,8 +103,8 @@ private extension DetailView {
         
         self.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
-        
+        self.contentView.addSubview(foodImageView)
+        self.contentView.addSubview(titleLabel)
         //스크롤뷰 제약
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo:  self.leadingAnchor),
@@ -74,17 +112,48 @@ private extension DetailView {
             scrollView.topAnchor.constraint(equalTo: self.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
             
-            foodImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            foodImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            foodImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 0),
-            foodImageView.heightAnchor.constraint(equalToConstant: 200)
+            foodImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            foodImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            foodImageView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+            foodImageView.heightAnchor.constraint(equalToConstant: 330),
+            
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant:  30),
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
+            titleLabel.topAnchor.constraint(equalTo: self.foodImageView.bottomAnchor, constant: 20)
+        ])
+    }
+    
+    func labelMakeUI() {
+        
+        self.contentView.addSubview(timeLabel)
+        self.contentView.addSubview(makeTimeLabel)
+        self.contentView.addSubview(difficultyLabel)
+        self.contentView.addSubview(makeDifficultyLabel)
+        
+        NSLayoutConstraint.activate([
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
+            timeLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 20),
+            timeLabel.trailingAnchor.constraint(equalTo: self.makeTimeLabel.leadingAnchor, constant: -5),
+            
+            makeTimeLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 20),
+            makeTimeLabel.trailingAnchor.constraint(equalTo: self.difficultyLabel.leadingAnchor, constant: -20),
+            
+            difficultyLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 20),
+            difficultyLabel.trailingAnchor.constraint(equalTo: self.makeDifficultyLabel.leadingAnchor, constant:  -5),
+            
+            makeDifficultyLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 20),
+            makeDifficultyLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
+        
         ])
     }
     
     
+    
 }
+
+

@@ -28,6 +28,7 @@
 		637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119EB2AC17CAA00E59D1F /* BookMarkViewController.swift */; };
 		637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119ED2AC17CC100E59D1F /* LoginViewController.swift */; };
 		637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119F02AC180DF00E59D1F /* TimerViewController.swift */; };
+		63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		637119EB2AC17CAA00E59D1F /* BookMarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkViewController.swift; sourceTree = "<group>"; };
 		637119ED2AC17CC100E59D1F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		637119F02AC180DF00E59D1F /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,8 +214,17 @@
 		637119F52AC182E500E59D1F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				63945F6B2AC2B1E00053792E /* Extension+DetailPage */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		63945F6B2AC2B1E00053792E /* Extension+DetailPage */ = {
+			isa = PBXGroup;
+			children = (
+				63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */,
+			);
+			path = "Extension+DetailPage";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +305,7 @@
 				637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */,
 				3F040ACC2AC1A3AC00719CDD /* User+CoreDataClass.swift in Sources */,
 				637119CF2AC1793000E59D1F /* HanSang.xcdatamodeld in Sources */,
+				63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */,
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
 				3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */,
 				637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */,

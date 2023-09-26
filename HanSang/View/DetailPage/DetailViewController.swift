@@ -22,3 +22,22 @@ final class DetailViewController: UIViewController {
     
     
 }
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+private struct UIViewControllerRepresenter: UIViewControllerRepresentable {
+    let viewController: UIViewController
+    
+    func makeUIViewController(context: Context) -> UIViewController {
+        return viewController
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+}
+
+struct UIViewControllerPreviewView: PreviewProvider {
+    static var previews: some View {
+        let viewController = DetailViewController()
+        return UIViewControllerRepresenter(viewController: viewController)
+    }
+}
+#endif
