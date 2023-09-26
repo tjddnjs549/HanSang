@@ -33,6 +33,7 @@ private extension LoginViewController {
     
     @objc func signUpButtonTapped() {
         let signUpVC = SignUpViewController()
-        navigationController?.pushViewController(signUpVC, animated: true)
+        signUpVC.modalPresentationStyle = .fullScreen
+        present(signUpVC, animated: true, completion: nil)
     }
 }

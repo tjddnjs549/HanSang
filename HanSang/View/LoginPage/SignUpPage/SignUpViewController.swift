@@ -8,22 +8,22 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
+    private let signUpView = SignUpView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setup()
+    }
+}
+
+private extension SignUpViewController {
+    func setup() {
+        view = signUpView
+        signUpView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func cancelButtonTapped() {
+        dismiss(animated: true)
     }
-    */
-
 }
