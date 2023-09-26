@@ -20,9 +20,28 @@ class CostomCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
+    private let label: UILabel = {
+        let label = UILabel()
+        label.text = "Costom"
+        label.textAlignment = .center
+        label.textColor = .white
+        return label
+    }()
+    
+    
+    
     public func configure(with image: UIImage) {
         self.myimageView.image = image
+        myimageView.addSubview(label)
         self.setupUI()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        label.frame = CGRect(x: 5, y: myimageView.frame.size.height-50, width: myimageView.frame.size.width-10, height: 50)
+//        label.frame = bounds
+        
+
     }
     
     private func setupUI() {
