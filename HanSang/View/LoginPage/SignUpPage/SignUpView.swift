@@ -26,8 +26,8 @@ class SignUpView: UIView {
     
     let profilePicture: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "profileImage")
-        imageView.backgroundColor = .black
+        imageView.image = UIImage(named: "profileImage")
+        imageView.backgroundColor = ColorGuide.yellow900
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 75
         return imageView
@@ -147,8 +147,9 @@ class SignUpView: UIView {
     let okButton: UIButton = {
         let button = UIButton()
         button.setTitle("계정 만들기", for: .normal)
-        button.backgroundColor = .black
-        button.layer.cornerRadius = 20
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = ColorGuide.yellow900
+        button.layer.cornerRadius = 10
         return button
     }()
 
@@ -194,9 +195,9 @@ private extension SignUpView {
         }
         
         okButton.snp.makeConstraints { make in
-            make.top.equalTo(signUpInfoStackView.snp.bottom).offset(30)
+            make.top.equalTo(signUpInfoStackView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
-            make.width.equalTo(250)
+            make.width.equalTo(300)
             make.height.equalTo(40)
         }
     }

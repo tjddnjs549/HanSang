@@ -35,16 +35,18 @@ class LoginView: UIView {
     let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("로그인", for: .normal)
-        button.backgroundColor = .black
-        button.layer.cornerRadius = 20
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = ColorGuide.yellow900
+        button.layer.cornerRadius = 10
         return button
     }()
     
     let signUpButton: UIButton = {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
-        button.backgroundColor = .black
-        button.layer.cornerRadius = 20
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = ColorGuide.yellow900
+        button.layer.cornerRadius = 10
         return button
     }()
     
@@ -74,26 +76,26 @@ class LoginView: UIView {
         id.snp.makeConstraints { make in
             make.top.equalTo(logo.snp.bottom).offset(50)
             make.centerX.equalToSuperview()
-            make.width.equalTo(250)
+            make.width.equalTo(300)
         }
         
         pw.snp.makeConstraints { make in
             make.top.equalTo(id.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-            make.width.equalTo(250)
+            make.width.equalTo(300)
         }
         
         loginButton.snp.makeConstraints { make in
             make.top.equalTo(pw.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
-            make.width.equalTo(250)
+            make.width.equalTo(300)
             make.height.equalTo(40)
         }
         
         signUpButton.snp.makeConstraints { make in
             make.top.equalTo(loginButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-            make.width.equalTo(250)
+            make.width.equalTo(300)
             make.height.equalTo(40)
         }
     }
