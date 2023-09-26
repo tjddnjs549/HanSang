@@ -6,13 +6,32 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainViewController: UIViewController {
+    
+    private let loginButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("로그인", for: .normal)
+        btn.backgroundColor = .link
+        return btn
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        view.addSubview(loginButton)
+        loginButton.snp.makeConstraints { make in
+            make.leading.top.equalTo(100)
+        }
+        
+        loginButton.addTarget(self, action: #selector(loginPageVC), for: .touchUpInside)
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func loginPageVC() {
+        let loginPageVC = LoginViewController()
+        navigationController?.pushViewController(loginPageVC, animated: true)
     }
     
 

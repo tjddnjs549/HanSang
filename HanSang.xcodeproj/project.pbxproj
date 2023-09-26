@@ -12,6 +12,10 @@
 		3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */; };
 		3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */; };
 		3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */; };
+		3F040ADB2AC1A99200719CDD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F040ADA2AC1A99200719CDD /* SnapKit */; };
+		3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADC2AC25DE700719CDD /* LoginView.swift */; };
+		3F040ADF2AC2645000719CDD /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADE2AC2645000719CDD /* SignUpView.swift */; };
+		3F040AE12AC2645F00719CDD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AE02AC2645F00719CDD /* SignUpViewController.swift */; };
 		637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C42AC1793000E59D1F /* AppDelegate.swift */; };
 		637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C62AC1793000E59D1F /* SceneDelegate.swift */; };
 		637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C82AC1793000E59D1F /* TabbarViewController.swift */; };
@@ -35,6 +39,9 @@
 		3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Materials+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3F040ADC2AC25DE700719CDD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		3F040ADE2AC2645000719CDD /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		3F040AE02AC2645F00719CDD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		637119C12AC1793000E59D1F /* HanSang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HanSang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637119C42AC1793000E59D1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		637119C62AC1793000E59D1F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F040ADB2AC1A99200719CDD /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +94,15 @@
 				637119DB2AC1795700E59D1F /* MyPage */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		3F040AE22AC2646200719CDD /* SignUpPage */ = {
+			isa = PBXGroup;
+			children = (
+				3F040ADE2AC2645000719CDD /* SignUpView.swift */,
+				3F040AE02AC2645F00719CDD /* SignUpViewController.swift */,
+			);
+			path = SignUpPage;
 			sourceTree = "<group>";
 		};
 		637119B82AC1793000E59D1F = {
@@ -133,7 +150,9 @@
 		637119DC2AC1796B00E59D1F /* LoginPage */ = {
 			isa = PBXGroup;
 			children = (
+				3F040ADC2AC25DE700719CDD /* LoginView.swift */,
 				637119ED2AC17CC100E59D1F /* LoginViewController.swift */,
+				3F040AE22AC2646200719CDD /* SignUpPage */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -229,6 +248,9 @@
 			dependencies = (
 			);
 			name = HanSang;
+			packageProductDependencies = (
+				3F040ADA2AC1A99200719CDD /* SnapKit */,
+			);
 			productName = HanSang;
 			productReference = 637119C12AC1793000E59D1F /* HanSang.app */;
 			productType = "com.apple.product-type.application";
@@ -257,6 +279,9 @@
 				Base,
 			);
 			mainGroup = 637119B82AC1793000E59D1F;
+			packageReferences = (
+				3F040AD92AC1A99200719CDD /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 637119C22AC1793000E59D1F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -292,14 +317,17 @@
 				637119CF2AC1793000E59D1F /* HanSang.xcdatamodeld in Sources */,
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
 				3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */,
+				3F040AE12AC2645F00719CDD /* SignUpViewController.swift in Sources */,
 				637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */,
 				637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */,
 				637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */,
+				3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */,
 				637119E42AC17BDC00E59D1F /* MainViewController.swift in Sources */,
 				637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */,
 				3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */,
 				3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */,
 				637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */,
+				3F040ADF2AC2645000719CDD /* SignUpView.swift in Sources */,
 				637119E82AC17C5900E59D1F /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,6 +557,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3F040AD92AC1A99200719CDD /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3F040ADA2AC1A99200719CDD /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F040AD92AC1A99200719CDD /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		637119CD2AC1793000E59D1F /* HanSang.xcdatamodeld */ = {

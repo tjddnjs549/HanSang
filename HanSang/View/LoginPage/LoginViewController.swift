@@ -8,22 +8,31 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    private let loginView = LoginView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        // Do any additional setup after loading the view.
+        
+        setup()
+    }
+
+}
+
+private extension LoginViewController {
+    func setup() {
+        view = loginView
+        loginView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        loginView.signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // 메인화면 이동 방법 수정 필요
+    @objc func loginButtonTapped() {
+        let mainVC = MainViewController()
+        navigationController?.pushViewController(mainVC, animated: true)
     }
-    */
-
+    
+    @objc func signUpButtonTapped() {
+        let signUpVC = SignUpViewController()
+        navigationController?.pushViewController(signUpVC, animated: true)
+    }
 }
