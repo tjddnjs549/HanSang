@@ -11,7 +11,8 @@ final class DetailView: UIView {
 
     var material: [String] = ["스테이크용 소고기", "아스파라거스", "새송이 버섯", "감자", "소스", "돼지고기", "와인", "야파"]
     var unit: [String] =  ["1개", "2개", "3개", "4개", "5개", "6개", "7개", "8개"]
-    
+    var imageArray: [UIImage] = [UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!]
+    var imageDescriptionArray: [String] = ["스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다."]
     
     var isLiked: Bool = false
     // MARK: - properties
@@ -100,14 +101,14 @@ final class DetailView: UIView {
         return like
     }()
     @objc func likeButtonTapped() {
-        likeButton.isSelected.toggle() // 선택 상태를 토글합니다.
-        isLiked = likeButton.isSelected // isLiked 값을 업데이트합니다.
+        likeButton.isSelected.toggle()
+        isLiked = likeButton.isSelected
         print(likeButton.isSelected)
     }
     
     private let divider: UIView = {
         let divider = UIView()
-        divider.backgroundColor = UIColor.lightGray
+        divider.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         divider.translatesAutoresizingMaskIntoConstraints = false
         return divider
     }()
@@ -159,6 +160,14 @@ final class DetailView: UIView {
                     """
         return label
     }()
+    
+    lazy var recipeTableView: UITableView = {
+        let table = UITableView()
+        table.separatorStyle = .none
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
+    }()
+    
     
     
     // MARK: - init
@@ -277,7 +286,7 @@ private extension DetailView {
             likeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
             likeButton.centerYAnchor.constraint(equalTo: self.profileImageView.centerYAnchor),
             
-            divider.heightAnchor.constraint(equalToConstant: 1.5),
+            divider.heightAnchor.constraint(equalToConstant: 2),
             divider.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1),
             divider.topAnchor.constraint(equalTo: self.profileImageView.bottomAnchor, constant: 15)
         ])
@@ -337,7 +346,10 @@ private extension DetailView {
     func tableViewSetting() {
         materialTableView.delegate = self
         materialTableView.dataSource = self
+        recipeTableView.delegate = self
+        recipeTableView.dataSource = self
         materialTableView.register(MaterialTableViewCell.self, forCellReuseIdentifier: "MaterialTableViewCell")
+        //recipeTableView.register(<#T##nib: UINib?##UINib?#>, forCellReuseIdentifier: <#T##String#>)
     }
     
 }
@@ -365,10 +377,6 @@ extension DetailView: UITableViewDelegate {
             return 30
         }
 }
-
-
-
-
 
 
 // MARK: - @objc func
