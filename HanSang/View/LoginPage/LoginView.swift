@@ -11,7 +11,7 @@ class LoginView: UIView {
 
     private let logo: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "plus")
+        imageView.image = UIImage(named: "logo1")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -29,6 +29,11 @@ class LoginView: UIView {
         textField.placeholder = "비밀번호 입력"
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.isSecureTextEntry = true
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
+        textField.textContentType = .none
         return textField
     }()
     
@@ -70,7 +75,8 @@ class LoginView: UIView {
         
         logo.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(300)
+            make.top.equalTo(200)
+            make.width.height.equalTo(200)
         }
         
         id.snp.makeConstraints { make in

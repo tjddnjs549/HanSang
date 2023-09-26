@@ -26,10 +26,13 @@ class SignUpView: UIView {
     
     let profilePicture: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "profileImage")
+        imageView.image = UIImage(systemName: "person.fill")
+        imageView.tintColor = ColorGuide.blue600
         imageView.backgroundColor = ColorGuide.yellow900
-        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 75
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -75,6 +78,11 @@ class SignUpView: UIView {
         textField.placeholder = "비밀번호 입력"
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.isSecureTextEntry = true
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
+        textField.textContentType = .none
         return textField
     }()
     
@@ -101,6 +109,11 @@ class SignUpView: UIView {
         textField.placeholder = "비밀번호 재입력"
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.isSecureTextEntry = true
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
+        textField.textContentType = .none
         return textField
     }()
     
