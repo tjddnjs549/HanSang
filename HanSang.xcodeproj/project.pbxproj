@@ -12,6 +12,17 @@
 		3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */; };
 		3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */; };
 		3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */; };
+		632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632336D82AC1DAAF0011B024 /* DetailView.swift */; };
+		3F040ADB2AC1A99200719CDD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F040ADA2AC1A99200719CDD /* SnapKit */; };
+		3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADC2AC25DE700719CDD /* LoginView.swift */; };
+		3F040ADF2AC2645000719CDD /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADE2AC2645000719CDD /* SignUpView.swift */; };
+		3F040AE12AC2645F00719CDD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AE02AC2645F00719CDD /* SignUpViewController.swift */; };
+		3F040AE42AC279C300719CDD /* MyPageView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AE32AC279C300719CDD /* MyPageView2.swift */; };
+		3F040AE62AC29B1F00719CDD /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AE52AC29B1F00719CDD /* MyPageView.swift */; };
+		3F040AEC2AC2B95F00719CDD /* MyPageCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AEB2AC2B95F00719CDD /* MyPageCustomCell.swift */; };
+		3F040AEE2AC2CA1900719CDD /* MyPageCustomCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AED2AC2CA1900719CDD /* MyPageCustomCell2.swift */; };
+		3F040AF22AC2D03000719CDD /* ColorGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AF12AC2D03000719CDD /* ColorGuide.swift */; };
+		3F040AF42AC3B34900719CDD /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AF32AC3B34900719CDD /* SignUpViewModel.swift */; };
 		637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C42AC1793000E59D1F /* AppDelegate.swift */; };
 		637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C62AC1793000E59D1F /* SceneDelegate.swift */; };
 		637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C82AC1793000E59D1F /* TabbarViewController.swift */; };
@@ -30,6 +41,10 @@
 		E26A9EB72AC2CAD500303B5F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E26A9EB62AC2CAD500303B5F /* SnapKit */; };
 		E26A9EBA2AC2CE2800303B5F /* RecipeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A9EB92AC2CE2800303B5F /* RecipeInfoView.swift */; };
 		E26A9EBD2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A9EBC2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift */; };
+		63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */; };
+		63945F6F2AC2EA590053792E /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63945F6E2AC2EA590053792E /* Extension+UIButton.swift */; };
+		63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */; };
+		63B35A122AC38266009B78D1 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +53,16 @@
 		3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Materials+CoreDataClass.swift"; sourceTree = "<group>"; };
+		632336D82AC1DAAF0011B024 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		3F040ADC2AC25DE700719CDD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		3F040ADE2AC2645000719CDD /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		3F040AE02AC2645F00719CDD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3F040AE32AC279C300719CDD /* MyPageView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView2.swift; sourceTree = "<group>"; };
+		3F040AE52AC29B1F00719CDD /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		3F040AEB2AC2B95F00719CDD /* MyPageCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCustomCell.swift; sourceTree = "<group>"; };
+		3F040AED2AC2CA1900719CDD /* MyPageCustomCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCustomCell2.swift; sourceTree = "<group>"; };
+		3F040AF12AC2D03000719CDD /* ColorGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGuide.swift; sourceTree = "<group>"; };
+		3F040AF32AC3B34900719CDD /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		637119C12AC1793000E59D1F /* HanSang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HanSang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637119C42AC1793000E59D1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		637119C62AC1793000E59D1F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +82,10 @@
 		637119F02AC180DF00E59D1F /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		E26A9EB92AC2CE2800303B5F /* RecipeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoView.swift; sourceTree = "<group>"; };
 		E26A9EBC2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
+		63945F6E2AC2EA590053792E /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
+		63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTableViewCell.swift; sourceTree = "<group>"; };
+		63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E26A9EB72AC2CAD500303B5F /* SnapKit in Frameworks */,
+				3F040ADB2AC1A99200719CDD /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +123,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		3F040AE22AC2646200719CDD /* SignUpPage */ = {
+			isa = PBXGroup;
+			children = (
+				3F040ADE2AC2645000719CDD /* SignUpView.swift */,
+				3F040AE02AC2645F00719CDD /* SignUpViewController.swift */,
+			);
+			path = SignUpPage;
+			sourceTree = "<group>";
+		};
+		3F040AF52AC3B35A00719CDD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3F040AF32AC3B34900719CDD /* SignUpViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		637119B82AC1793000E59D1F = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +166,7 @@
 				3F040AD62AC1A3D700719CDD /* Manager */,
 				637119F22AC182A200E59D1F /* Model */,
 				3F040AD72AC1A41600719CDD /* View */,
+				3F040AF52AC3B35A00719CDD /* ViewModel */,
 				637119D02AC1793100E59D1F /* Assets.xcassets */,
 				637119D22AC1793100E59D1F /* LaunchScreen.storyboard */,
 				637119D52AC1793100E59D1F /* Info.plist */,
@@ -131,6 +178,10 @@
 		637119DB2AC1795700E59D1F /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				3F040AE32AC279C300719CDD /* MyPageView2.swift */,
+				3F040AED2AC2CA1900719CDD /* MyPageCustomCell2.swift */,
+				3F040AE52AC29B1F00719CDD /* MyPageView.swift */,
+				3F040AEB2AC2B95F00719CDD /* MyPageCustomCell.swift */,
 				637119E52AC17C0E00E59D1F /* MyPageViewController.swift */,
 			);
 			path = MyPage;
@@ -139,7 +190,9 @@
 		637119DC2AC1796B00E59D1F /* LoginPage */ = {
 			isa = PBXGroup;
 			children = (
+				3F040ADC2AC25DE700719CDD /* LoginView.swift */,
 				637119ED2AC17CC100E59D1F /* LoginViewController.swift */,
+				3F040AE22AC2646200719CDD /* SignUpPage */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -156,6 +209,9 @@
 			isa = PBXGroup;
 			children = (
 				637119E72AC17C5900E59D1F /* DetailViewController.swift */,
+				632336D82AC1DAAF0011B024 /* DetailView.swift */,
+				63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */,
+				63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */,
 			);
 			path = DetailPage;
 			sourceTree = "<group>";
@@ -209,6 +265,7 @@
 		637119F42AC182C300E59D1F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				3F040AF12AC2D03000719CDD /* ColorGuide.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -216,6 +273,7 @@
 		637119F52AC182E500E59D1F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				63945F6B2AC2B1E00053792E /* Extension+DetailPage */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -235,6 +293,13 @@
 				E26A9EBC2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift */,
 			);
 			path = Cell;
+		63945F6B2AC2B1E00053792E /* Extension+DetailPage */ = {
+			isa = PBXGroup;
+			children = (
+				63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */,
+				63945F6E2AC2EA590053792E /* Extension+UIButton.swift */,
+			);
+			path = "Extension+DetailPage";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,7 +319,7 @@
 			);
 			name = HanSang;
 			packageProductDependencies = (
-				E26A9EB62AC2CAD500303B5F /* SnapKit */,
+				3F040ADA2AC1A99200719CDD /* SnapKit */,
 			);
 			productName = HanSang;
 			productReference = 637119C12AC1793000E59D1F /* HanSang.app */;
@@ -285,7 +350,7 @@
 			);
 			mainGroup = 637119B82AC1793000E59D1F;
 			packageReferences = (
-				E26A9EB52AC2CAD500303B5F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3F040AD92AC1A99200719CDD /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 637119C22AC1793000E59D1F /* Products */;
 			projectDirPath = "";
@@ -317,21 +382,35 @@
 			files = (
 				637119EA2AC17C9500E59D1F /* CreateViewController.swift in Sources */,
 				3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */,
+				632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */,
+				63B35A122AC38266009B78D1 /* RecipeTableViewCell.swift in Sources */,
 				637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */,
 				3F040ACC2AC1A3AC00719CDD /* User+CoreDataClass.swift in Sources */,
 				637119CF2AC1793000E59D1F /* HanSang.xcdatamodeld in Sources */,
 				E26A9EBD2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift in Sources */,
+				63945F6F2AC2EA590053792E /* Extension+UIButton.swift in Sources */,
+				63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */,
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
 				3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */,
+				3F040AE12AC2645F00719CDD /* SignUpViewController.swift in Sources */,
 				637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */,
 				637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */,
 				637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */,
 				E26A9EBA2AC2CE2800303B5F /* RecipeInfoView.swift in Sources */,
+				3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */,
 				637119E42AC17BDC00E59D1F /* MainViewController.swift in Sources */,
 				637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */,
+				3F040AE62AC29B1F00719CDD /* MyPageView.swift in Sources */,
 				3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */,
+				63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */,
+				3F040AF22AC2D03000719CDD /* ColorGuide.swift in Sources */,
+				3F040AEE2AC2CA1900719CDD /* MyPageCustomCell2.swift in Sources */,
 				3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */,
+				3F040AEC2AC2B95F00719CDD /* MyPageCustomCell.swift in Sources */,
 				637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */,
+				3F040AE42AC279C300719CDD /* MyPageView2.swift in Sources */,
+				3F040AF42AC3B34900719CDD /* SignUpViewModel.swift in Sources */,
+				3F040ADF2AC2645000719CDD /* SignUpView.swift in Sources */,
 				637119E82AC17C5900E59D1F /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -563,7 +642,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E26A9EB52AC2CAD500303B5F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		3F040AD92AC1A99200719CDD /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -574,9 +653,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E26A9EB62AC2CAD500303B5F /* SnapKit */ = {
+		3F040ADA2AC1A99200719CDD /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E26A9EB52AC2CAD500303B5F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 3F040AD92AC1A99200719CDD /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
