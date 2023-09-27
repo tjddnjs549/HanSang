@@ -69,15 +69,20 @@ private extension MyPageViewController {
         // 로그인 페이지 테스트용
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(loginButtonTapped))
         myPageView.logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
-        
     }
-    
+
     func loadUserInfo() {
         fetchUserInfo()
         if let user = SignUpViewController.user?.first,
            let id = user.id,
            let nickname = user.nickname,
            let recipeCount = user.content?.count {
+            if let imageData = user.profilePicture,
+               let image = UIImage(data: imageData) {
+                myPageView.profilePicture.image = image
+            } else {
+                myPageView.profilePicture.image = UIImage(systemName: "person.fill")
+            }
             navigationItem.title = id
             myPageView.nicknameLabel.text = nickname
             if recipeCount == 0 {

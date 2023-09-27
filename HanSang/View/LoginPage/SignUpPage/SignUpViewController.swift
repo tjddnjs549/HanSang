@@ -49,11 +49,16 @@ class SignUpViewController: UIViewController {
         }
     }
 
-    func createUser(id: String, pw: String, nickname: String) {
+    func createUser(image: UIImage?, id: String, pw: String, nickname: String) {
         let newUser = User(context: context)
-        newUser.id = id
-        newUser.pw = pw
-        newUser.nickname = nickname
+        if let imageData = image!.jpegData(compressionQuality: 1.0) {
+            newUser.profilePicture = imageData
+            newUser.id = id
+            newUser.pw = pw
+            newUser.nickname = nickname
+        } else {
+            print("이미지 저장 에러")
+        }
 
         do {
             try context.save()
@@ -211,7 +216,8 @@ extension SignUpViewController {
     @objc func createButtonTapped() {
         guard let id = signUpView.idTextField.text,
               let pw = signUpView.pwTextField.text,
-              let nickname = signUpView.nicknameTextField.text
+              let nickname = signUpView.nicknameTextField.text,
+              let image = signUpView.profilePicture.image
         else {
             return
         }
@@ -229,7 +235,7 @@ extension SignUpViewController {
             return
         }
 
-        createUser(id: id, pw: pw, nickname: nickname)
+        createUser(image: image, id: id, pw: pw, nickname: nickname)
         fetchUserInfo()
 
         // 회원가입 완료 시 로그인 페이지로 이동
