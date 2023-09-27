@@ -100,7 +100,7 @@ class MyPageView2: UIView {
 //        return stackView
 //    }()
     
-    let nicknameLabel: UILabel = {
+    var nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "유저 닉네임"
         label.textAlignment = .left
@@ -117,7 +117,7 @@ class MyPageView2: UIView {
         return label
     }()
     
-    let recipeCount: UILabel = {
+    var recipeCount: UILabel = {
         let label = UILabel()
         label.text = "10"
         label.textAlignment = .right

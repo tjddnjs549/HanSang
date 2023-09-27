@@ -33,6 +33,19 @@ class LoginViewController: UIViewController {
             return nil
         }
     }
+    
+    func saveLogInUserInfo(_ id: String, _ pw: String) {
+        let user = User(context: context)
+        user.id = id
+        user.pw = pw
+        
+        do {
+            try context.save()
+            fetchUserInfo()
+        } catch {
+            fatalError("🚨 로그인 정보 저장 오류")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +63,6 @@ private extension LoginViewController {
         loginView.pwCheckedButton.addTarget(self, action: #selector(pwCheckedButtonTapped), for: .touchUpInside)
     }
 
-    // 메인화면 이동 방법 수정 필요
     @objc func loginButtonTapped() {
         guard let id = loginView.id.text,
               let pw = loginView.pw.text
@@ -59,15 +71,20 @@ private extension LoginViewController {
         }
         if let user = getUserId(id) {
             if user.pw == pw {
+                // 로그인 정보 저장
+                saveLogInUserInfo(id, pw)
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 // 로그인 시 메인페이지로 이동 로직
-                DispatchQueue.main.async {}
+                if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                    let tabBarController = TabbarViewController()
+                    sceneDelegate.window?.rootViewController = tabBarController
+                }
             } else {
                 showAlert(message: "비밀번호가 일치하지 않습니다.")
             }
         } else {
             showAlert(message: "존재하지 않는 계정입니다.")
         }
-        
     }
 
     @objc func signUpButtonTapped() {
