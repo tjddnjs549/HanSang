@@ -38,6 +38,7 @@
 		637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119EB2AC17CAA00E59D1F /* BookMarkViewController.swift */; };
 		637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119ED2AC17CC100E59D1F /* LoginViewController.swift */; };
 		637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119F02AC180DF00E59D1F /* TimerViewController.swift */; };
+		FF14D5CC2AC1C9B200B9D6EB /* CostomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14D5CB2AC1C9B200B9D6EB /* CostomCollectionViewCell.swift */; };
 		E26A9EB72AC2CAD500303B5F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E26A9EB62AC2CAD500303B5F /* SnapKit */; };
 		E26A9EBA2AC2CE2800303B5F /* RecipeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A9EB92AC2CE2800303B5F /* RecipeInfoView.swift */; };
 		E26A9EBD2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A9EBC2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift */; };
@@ -80,6 +81,7 @@
 		637119EB2AC17CAA00E59D1F /* BookMarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkViewController.swift; sourceTree = "<group>"; };
 		637119ED2AC17CC100E59D1F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		637119F02AC180DF00E59D1F /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		FF14D5CB2AC1C9B200B9D6EB /* CostomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostomCollectionViewCell.swift; sourceTree = "<group>"; };
 		E26A9EB92AC2CE2800303B5F /* RecipeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoView.swift; sourceTree = "<group>"; };
 		E26A9EBC2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				637119E32AC17BDC00E59D1F /* MainViewController.swift */,
+				FF14D5CB2AC1C9B200B9D6EB /* CostomCollectionViewCell.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */,
 				3F040AEC2AC2B95F00719CDD /* MyPageCustomCell.swift in Sources */,
 				637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */,
+				FF14D5CC2AC1C9B200B9D6EB /* CostomCollectionViewCell.swift in Sources */,
 				3F040AE42AC279C300719CDD /* MyPageView2.swift in Sources */,
 				3F040AF42AC3B34900719CDD /* SignUpViewModel.swift in Sources */,
 				3F040ADF2AC2645000719CDD /* SignUpView.swift in Sources */,
