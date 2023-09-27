@@ -6,61 +6,24 @@
 //
 
 import UIKit
-import SnapKit
 
 class CreateViewController: UIViewController {
 
-    // MARK: - Properties
-    
-    private let recipeInfoView = RecipeInfoView()
-    
-    private let nextButton: UIButton = {
-        $0.setTitle("다음으로", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.backgroundColor = .systemGray5
-        $0.layer.cornerRadius = 15
-        $0.addTarget(self, action: #selector(touchUpNextButton), for: .touchUpInside)
-        return $0
-    }(UIButton())
-    
-    // MARK: - Life Cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configUI()
-        setupLayout()
-    }
-    
-    // MARK: - InitUI
-    
-    private func configUI() {
         view.backgroundColor = .white
-        navigationItem.title = "레시피 작성"
+        // Do any additional setup after loading the view.
     }
     
-    private func setupLayout() {
-        [recipeInfoView, nextButton].forEach {
-            view.addSubview($0)
-        }
-        
-        recipeInfoView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(nextButton.snp.top).offset(10)
-        }
-        
-        nextButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(15)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
-            $0.height.equalTo(50)
-        }
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
-    
-    //MARK: - @objc
-    
-    @objc func touchUpNextButton() {
-        
-    }
-    
-    // MARK: - Custom Method
+    */
 
 }
