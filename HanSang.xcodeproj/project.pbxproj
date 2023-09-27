@@ -12,7 +12,6 @@
 		3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */; };
 		3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */; };
 		3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */; };
-		632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632336D82AC1DAAF0011B024 /* DetailView.swift */; };
 		3F040ADB2AC1A99200719CDD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F040ADA2AC1A99200719CDD /* SnapKit */; };
 		3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADC2AC25DE700719CDD /* LoginView.swift */; };
 		3F040ADF2AC2645000719CDD /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADE2AC2645000719CDD /* SignUpView.swift */; };
@@ -23,6 +22,7 @@
 		3F040AEE2AC2CA1900719CDD /* MyPageCustomCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AED2AC2CA1900719CDD /* MyPageCustomCell2.swift */; };
 		3F040AF22AC2D03000719CDD /* ColorGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AF12AC2D03000719CDD /* ColorGuide.swift */; };
 		3F040AF42AC3B34900719CDD /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AF32AC3B34900719CDD /* SignUpViewModel.swift */; };
+		632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632336D82AC1DAAF0011B024 /* DetailView.swift */; };
 		637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C42AC1793000E59D1F /* AppDelegate.swift */; };
 		637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C62AC1793000E59D1F /* SceneDelegate.swift */; };
 		637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C82AC1793000E59D1F /* TabbarViewController.swift */; };
@@ -31,7 +31,6 @@
 		637119D12AC1793100E59D1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 637119D02AC1793100E59D1F /* Assets.xcassets */; };
 		637119D42AC1793100E59D1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 637119D22AC1793100E59D1F /* LaunchScreen.storyboard */; };
 		637119E22AC17A3400E59D1F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 637119E12AC17A3400E59D1F /* .gitignore */; };
-		637119E42AC17BDC00E59D1F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119E32AC17BDC00E59D1F /* MainViewController.swift */; };
 		637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119E52AC17C0E00E59D1F /* MyPageViewController.swift */; };
 		637119E82AC17C5900E59D1F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119E72AC17C5900E59D1F /* DetailViewController.swift */; };
 		637119EA2AC17C9500E59D1F /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119E92AC17C9500E59D1F /* CreateViewController.swift */; };
@@ -42,6 +41,8 @@
 		63945F6F2AC2EA590053792E /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63945F6E2AC2EA590053792E /* Extension+UIButton.swift */; };
 		63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */; };
 		63B35A122AC38266009B78D1 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */; };
+		FF49FC722AC3E93F0003A898 /* CostomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF49FC702AC3E93F0003A898 /* CostomCollectionViewCell.swift */; };
+		FF49FC732AC3E93F0003A898 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF49FC712AC3E93F0003A898 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +51,6 @@
 		3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Materials+CoreDataClass.swift"; sourceTree = "<group>"; };
-		632336D82AC1DAAF0011B024 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		3F040ADC2AC25DE700719CDD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3F040ADE2AC2645000719CDD /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		3F040AE02AC2645F00719CDD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +60,7 @@
 		3F040AED2AC2CA1900719CDD /* MyPageCustomCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCustomCell2.swift; sourceTree = "<group>"; };
 		3F040AF12AC2D03000719CDD /* ColorGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGuide.swift; sourceTree = "<group>"; };
 		3F040AF32AC3B34900719CDD /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		632336D82AC1DAAF0011B024 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		637119C12AC1793000E59D1F /* HanSang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HanSang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637119C42AC1793000E59D1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		637119C62AC1793000E59D1F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +71,6 @@
 		637119D32AC1793100E59D1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		637119D52AC1793100E59D1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		637119E12AC17A3400E59D1F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		637119E32AC17BDC00E59D1F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		637119E52AC17C0E00E59D1F /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		637119E72AC17C5900E59D1F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		637119E92AC17C9500E59D1F /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +81,8 @@
 		63945F6E2AC2EA590053792E /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
 		63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTableViewCell.swift; sourceTree = "<group>"; };
 		63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
+		FF49FC702AC3E93F0003A898 /* CostomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CostomCollectionViewCell.swift; path = ../../../../../Desktop/CostomCollectionViewCell.swift; sourceTree = "<group>"; };
+		FF49FC712AC3E93F0003A898 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ../../../../../Desktop/MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,7 +197,8 @@
 		637119DD2AC1798400E59D1F /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				637119E32AC17BDC00E59D1F /* MainViewController.swift */,
+				FF49FC702AC3E93F0003A898 /* CostomCollectionViewCell.swift */,
+				FF49FC712AC3E93F0003A898 /* MainViewController.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -375,12 +378,13 @@
 				637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */,
 				637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */,
 				3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */,
-				637119E42AC17BDC00E59D1F /* MainViewController.swift in Sources */,
+				FF49FC722AC3E93F0003A898 /* CostomCollectionViewCell.swift in Sources */,
 				637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */,
 				3F040AE62AC29B1F00719CDD /* MyPageView.swift in Sources */,
 				3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */,
 				63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */,
 				3F040AF22AC2D03000719CDD /* ColorGuide.swift in Sources */,
+				FF49FC732AC3E93F0003A898 /* MainViewController.swift in Sources */,
 				3F040AEE2AC2CA1900719CDD /* MyPageCustomCell2.swift in Sources */,
 				3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */,
 				3F040AEC2AC2B95F00719CDD /* MyPageCustomCell.swift in Sources */,
