@@ -11,13 +11,13 @@ import UIKit
 class SignUpViewController: UIViewController {
     private let signUpView = SignUpView()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var user: [User]?
+    static var user: [User]?
 
     func fetchUserInfo() {
         let request = User.fetchRequest()
 
         do {
-            user = try context.fetch(request)
+            SignUpViewController.user = try context.fetch(request)
         } catch {
             print("🚨 유저 정보 불러오기 오류")
         }
