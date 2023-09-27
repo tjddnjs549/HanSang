@@ -21,8 +21,10 @@ class LoginViewController: UIViewController {
 private extension LoginViewController {
     func setup() {
         view = loginView
+        loginView.pw.delegate = self
         loginView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         loginView.signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        loginView.pwCheckedButton.addTarget(self, action: #selector(pwCheckedButtonTapped), for: .touchUpInside)
     }
     
     // 메인화면 이동 방법 수정 필요
@@ -36,4 +38,14 @@ private extension LoginViewController {
         signUpVC.modalPresentationStyle = .fullScreen
         present(signUpVC, animated: true, completion: nil)
     }
+    
+    @objc func pwCheckedButtonTapped() {
+        loginView.pw.isSecureTextEntry.toggle()
+        let imageName = loginView.pw.isSecureTextEntry ? "eyes" : "eyes.inverse"
+        loginView.pwCheckedButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
 }

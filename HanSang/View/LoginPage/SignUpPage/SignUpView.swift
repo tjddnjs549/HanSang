@@ -79,6 +79,14 @@ class SignUpView: UIView {
         return textField
     }()
     
+    let pwCheckedButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "eyes"), for: .normal)
+        button.tintColor = .systemGray3
+        button.backgroundColor = .white
+        return button
+    }()
+    
     private lazy var pwStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [pwLabel, pwTextField])
         stackView.axis = .horizontal
@@ -86,7 +94,7 @@ class SignUpView: UIView {
         return stackView
     }()
     
-    private let verifyPwLabel: UILabel = {
+    private let confirmPwLabel: UILabel = {
         let label = UILabel()
         label.text = "비밀번호 확인"
         label.textColor = .black
@@ -97,7 +105,7 @@ class SignUpView: UIView {
         return label
     }()
     
-    let verifyPwTextField: UITextField = {
+    let confirmPwTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "비밀번호 재입력"
         textField.backgroundColor = .white
@@ -110,8 +118,16 @@ class SignUpView: UIView {
         return textField
     }()
     
-    private lazy var verifyPwStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [verifyPwLabel, verifyPwTextField])
+    let confirmPwCheckedButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "eyes"), for: .normal)
+        button.tintColor = .systemGray3
+        button.backgroundColor = .white
+        return button
+    }()
+    
+    private lazy var confirmPwStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [confirmPwLabel, confirmPwTextField])
         stackView.axis = .horizontal
         stackView.spacing = 10
         return stackView
@@ -144,7 +160,7 @@ class SignUpView: UIView {
     }()
     
     private lazy var signUpInfoStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [idStackView, pwStackView, verifyPwStackView, nicknameStackView])
+        let stackView = UIStackView(arrangedSubviews: [idStackView, pwStackView, confirmPwStackView, nicknameStackView])
         stackView.axis = .vertical
         stackView.spacing = 30
         return stackView
@@ -154,7 +170,7 @@ class SignUpView: UIView {
         let button = UIButton()
         button.setTitle("계정 만들기", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.backgroundColor = ColorGuide.yellow900
+        button.backgroundColor = .systemGray6
         button.layer.cornerRadius = 10
         return button
     }()
@@ -177,6 +193,8 @@ private extension SignUpView {
         addSubview(cancelButton)
         addSubview(profilePicture)
         addSubview(signUpInfoStackView)
+        addSubview(pwCheckedButton)
+        addSubview(confirmPwCheckedButton)
         addSubview(createButton)
         
         cancelButton.snp.makeConstraints { make in
@@ -193,6 +211,18 @@ private extension SignUpView {
         signUpInfoStackView.snp.makeConstraints { make in
             make.top.equalTo(profilePicture.snp.bottom).offset(50)
             make.centerX.equalToSuperview()
+        }
+        
+        pwCheckedButton.snp.makeConstraints { make in
+            make.centerY.equalTo(pwTextField.snp.centerY)
+            make.trailing.equalTo(pwTextField.snp.trailing).offset(-10)
+            make.width.height.equalTo(20)
+        }
+        
+        confirmPwCheckedButton.snp.makeConstraints { make in
+            make.centerY.equalTo(confirmPwTextField.snp.centerY)
+            make.trailing.equalTo(confirmPwTextField.snp.trailing).offset(-10)
+            make.width.height.equalTo(20)
         }
         
         createButton.snp.makeConstraints { make in

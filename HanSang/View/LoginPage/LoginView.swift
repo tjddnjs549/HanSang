@@ -36,6 +36,14 @@ class LoginView: UIView {
         return textField
     }()
     
+    let pwCheckedButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "eyes"), for: .normal)
+        button.tintColor = .systemGray3
+        button.backgroundColor = .white
+        return button
+    }()
+    
     let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("로그인", for: .normal)
@@ -69,6 +77,7 @@ class LoginView: UIView {
         addSubview(logo)
         addSubview(id)
         addSubview(pw)
+        addSubview(pwCheckedButton)
         addSubview(loginButton)
         addSubview(signUpButton)
         
@@ -88,6 +97,12 @@ class LoginView: UIView {
             make.top.equalTo(id.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.equalTo(300)
+        }
+        
+        pwCheckedButton.snp.makeConstraints { make in
+            make.centerY.equalTo(pw.snp.centerY)
+            make.trailing.equalTo(pw.snp.trailing).offset(-10)
+            make.width.height.equalTo(20)
         }
         
         loginButton.snp.makeConstraints { make in
