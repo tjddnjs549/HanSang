@@ -23,6 +23,13 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     
+    private let backButton: UIButton = {
+        let backButton = UIButton()
+        backButton.tintColor = .systemGray
+        backButton.setImage(UIImage(named: "like_icon"), for: .normal)
+        return backButton
+    }()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,15 +54,28 @@ class MainViewController: UIViewController {
         
         self.view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(backButton)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -20),
+            
+            backButton.topAnchor.constraint(equalTo: self.view.topAnchor),
+            backButton.widthAnchor.constraint(equalToConstant: 15),
+            backButton.heightAnchor.constraint(equalToConstant: 15),
+            backButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
         ])
     }
+    
+//    func contentView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: 162.63, height: 163)
+//    }
 }
+
+
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -80,19 +100,20 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
 extension  MainViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (self.view.frame.width/3)-1.34
+        print(self.view.frame.width)
+        let size = (self.view.frame.width-60)/2
         return CGSize(width: size, height: size)
     }
     
     // Vertical Specing
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        2
+        20
     }
     
-    // Horizontal Specing
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        2
-    }
+//    // Horizontal Specing
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        8
+//    }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 //        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
