@@ -5,33 +5,23 @@
 //  Created by t2023-m0076 on 2023/09/26.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class SignUpView: UIView {
-    
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .black
-        return button        
-    }()
-
-    private let logo: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "plus")
-        imageView.contentMode = .scaleAspectFit
-        return imageView
+        return button
     }()
     
     let profilePicture: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.fill")
-        imageView.tintColor = ColorGuide.blue600
-        imageView.backgroundColor = ColorGuide.yellow900
+        imageView.image = UIImage(named: "defaultImage")
         imageView.layer.cornerRadius = 75
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         return imageView
     }()
@@ -52,13 +42,16 @@ class SignUpView: UIView {
         textField.placeholder = "아이디 입력"
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.snp.makeConstraints { make in
+            make.width.equalTo(180)
+        }
         return textField
     }()
     
     private lazy var idStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [idLabel, idTextField])
         stackView.axis = .horizontal
-        stackView.spacing = 30
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -89,7 +82,7 @@ class SignUpView: UIView {
     private lazy var pwStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [pwLabel, pwTextField])
         stackView.axis = .horizontal
-        stackView.spacing = 30
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -120,7 +113,7 @@ class SignUpView: UIView {
     private lazy var verifyPwStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [verifyPwLabel, verifyPwTextField])
         stackView.axis = .horizontal
-        stackView.spacing = 30
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -146,7 +139,7 @@ class SignUpView: UIView {
     private lazy var nicknameStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [nicknameLabel, nicknameTextField])
         stackView.axis = .horizontal
-        stackView.spacing = 30
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -157,7 +150,7 @@ class SignUpView: UIView {
         return stackView
     }()
     
-    let okButton: UIButton = {
+    let createButton: UIButton = {
         let button = UIButton()
         button.setTitle("계정 만들기", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
@@ -172,6 +165,7 @@ class SignUpView: UIView {
         setupUI()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -181,23 +175,17 @@ private extension SignUpView {
     func setupUI() {
         backgroundColor = .systemBackground
         addSubview(cancelButton)
-        addSubview(logo)
         addSubview(profilePicture)
         addSubview(signUpInfoStackView)
-        addSubview(okButton)
+        addSubview(createButton)
         
         cancelButton.snp.makeConstraints { make in
             make.top.equalTo(60)
             make.leading.equalTo(15)
         }
         
-        logo.snp.makeConstraints { make in
-            make.top.equalTo(cancelButton.snp.bottom).offset(20)
-            make.leading.equalTo(100)
-        }
-        
         profilePicture.snp.makeConstraints { make in
-            make.top.equalTo(logo.snp.bottom).offset(50)
+            make.top.equalTo(cancelButton.snp.bottom).offset(100)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(150)
         }
@@ -207,7 +195,7 @@ private extension SignUpView {
             make.centerX.equalToSuperview()
         }
         
-        okButton.snp.makeConstraints { make in
+        createButton.snp.makeConstraints { make in
             make.top.equalTo(signUpInfoStackView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.width.equalTo(300)

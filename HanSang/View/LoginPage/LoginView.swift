@@ -8,10 +8,9 @@
 import UIKit
 
 class LoginView: UIView {
-
     private let logo: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo1")
+        imageView.image = UIImage(named: "logo")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -75,12 +74,12 @@ class LoginView: UIView {
         
         logo.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(200)
+            make.top.equalTo(180)
             make.width.height.equalTo(200)
         }
         
         id.snp.makeConstraints { make in
-            make.top.equalTo(logo.snp.bottom).offset(50)
+            make.top.equalTo(logo.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
             make.width.equalTo(300)
         }
