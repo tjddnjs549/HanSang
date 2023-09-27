@@ -38,9 +38,19 @@ class MyPageViewController: UIViewController {
 private extension MyPageViewController {
     func setup() {
         view = myPageView
-        navigationItem.title = "user id"
         myPageView.collectionView.dataSource = self
         myPageView.collectionView.delegate = self
+        
+        navigationItem.title = "user id"
+        
+        // 로그인 페이지 테스트용
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(loginButtonTapped))
+    }
+    
+    // 로그인 페이지 테스트용
+    @objc func loginButtonTapped() {
+        let loginPageVC = LoginViewController()
+        navigationController?.pushViewController(loginPageVC, animated: true)
     }
 }
 
