@@ -218,7 +218,7 @@ private extension SignUpView {
             make.trailing.equalTo(pwTextField.snp.trailing).offset(-10)
             make.width.height.equalTo(20)
         }
-        
+        // 커밋용
         confirmPwCheckedButton.snp.makeConstraints { make in
             make.centerY.equalTo(confirmPwTextField.snp.centerY)
             make.trailing.equalTo(confirmPwTextField.snp.trailing).offset(-10)
