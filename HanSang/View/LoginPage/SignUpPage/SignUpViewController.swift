@@ -35,7 +35,7 @@ class SignUpViewController: UIViewController {
             return nil
         }
     }
-    
+
     func getUserNickname(_ nickname: String) -> User? {
         let request = User.fetchRequest()
         request.predicate = NSPredicate(format: "nickname == %@", nickname)
@@ -105,6 +105,24 @@ private extension SignUpViewController {
         signUpView.pwTextField.delegate = self
         signUpView.confirmPwTextField.delegate = self
         signUpView.nicknameTextField.delegate = self
+    }
+
+    func notify() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+        {
+            let keyboardHeight = keyboardFrame.height
+            signUpView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+        }
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        signUpView.contentInset = .zero
     }
 
     @objc func cancelButtonTapped() {

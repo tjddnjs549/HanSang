@@ -23,7 +23,7 @@ class LoginView: UIView {
         let label = UILabel()
         label.text = "로그인"
         label.font = FontGuide.size32Bold
-        label.textColor = ColorGuide.text
+        label.textColor = ColorGuide.black
         return label
     }()
     
@@ -102,7 +102,7 @@ class LoginView: UIView {
         let attributedText = NSAttributedString(string: "회원가입", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
         button.setAttributedTitle(attributedText, for: .normal)
         button.titleLabel?.font = FontGuide.size16
-        button.setTitleColor(ColorGuide.text, for: .normal)
+        button.setTitleColor(ColorGuide.black, for: .normal)
         button.backgroundColor = .white
         button.snp.makeConstraints { make in
             make.width.equalTo(58)
@@ -133,7 +133,7 @@ class LoginView: UIView {
         addSubview(signUpButton)
         
         logo.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(23.63)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
             make.leading.equalTo(22.73)
         }
         
