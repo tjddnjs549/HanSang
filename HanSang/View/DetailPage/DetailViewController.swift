@@ -7,23 +7,40 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        // Do any additional setup after loading the view.
+    private let detailView = DetailView()
+    
+    override func loadView() {
+        view = detailView
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       detailView.materialTableView.reloadData()
+        detailView.recipeTableView.reloadData()
     }
-    */
 
+    
+    
 }
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+private struct UIViewControllerRepresenter: UIViewControllerRepresentable {
+    let viewController: UIViewController
+    
+    func makeUIViewController(context: Context) -> UIViewController {
+        return viewController
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+}
+
+struct UIViewControllerPreviewView: PreviewProvider {
+    static var previews: some View {
+        let viewController = DetailViewController()
+        return UIViewControllerRepresenter(viewController: viewController)
+    }
+}
+#endif
