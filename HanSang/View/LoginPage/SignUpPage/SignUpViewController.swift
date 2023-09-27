@@ -205,21 +205,88 @@ extension SignUpViewController: UITextFieldDelegate {
         return true
     }
 
-    // 계정 만들기 버튼 활성화
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == signUpView.idTextField {
+            signUpView.idTextFieldDescription.isHidden = false
+        } else if textField == signUpView.pwTextField {
+            signUpView.pwTextFieldDescription.isHidden = false
+        } else if textField == signUpView.confirmPwTextField {
+            signUpView.confirmPwTextFieldDescription.isHidden = false
+        } else {
+            signUpView.nicknameTextFieldDescription.isHidden = false
+        }
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == signUpView.idTextField {
+            let currentText = textField.text ?? ""
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+            let idPattern = "^[a-z0-9]{6,12}$"
+            let isValidId = (newText.range(of: idPattern, options: .regularExpression) != nil)
+
+            if isValidId {
+                signUpView.idTextFieldDescription.isHidden = true
+            } else {
+                signUpView.idTextFieldDescription.text = "아이디는 소문자, 숫자로 이루어진 6~12자이어야 합니다."
+            }
+
+        } else if textField == signUpView.pwTextField {
+            let currentText = textField.text ?? ""
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+            let passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$"
+            let isValidPassword = (newText.range(of: passwordPattern, options: .regularExpression) != nil)
+
+            if isValidPassword {
+                signUpView.pwTextFieldDescription.isHidden = true
+            } else {
+                signUpView.pwTextFieldDescription.text = "비밀번호는 8자 이상 대소문자, 숫자, 특수문자이어야 합니다."
+            }
+        } else if textField == signUpView.confirmPwTextField {
+            let currentText = textField.text ?? ""
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+            let isMatchingPassword = (newText == signUpView.pwTextField.text)
+
+            if isMatchingPassword {
+                signUpView.confirmPwTextFieldDescription.isHidden = true
+            } else {
+                signUpView.confirmPwTextFieldDescription.text = "비밀번호가 일치하지 않습니다."
+            }
+        } else if textField == signUpView.nicknameTextField {
+            let currentText = textField.text ?? ""
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+            let nicknamePattern = "^.{2,20}$"
+            let isValidNickname = (newText.range(of: nicknamePattern, options: .regularExpression) != nil)
+
+            if isValidNickname {
+                signUpView.nicknameTextFieldDescription.isHidden = true
+            } else {
+                signUpView.nicknameTextFieldDescription.text = "닉네임은 2-20자이어야 합니다."
+            }
+        }
+
+        if isAllFieldsValid() {
+            signUpView.createButton.backgroundColor = ColorGuide.yellow900
+            signUpView.createButton.isEnabled = true
+        } else {
+            signUpView.createButton.backgroundColor = .systemGray6
+            signUpView.createButton.isEnabled = false
+        }
+
+        return true
+    }
+
+    private func isAllFieldsValid() -> Bool {
         if let id = signUpView.idTextField.text,
            let pw = signUpView.pwTextField.text,
            let confirmPw = signUpView.confirmPwTextField.text,
            let nickname = signUpView.nicknameTextField.text
         {
-            if !id.isEmpty && !pw.isEmpty && !confirmPw.isEmpty && !nickname.isEmpty {
-                signUpView.createButton.backgroundColor = ColorGuide.yellow900
-                signUpView.createButton.isEnabled = true
-            } else {
-                signUpView.createButton.backgroundColor = .systemGray6
-                signUpView.createButton.isEnabled = false
-            }
+            return !id.isEmpty && !pw.isEmpty && !confirmPw.isEmpty && !nickname.isEmpty
         }
-        return true
+        return false
     }
 }

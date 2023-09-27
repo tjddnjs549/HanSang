@@ -28,7 +28,7 @@ class SignUpView: UIView {
     let profilePicture: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "defaultImage")
-        imageView.layer.cornerRadius = 70
+        imageView.layer.cornerRadius = 60
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
@@ -50,6 +50,7 @@ class SignUpView: UIView {
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textColor = .black
         label.textAlignment = .right
+        label.isHidden = true
         return label
     }()
     
@@ -68,6 +69,16 @@ class SignUpView: UIView {
         return textField
     }()
     
+    let idTextFieldDescription: UILabel = {
+        let label = UILabel()
+        label.text = "  🚨 필수 입력 사항입니다."
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textColor = .red
+        label.textAlignment = .left
+        label.isHidden = true
+        return label
+    }()
+    
     let idCheckedButton: UIButton = {
         let button = UIButton()
         button.setTitle("중복확인", for: .normal)
@@ -79,7 +90,7 @@ class SignUpView: UIView {
     }()
     
     private lazy var idStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [idLabelStackView, idTextField])
+        let stackView = UIStackView(arrangedSubviews: [idLabelStackView, idTextField, idTextFieldDescription])
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
@@ -100,6 +111,7 @@ class SignUpView: UIView {
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textColor = .black
         label.textAlignment = .right
+        label.isHidden = true
         return label
     }()
     
@@ -123,6 +135,16 @@ class SignUpView: UIView {
         return textField
     }()
     
+    let pwTextFieldDescription: UILabel = {
+        let label = UILabel()
+        label.text = "  🚨 필수 입력 사항입니다."
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textColor = .red
+        label.textAlignment = .left
+        label.isHidden = true
+        return label
+    }()
+    
     let pwCheckedButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "eyes"), for: .normal)
@@ -132,7 +154,7 @@ class SignUpView: UIView {
     }()
     
     private lazy var pwStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [pwLabelStackView, pwTextField])
+        let stackView = UIStackView(arrangedSubviews: [pwLabelStackView, pwTextField, pwTextFieldDescription])
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
@@ -153,6 +175,7 @@ class SignUpView: UIView {
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textColor = .black
         label.textAlignment = .right
+        label.isHidden = true
         return label
     }()
     
@@ -176,6 +199,16 @@ class SignUpView: UIView {
         return textField
     }()
     
+    let confirmPwTextFieldDescription: UILabel = {
+        let label = UILabel()
+        label.text = "  🚨 필수 입력 사항입니다."
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textColor = .red
+        label.textAlignment = .left
+        label.isHidden = true
+        return label
+    }()
+    
     let confirmPwCheckedButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "eyes"), for: .normal)
@@ -185,7 +218,7 @@ class SignUpView: UIView {
     }()
     
     private lazy var confirmPwStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [confirmLabelStackView, confirmPwTextField])
+        let stackView = UIStackView(arrangedSubviews: [confirmLabelStackView, confirmPwTextField, confirmPwTextFieldDescription])
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
@@ -200,12 +233,13 @@ class SignUpView: UIView {
         return label
     }()
     
-    private let nicknameCheckedLabel: UILabel = {
+    let nicknameCheckedLabel: UILabel = {
         let label = UILabel()
         label.text = "사용 가능한 닉네임입니다."
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textColor = .black
         label.textAlignment = .right
+        label.isHidden = true
         return label
     }()
     
@@ -224,6 +258,16 @@ class SignUpView: UIView {
         return textField
     }()
     
+    let nicknameTextFieldDescription: UILabel = {
+        let label = UILabel()
+        label.text = "  🚨 필수 입력 사항입니다."
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textColor = .red
+        label.textAlignment = .left
+        label.isHidden = true
+        return label
+    }()
+    
     let nicknameCheckedButton: UIButton = {
         let button = UIButton()
         button.setTitle("중복확인", for: .normal)
@@ -235,7 +279,7 @@ class SignUpView: UIView {
     }()
     
     private lazy var nicknameStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [nicknameLabelStackView, nicknameTextField])
+        let stackView = UIStackView(arrangedSubviews: [nicknameLabelStackView, nicknameTextField, nicknameTextFieldDescription])
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
@@ -293,13 +337,13 @@ private extension SignUpView {
         }
         
         profilePicture.snp.makeConstraints { make in
-            make.top.equalTo(signUpLabel.snp.bottom).offset(30)
+            make.top.equalTo(signUpLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(140)
+            make.width.height.equalTo(120)
         }
         
         signUpInfoStackView.snp.makeConstraints { make in
-            make.top.equalTo(profilePicture.snp.bottom).offset(30)
+            make.top.equalTo(profilePicture.snp.bottom).offset(20)
             make.leading.equalTo(15)
             make.trailing.equalTo(-15)
         }
