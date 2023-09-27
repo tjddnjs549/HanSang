@@ -9,8 +9,8 @@ import UIKit
 
 extension UIButton {
     
-    func buttonMakeUI(cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: CGColor, setTitle: String, font: UIFont, setTitleColor:  UIColor) {
-        self.backgroundColor = .clear
+    func buttonMakeUI(backgroundColor: UIColor, cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: CGColor, setTitle: String, font: UIFont, setTitleColor:  UIColor) {
+        self.backgroundColor = backgroundColor
         self.layer.cornerRadius = cornerRadius
         self.clipsToBounds = true //둥글게
         self.layer.borderWidth = borderWidth

@@ -168,6 +168,12 @@ final class DetailView: UIView {
         return table
     }()
     
+    private lazy var recipeUdateButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.buttonMakeUI(backgroundColor: UIColor.lightGray.withAlphaComponent(0.4), cornerRadius: 10.0, borderWidth: 0.0, borderColor: UIColor.clear.cgColor, setTitle: "레시피 수정하기", font: .boldSystemFont(ofSize: 20), setTitleColor: UIColor.black)
+        return button
+    }()
+    
     
     
     // MARK: - init
@@ -184,8 +190,9 @@ final class DetailView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        scrollView.contentSize = CGSize(width: bounds.width, height: kickView.frame.maxY + 100)
+        scrollView.contentSize = CGSize(width: bounds.width, height: recipeUdateButton.frame.maxY + 30)
         print(materialTableView.frame)
+        print(recipeTableView.frame)
         
         
     }
@@ -314,12 +321,13 @@ private extension DetailView {
         ])
     }
 
-    //킥 부분
+    //킥에서부터 끝까지 부분
     func kickMakeUI() {
         self.contentView.addSubview(kickView)
         self.contentView.addSubview(kickLabel)
         self.contentView.addSubview(makeKickLabel)
-        
+        self.contentView.addSubview(recipeTableView)
+        self.contentView.addSubview(recipeUdateButton)
         
         NSLayoutConstraint.activate([
             kickView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
@@ -332,9 +340,20 @@ private extension DetailView {
             makeKickLabel.topAnchor.constraint(equalTo: self.kickLabel.bottomAnchor, constant: 10),
             makeKickLabel.leadingAnchor.constraint(equalTo: self.kickView.leadingAnchor, constant: 20),
             makeKickLabel.trailingAnchor.constraint(equalTo: self.kickView.trailingAnchor, constant: -20),
-            makeKickLabel.bottomAnchor.constraint(equalTo: self.kickView.bottomAnchor, constant: -20)
+            makeKickLabel.bottomAnchor.constraint(equalTo: self.kickView.bottomAnchor, constant: -20),
             
+            recipeTableView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
+            recipeTableView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
+            recipeTableView.widthAnchor.constraint(equalToConstant: 343.0),
+            recipeTableView.heightAnchor.constraint(equalToConstant: 320),
+            // ❗️❗️❗️❗️❗️❗️❗️
+            recipeTableView.topAnchor.constraint(equalTo: self.kickView.bottomAnchor, constant: 20),
+            recipeTableView.bottomAnchor.constraint(equalTo: self.recipeUdateButton.topAnchor, constant: -30),
             
+            recipeUdateButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
+            recipeUdateButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
+            recipeUdateButton.topAnchor.constraint(equalTo: self.recipeTableView.bottomAnchor, constant: 30),
+            recipeUdateButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -30),
         ])
     }
 }
@@ -349,7 +368,7 @@ private extension DetailView {
         recipeTableView.delegate = self
         recipeTableView.dataSource = self
         materialTableView.register(MaterialTableViewCell.self, forCellReuseIdentifier: "MaterialTableViewCell")
-        //recipeTableView.register(<#T##nib: UINib?##UINib?#>, forCellReuseIdentifier: <#T##String#>)
+        recipeTableView.register(RecipeTableViewCell.self, forCellReuseIdentifier: "RecipeTableViewCell")
     }
     
 }
@@ -359,22 +378,45 @@ private extension DetailView {
 
 extension DetailView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return material.count
+        if tableView == self.materialTableView {
+            return material.count
+        } else if tableView == self.recipeTableView {
+            return imageArray.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MaterialTableViewCell", for: indexPath) as! MaterialTableViewCell
-        cell.materialLabel.text = material[indexPath.row]
-        cell.unitLabel.text = unit[indexPath.row]
-        cell.selectionStyle = .none
-        return cell
+        
+        if tableView == self.materialTableView {
+            print(#function)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MaterialTableViewCell", for: indexPath) as! MaterialTableViewCell
+            cell.materialLabel.text = material[indexPath.row]
+            cell.unitLabel.text = unit[indexPath.row]
+            cell.selectionStyle = .none
+            return cell
+        } else if tableView == self.recipeTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeTableViewCell", for: indexPath) as! RecipeTableViewCell
+            cell.cellMakeUI(index: indexPath.row)
+            cell.recipeImageView.image = imageArray[indexPath.row]
+            cell.recipeLabel.text = imageDescriptionArray[indexPath.row]
+            cell.selectionStyle = .none
+            print(#function)
+            return cell
+        }
+       return UITableViewCell()
     }
 }
 
 
 extension DetailView: UITableViewDelegate {
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 30
+            if tableView == self.materialTableView {
+                return 30
+            } else if tableView == self.recipeTableView {
+                return 80
+            }
+            return 0
         }
 }
 

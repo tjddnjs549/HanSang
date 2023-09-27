@@ -19,6 +19,7 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        detailView.materialTableView.reloadData()
+        detailView.recipeTableView.reloadData()
     }
 
     
