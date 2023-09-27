@@ -23,15 +23,57 @@ class SignUpViewController: UIViewController {
         }
     }
 
-    func getUser(_ id: String) -> User? {
+    func getUserId(_ id: String) -> User? {
         let request = User.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id)
 
         do {
-            return try context.fetch(request).first
+            let users = try context.fetch(request)
+            return users.first
         } catch {
             print("🚨 유저 정보 찾을 수 없음: \(error)")
             return nil
+        }
+    }
+    
+    func getUserNickname(_ nickname: String) -> User? {
+        let request = User.fetchRequest()
+        request.predicate = NSPredicate(format: "nickname == %@", nickname)
+
+        do {
+            let users = try context.fetch(request)
+            return users.first
+        } catch {
+            print("🚨 유저 정보 찾을 수 없음: \(error)")
+            return nil
+        }
+    }
+
+    func createUser(id: String, pw: String, nickname: String) {
+        let newUser = User(context: context)
+        newUser.id = id
+        newUser.pw = pw
+        newUser.nickname = nickname
+
+        do {
+            try context.save()
+        } catch {
+            print("🚨 유저 생성 오류")
+        }
+    }
+
+    func deleteAllUsers() {
+        let request = User.fetchRequest()
+
+        do {
+            let users = try context.fetch(request)
+            for user in users {
+                context.delete(user)
+            }
+            try context.save()
+            fetchUserInfo()
+        } catch {
+            print("🚨 유저 정보 일괄 삭제 오류")
         }
     }
 
@@ -48,8 +90,10 @@ private extension SignUpViewController {
         signUpView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         signUpView.createButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
         signUpView.profilePicture.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(editProfilePicture)))
+        signUpView.idCheckedButton.addTarget(self, action: #selector(idCheckedButtonTapped), for: .touchUpInside)
         signUpView.pwCheckedButton.addTarget(self, action: #selector(pwCheckedButtonTapped), for: .touchUpInside)
         signUpView.confirmPwCheckedButton.addTarget(self, action: #selector(verifyPwCheckedButtonTapped), for: .touchUpInside)
+        signUpView.nicknameCheckedButton.addTarget(self, action: #selector(nicknameCheckedButtonTapped), for: .touchUpInside)
 
         // TextField delegate
         signUpView.idTextField.delegate = self
@@ -93,6 +137,18 @@ extension SignUpViewController: PHPickerViewControllerDelegate {
 }
 
 extension SignUpViewController {
+    @objc func idCheckedButtonTapped() {
+        let id = signUpView.idTextField.text ?? ""
+        if isIdAlreadyRegistered(id) {
+            print("true")
+            signUpView.idTextFieldDescription.text = "이미 존재하는 아이디입니다."
+            signUpView.idTextFieldDescription.isHidden = false
+        } else {
+            print("false")
+            signUpView.idTextFieldDescription.isHidden = true
+        }
+    }
+
     @objc func pwCheckedButtonTapped() {
         signUpView.pwTextField.isSecureTextEntry.toggle()
         let imageName = signUpView.pwTextField.isSecureTextEntry ? "eyes" : "eyes.inverse"
@@ -103,6 +159,16 @@ extension SignUpViewController {
         signUpView.confirmPwTextField.isSecureTextEntry.toggle()
         let imageName = signUpView.confirmPwTextField.isSecureTextEntry ? "eyes" : "eyes.inverse"
         signUpView.confirmPwCheckedButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+
+    @objc func nicknameCheckedButtonTapped() {
+        let nickname = signUpView.nicknameTextField.text ?? ""
+        if isNicknameAlreadyRegistered(nickname) {
+            signUpView.nicknameTextFieldDescription.text = "이미 존재하는 닉네임입니다."
+            signUpView.nicknameTextFieldDescription.isHidden = false
+        } else {
+            signUpView.nicknameTextFieldDescription.isHidden = true
+        }
     }
 
     // MARK: - 회원가입 정규식 유효성 검사
@@ -133,40 +199,38 @@ extension SignUpViewController {
     }
 
     private func isIdAlreadyRegistered(_ id: String) -> Bool {
-        let existingUser = getUser(id)
+        let existingUser = getUserId(id)
+        return (existingUser != nil) ? true : false
+    }
+
+    private func isNicknameAlreadyRegistered(_ nickname: String) -> Bool {
+        let existingUser = getUserNickname(nickname)
         return (existingUser != nil) ? true : false
     }
 
     @objc func createButtonTapped() {
         guard let id = signUpView.idTextField.text,
               let pw = signUpView.pwTextField.text,
-              let confirmPw = signUpView.confirmPwTextField.text,
               let nickname = signUpView.nicknameTextField.text
         else {
             return
         }
 
+        // 중복 확인
         if isIdAlreadyRegistered(id) {
-            // 중복 시 화면에 표시할 로직 추가
+            signUpView.idTextFieldDescription.text = "이미 존재하는 아이디입니다."
+            signUpView.idTextFieldDescription.isHidden = false
             return
         }
 
-        if !isValidPw(pw) {
-            // 비밀번호 정규식 오류 시 표시할 로직 추가
+        if isNicknameAlreadyRegistered(nickname) {
+            signUpView.nicknameTextFieldDescription.text = "이미 존재하는 닉네임입니다."
+            signUpView.nicknameTextFieldDescription.isHidden = false
             return
         }
 
-        if pw != confirmPw {
-            // 비밀번호-비밀번호 확인 매칭 오류 시 표시할 로직 추가
-            return
-        }
-
-        if !isValidNickname(nickname) {
-            // 닉네임 정규식 오류 시 표시할 로직 추가
-            return
-        }
-
-        // 추가할 항목: CoreData에 User 정보 저장
+        createUser(id: id, pw: pw, nickname: nickname)
+        fetchUserInfo()
 
         // 회원가입 완료 시 로그인 페이지로 이동
         DispatchQueue.main.async {
@@ -268,7 +332,8 @@ extension SignUpViewController: UITextFieldDelegate {
         if let id = signUpView.idTextField.text,
            let pw = signUpView.pwTextField.text,
            let confirmPw = signUpView.confirmPwTextField.text,
-           let nickname = signUpView.nicknameTextField.text {
+           let nickname = signUpView.nicknameTextField.text
+        {
             return !id.isEmpty && !pw.isEmpty && !confirmPw.isEmpty && !nickname.isEmpty
         }
         return false

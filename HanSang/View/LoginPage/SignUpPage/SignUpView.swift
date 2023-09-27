@@ -44,23 +44,6 @@ class SignUpView: UIView {
         return label
     }()
     
-    private let idCheckedLabel: UILabel = {
-        let label = UILabel()
-        label.text = "사용 가능한 아이디입니다."
-        label.font = UIFont.boldSystemFont(ofSize: 13)
-        label.textColor = .black
-        label.textAlignment = .right
-        label.isHidden = true
-        return label
-    }()
-    
-    private lazy var idLabelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [idLabel, idCheckedLabel])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
-    
     let idTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "아이디를 입력해주세요"
@@ -94,7 +77,7 @@ class SignUpView: UIView {
     }()
     
     private lazy var idStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [idLabelStackView, idTextField, idTextFieldDescription])
+        let stackView = UIStackView(arrangedSubviews: [idLabel, idTextField, idTextFieldDescription])
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
@@ -107,23 +90,6 @@ class SignUpView: UIView {
         label.textColor = .black
         label.textAlignment = .left
         return label
-    }()
-    
-    private let pwCheckedLabel: UILabel = {
-        let label = UILabel()
-        label.text = "사용 가능한 비밀번호입니다."
-        label.font = UIFont.boldSystemFont(ofSize: 13)
-        label.textColor = .black
-        label.textAlignment = .right
-        label.isHidden = true
-        return label
-    }()
-    
-    private lazy var pwLabelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [pwLabel, pwCheckedLabel])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
-        return stackView
     }()
     
     let pwTextField: UITextField = {
@@ -162,7 +128,7 @@ class SignUpView: UIView {
     }()
     
     private lazy var pwStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [pwLabelStackView, pwTextField, pwTextFieldDescription])
+        let stackView = UIStackView(arrangedSubviews: [pwLabel, pwTextField, pwTextFieldDescription])
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
@@ -175,23 +141,6 @@ class SignUpView: UIView {
         label.textColor = .black
         label.textAlignment = .left
         return label
-    }()
-    
-    private let confirmPwCheckedLabel: UILabel = {
-        let label = UILabel()
-        label.text = "비밀번호가 일치합니다."
-        label.font = UIFont.boldSystemFont(ofSize: 13)
-        label.textColor = .black
-        label.textAlignment = .right
-        label.isHidden = true
-        return label
-    }()
-    
-    private lazy var confirmLabelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [confirmPwLabel, confirmPwCheckedLabel])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
-        return stackView
     }()
     
     let confirmPwTextField: UITextField = {
@@ -230,7 +179,7 @@ class SignUpView: UIView {
     }()
     
     private lazy var confirmPwStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [confirmLabelStackView, confirmPwTextField, confirmPwTextFieldDescription])
+        let stackView = UIStackView(arrangedSubviews: [confirmPwLabel, confirmPwTextField, confirmPwTextFieldDescription])
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
@@ -243,23 +192,6 @@ class SignUpView: UIView {
         label.textColor = .black
         label.textAlignment = .left
         return label
-    }()
-    
-    let nicknameCheckedLabel: UILabel = {
-        let label = UILabel()
-        label.text = "사용 가능한 닉네임입니다."
-        label.font = UIFont.boldSystemFont(ofSize: 13)
-        label.textColor = .black
-        label.textAlignment = .right
-        label.isHidden = true
-        return label
-    }()
-    
-    private lazy var nicknameLabelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [nicknameLabel, nicknameCheckedLabel])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
-        return stackView
     }()
     
     let nicknameTextField: UITextField = {
@@ -295,7 +227,7 @@ class SignUpView: UIView {
     }()
     
     private lazy var nicknameStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [nicknameLabelStackView, nicknameTextField, nicknameTextFieldDescription])
+        let stackView = UIStackView(arrangedSubviews: [nicknameLabel, nicknameTextField, nicknameTextFieldDescription])
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
