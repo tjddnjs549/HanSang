@@ -30,7 +30,7 @@ class SignUpView: UIView {
         imageView.image = UIImage(named: "defaultImage")
         imageView.layer.cornerRadius = 60
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true
         return imageView
     }()
@@ -63,9 +63,13 @@ class SignUpView: UIView {
     
     let idTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "아이디 입력"
+        textField.placeholder = "아이디를 입력해주세요"
+        textField.font = UIFont.systemFont(ofSize: 16)
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.snp.makeConstraints { make in
+            make.height.equalTo(48)
+        }
         return textField
     }()
     
@@ -85,7 +89,7 @@ class SignUpView: UIView {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         button.setTitleColor(UIColor.black, for: .normal)
         button.backgroundColor = ColorGuide.yellow900
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 15
         return button
     }()
     
@@ -124,7 +128,8 @@ class SignUpView: UIView {
     
     let pwTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "비밀번호 입력"
+        textField.placeholder = "비밀번호를 입력해주세요"
+        textField.font = UIFont.systemFont(ofSize: 16)
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
@@ -132,6 +137,9 @@ class SignUpView: UIView {
         textField.autocorrectionType = .no
         textField.spellCheckingType = .no
         textField.textContentType = .none
+        textField.snp.makeConstraints { make in
+            make.height.equalTo(48)
+        }
         return textField
     }()
     
@@ -188,7 +196,8 @@ class SignUpView: UIView {
     
     let confirmPwTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "비밀번호 재입력"
+        textField.placeholder = "비밀번호를 다시 입력해주세요"
+        textField.font = UIFont.systemFont(ofSize: 16)
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
@@ -196,6 +205,9 @@ class SignUpView: UIView {
         textField.autocorrectionType = .no
         textField.spellCheckingType = .no
         textField.textContentType = .none
+        textField.snp.makeConstraints { make in
+            make.height.equalTo(48)
+        }
         return textField
     }()
     
@@ -252,9 +264,13 @@ class SignUpView: UIView {
     
     let nicknameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "닉네임 입력"
+        textField.placeholder = "닉네임을 입력해주세요"
+        textField.font = UIFont.systemFont(ofSize: 16)
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.snp.makeConstraints { make in
+            make.height.equalTo(48)
+        }
         return textField
     }()
     
@@ -274,7 +290,7 @@ class SignUpView: UIView {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         button.setTitleColor(UIColor.black, for: .normal)
         button.backgroundColor = ColorGuide.yellow900
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 15
         return button
     }()
     
@@ -352,7 +368,7 @@ private extension SignUpView {
             make.centerY.equalTo(idTextField.snp.centerY)
             make.trailing.equalTo(idTextField.snp.trailing).offset(-10)
             make.width.equalTo(70)
-            make.height.equalTo(20)
+            make.height.equalTo(30)
         }
         
         pwCheckedButton.snp.makeConstraints { make in
@@ -371,7 +387,7 @@ private extension SignUpView {
             make.centerY.equalTo(nicknameTextField.snp.centerY)
             make.trailing.equalTo(nicknameTextField.snp.trailing).offset(-10)
             make.width.equalTo(70)
-            make.height.equalTo(20)
+            make.height.equalTo(30)
         }
         
         createButton.snp.makeConstraints { make in

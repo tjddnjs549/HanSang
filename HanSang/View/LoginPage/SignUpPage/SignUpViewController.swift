@@ -108,15 +108,15 @@ extension SignUpViewController {
     // MARK: - 회원가입 정규식 유효성 검사
 
     private func isValidId(_ id: String) -> Bool {
-        // 아이디 정규식: 소문자, 숫자로 이루어진 6~12자
-        let idRegex = "^[a-z0-9]{6,12}$"
+        // 아이디 정규식: 소문자, 숫자로 이루어진 4~12자
+        let idRegex = "^[a-z0-9]{4,12}$"
         let idPredicate = NSPredicate(format: "SELF MATCHES %@", idRegex)
         return idPredicate.evaluate(with: id)
     }
 
     private func isValidPw(_ pw: String) -> Bool {
-        // 비밀번호 정규식: 대소문자, 숫자, 특수문자만 허용 8자 이상
-        let pwRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$"
+        // 비밀번호 정규식: 대소문자, 숫자, 특수문자 중 적어도 하나를 포함하고 4자 이상
+        let pwRegex = "^(?=.*[A-Za-z\\d@$!%*?&#]).{4,}$"
         let pwPredicate = NSPredicate(format: "SELF MATCHES %@", pwRegex)
         return pwPredicate.evaluate(with: pw)
     }
@@ -126,8 +126,8 @@ extension SignUpViewController {
     }
 
     private func isValidNickname(_ nickname: String) -> Bool {
-        // 닉네임 정규식: 2~20자의 문자열
-        let nicknameRegex = "^.{2,20}$"
+        // 닉네임 정규식: 2~8자의 문자열
+        let nicknameRegex = "^.{2,8}$"
         let nicknamePredicate = NSPredicate(format: "SELF MATCHES %@", nicknameRegex)
         return nicknamePredicate.evaluate(with: nickname)
     }
@@ -173,21 +173,6 @@ extension SignUpViewController {
             self.dismiss(animated: true)
         }
     }
-
-    // TextField 흔들기 애니메이션
-    func shakeTextField(textField: UITextField) {
-        UIView.animate(withDuration: 0.2, animations: {
-            textField.frame.origin.x -= 10
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.2, animations: {
-                textField.frame.origin.x += 20
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.2, animations: {
-                    textField.frame.origin.x -= 10
-                })
-            })
-        })
-    }
 }
 
 extension SignUpViewController: UITextFieldDelegate {
@@ -222,26 +207,26 @@ extension SignUpViewController: UITextFieldDelegate {
             let currentText = textField.text ?? ""
             let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
 
-            let idPattern = "^[a-z0-9]{6,12}$"
+            let idPattern = "^[a-z0-9]{4,12}$"
             let isValidId = (newText.range(of: idPattern, options: .regularExpression) != nil)
 
             if isValidId {
                 signUpView.idTextFieldDescription.isHidden = true
             } else {
-                signUpView.idTextFieldDescription.text = "아이디는 소문자, 숫자로 이루어진 6~12자이어야 합니다."
+                signUpView.idTextFieldDescription.text = "아이디는 소문자, 숫자로 이루어진 4~12자이어야 합니다."
             }
 
         } else if textField == signUpView.pwTextField {
             let currentText = textField.text ?? ""
             let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
 
-            let passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$"
+            let passwordPattern = "^(?=.*[A-Za-z\\d@$!%*?&#]).{4,}$"
             let isValidPassword = (newText.range(of: passwordPattern, options: .regularExpression) != nil)
 
             if isValidPassword {
                 signUpView.pwTextFieldDescription.isHidden = true
             } else {
-                signUpView.pwTextFieldDescription.text = "비밀번호는 8자 이상 대소문자, 숫자, 특수문자이어야 합니다."
+                signUpView.pwTextFieldDescription.text = "비밀번호는 4자 이상 대소문자, 숫자, 특수문자 중 적어도 하나를 포함해야 합니다."
             }
         } else if textField == signUpView.confirmPwTextField {
             let currentText = textField.text ?? ""
@@ -258,13 +243,13 @@ extension SignUpViewController: UITextFieldDelegate {
             let currentText = textField.text ?? ""
             let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
 
-            let nicknamePattern = "^.{2,20}$"
+            let nicknamePattern = "^.{2,8}$"
             let isValidNickname = (newText.range(of: nicknamePattern, options: .regularExpression) != nil)
 
             if isValidNickname {
                 signUpView.nicknameTextFieldDescription.isHidden = true
             } else {
-                signUpView.nicknameTextFieldDescription.text = "닉네임은 2-20자이어야 합니다."
+                signUpView.nicknameTextFieldDescription.text = "닉네임은 2-8자이어야 합니다."
             }
         }
 
@@ -283,8 +268,7 @@ extension SignUpViewController: UITextFieldDelegate {
         if let id = signUpView.idTextField.text,
            let pw = signUpView.pwTextField.text,
            let confirmPw = signUpView.confirmPwTextField.text,
-           let nickname = signUpView.nicknameTextField.text
-        {
+           let nickname = signUpView.nicknameTextField.text {
             return !id.isEmpty && !pw.isEmpty && !confirmPw.isEmpty && !nickname.isEmpty
         }
         return false
