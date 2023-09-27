@@ -53,3 +53,22 @@ enum FontGuide {
     static let size14 = customFont(size: 14, lineHeight: 20)
     static let size14Bold = customFont(size: 14, lineHeight: 20, isBold: true)
 }
+
+
+/*
+ 
+ 사용방법
+ 
+ let font32 = FontGuide.size32
+ let font32Bold = FontGuide.size32Bold // Bold 스타일
+
+ let font19 = FontGuide.size19
+ let font19Bold = FontGuide.size19Bold // Bold 스타일
+
+ let font16 = FontGuide.size16
+ let font16Bold = FontGuide.size16Bold // Bold 스타일
+
+ let font14 = FontGuide.size14
+ let font14Bold = FontGuide.size14Bold // Bold 스타일
+ 
+ */
