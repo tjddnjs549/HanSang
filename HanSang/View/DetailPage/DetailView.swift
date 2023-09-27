@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailView: UIView {
 
-    var material: [String] = ["스테이크용 소고기", "아스파라거스", "새송이 버섯", "감자", "소스", "돼지고기", "와인", "야파"]
+    var material: [String] = ["스테이크용 소고기", "아스파라거스", "새송이 버섯", "감자", "소스", "돼지고기", "와인", "양파"]
     var unit: [String] =  ["1개", "2개", "3개", "4개", "5개", "6개", "7개", "8개"]
     var imageArray: [UIImage] = [UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!]
     var imageDescriptionArray: [String] = ["스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다."]
@@ -190,7 +190,7 @@ final class DetailView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        scrollView.contentSize = CGSize(width: bounds.width, height: recipeUdateButton.frame.maxY + 30)
+        scrollView.contentSize = CGSize(width: bounds.width, height: recipeUdateButton.frame.maxY + 20)
         print(materialTableView.frame)
         print(recipeTableView.frame)
         
@@ -353,7 +353,7 @@ private extension DetailView {
             recipeUdateButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
             recipeUdateButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
             recipeUdateButton.topAnchor.constraint(equalTo: self.recipeTableView.bottomAnchor, constant: 30),
-            recipeUdateButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -30),
+            recipeUdateButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20),
         ])
     }
 }
