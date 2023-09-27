@@ -38,6 +38,9 @@
 		637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119EB2AC17CAA00E59D1F /* BookMarkViewController.swift */; };
 		637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119ED2AC17CC100E59D1F /* LoginViewController.swift */; };
 		637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119F02AC180DF00E59D1F /* TimerViewController.swift */; };
+		E26A9EB72AC2CAD500303B5F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E26A9EB62AC2CAD500303B5F /* SnapKit */; };
+		E26A9EBA2AC2CE2800303B5F /* RecipeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A9EB92AC2CE2800303B5F /* RecipeInfoView.swift */; };
+		E26A9EBD2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A9EBC2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift */; };
 		63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */; };
 		63945F6F2AC2EA590053792E /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63945F6E2AC2EA590053792E /* Extension+UIButton.swift */; };
 		63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */; };
@@ -77,6 +80,8 @@
 		637119EB2AC17CAA00E59D1F /* BookMarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkViewController.swift; sourceTree = "<group>"; };
 		637119ED2AC17CC100E59D1F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		637119F02AC180DF00E59D1F /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		E26A9EB92AC2CE2800303B5F /* RecipeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoView.swift; sourceTree = "<group>"; };
+		E26A9EBC2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
 		63945F6E2AC2EA590053792E /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
 		63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTableViewCell.swift; sourceTree = "<group>"; };
@@ -214,6 +219,7 @@
 		637119DF2AC179C600E59D1F /* CreatePage */ = {
 			isa = PBXGroup;
 			children = (
+				E26A9EB82AC2CC9D00303B5F /* View */,
 				637119E92AC17C9500E59D1F /* CreateViewController.swift */,
 			);
 			path = CreatePage;
@@ -272,6 +278,21 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		E26A9EB82AC2CC9D00303B5F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E26A9EBB2AC2D4AA00303B5F /* Cell */,
+				E26A9EB92AC2CE2800303B5F /* RecipeInfoView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E26A9EBB2AC2D4AA00303B5F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E26A9EBC2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift */,
+			);
+			path = Cell;
 		63945F6B2AC2B1E00053792E /* Extension+DetailPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +387,7 @@
 				637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */,
 				3F040ACC2AC1A3AC00719CDD /* User+CoreDataClass.swift in Sources */,
 				637119CF2AC1793000E59D1F /* HanSang.xcdatamodeld in Sources */,
+				E26A9EBD2AC2D51B00303B5F /* RecipeInfoItemCollectionViewCell.swift in Sources */,
 				63945F6F2AC2EA590053792E /* Extension+UIButton.swift in Sources */,
 				63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */,
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
@@ -374,6 +396,7 @@
 				637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */,
 				637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */,
 				637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */,
+				E26A9EBA2AC2CE2800303B5F /* RecipeInfoView.swift in Sources */,
 				3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */,
 				637119E42AC17BDC00E59D1F /* MainViewController.swift in Sources */,
 				637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */,
