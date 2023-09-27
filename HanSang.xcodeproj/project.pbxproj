@@ -12,6 +12,7 @@
 		3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */; };
 		3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */; };
 		3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */; };
+		632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632336D82AC1DAAF0011B024 /* DetailView.swift */; };
 		3F040ADB2AC1A99200719CDD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F040ADA2AC1A99200719CDD /* SnapKit */; };
 		3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADC2AC25DE700719CDD /* LoginView.swift */; };
 		3F040ADF2AC2645000719CDD /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADE2AC2645000719CDD /* SignUpView.swift */; };
@@ -37,6 +38,10 @@
 		637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119EB2AC17CAA00E59D1F /* BookMarkViewController.swift */; };
 		637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119ED2AC17CC100E59D1F /* LoginViewController.swift */; };
 		637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119F02AC180DF00E59D1F /* TimerViewController.swift */; };
+		63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */; };
+		63945F6F2AC2EA590053792E /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63945F6E2AC2EA590053792E /* Extension+UIButton.swift */; };
+		63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */; };
+		63B35A122AC38266009B78D1 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +50,7 @@
 		3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Materials+CoreDataClass.swift"; sourceTree = "<group>"; };
+		632336D82AC1DAAF0011B024 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		3F040ADC2AC25DE700719CDD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3F040ADE2AC2645000719CDD /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		3F040AE02AC2645F00719CDD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +77,10 @@
 		637119EB2AC17CAA00E59D1F /* BookMarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkViewController.swift; sourceTree = "<group>"; };
 		637119ED2AC17CC100E59D1F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		637119F02AC180DF00E59D1F /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
+		63945F6E2AC2EA590053792E /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
+		63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTableViewCell.swift; sourceTree = "<group>"; };
+		63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +204,9 @@
 			isa = PBXGroup;
 			children = (
 				637119E72AC17C5900E59D1F /* DetailViewController.swift */,
+				632336D82AC1DAAF0011B024 /* DetailView.swift */,
+				63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */,
+				63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */,
 			);
 			path = DetailPage;
 			sourceTree = "<group>";
@@ -254,8 +267,18 @@
 		637119F52AC182E500E59D1F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				63945F6B2AC2B1E00053792E /* Extension+DetailPage */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		63945F6B2AC2B1E00053792E /* Extension+DetailPage */ = {
+			isa = PBXGroup;
+			children = (
+				63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */,
+				63945F6E2AC2EA590053792E /* Extension+UIButton.swift */,
+			);
+			path = "Extension+DetailPage";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,9 +361,13 @@
 			files = (
 				637119EA2AC17C9500E59D1F /* CreateViewController.swift in Sources */,
 				3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */,
+				632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */,
+				63B35A122AC38266009B78D1 /* RecipeTableViewCell.swift in Sources */,
 				637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */,
 				3F040ACC2AC1A3AC00719CDD /* User+CoreDataClass.swift in Sources */,
 				637119CF2AC1793000E59D1F /* HanSang.xcdatamodeld in Sources */,
+				63945F6F2AC2EA590053792E /* Extension+UIButton.swift in Sources */,
+				63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */,
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
 				3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */,
 				3F040AE12AC2645F00719CDD /* SignUpViewController.swift in Sources */,
@@ -352,6 +379,7 @@
 				637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */,
 				3F040AE62AC29B1F00719CDD /* MyPageView.swift in Sources */,
 				3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */,
+				63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */,
 				3F040AF22AC2D03000719CDD /* ColorGuide.swift in Sources */,
 				3F040AEE2AC2CA1900719CDD /* MyPageCustomCell2.swift in Sources */,
 				3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */,
