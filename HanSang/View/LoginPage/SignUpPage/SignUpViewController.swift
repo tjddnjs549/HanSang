@@ -10,11 +10,84 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     private let signUpView = SignUpView()
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    static var user: [User]?
+    var activeTextField: UITextField?
+
+    func fetchUserInfo() {
+        let request = User.fetchRequest()
+
+        do {
+            SignUpViewController.user = try context.fetch(request)
+        } catch {
+            print("🚨 유저 정보 불러오기 오류")
+        }
+    }
+
+    func getUserId(_ id: String) -> User? {
+        let request = User.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id)
+
+        do {
+            let users = try context.fetch(request)
+            return users.first
+        } catch {
+            print("🚨 유저 정보 찾을 수 없음: \(error)")
+            return nil
+        }
+    }
+
+    func getUserNickname(_ nickname: String) -> User? {
+        let request = User.fetchRequest()
+        request.predicate = NSPredicate(format: "nickname == %@", nickname)
+
+        do {
+            let users = try context.fetch(request)
+            return users.first
+        } catch {
+            print("🚨 유저 정보 찾을 수 없음: \(error)")
+            return nil
+        }
+    }
+
+    func createUser(image: UIImage?, id: String, pw: String, nickname: String) {
+        let newUser = User(context: context)
+        if let imageData = image!.jpegData(compressionQuality: 1.0) {
+            newUser.profilePicture = imageData
+            newUser.id = id
+            newUser.pw = pw
+            newUser.nickname = nickname
+        } else {
+            print("이미지 저장 에러")
+        }
+
+        do {
+            try context.save()
+        } catch {
+            print("🚨 유저 생성 오류")
+        }
+    }
+
+    func deleteAllUsers() {
+        let request = User.fetchRequest()
+
+        do {
+            let users = try context.fetch(request)
+            for user in users {
+                context.delete(user)
+            }
+            try context.save()
+            fetchUserInfo()
+        } catch {
+            print("🚨 유저 정보 일괄 삭제 오류")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
+        hideKeyboard()
     }
 }
 
@@ -24,8 +97,10 @@ private extension SignUpViewController {
         signUpView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         signUpView.createButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
         signUpView.profilePicture.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(editProfilePicture)))
+        signUpView.idCheckedButton.addTarget(self, action: #selector(idCheckedButtonTapped), for: .touchUpInside)
         signUpView.pwCheckedButton.addTarget(self, action: #selector(pwCheckedButtonTapped), for: .touchUpInside)
         signUpView.confirmPwCheckedButton.addTarget(self, action: #selector(verifyPwCheckedButtonTapped), for: .touchUpInside)
+        signUpView.nicknameCheckedButton.addTarget(self, action: #selector(nicknameCheckedButtonTapped), for: .touchUpInside)
 
         // TextField delegate
         signUpView.idTextField.delegate = self
@@ -34,6 +109,34 @@ private extension SignUpViewController {
         signUpView.nicknameTextField.delegate = self
     }
 
+    /* 지금 적용 안됨
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+
+            if let activeTextField = activeTextField {
+                let textFieldFrame = activeTextField.frame
+                let scrollOffset = textFieldFrame.origin.y + textFieldFrame.size.height - (view.frame.height - keyboardHeight)
+
+                if scrollOffset > 0 {
+                    self.view.frame.origin.y = -scrollOffset
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+//        signUpView.setContentOffset(CGPoint.zero, animated: true)
+        self.view.frame.origin.y = 0
+    }
+     */
+    
     @objc func cancelButtonTapped() {
         dismiss(animated: true)
     }
@@ -69,6 +172,22 @@ extension SignUpViewController: PHPickerViewControllerDelegate {
 }
 
 extension SignUpViewController {
+    @objc func idCheckedButtonTapped() {
+        let id = signUpView.idTextField.text ?? ""
+        if isValidId(id) {
+            if isIdAlreadyRegistered(id) {
+                print("true")
+                signUpView.idTextFieldDescription.text = "이미 존재하는 아이디입니다."
+                signUpView.idTextFieldDescription.isHidden = false
+            } else {
+                print("false")
+                signUpView.idTextFieldDescription.text = "사용 가능한 아이디입니다."
+                signUpView.idTextFieldDescription.isHidden =
+                    false
+            }
+        }
+    }
+
     @objc func pwCheckedButtonTapped() {
         signUpView.pwTextField.isSecureTextEntry.toggle()
         let imageName = signUpView.pwTextField.isSecureTextEntry ? "eyes" : "eyes.inverse"
@@ -80,75 +199,85 @@ extension SignUpViewController {
         let imageName = signUpView.confirmPwTextField.isSecureTextEntry ? "eyes" : "eyes.inverse"
         signUpView.confirmPwCheckedButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
-    
+
+    @objc func nicknameCheckedButtonTapped() {
+        let nickname = signUpView.nicknameTextField.text ?? ""
+        if isValidNickname(nickname) {
+            if isNicknameAlreadyRegistered(nickname) {
+                signUpView.nicknameTextFieldDescription.text = "이미 존재하는 닉네임입니다."
+                signUpView.nicknameTextFieldDescription.isHidden = false
+            } else {
+                signUpView.nicknameTextFieldDescription.text = "사용 가능한 닉네임입니다."
+                signUpView.nicknameTextFieldDescription.isHidden = false
+            }
+        }
+    }
+
     // MARK: - 회원가입 정규식 유효성 검사
+
     private func isValidId(_ id: String) -> Bool {
-        // 아이디 정규식: 소문자, 숫자로 이루어진 6~12자
-        let idRegex = "^[a-z0-9]{6,12}$"
+        // 아이디 정규식: 소문자, 숫자로 이루어진 4~12자
+        let idRegex = "^[a-z0-9]{4,12}$"
         let idPredicate = NSPredicate(format: "SELF MATCHES %@", idRegex)
         return idPredicate.evaluate(with: id)
     }
-    
+
     private func isValidPw(_ pw: String) -> Bool {
-        // 비밀번호 정규식: 대소문자, 숫자, 특수문자만 허용 8자 이상
-        let pwRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$"
+        // 비밀번호 정규식: 대소문자, 숫자, 특수문자 중 적어도 하나를 포함하고 4자 이상
+        let pwRegex = "^(?=.*[A-Za-z\\d@$!%*?&#]).{4,}$"
         let pwPredicate = NSPredicate(format: "SELF MATCHES %@", pwRegex)
         return pwPredicate.evaluate(with: pw)
     }
-    
+
     private func doPasswordsMatch(_ pw: String, _ confirmPw: String) -> Bool {
         return pw == confirmPw
     }
-    
+
     private func isValidNickname(_ nickname: String) -> Bool {
-        // 닉네임 정규식: 2~20자의 문자열
-        let nicknameRegex = "^.{2,20}$"
+        // 닉네임 정규식: 2~8자의 문자열
+        let nicknameRegex = "^.{2,8}$"
         let nicknamePredicate = NSPredicate(format: "SELF MATCHES %@", nicknameRegex)
         return nicknamePredicate.evaluate(with: nickname)
     }
-    
+
     private func isIdAlreadyRegistered(_ id: String) -> Bool {
-        // CoreData User 확인 로직 추가
-        return false
+        let existingUser = getUserId(id)
+        return (existingUser != nil) ? true : false
+    }
+
+    private func isNicknameAlreadyRegistered(_ nickname: String) -> Bool {
+        let existingUser = getUserNickname(nickname)
+        return (existingUser != nil) ? true : false
     }
 
     @objc func createButtonTapped() {
         guard let id = signUpView.idTextField.text,
               let pw = signUpView.pwTextField.text,
-              let confirmPw = signUpView.confirmPwTextField.text,
-              let nickname = signUpView.nicknameTextField.text
+              let nickname = signUpView.nicknameTextField.text,
+              let image = signUpView.profilePicture.image
         else {
             return
         }
-        
+
+        // 중복 확인
         if isIdAlreadyRegistered(id) {
-            // 중복 시 화면에 표시할 로직 추가
+            signUpView.idTextFieldDescription.text = "이미 존재하는 아이디입니다."
             return
         }
-        
-        if !isValidPw(pw) {
-            // 비밀번호 정규식 오류 시 표시할 로직 추가
+
+        if isNicknameAlreadyRegistered(nickname) {
+            signUpView.nicknameTextFieldDescription.text = "이미 존재하는 닉네임입니다."
             return
         }
-        
-        if pw != confirmPw {
-            // 비밀번호-비밀번호 확인 매칭 오류 시 표시할 로직 추가
-            return
-        }
-        
-        if !isValidNickname(nickname) {
-            // 닉네임 정규식 오류 시 표시할 로직 추가
-            return
-        }
-        
-        // 추가할 항목: CoreData에 User 정보 저장
-        
+
+        createUser(image: image, id: id, pw: pw, nickname: nickname)
+        fetchUserInfo()
+
         // 회원가입 완료 시 로그인 페이지로 이동
         DispatchQueue.main.async {
             self.dismiss(animated: true)
         }
     }
-
 }
 
 extension SignUpViewController: UITextFieldDelegate {
@@ -165,21 +294,95 @@ extension SignUpViewController: UITextFieldDelegate {
         }
         return true
     }
-    
-    // 계정 만들기 버튼 활성화
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+        if textField == signUpView.idTextField {
+            signUpView.idTextFieldDescription.isHidden = false
+        } else if textField == signUpView.pwTextField {
+            signUpView.pwTextFieldDescription.isHidden = false
+        } else if textField == signUpView.confirmPwTextField {
+            signUpView.confirmPwTextFieldDescription.isHidden = false
+        } else {
+            signUpView.nicknameTextFieldDescription.isHidden = false
+        }
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeTextField = nil
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == signUpView.idTextField {
+            let currentText = textField.text ?? ""
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+            let idPattern = "^[a-z0-9]{4,12}$"
+            let isValidId = (newText.range(of: idPattern, options: .regularExpression) != nil)
+
+            if isValidId {
+                signUpView.idTextFieldDescription.isHidden = true
+            } else {
+                signUpView.idTextFieldDescription.text = "아이디는 소문자, 숫자로 이루어진 4~12자이어야 합니다."
+            }
+
+        } else if textField == signUpView.pwTextField {
+            let currentText = textField.text ?? ""
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+            let passwordPattern = "^(?=.*[A-Za-z\\d@$!%*?&#]).{4,}$"
+            let isValidPassword = (newText.range(of: passwordPattern, options: .regularExpression) != nil)
+
+            if isValidPassword {
+                signUpView.pwTextFieldDescription.isHidden = true
+            } else {
+                signUpView.pwTextFieldDescription.text = "비밀번호는 4자 이상 대소문자, 숫자, 특수문자 중 적어도 하나를 포함해야 합니다."
+            }
+        } else if textField == signUpView.confirmPwTextField {
+            let currentText = textField.text ?? ""
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+            let isMatchingPassword = (newText == signUpView.pwTextField.text)
+
+            if isMatchingPassword {
+                signUpView.confirmPwTextFieldDescription.isHidden = true
+            } else {
+                signUpView.confirmPwTextFieldDescription.text = "비밀번호가 일치하지 않습니다."
+            }
+        } else if textField == signUpView.nicknameTextField {
+            let currentText = textField.text ?? ""
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+            let nicknamePattern = "^.{2,8}$"
+            let isValidNickname = (newText.range(of: nicknamePattern, options: .regularExpression) != nil)
+
+            if isValidNickname {
+                signUpView.nicknameTextFieldDescription.isHidden = true
+            } else {
+                signUpView.nicknameTextFieldDescription.text = "닉네임은 2-8자이어야 합니다."
+            }
+        }
+
+        if isAllFieldsValid() {
+            signUpView.createButton.backgroundColor = ColorGuide.main
+            signUpView.createButton.setTitleColor(.white, for: .normal)
+            signUpView.createButton.isEnabled = true
+        } else {
+            signUpView.createButton.backgroundColor = ColorGuide.inputLine
+            signUpView.createButton.isEnabled = false
+        }
+
+        return true
+    }
+
+    private func isAllFieldsValid() -> Bool {
         if let id = signUpView.idTextField.text,
            let pw = signUpView.pwTextField.text,
            let confirmPw = signUpView.confirmPwTextField.text,
-           let nickname = signUpView.nicknameTextField.text {
-            if !id.isEmpty && !pw.isEmpty && !confirmPw.isEmpty && !nickname.isEmpty {
-                signUpView.createButton.backgroundColor = ColorGuide.yellow900
-                signUpView.createButton.isEnabled = true
-            } else {
-                signUpView.createButton.backgroundColor = .systemGray6
-                signUpView.createButton.isEnabled = false
-            }
+           let nickname = signUpView.nicknameTextField.text
+        {
+            return !id.isEmpty && !pw.isEmpty && !confirmPw.isEmpty && !nickname.isEmpty
         }
-        return true
+        return false
     }
 }
