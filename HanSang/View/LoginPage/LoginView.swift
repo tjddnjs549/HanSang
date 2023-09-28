@@ -123,51 +123,51 @@ class LoginView: UIView {
     
     private func setupUI() {
         backgroundColor = .systemBackground
-        addSubview(logo)
-        addSubview(loginLabel)
-        addSubview(simbolLogo)
-        addSubview(id)
-        addSubview(pw)
-        addSubview(pwCheckedButton)
-        addSubview(loginButton)
-        addSubview(signUpButton)
         
+        addSubview(logo)
         logo.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top)
             make.leading.equalTo(22.73)
         }
         
+        addSubview(loginLabel)
         loginLabel.snp.makeConstraints { make in
             make.top.equalTo(logo.snp.bottom).offset(43.83)
             make.leading.equalTo(30)
         }
         
+        addSubview(simbolLogo)
         simbolLogo.snp.makeConstraints { make in
             make.top.equalTo(loginLabel.snp.bottom).offset(79)
             make.centerX.equalToSuperview()
         }
         
+        addSubview(id)
         id.snp.makeConstraints { make in
             make.top.equalTo(simbolLogo.snp.bottom).offset(80)
             make.centerX.equalToSuperview()
         }
         
+        addSubview(pw)
         pw.snp.makeConstraints { make in
             make.top.equalTo(id.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
         }
         
+        addSubview(pwCheckedButton)
         pwCheckedButton.snp.makeConstraints { make in
             make.centerY.equalTo(pw.snp.centerY)
             make.trailing.equalTo(pw.snp.trailing).offset(-10)
             make.width.height.equalTo(20)
         }
         
+        addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
             make.top.equalTo(pw.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
         }
         
+        addSubview(signUpButton)
         signUpButton.snp.makeConstraints { make in
             make.top.equalTo(loginButton.snp.bottom).offset(32)
             make.centerX.equalToSuperview()

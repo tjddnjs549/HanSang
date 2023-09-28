@@ -15,10 +15,8 @@
 		3F040ADB2AC1A99200719CDD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F040ADA2AC1A99200719CDD /* SnapKit */; };
 		3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADC2AC25DE700719CDD /* LoginView.swift */; };
 		3F040AE12AC2645F00719CDD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AE02AC2645F00719CDD /* SignUpViewController.swift */; };
-		3F040AE42AC279C300719CDD /* MyPageView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AE32AC279C300719CDD /* MyPageView2.swift */; };
 		3F040AE62AC29B1F00719CDD /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AE52AC29B1F00719CDD /* MyPageView.swift */; };
 		3F040AEC2AC2B95F00719CDD /* MyPageCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AEB2AC2B95F00719CDD /* MyPageCustomCell.swift */; };
-		3F040AEE2AC2CA1900719CDD /* MyPageCustomCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AED2AC2CA1900719CDD /* MyPageCustomCell2.swift */; };
 		3F040AF22AC2D03000719CDD /* ColorGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AF12AC2D03000719CDD /* ColorGuide.swift */; };
 		3F040AF42AC3B34900719CDD /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AF32AC3B34900719CDD /* SignUpViewModel.swift */; };
 		3F040AFE2AC4106300719CDD /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AFD2AC4106300719CDD /* SignUpView.swift */; };
@@ -56,10 +54,8 @@
 		3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Materials+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3F040ADC2AC25DE700719CDD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3F040AE02AC2645F00719CDD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		3F040AE32AC279C300719CDD /* MyPageView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView2.swift; sourceTree = "<group>"; };
 		3F040AE52AC29B1F00719CDD /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		3F040AEB2AC2B95F00719CDD /* MyPageCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCustomCell.swift; sourceTree = "<group>"; };
-		3F040AED2AC2CA1900719CDD /* MyPageCustomCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCustomCell2.swift; sourceTree = "<group>"; };
 		3F040AF12AC2D03000719CDD /* ColorGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGuide.swift; sourceTree = "<group>"; };
 		3F040AF32AC3B34900719CDD /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		3F040AFD2AC4106300719CDD /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -181,8 +177,6 @@
 		637119DB2AC1795700E59D1F /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				3F040AE32AC279C300719CDD /* MyPageView2.swift */,
-				3F040AED2AC2CA1900719CDD /* MyPageCustomCell2.swift */,
 				3F040AE52AC29B1F00719CDD /* MyPageView.swift */,
 				3F040AEB2AC2B95F00719CDD /* MyPageCustomCell.swift */,
 				637119E52AC17C0E00E59D1F /* MyPageViewController.swift */,
@@ -413,12 +407,10 @@
 				63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */,
 				3F040AF22AC2D03000719CDD /* ColorGuide.swift in Sources */,
 				3F040B042AC4754700719CDD /* FontGuide.swift in Sources */,
-				3F040AEE2AC2CA1900719CDD /* MyPageCustomCell2.swift in Sources */,
 				3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */,
 				3F040AEC2AC2B95F00719CDD /* MyPageCustomCell.swift in Sources */,
 				637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */,
 				E21806E32AC3E8EC00A2614B /* RecipeInfoItemCollectionViewCell.swift in Sources */,
-				3F040AE42AC279C300719CDD /* MyPageView2.swift in Sources */,
 				3F040AF42AC3B34900719CDD /* SignUpViewModel.swift in Sources */,
 				637119E82AC17C5900E59D1F /* DetailViewController.swift in Sources */,
 			);

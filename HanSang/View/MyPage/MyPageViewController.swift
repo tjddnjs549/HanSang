@@ -8,7 +8,7 @@
 import UIKit
 
 class MyPageViewController: UIViewController {
-    private let myPageView = MyPageView2()
+    private let myPageView = MyPageView()
     let images: [UIImage] = [
         UIImage(named: "1")!,
         UIImage(named: "2")!,
@@ -80,10 +80,19 @@ private extension MyPageViewController {
         view = myPageView
         myPageView.collectionView.dataSource = self
         myPageView.collectionView.delegate = self
+        
+        if let originalImage = UIImage(named: "HANSANG") {
+            let tintedImage = originalImage.withTintColor(ColorGuide.main)
+            let button = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: nil)
+            button.tintColor = ColorGuide.main
+            navigationItem.leftBarButtonItem = button
+        }
+        
+        if let gearImage = UIImage(named: "setting") {
+            let coloredGearImage = gearImage.withTintColor(ColorGuide.textHint, renderingMode: .alwaysOriginal)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: coloredGearImage, style: .plain, target: self, action: #selector(logoutButtonTapped))
+        }
 
-        // 로그인 페이지 테스트용
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(loginButtonTapped))
-        myPageView.logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
     }
 
     func loadUserInfo() {
@@ -96,10 +105,9 @@ private extension MyPageViewController {
                let image = UIImage(data: imageData) {
                 myPageView.profilePicture.image = image
             } else {
-                myPageView.profilePicture.image = UIImage(systemName: "person.fill")
+                myPageView.profilePicture.image = UIImage(named: "profile")
             }
-            navigationItem.title = id
-            myPageView.nicknameLabel.text = nickname
+            myPageView.nickname.text = nickname
             if recipeCount == 0 {
                 myPageView.recipeCount.text = "0"
             } else {
@@ -108,12 +116,7 @@ private extension MyPageViewController {
         }
     }
 
-    // 로그인 페이지 테스트용
-    @objc func loginButtonTapped() {
-        let loginPageVC = LoginViewController()
-        navigationController?.pushViewController(loginPageVC, animated: true)
-    }
-
+    // 로그아웃 별도 페이지로 이동 예정(-> 설정 페이지 추가)
     @objc func logoutButtonTapped() {
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
 
@@ -132,27 +135,29 @@ extension MyPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell2.identifier, for: indexPath) as? MyPageCustomCell2 else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as? MyPageCustomCell else {
             fatalError()
         }
         let image = images[indexPath.row]
         cell.configure(image)
+        cell.layer.borderWidth = 1.0
+        cell.layer.borderColor = ColorGuide.inputLine.cgColor
+        cell.layer.cornerRadius = 12
+        cell.layer.masksToBounds = true
+        cell.layer.shadowColor = ColorGuide.textHint.cgColor
+        cell.layer.shadowOpacity = 1
+        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
+        cell.layer.shadowRadius = 12
         return cell
     }
 }
 
-// MyPageCustomCell
-// extension MyPageViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let size = (view.frame.width/3)-20
-//        return CGSize(width: size, height: size)
-//   }
-// }
-
-// MyPageCustomCell2
-extension MyPageViewController: UICollectionViewDelegateFlowLayout {
+ extension MyPageViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = view.frame.width - 40
-        return CGSize(width: size, height: 200)
-    }
-}
+        return CGSize(width: 158, height: 182)
+   }
+     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+         return 16
+     }
+ }
