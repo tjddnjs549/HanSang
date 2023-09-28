@@ -16,6 +16,7 @@ class SignUpView: UIView {
         scrollView.isUserInteractionEnabled = true
         return scrollView
     }()
+    
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "close"), for: .normal)
@@ -111,7 +112,6 @@ class SignUpView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 4
         textField.snp.makeConstraints { make in
-            make.width.equalTo(333)
             make.height.equalTo(56)
         }
         return textField
@@ -173,7 +173,6 @@ class SignUpView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 4
         textField.snp.makeConstraints { make in
-            make.width.equalTo(333)
             make.height.equalTo(56)
         }
         return textField
@@ -231,7 +230,6 @@ class SignUpView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 4
         textField.snp.makeConstraints { make in
-            make.width.equalTo(333)
             make.height.equalTo(56)
         }
         return textField
@@ -286,7 +284,6 @@ class SignUpView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 4
         textField.snp.makeConstraints { make in
-            make.width.equalTo(333)
             make.height.equalTo(56)
         }
         return textField
@@ -338,7 +335,6 @@ class SignUpView: UIView {
         button.backgroundColor = ColorGuide.main
         button.layer.cornerRadius = 4
         button.snp.makeConstraints { make in
-            make.width.equalTo(333)
             make.height.equalTo(56)
         }
         return button
