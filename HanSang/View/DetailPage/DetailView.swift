@@ -9,10 +9,7 @@ import UIKit
 
 final class DetailView: UIView {
 
-    var material: [String] = ["스테이크용 소고기", "아스파라거스", "새송이 버섯", "감자", "소스", "돼지고기", "와인", "양파"]
-    var unit: [String] =  ["1개", "2개", "3개", "4개", "5개", "6개", "7개", "8개"]
-    var imageArray: [UIImage] = [UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!]
-    var imageDescriptionArray: [String] = ["스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다."]
+
     
     var isLiked: Bool = false
     // MARK: - properties
@@ -79,7 +76,7 @@ final class DetailView: UIView {
     
     private lazy var profileImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "ProfileImage")
+        image.image = UIImage(named: "profileImage")
         image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -93,19 +90,13 @@ final class DetailView: UIView {
         return label
     }()
     
-    //❗️❗️❗️❗️❗️❗️❗️
     private lazy var likeButton: UIButton = {
         let like = UIButton(type: .custom)
         like.buttonImageMakeUI(image: "heart", selectedImage: "heart.fill", color: .red)
         like.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return like
     }()
-    @objc func likeButtonTapped() {
-        likeButton.isSelected.toggle()
-        isLiked = likeButton.isSelected
-        print(likeButton.isSelected)
-    }
-    
+
     private let divider: UIView = {
         let divider = UIView()
         divider.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
@@ -123,6 +114,7 @@ final class DetailView: UIView {
     lazy var materialTableView: UITableView = {
         let table = UITableView()
         table.separatorStyle = .none
+        table.showsVerticalScrollIndicator = false
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -164,6 +156,7 @@ final class DetailView: UIView {
     lazy var recipeTableView: UITableView = {
         let table = UITableView()
         table.separatorStyle = .none
+        table.showsVerticalScrollIndicator = false
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -190,7 +183,7 @@ final class DetailView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        scrollView.contentSize = CGSize(width: bounds.width, height: recipeUdateButton.frame.maxY + 20)
+        //scrollView.contentSize = CGSize(width: bounds.width, height: recipeUdateButton.frame.maxY + 20)
         print(materialTableView.frame)
         print(recipeTableView.frame)
         
@@ -213,7 +206,6 @@ private extension DetailView {
         labelMakeUI()
         userInfoMakeUI()
         materialMakeUI()
-        tableViewSetting()
         kickMakeUI()
     }
     
@@ -312,9 +304,9 @@ private extension DetailView {
             materialTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             materialTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
             materialTableView.topAnchor.constraint(equalTo: self.materialLabel.bottomAnchor, constant: 20),
-            materialTableView.heightAnchor.constraint(equalToConstant: 250),
+            materialTableView.heightAnchor.constraint(equalToConstant: 200),
             //❗️❗️❗️
-            //materialTableView.bottomAnchor.constraint(equalTo: self.recipeLabel.topAnchor, constant: -20),
+            materialTableView.bottomAnchor.constraint(equalTo: self.recipeLabel.topAnchor, constant: -5),
             
             recipeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             recipeLabel.topAnchor.constraint(equalTo: self.materialTableView.bottomAnchor, constant: 20),
@@ -345,7 +337,7 @@ private extension DetailView {
             recipeTableView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
             recipeTableView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
             recipeTableView.widthAnchor.constraint(equalToConstant: 343.0),
-            recipeTableView.heightAnchor.constraint(equalToConstant: 320),
+            recipeTableView.heightAnchor.constraint(equalToConstant: 300),
             // ❗️❗️❗️❗️❗️❗️❗️
             recipeTableView.topAnchor.constraint(equalTo: self.kickView.bottomAnchor, constant: 20),
             recipeTableView.bottomAnchor.constraint(equalTo: self.recipeUdateButton.topAnchor, constant: -30),
@@ -358,73 +350,16 @@ private extension DetailView {
     }
 }
 
-// MARK: - tableView 세팅
-
-private extension DetailView {
-    
-    func tableViewSetting() {
-        materialTableView.delegate = self
-        materialTableView.dataSource = self
-        recipeTableView.delegate = self
-        recipeTableView.dataSource = self
-        materialTableView.register(MaterialTableViewCell.self, forCellReuseIdentifier: "MaterialTableViewCell")
-        recipeTableView.register(RecipeTableViewCell.self, forCellReuseIdentifier: "RecipeTableViewCell")
-    }
-    
-}
-
-// MARK: - table UITableViewDelegate / UITableViewDataSource
-
-
-extension DetailView: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.materialTableView {
-            return material.count
-        } else if tableView == self.recipeTableView {
-            return imageArray.count
-        }
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if tableView == self.materialTableView {
-            print(#function)
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MaterialTableViewCell", for: indexPath) as! MaterialTableViewCell
-            cell.materialLabel.text = material[indexPath.row]
-            cell.unitLabel.text = unit[indexPath.row]
-            cell.selectionStyle = .none
-            return cell
-        } else if tableView == self.recipeTableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeTableViewCell", for: indexPath) as! RecipeTableViewCell
-            cell.cellMakeUI(index: indexPath.row)
-            cell.recipeImageView.image = imageArray[indexPath.row]
-            cell.recipeLabel.text = imageDescriptionArray[indexPath.row]
-            cell.selectionStyle = .none
-            print(#function)
-            return cell
-        }
-       return UITableViewCell()
-    }
-}
-
-
-extension DetailView: UITableViewDelegate {
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            if tableView == self.materialTableView {
-                return 30
-            } else if tableView == self.recipeTableView {
-                return 80
-            }
-            return 0
-        }
-}
-
-
 // MARK: - @objc func
 
 extension DetailView {
     
-
+    @objc func likeButtonTapped() {
+        likeButton.isSelected.toggle()
+        isLiked = likeButton.isSelected
+        print(likeButton.isSelected)
+    }
 }
+
+
 

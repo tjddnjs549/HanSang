@@ -9,38 +9,86 @@ import UIKit
 
 final class DetailViewController: UIViewController {
 
+    // MARK: - dummy
+    
+    var material: [String] = ["스테이크용 소고기", "아스파라거스", "새송이 버섯", "감자", "소스", "돼지고기", "와인", "양파", "양파", "양파"]
+    var unit: [String] =  ["1개", "2개", "3개", "4개", "5개", "6개", "7개", "8개", "8개", "8개"]
+    var imageArray: [UIImage] = [UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!]
+    var imageDescriptionArray: [String] = ["스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다."]
+
+    
     private let detailView = DetailView()
     
     override func loadView() {
-        view = detailView
-        
+        self.view = detailView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       detailView.materialTableView.reloadData()
+        tableViewSetting()
+        detailView.materialTableView.reloadData()
         detailView.recipeTableView.reloadData()
     }
-
-    
-    
-}
-#if DEBUG && canImport(SwiftUI)
-import SwiftUI
-private struct UIViewControllerRepresenter: UIViewControllerRepresentable {
-    let viewController: UIViewController
-    
-    func makeUIViewController(context: Context) -> UIViewController {
-        return viewController
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
-struct UIViewControllerPreviewView: PreviewProvider {
-    static var previews: some View {
-        let viewController = DetailViewController()
-        return UIViewControllerRepresenter(viewController: viewController)
+// MARK: - tableView 세팅
+
+private extension DetailViewController {
+    
+    func tableViewSetting() {
+        detailView.materialTableView.delegate = self
+        detailView.materialTableView.dataSource = self
+        detailView.recipeTableView.delegate = self
+        detailView.recipeTableView.dataSource = self
+        detailView.materialTableView.register(MaterialTableViewCell.self, forCellReuseIdentifier: "MaterialTableViewCell")
+        detailView.recipeTableView.register(RecipeTableViewCell.self, forCellReuseIdentifier: "RecipeTableViewCell")
+    }
+    
+}
+
+// MARK: - table UITableViewDelegate / UITableViewDataSource
+
+
+extension DetailViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == detailView.materialTableView {
+            return material.count
+        } else if tableView == detailView.recipeTableView {
+            return imageArray.count
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if tableView == detailView.materialTableView {
+            print(#function)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MaterialTableViewCell", for: indexPath) as! MaterialTableViewCell
+            cell.materialLabel.text = material[indexPath.row]
+            cell.unitLabel.text = unit[indexPath.row]
+            cell.selectionStyle = .none
+            return cell
+        } else if tableView == detailView.recipeTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeTableViewCell", for: indexPath) as! RecipeTableViewCell
+            cell.cellMakeUI(index: indexPath.row)
+            cell.recipeImageView.image = imageArray[indexPath.row]
+            cell.recipeLabel.text = imageDescriptionArray[indexPath.row]
+            cell.selectionStyle = .none
+            print(#function)
+            return cell
+        }
+       return UITableViewCell()
     }
 }
-#endif
+
+
+extension DetailViewController: UITableViewDelegate {
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            if tableView == detailView.materialTableView {
+                return 30
+            } else if tableView == detailView.recipeTableView {
+                return 80
+            }
+            return 0
+        }
+}

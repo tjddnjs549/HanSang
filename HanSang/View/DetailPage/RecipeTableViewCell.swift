@@ -31,7 +31,7 @@ final class RecipeTableViewCell: UITableViewCell {
     
     lazy var timerButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setTitle("Start Timer", for: .normal)
+        button.setTitle("Timer", for: .normal)
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 1.0
         return button
@@ -74,10 +74,12 @@ extension RecipeTableViewCell {
             recipeImageView.trailingAnchor.constraint(equalTo: self.recipeLabel.leadingAnchor, constant: -10),
             
             recipeLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            recipeLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
+            recipeLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -75),
             
-            timerButton.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            timerButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0)
+//            timerButton.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+//            timerButton.widthAnchor.constraint(equalToConstant: 70),
+//            timerButton.heightAnchor.constraint(equalToConstant: 70),
+//            timerButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0)
         ])
     }
     
