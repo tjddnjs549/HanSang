@@ -167,8 +167,6 @@ final class DetailView: UIView {
         return button
     }()
     
-    
-    
     // MARK: - init
 
     override init(frame: CGRect) {
@@ -194,7 +192,6 @@ final class DetailView: UIView {
         self.profileImageView.clipsToBounds = true
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width / 2
     }
-
 }
 
 // MARK: - makeUI
@@ -348,6 +345,8 @@ private extension DetailView {
             recipeUdateButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20),
         ])
     }
+    
+    
 }
 
 // MARK: - @objc func

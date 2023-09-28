@@ -26,8 +26,10 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewSetting()
+        naviBarSetting()
         detailView.materialTableView.reloadData()
         detailView.recipeTableView.reloadData()
+        
     }
 }
 
@@ -42,8 +44,31 @@ private extension DetailViewController {
         detailView.recipeTableView.dataSource = self
         detailView.materialTableView.register(MaterialTableViewCell.self, forCellReuseIdentifier: "MaterialTableViewCell")
         detailView.recipeTableView.register(RecipeTableViewCell.self, forCellReuseIdentifier: "RecipeTableViewCell")
+        
     }
     
+    //네비게이션바 세팅
+    private func naviBarSetting() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .clear
+        appearance.shadowColor = .none
+        navigationItem.hidesSearchBarWhenScrolling = false
+        //navigationController?.navigationBar.tintColor = .red
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        //한글 버튼 넣을 시
+        let updateButton = UIBarButtonItem(title: "수정", style: .done, target: self, action: #selector(updateButtonTapped))
+        
+        updateButton.tintColor = UIColor.black //색 조정
+        navigationItem.rightBarButtonItem = updateButton //오른쪽에 넣음 (왼쪽일 시: navigationItem.leftBarButtonItem)
+    }
+    
+    @objc func updateButtonTapped() {
+        let createViewController = CreateViewController()
+        navigationController?.pushViewController(createViewController, animated: true)
+    }
 }
 
 // MARK: - table UITableViewDelegate / UITableViewDataSource
