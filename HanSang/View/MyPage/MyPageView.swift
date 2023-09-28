@@ -168,7 +168,7 @@ class MyPageView: UIView {
         addSubview(profilePicture)
         profilePicture.snp.makeConstraints { make in
             make.top.equalTo(userInfoStackView.snp.top)
-            make.leading.equalToSuperview().offset(283)
+            make.trailing.equalToSuperview().offset(-30)
         }
         
         addSubview(edit)

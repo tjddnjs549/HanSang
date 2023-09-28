@@ -14,16 +14,6 @@ class MyPageViewController: UIViewController {
         UIImage(named: "2")!,
         UIImage(named: "3")!,
         UIImage(named: "4")!,
-        UIImage(named: "5")!,
-        UIImage(named: "6")!,
-        UIImage(named: "7")!,
-        UIImage(named: "1")!,
-        UIImage(named: "2")!,
-        UIImage(named: "3")!,
-        UIImage(named: "4")!,
-        UIImage(named: "5")!,
-        UIImage(named: "6")!,
-        UIImage(named: "7")!,
     ]
 
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -153,7 +143,8 @@ extension MyPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
  extension MyPageViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 158, height: 182)
+        let size = (view.bounds.size.width - 76)/2
+        return CGSize(width: size, height: 182)
    }
      
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

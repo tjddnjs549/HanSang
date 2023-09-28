@@ -166,6 +166,7 @@ class SignUpView: UIView {
         textField.textColor = ColorGuide.textHint
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.layer.borderColor = ColorGuide.inputLine.cgColor

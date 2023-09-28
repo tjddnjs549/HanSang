@@ -35,11 +35,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func saveLogInUserInfo(_ id: String, _ pw: String) {
-        let user = User(context: context)
-        user.id = id
-        user.pw = pw
-        
+    func saveLogInUserInfo(_ user: User) {
         do {
             try context.save()
             LoginViewController.loginUser = user
@@ -74,7 +70,7 @@ private extension LoginViewController {
         if let user = getUserId(id) {
             if user.pw == pw {
                 // 로그인 정보 저장
-                saveLogInUserInfo(id, pw)
+                saveLogInUserInfo(user)
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 // 로그인 시 메인페이지로 이동 로직
                 if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
