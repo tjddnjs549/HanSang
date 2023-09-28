@@ -12,6 +12,7 @@ class SignUpViewController: UIViewController {
     private let signUpView = SignUpView()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     static var user: [User]?
+    var activeTextField: UITextField?
 
     func fetchUserInfo() {
         let request = User.fetchRequest()
@@ -108,6 +109,34 @@ private extension SignUpViewController {
         signUpView.nicknameTextField.delegate = self
     }
 
+    /* 지금 적용 안됨
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+
+            if let activeTextField = activeTextField {
+                let textFieldFrame = activeTextField.frame
+                let scrollOffset = textFieldFrame.origin.y + textFieldFrame.size.height - (view.frame.height - keyboardHeight)
+
+                if scrollOffset > 0 {
+                    self.view.frame.origin.y = -scrollOffset
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+//        signUpView.setContentOffset(CGPoint.zero, animated: true)
+        self.view.frame.origin.y = 0
+    }
+     */
+    
     @objc func cancelButtonTapped() {
         dismiss(animated: true)
     }
@@ -269,6 +298,7 @@ extension SignUpViewController: UITextFieldDelegate {
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
         if textField == signUpView.idTextField {
             signUpView.idTextFieldDescription.isHidden = false
         } else if textField == signUpView.pwTextField {
@@ -278,6 +308,10 @@ extension SignUpViewController: UITextFieldDelegate {
         } else {
             signUpView.nicknameTextFieldDescription.isHidden = false
         }
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeTextField = nil
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

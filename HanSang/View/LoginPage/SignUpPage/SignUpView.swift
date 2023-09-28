@@ -8,7 +8,14 @@
 import SnapKit
 import UIKit
 
-class SignUpView: UIScrollView {
+class SignUpView: UIView {
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.isScrollEnabled = true
+        scrollView.isUserInteractionEnabled = true
+        return scrollView
+    }()
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "close"), for: .normal)
@@ -98,6 +105,8 @@ class SignUpView: UIScrollView {
         textField.textColor = ColorGuide.textHint
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         textField.layer.borderColor = ColorGuide.inputLine.cgColor
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 4
@@ -157,6 +166,8 @@ class SignUpView: UIScrollView {
         textField.textColor = ColorGuide.textHint
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         textField.layer.borderColor = ColorGuide.inputLine.cgColor
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 4
@@ -268,6 +279,8 @@ class SignUpView: UIScrollView {
         textField.textColor = ColorGuide.textHint
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         textField.layer.borderColor = ColorGuide.inputLine.cgColor
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 4
@@ -334,12 +347,11 @@ class SignUpView: UIScrollView {
         super.init(frame: frame)
         
         setupUI()
-        self.isScrollEnabled = true
-        self.contentSize = CGSize(width: frame.width, height: contentHeight)
+        setupScrollView()
     }
     
     private var contentHeight: CGFloat {
-        return 800
+        return 1000
     }
 
     required init?(coder: NSCoder) {
@@ -350,17 +362,22 @@ class SignUpView: UIScrollView {
 private extension SignUpView {
     func setupUI() {
         backgroundColor = .systemBackground
-        addSubview(cancelButton)
-        addSubview(signUpLabel)
-        addSubview(subTitleLabel)
-        addSubview(profilePicture)
-        addSubview(edit)
-        addSubview(signUpInfoStackView)
-        addSubview(idCheckedButton)
-        addSubview(pwCheckedButton)
-        addSubview(confirmPwCheckedButton)
-        addSubview(nicknameCheckedButton)
-        addSubview(createButton)
+        addSubview(scrollView)
+        scrollView.addSubview(cancelButton)
+        scrollView.addSubview(signUpLabel)
+        scrollView.addSubview(subTitleLabel)
+        scrollView.addSubview(profilePicture)
+        scrollView.addSubview(edit)
+        scrollView.addSubview(signUpInfoStackView)
+        scrollView.addSubview(idCheckedButton)
+        scrollView.addSubview(pwCheckedButton)
+        scrollView.addSubview(confirmPwCheckedButton)
+        scrollView.addSubview(nicknameCheckedButton)
+        scrollView.addSubview(createButton)
+        
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         cancelButton.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top)
@@ -422,5 +439,9 @@ private extension SignUpView {
             make.leading.equalToSuperview().offset(30)
             make.trailing.equalToSuperview().offset(-30)
         }
+    }
+    
+    private func setupScrollView() {
+        scrollView.contentSize = CGSize(width: scrollView.bounds.width, height: contentHeight)
     }
 }
