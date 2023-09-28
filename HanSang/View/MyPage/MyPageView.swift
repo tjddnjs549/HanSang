@@ -147,17 +147,6 @@ class MyPageView: UIView {
     
     private func setupUI() {
         backgroundColor = .systemBackground
-        
-//        addSubview(scrollView)
-//        scrollView.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
-//        }
-
-//        addSubview(userInfoView)
-//        userInfoView.snp.makeConstraints { make in
-//            make.top.leading.trailing.equalToSuperview()
-//            make.height.equalTo(180)
-//        }
 
         addSubview(userInfoStackView)
         userInfoStackView.snp.makeConstraints { make in

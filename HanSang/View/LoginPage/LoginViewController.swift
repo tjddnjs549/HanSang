@@ -91,17 +91,13 @@ private extension LoginViewController {
     }
 
     @objc func loginButtonTapped() {
-        guard let id = loginView.id.text,
-              let pw = loginView.pw.text
-        else {
-            return
-        }
+        guard let id = loginView.id.text, let pw = loginView.pw.text else { return }
+        
         if let user = getUserId(id) {
             if user.pw == pw {
-                // 로그인 정보 저장
                 saveLogInUserInfo(user)
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                // 로그인 시 메인페이지로 이동 로직
+
                 if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
                     let tabBarController = TabbarViewController()
                     sceneDelegate.window?.rootViewController = tabBarController

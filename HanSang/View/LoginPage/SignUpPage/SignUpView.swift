@@ -346,11 +346,6 @@ class SignUpView: UIView {
         super.init(frame: frame)
         
         setupUI()
-        setupScrollView()
-    }
-    
-    private var contentHeight: CGFloat {
-        return 1000
     }
 
     required init?(coder: NSCoder) {
@@ -445,9 +440,5 @@ private extension SignUpView {
             make.leading.equalToSuperview().offset(30)
             make.trailing.equalToSuperview().offset(-30)
         }
-    }
-    
-    private func setupScrollView() {
-        scrollView.contentSize = CGSize(width: scrollView.bounds.width, height: contentHeight)
     }
 }

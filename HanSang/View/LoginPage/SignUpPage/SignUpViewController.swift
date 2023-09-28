@@ -58,7 +58,7 @@ class SignUpViewController: UIViewController {
             newUser.pw = pw
             newUser.nickname = nickname
         } else {
-            print("이미지 저장 에러")
+            print("🚨 이미지 저장 에러")
         }
 
         do {
@@ -95,6 +95,11 @@ class SignUpViewController: UIViewController {
 private extension SignUpViewController {
     func setup() {
         view = signUpView
+        signUpView.idTextField.delegate = self
+        signUpView.pwTextField.delegate = self
+        signUpView.confirmPwTextField.delegate = self
+        signUpView.nicknameTextField.delegate = self
+        
         signUpView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         signUpView.createButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
         signUpView.profilePicture.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(editProfilePicture)))
@@ -102,12 +107,6 @@ private extension SignUpViewController {
         signUpView.pwCheckedButton.addTarget(self, action: #selector(pwCheckedButtonTapped), for: .touchUpInside)
         signUpView.confirmPwCheckedButton.addTarget(self, action: #selector(verifyPwCheckedButtonTapped), for: .touchUpInside)
         signUpView.nicknameCheckedButton.addTarget(self, action: #selector(nicknameCheckedButtonTapped), for: .touchUpInside)
-
-        // TextField delegate
-        signUpView.idTextField.delegate = self
-        signUpView.pwTextField.delegate = self
-        signUpView.confirmPwTextField.delegate = self
-        signUpView.nicknameTextField.delegate = self
     }
 
     func registerForKeyboardNotifications() {
@@ -154,9 +153,7 @@ extension SignUpViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
 
-        guard let selectedImage = results.first?.itemProvider else {
-            return
-        }
+        guard let selectedImage = results.first?.itemProvider else { return }
 
         selectedImage.loadObject(ofClass: UIImage.self) { [weak self] image, error in
             if let error = error {
@@ -213,7 +210,6 @@ extension SignUpViewController {
     }
 
     // MARK: - 회원가입 정규식 유효성 검사
-
     private func isValidId(_ id: String) -> Bool {
         // 아이디 정규식: 소문자, 숫자로 이루어진 4~12자
         let idRegex = "^[a-z0-9]{4,12}$"
@@ -378,8 +374,7 @@ extension SignUpViewController: UITextFieldDelegate {
         if let id = signUpView.idTextField.text,
            let pw = signUpView.pwTextField.text,
            let confirmPw = signUpView.confirmPwTextField.text,
-           let nickname = signUpView.nicknameTextField.text
-        {
+           let nickname = signUpView.nicknameTextField.text {
             return !id.isEmpty && !pw.isEmpty && !confirmPw.isEmpty && !nickname.isEmpty
         }
         return false
