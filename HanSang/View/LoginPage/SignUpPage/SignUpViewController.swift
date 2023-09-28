@@ -12,7 +12,7 @@ class SignUpViewController: UIViewController {
     private let signUpView = SignUpView()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     static var user: [User]?
-    var activeTextField: UITextField?
+    private var activeTextField: UITextField?
 
     func fetchUserInfo() {
         let request = User.fetchRequest()
@@ -88,6 +88,7 @@ class SignUpViewController: UIViewController {
 
         setup()
         hideKeyboard()
+        registerForKeyboardNotifications()
     }
 }
 
@@ -109,7 +110,6 @@ private extension SignUpViewController {
         signUpView.nicknameTextField.delegate = self
     }
 
-    /* 지금 적용 안됨
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -121,22 +121,21 @@ private extension SignUpViewController {
             let keyboardHeight = keyboardFrame.height
 
             if let activeTextField = activeTextField {
-                let textFieldFrame = activeTextField.frame
-                let scrollOffset = textFieldFrame.origin.y + textFieldFrame.size.height - (view.frame.height - keyboardHeight)
+                let textFieldFrameInWindow = activeTextField.convert(activeTextField.bounds, to: nil)
+                let maxY = textFieldFrameInWindow.maxY
 
-                if scrollOffset > 0 {
-                    self.view.frame.origin.y = -scrollOffset
+                if maxY > (view.frame.size.height - keyboardHeight) {
+                    let scrollOffset = maxY - (view.frame.size.height - keyboardHeight)
+                    view.frame.origin.y = -scrollOffset
                 }
             }
         }
     }
-    
+
     @objc func keyboardWillHide(_ notification: Notification) {
-//        signUpView.setContentOffset(CGPoint.zero, animated: true)
-        self.view.frame.origin.y = 0
+        view.frame.origin.y = 0
     }
-     */
-    
+
     @objc func cancelButtonTapped() {
         dismiss(animated: true)
     }

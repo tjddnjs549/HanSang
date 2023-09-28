@@ -11,6 +11,7 @@ class LoginViewController: UIViewController {
     private let loginView = LoginView()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     static var loginUser: User?
+    private var activeTextField: UITextField?
 
     func fetchUserInfo() {
         let request = User.fetchRequest()
@@ -49,16 +50,44 @@ class LoginViewController: UIViewController {
 
         setup()
         hideKeyboard()
+        registerForKeyboardNotifications()
     }
 }
 
 private extension LoginViewController {
     func setup() {
         view = loginView
+        loginView.id.delegate = self
         loginView.pw.delegate = self
         loginView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         loginView.signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         loginView.pwCheckedButton.addTarget(self, action: #selector(pwCheckedButtonTapped), for: .touchUpInside)
+    }
+    
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+
+            if let activeTextField = activeTextField {
+                let textFieldFrameInWindow = activeTextField.convert(activeTextField.bounds, to: nil)
+                let maxY = textFieldFrameInWindow.maxY
+
+                if maxY > (view.frame.size.height - keyboardHeight) {
+                    let scrollOffset = maxY - (view.frame.size.height - keyboardHeight)
+                    view.frame.origin.y = -scrollOffset
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        view.frame.origin.y = 0
     }
 
     @objc func loginButtonTapped() {
@@ -105,4 +134,8 @@ private extension LoginViewController {
     }
 }
 
-extension LoginViewController: UITextFieldDelegate {}
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+}
