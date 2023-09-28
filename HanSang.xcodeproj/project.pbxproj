@@ -45,6 +45,8 @@
 		E21806E32AC3E8EC00A2614B /* RecipeInfoItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21806E22AC3E8EC00A2614B /* RecipeInfoItemCollectionViewCell.swift */; };
 		FF2300E72AC3ED8E00D4199E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2300E62AC3ED8E00D4199E /* MainViewController.swift */; };
 		FF2300E92AC3EDD600D4199E /* CostomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */; };
+		FF2300ED2AC4489A00D4199E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2300EC2AC4489A00D4199E /* SearchViewController.swift */; };
+		FF35760E2AC48AE4003FB361 /* MainPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		E21806E22AC3E8EC00A2614B /* RecipeInfoItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		FF2300E62AC3ED8E00D4199E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostomCollectionViewCell.swift; sourceTree = "<group>"; };
+		FF2300EC2AC4489A00D4199E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +207,8 @@
 			children = (
 				FF2300E62AC3ED8E00D4199E /* MainViewController.swift */,
 				FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */,
+				FF2300EC2AC4489A00D4199E /* SearchViewController.swift */,
+				FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -408,8 +414,10 @@
 				3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */,
 				63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */,
 				3F040AF22AC2D03000719CDD /* ColorGuide.swift in Sources */,
+				FF35760E2AC48AE4003FB361 /* MainPageCollectionViewCell.swift in Sources */,
 				3F040AEE2AC2CA1900719CDD /* MyPageCustomCell2.swift in Sources */,
 				3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */,
+				FF2300ED2AC4489A00D4199E /* SearchViewController.swift in Sources */,
 				3F040AEC2AC2B95F00719CDD /* MyPageCustomCell.swift in Sources */,
 				637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */,
 				E21806E32AC3E8EC00A2614B /* RecipeInfoItemCollectionViewCell.swift in Sources */,
