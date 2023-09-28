@@ -10,6 +10,7 @@ import UIKit
 class LoginViewController: UIViewController {
     private let loginView = LoginView()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    static var loginUser: User?
 
     func fetchUserInfo() {
         let request = User.fetchRequest()
@@ -41,7 +42,7 @@ class LoginViewController: UIViewController {
         
         do {
             try context.save()
-            fetchUserInfo()
+            LoginViewController.loginUser = user
         } catch {
             fatalError("🚨 로그인 정보 저장 오류")
         }

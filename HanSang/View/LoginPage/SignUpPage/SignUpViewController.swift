@@ -262,13 +262,11 @@ extension SignUpViewController {
         // 중복 확인
         if isIdAlreadyRegistered(id) {
             signUpView.idTextFieldDescription.text = "이미 존재하는 아이디입니다."
-//            signUpView.idTextFieldDescription.isHidden = false
             return
         }
 
         if isNicknameAlreadyRegistered(nickname) {
             signUpView.nicknameTextFieldDescription.text = "이미 존재하는 닉네임입니다."
-//            signUpView.nicknameTextFieldDescription.isHidden = false
             return
         }
 

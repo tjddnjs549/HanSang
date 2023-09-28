@@ -52,7 +52,7 @@ class MyPageViewController: UIViewController {
         }
     }
     
-    func deleteAllUsers() {
+    @objc func deleteAllUsers() {
         let request = User.fetchRequest()
 
         do {
@@ -83,7 +83,7 @@ private extension MyPageViewController {
         
         if let originalImage = UIImage(named: "HANSANG") {
             let tintedImage = originalImage.withTintColor(ColorGuide.main)
-            let button = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: nil)
+            let button = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(deleteAllUsers))
             button.tintColor = ColorGuide.main
             navigationItem.leftBarButtonItem = button
         }
@@ -96,8 +96,7 @@ private extension MyPageViewController {
     }
 
     func loadUserInfo() {
-        fetchUserInfo()
-        if let user = SignUpViewController.user?.first,
+        if let user = LoginViewController.loginUser,
            let id = user.id,
            let nickname = user.nickname,
            let recipeCount = user.content?.count {
