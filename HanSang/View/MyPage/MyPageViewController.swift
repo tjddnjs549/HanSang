@@ -51,6 +51,21 @@ class MyPageViewController: UIViewController {
             print("🚨 로그아웃 유저 정보 저장 에러")
         }
     }
+    
+    func deleteAllUsers() {
+        let request = User.fetchRequest()
+
+        do {
+            let users = try context.fetch(request)
+            for user in users {
+                context.delete(user)
+            }
+            try context.save()
+            fetchUserInfo()
+        } catch {
+            print("🚨 Error: Delete all tasks")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

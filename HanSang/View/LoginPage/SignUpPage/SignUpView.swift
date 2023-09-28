@@ -35,10 +35,10 @@ class SignUpView: UIScrollView {
     private let subTitleLabel: UILabel = {
         let label = UILabel()
         label.text =
-                """
-                안녕하세요.
-                함께 한상 거하게 차려볼까요?
-                """
+            """
+            안녕하세요.
+            함께 한상 거하게 차려볼까요?
+            """
         label.font = FontGuide.size19
         label.textColor = ColorGuide.black
         label.textAlignment = .left
@@ -56,7 +56,7 @@ class SignUpView: UIScrollView {
         imageView.backgroundColor = ColorGuide.subButton
         imageView.layer.cornerRadius = 40
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         imageView.snp.makeConstraints { make in
             make.width.height.equalTo(80)
@@ -87,7 +87,6 @@ class SignUpView: UIScrollView {
         label.textColor = ColorGuide.black
         label.textAlignment = .left
         label.snp.makeConstraints { make in
-            make.width.equalTo(38)
             make.height.equalTo(20)
         }
         return label
@@ -147,7 +146,6 @@ class SignUpView: UIScrollView {
         label.textColor = ColorGuide.black
         label.textAlignment = .left
         label.snp.makeConstraints { make in
-            make.width.equalTo(38)
             make.height.equalTo(20)
         }
         return label
@@ -201,7 +199,6 @@ class SignUpView: UIScrollView {
         label.textColor = ColorGuide.black
         label.textAlignment = .left
         label.snp.makeConstraints { make in
-            make.width.equalTo(38)
             make.height.equalTo(20)
         }
         return label
@@ -260,7 +257,6 @@ class SignUpView: UIScrollView {
         label.textColor = ColorGuide.black
         label.textAlignment = .left
         label.snp.makeConstraints { make in
-            make.width.equalTo(38)
             make.height.equalTo(20)
         }
         return label
@@ -338,6 +334,7 @@ class SignUpView: UIScrollView {
         super.init(frame: frame)
         
         setupUI()
+        self.isScrollEnabled = true
         self.contentSize = CGSize(width: frame.width, height: contentHeight)
     }
     
@@ -392,6 +389,7 @@ private extension SignUpView {
         
         signUpInfoStackView.snp.makeConstraints { make in
             make.top.equalTo(subTitleLabel.snp.bottom).offset(40)
+            make.centerX.equalToSuperview()
             make.leading.equalTo(30)
             make.trailing.equalTo(-30)
         }
@@ -420,6 +418,7 @@ private extension SignUpView {
         
         createButton.snp.makeConstraints { make in
             make.top.equalTo(signUpInfoStackView.snp.bottom).offset(68)
+            make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(30)
             make.trailing.equalToSuperview().offset(-30)
         }

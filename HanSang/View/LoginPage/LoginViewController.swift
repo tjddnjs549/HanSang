@@ -51,6 +51,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
+        hideKeyboard()
     }
 }
 

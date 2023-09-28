@@ -86,6 +86,7 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
+        hideKeyboard()
     }
 }
 
@@ -105,24 +106,6 @@ private extension SignUpViewController {
         signUpView.pwTextField.delegate = self
         signUpView.confirmPwTextField.delegate = self
         signUpView.nicknameTextField.delegate = self
-    }
-
-    func notify() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    @objc func keyboardWillShow(_ notification: Notification) {
-        if let userInfo = notification.userInfo,
-           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-        {
-            let keyboardHeight = keyboardFrame.height
-            signUpView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
-        }
-    }
-
-    @objc func keyboardWillHide(_ notification: Notification) {
-        signUpView.contentInset = .zero
     }
 
     @objc func cancelButtonTapped() {
@@ -162,13 +145,17 @@ extension SignUpViewController: PHPickerViewControllerDelegate {
 extension SignUpViewController {
     @objc func idCheckedButtonTapped() {
         let id = signUpView.idTextField.text ?? ""
-        if isIdAlreadyRegistered(id) {
-            print("true")
-            signUpView.idTextFieldDescription.text = "이미 존재하는 아이디입니다."
-            signUpView.idTextFieldDescription.isHidden = false
-        } else {
-            print("false")
-            signUpView.idTextFieldDescription.isHidden = true
+        if isValidId(id) {
+            if isIdAlreadyRegistered(id) {
+                print("true")
+                signUpView.idTextFieldDescription.text = "이미 존재하는 아이디입니다."
+                signUpView.idTextFieldDescription.isHidden = false
+            } else {
+                print("false")
+                signUpView.idTextFieldDescription.text = "사용 가능한 아이디입니다."
+                signUpView.idTextFieldDescription.isHidden =
+                    false
+            }
         }
     }
 
@@ -186,11 +173,14 @@ extension SignUpViewController {
 
     @objc func nicknameCheckedButtonTapped() {
         let nickname = signUpView.nicknameTextField.text ?? ""
-        if isNicknameAlreadyRegistered(nickname) {
-            signUpView.nicknameTextFieldDescription.text = "이미 존재하는 닉네임입니다."
-            signUpView.nicknameTextFieldDescription.isHidden = false
-        } else {
-            signUpView.nicknameTextFieldDescription.isHidden = true
+        if isValidNickname(nickname) {
+            if isNicknameAlreadyRegistered(nickname) {
+                signUpView.nicknameTextFieldDescription.text = "이미 존재하는 닉네임입니다."
+                signUpView.nicknameTextFieldDescription.isHidden = false
+            } else {
+                signUpView.nicknameTextFieldDescription.text = "사용 가능한 닉네임입니다."
+                signUpView.nicknameTextFieldDescription.isHidden = false
+            }
         }
     }
 
@@ -243,13 +233,13 @@ extension SignUpViewController {
         // 중복 확인
         if isIdAlreadyRegistered(id) {
             signUpView.idTextFieldDescription.text = "이미 존재하는 아이디입니다."
-            signUpView.idTextFieldDescription.isHidden = false
+//            signUpView.idTextFieldDescription.isHidden = false
             return
         }
 
         if isNicknameAlreadyRegistered(nickname) {
             signUpView.nicknameTextFieldDescription.text = "이미 존재하는 닉네임입니다."
-            signUpView.nicknameTextFieldDescription.isHidden = false
+//            signUpView.nicknameTextFieldDescription.isHidden = false
             return
         }
 
@@ -342,10 +332,11 @@ extension SignUpViewController: UITextFieldDelegate {
         }
 
         if isAllFieldsValid() {
-            signUpView.createButton.backgroundColor = ColorGuide.yellow900
+            signUpView.createButton.backgroundColor = ColorGuide.main
+            signUpView.createButton.setTitleColor(.white, for: .normal)
             signUpView.createButton.isEnabled = true
         } else {
-            signUpView.createButton.backgroundColor = .systemGray6
+            signUpView.createButton.backgroundColor = ColorGuide.inputLine
             signUpView.createButton.isEnabled = false
         }
 
