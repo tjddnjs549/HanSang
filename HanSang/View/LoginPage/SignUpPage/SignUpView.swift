@@ -16,6 +16,9 @@ class SignUpView: UIView {
         scrollView.isUserInteractionEnabled = true
         return scrollView
     }()
+    
+    private let contentView = UIView()
+    
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "close"), for: .normal)
@@ -111,7 +114,6 @@ class SignUpView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 4
         textField.snp.makeConstraints { make in
-            make.width.equalTo(333)
             make.height.equalTo(56)
         }
         return textField
@@ -166,13 +168,13 @@ class SignUpView: UIView {
         textField.textColor = ColorGuide.textHint
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.layer.borderColor = ColorGuide.inputLine.cgColor
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 4
         textField.snp.makeConstraints { make in
-            make.width.equalTo(333)
             make.height.equalTo(56)
         }
         return textField
@@ -230,7 +232,6 @@ class SignUpView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 4
         textField.snp.makeConstraints { make in
-            make.width.equalTo(333)
             make.height.equalTo(56)
         }
         return textField
@@ -285,7 +286,6 @@ class SignUpView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 4
         textField.snp.makeConstraints { make in
-            make.width.equalTo(333)
             make.height.equalTo(56)
         }
         return textField
@@ -337,7 +337,6 @@ class SignUpView: UIView {
         button.backgroundColor = ColorGuide.main
         button.layer.cornerRadius = 4
         button.snp.makeConstraints { make in
-            make.width.equalTo(333)
             make.height.equalTo(56)
         }
         return button
@@ -347,11 +346,6 @@ class SignUpView: UIView {
         super.init(frame: frame)
         
         setupUI()
-        setupScrollView()
-    }
-    
-    private var contentHeight: CGFloat {
-        return 1000
     }
 
     required init?(coder: NSCoder) {
@@ -368,37 +362,44 @@ private extension SignUpView {
             make.edges.equalToSuperview()
         }
         
-        scrollView.addSubview(cancelButton)
+        scrollView.addSubview(contentView)
+        contentView.snp.makeConstraints {make in
+            make.edges.equalTo(scrollView.contentLayoutGuide)
+            make.width.equalTo(scrollView.frameLayoutGuide)
+            make.height.equalTo(900)
+       }
+        
+        contentView.addSubview(cancelButton)
         cancelButton.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(contentView.snp.top)
             make.leading.equalTo(24)
         }
         
-        scrollView.addSubview(signUpLabel)
+        contentView.addSubview(signUpLabel)
         signUpLabel.snp.makeConstraints { make in
             make.top.equalTo(cancelButton.snp.bottom).offset(39)
             make.leading.equalTo(30)
         }
         
-        scrollView.addSubview(subTitleLabel)
+        contentView.addSubview(subTitleLabel)
         subTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(signUpLabel.snp.bottom).offset(16)
             make.leading.equalTo(30)
         }
         
-        scrollView.addSubview(profilePicture)
+        contentView.addSubview(profilePicture)
         profilePicture.snp.makeConstraints { make in
             make.top.equalTo(signUpLabel.snp.top)
             make.trailing.equalToSuperview().offset(-33)
         }
         
-        scrollView.addSubview(edit)
+        contentView.addSubview(edit)
         edit.snp.makeConstraints { make in
             make.top.equalTo(profilePicture.snp.top).offset(56)
             make.trailing.equalToSuperview().offset(-30)
         }
         
-        scrollView.addSubview(signUpInfoStackView)
+        contentView.addSubview(signUpInfoStackView)
         signUpInfoStackView.snp.makeConstraints { make in
             make.top.equalTo(subTitleLabel.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
@@ -406,42 +407,38 @@ private extension SignUpView {
             make.trailing.equalTo(-30)
         }
         
-        scrollView.addSubview(idCheckedButton)
+        contentView.addSubview(idCheckedButton)
         idCheckedButton.snp.makeConstraints { make in
             make.centerY.equalTo(idTextField.snp.centerY)
             make.trailing.equalTo(idTextField.snp.trailing).offset(-8)
         }
         
-        scrollView.addSubview(pwCheckedButton)
+        contentView.addSubview(pwCheckedButton)
         pwCheckedButton.snp.makeConstraints { make in
             make.centerY.equalTo(pwTextField.snp.centerY)
             make.trailing.equalTo(pwTextField.snp.trailing).offset(-10)
             make.width.height.equalTo(20)
         }
         
-        scrollView.addSubview(confirmPwCheckedButton)
+        contentView.addSubview(confirmPwCheckedButton)
         confirmPwCheckedButton.snp.makeConstraints { make in
             make.centerY.equalTo(confirmPwTextField.snp.centerY)
             make.trailing.equalTo(confirmPwTextField.snp.trailing).offset(-10)
             make.width.height.equalTo(20)
         }
         
-        scrollView.addSubview(nicknameCheckedButton)
+        contentView.addSubview(nicknameCheckedButton)
         nicknameCheckedButton.snp.makeConstraints { make in
             make.centerY.equalTo(nicknameTextField.snp.centerY)
             make.trailing.equalTo(nicknameTextField.snp.trailing).offset(-8)
         }
         
-        scrollView.addSubview(createButton)
+        contentView.addSubview(createButton)
         createButton.snp.makeConstraints { make in
             make.top.equalTo(signUpInfoStackView.snp.bottom).offset(68)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(30)
             make.trailing.equalToSuperview().offset(-30)
         }
-    }
-    
-    private func setupScrollView() {
-        scrollView.contentSize = CGSize(width: scrollView.bounds.width, height: contentHeight)
     }
 }

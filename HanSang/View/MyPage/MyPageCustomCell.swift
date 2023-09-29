@@ -25,7 +25,6 @@ class MyPageCustomCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.snp.makeConstraints { make in
-            make.width.equalTo(158)
             make.height.equalTo(118)
         }
         return imageView

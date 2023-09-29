@@ -11,6 +11,7 @@ class LoginViewController: UIViewController {
     private let loginView = LoginView()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     static var loginUser: User?
+    private var activeTextField: UITextField?
 
     func fetchUserInfo() {
         let request = User.fetchRequest()
@@ -35,11 +36,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func saveLogInUserInfo(_ id: String, _ pw: String) {
-        let user = User(context: context)
-        user.id = id
-        user.pw = pw
-        
+    func saveLogInUserInfo(_ user: User) {
         do {
             try context.save()
             LoginViewController.loginUser = user
@@ -53,30 +50,54 @@ class LoginViewController: UIViewController {
 
         setup()
         hideKeyboard()
+        registerForKeyboardNotifications()
     }
 }
 
 private extension LoginViewController {
     func setup() {
         view = loginView
+        loginView.id.delegate = self
         loginView.pw.delegate = self
         loginView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         loginView.signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         loginView.pwCheckedButton.addTarget(self, action: #selector(pwCheckedButtonTapped), for: .touchUpInside)
     }
+    
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+
+            if let activeTextField = activeTextField {
+                let textFieldFrameInWindow = activeTextField.convert(activeTextField.bounds, to: nil)
+                let maxY = textFieldFrameInWindow.maxY
+
+                if maxY > (view.frame.size.height - keyboardHeight) {
+                    let scrollOffset = maxY - (view.frame.size.height - keyboardHeight)
+                    view.frame.origin.y = -scrollOffset
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        view.frame.origin.y = 0
+    }
 
     @objc func loginButtonTapped() {
-        guard let id = loginView.id.text,
-              let pw = loginView.pw.text
-        else {
-            return
-        }
+        guard let id = loginView.id.text, let pw = loginView.pw.text else { return }
+        
         if let user = getUserId(id) {
             if user.pw == pw {
-                // 로그인 정보 저장
-                saveLogInUserInfo(id, pw)
+                saveLogInUserInfo(user)
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                // 로그인 시 메인페이지로 이동 로직
+
                 if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
                     let tabBarController = TabbarViewController()
                     sceneDelegate.window?.rootViewController = tabBarController
@@ -109,4 +130,8 @@ private extension LoginViewController {
     }
 }
 
-extension LoginViewController: UITextFieldDelegate {}
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+}
