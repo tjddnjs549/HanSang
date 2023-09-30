@@ -37,9 +37,11 @@
 		637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119EB2AC17CAA00E59D1F /* BookMarkViewController.swift */; };
 		637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119ED2AC17CC100E59D1F /* LoginViewController.swift */; };
 		637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119F02AC180DF00E59D1F /* TimerViewController.swift */; };
+		637AA5A02AC8B13000DA74B3 /* DetailViewTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637AA59F2AC8B13000DA74B3 /* DetailViewTop.swift */; };
+		637AA5A22AC8B13F00DA74B3 /* DetailViewMiddle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637AA5A12AC8B13F00DA74B3 /* DetailViewMiddle.swift */; };
+		637AA5A42AC8B14900DA74B3 /* DetailViewBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637AA5A32AC8B14900DA74B3 /* DetailViewBottom.swift */; };
 		63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */; };
 		63945F6F2AC2EA590053792E /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63945F6E2AC2EA590053792E /* Extension+UIButton.swift */; };
-		639964102AC5F1670091AEFE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6399640F2AC5F1670091AEFE /* TestViewController.swift */; };
 		639964122AC5F36A0091AEFE /* ContentDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639964112AC5F36A0091AEFE /* ContentDataManager.swift */; };
 		63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */; };
 		63B35A122AC38266009B78D1 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */; };
@@ -81,9 +83,11 @@
 		637119EB2AC17CAA00E59D1F /* BookMarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkViewController.swift; sourceTree = "<group>"; };
 		637119ED2AC17CC100E59D1F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		637119F02AC180DF00E59D1F /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		637AA59F2AC8B13000DA74B3 /* DetailViewTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewTop.swift; sourceTree = "<group>"; };
+		637AA5A12AC8B13F00DA74B3 /* DetailViewMiddle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewMiddle.swift; sourceTree = "<group>"; };
+		637AA5A32AC8B14900DA74B3 /* DetailViewBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewBottom.swift; sourceTree = "<group>"; };
 		63945F6C2AC2B20B0053792E /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
 		63945F6E2AC2EA590053792E /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
-		6399640F2AC5F1670091AEFE /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		639964112AC5F36A0091AEFE /* ContentDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentDataManager.swift; path = HanSang/View/DetailPage/ContentDataManager.swift; sourceTree = SOURCE_ROOT; };
 		63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTableViewCell.swift; sourceTree = "<group>"; };
 		63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
@@ -215,11 +219,7 @@
 		637119DE2AC179B000E59D1F /* DetailPage */ = {
 			isa = PBXGroup;
 			children = (
-				637119E72AC17C5900E59D1F /* DetailViewController.swift */,
-				632336D82AC1DAAF0011B024 /* DetailView.swift */,
-				63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */,
-				63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */,
-				6399640F2AC5F1670091AEFE /* TestViewController.swift */,
+				637AA5A52AC8B19D00DA74B3 /* DetailView,VC */,
 			);
 			path = DetailPage;
 			sourceTree = "<group>";
@@ -284,6 +284,20 @@
 				63945F6B2AC2B1E00053792E /* Extension+DetailPage */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		637AA5A52AC8B19D00DA74B3 /* DetailView,VC */ = {
+			isa = PBXGroup;
+			children = (
+				637119E72AC17C5900E59D1F /* DetailViewController.swift */,
+				632336D82AC1DAAF0011B024 /* DetailView.swift */,
+				637AA59F2AC8B13000DA74B3 /* DetailViewTop.swift */,
+				637AA5A12AC8B13F00DA74B3 /* DetailViewMiddle.swift */,
+				637AA5A32AC8B14900DA74B3 /* DetailViewBottom.swift */,
+				63B35A0F2AC34965009B78D1 /* MaterialTableViewCell.swift */,
+				63B35A112AC38266009B78D1 /* RecipeTableViewCell.swift */,
+			);
+			path = "DetailView,VC";
 			sourceTree = "<group>";
 		};
 		63945F6B2AC2B1E00053792E /* Extension+DetailPage */ = {
@@ -392,7 +406,6 @@
 			files = (
 				FF2300E92AC3EDD600D4199E /* CostomCollectionViewCell.swift in Sources */,
 				637119EA2AC17C9500E59D1F /* CreateViewController.swift in Sources */,
-				639964102AC5F1670091AEFE /* TestViewController.swift in Sources */,
 				3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */,
 				632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */,
 				63B35A122AC38266009B78D1 /* RecipeTableViewCell.swift in Sources */,
@@ -405,6 +418,7 @@
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
 				3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */,
 				FF2300E72AC3ED8E00D4199E /* MainViewController.swift in Sources */,
+				637AA5A22AC8B13F00DA74B3 /* DetailViewMiddle.swift in Sources */,
 				3F040AE12AC2645F00719CDD /* SignUpViewController.swift in Sources */,
 				637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */,
 				637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */,
@@ -414,6 +428,8 @@
 				3F040AE62AC29B1F00719CDD /* MyPageView.swift in Sources */,
 				3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */,
 				63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */,
+				637AA5A02AC8B13000DA74B3 /* DetailViewTop.swift in Sources */,
+				637AA5A42AC8B14900DA74B3 /* DetailViewBottom.swift in Sources */,
 				3F040AF22AC2D03000719CDD /* ColorGuide.swift in Sources */,
 				3F040AEE2AC2CA1900719CDD /* MyPageCustomCell2.swift in Sources */,
 				3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */,
