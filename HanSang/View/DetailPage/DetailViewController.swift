@@ -18,6 +18,8 @@ final class DetailViewController: UIViewController {
 
     
     private let detailView = DetailView()
+ 
+    var isLiked: Bool = false
     
     override func loadView() {
         self.view = detailView
@@ -25,10 +27,9 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewSetting()
-        naviBarSetting()
-        detailView.materialTableView.reloadData()
-        detailView.recipeTableView.reloadData()
+        allSetting()
+        detailView.detailViewMiddle.materialTableView.reloadData()
+        detailView.detailViewBottom.recipeTableView.reloadData()
         
     }
 }
@@ -37,48 +38,48 @@ final class DetailViewController: UIViewController {
 
 private extension DetailViewController {
     
+    func allSetting() {
+        tableViewSetting()
+        buttonTapped()
+    }
+    
     func tableViewSetting() {
-        detailView.materialTableView.delegate = self
-        detailView.materialTableView.dataSource = self
-        detailView.recipeTableView.delegate = self
-        detailView.recipeTableView.dataSource = self
-        detailView.materialTableView.register(MaterialTableViewCell.self, forCellReuseIdentifier: "MaterialTableViewCell")
-        detailView.recipeTableView.register(RecipeTableViewCell.self, forCellReuseIdentifier: "RecipeTableViewCell")
-        
+        detailView.detailViewMiddle.materialTableView.delegate = self
+        detailView.detailViewMiddle.materialTableView.dataSource = self
+        detailView.detailViewMiddle.materialTableView.register(MaterialTableViewCell.self, forCellReuseIdentifier: "MaterialTableViewCell")
+        detailView.detailViewBottom.recipeTableView.delegate = self
+        detailView.detailViewBottom.recipeTableView.dataSource = self
+        detailView.detailViewBottom.recipeTableView.register(RecipeTableViewCell.self, forCellReuseIdentifier: "RecipeTableViewCell")
     }
-    
-    //네비게이션바 세팅
-    private func naviBarSetting() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .clear
-        appearance.shadowColor = .none
-        navigationItem.hidesSearchBarWhenScrolling = false
-        //navigationController?.navigationBar.tintColor = .red
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
-        //한글 버튼 넣을 시
-        let updateButton = UIBarButtonItem(title: "수정", style: .done, target: self, action: #selector(updateButtonTapped))
-        
-        updateButton.tintColor = UIColor.black //색 조정
-        navigationItem.rightBarButtonItem = updateButton //오른쪽에 넣음 (왼쪽일 시: navigationItem.leftBarButtonItem)
-    }
-    
-    @objc func updateButtonTapped() {
-        let createViewController = CreateViewController()
-        navigationController?.pushViewController(createViewController, animated: true)
+    func buttonTapped() {
+        detailView.detailViewTop.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        detailView.detailViewBottom.recipeUdateButton.addTarget(self, action: #selector(contentUpdateButtonTapped), for: .touchUpInside)
     }
 }
 
+
+// MARK: - @objc func
+
+extension DetailViewController {
+    
+    @objc func likeButtonTapped() {
+        detailView.detailViewTop.likeButton.isSelected.toggle()
+        isLiked = detailView.detailViewTop.likeButton.isSelected
+        print(isLiked)
+    }
+    @objc func contentUpdateButtonTapped() {
+        let createVC = CreateViewController()
+        navigationController?.pushViewController(createVC, animated: true)
+    }
+}
 // MARK: - table UITableViewDelegate / UITableViewDataSource
 
 
 extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == detailView.materialTableView {
+        if tableView == detailView.detailViewMiddle.materialTableView {
             return material.count
-        } else if tableView == detailView.recipeTableView {
+        } else if tableView == detailView.detailViewBottom.recipeTableView {
             return imageArray.count
         }
         return 0
@@ -86,14 +87,14 @@ extension DetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if tableView == detailView.materialTableView {
+        if tableView == detailView.detailViewMiddle.materialTableView {
             print(#function)
             let cell = tableView.dequeueReusableCell(withIdentifier: "MaterialTableViewCell", for: indexPath) as! MaterialTableViewCell
             cell.materialLabel.text = material[indexPath.row]
             cell.unitLabel.text = unit[indexPath.row]
             cell.selectionStyle = .none
             return cell
-        } else if tableView == detailView.recipeTableView {
+        } else if tableView == detailView.detailViewBottom.recipeTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeTableViewCell", for: indexPath) as! RecipeTableViewCell
             cell.cellMakeUI(index: indexPath.row)
             cell.recipeImageView.image = imageArray[indexPath.row]
@@ -109,9 +110,9 @@ extension DetailViewController: UITableViewDataSource {
 
 extension DetailViewController: UITableViewDelegate {
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            if tableView == detailView.materialTableView {
+            if tableView == detailView.detailViewMiddle.materialTableView {
                 return 30
-            } else if tableView == detailView.recipeTableView {
+            } else if tableView == detailView.detailViewBottom.recipeTableView {
                 return 80
             }
             return 0
