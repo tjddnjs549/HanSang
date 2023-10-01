@@ -7,8 +7,10 @@
 
 import UIKit
 
-class DetailViewMiddle: UIView {
+final class DetailViewMiddle: UIView {
 
+    lazy var detailVC = DetailViewController()
+    
     // MARK: - properties
     private let materialLabel: UILabel = {
         let label = UILabel()
@@ -68,7 +70,6 @@ class DetailViewMiddle: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 
 private extension DetailViewMiddle {
@@ -86,7 +87,7 @@ private extension DetailViewMiddle {
             materialTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             materialTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
             materialTableView.topAnchor.constraint(equalTo: self.materialLabel.bottomAnchor, constant: 20),
-            materialTableView.heightAnchor.constraint(equalToConstant: 200), //❗️❗️❗️❗️
+            materialTableView.heightAnchor.constraint(equalToConstant: 200), //❗️❗️❗️❗️❗️
             materialTableView.bottomAnchor.constraint(equalTo: self.recipeLabel.topAnchor, constant: -5),
             
             recipeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
@@ -105,4 +106,5 @@ private extension DetailViewMiddle {
             makeKickLabel.bottomAnchor.constraint(equalTo: self.kickView.bottomAnchor, constant: -20)
         ])
     }
+    
 }

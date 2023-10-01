@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 final class DetailViewController: UIViewController {
 
@@ -17,9 +18,22 @@ final class DetailViewController: UIViewController {
     var imageDescriptionArray: [String] = ["스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다."]
 
     
+    
+    lazy var timeSlider: UISlider = {
+        let slider = UISlider()
+        slider.minimumValue = 0
+        slider.maximumValue = 60
+        slider.value = 60
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        return slider
+    }()
+    
     private let detailView = DetailView()
- 
+    
     var isLiked: Bool = false
+    var number = 0
+    var timer: Timer?
+    var time: String = "60초"
     
     override func loadView() {
         self.view = detailView
@@ -30,7 +44,6 @@ final class DetailViewController: UIViewController {
         allSetting()
         detailView.detailViewMiddle.materialTableView.reloadData()
         detailView.detailViewBottom.recipeTableView.reloadData()
-        
     }
 }
 
@@ -71,9 +84,45 @@ extension DetailViewController {
         let createVC = CreateViewController()
         navigationController?.pushViewController(createVC, animated: true)
     }
+    
+    @objc func timerButtonTapped() {
+        let alertController = UIAlertController(title: "타이머", message: "\(time)로 설정", preferredStyle: .alert)
+        
+        alertController.view.addSubview(timeSlider)
+        NSLayoutConstraint.activate([
+            timeSlider.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 16),
+            timeSlider.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -16),
+            timeSlider.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 60)
+        ])
+        
+        let startAction = UIAlertAction(title: "시작", style: .default) { _ in
+            self.timer?.invalidate() // 현재 타이머 중지
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.doSomethingAfter1Second), userInfo: nil, repeats: true) // 타이머 재시작
+        }
+        alertController.addAction(startAction)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+            self.timer?.invalidate() // 타이머 중지
+        }
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+
+    @objc func doSomethingAfter1Second() {
+        if number > 0 {
+            number -= 1
+            print(Float(number) / Float(60))
+            timeSlider.value = Float(number) / Float(60)
+        } else {
+            number = 0
+            timer?.invalidate()
+            AudioServicesPlaySystemSound(SystemSoundID(1000))
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
 }
 // MARK: - table UITableViewDelegate / UITableViewDataSource
-
 
 extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,7 +148,9 @@ extension DetailViewController: UITableViewDataSource {
             cell.cellMakeUI(index: indexPath.row)
             cell.recipeImageView.image = imageArray[indexPath.row]
             cell.recipeLabel.text = imageDescriptionArray[indexPath.row]
+            cell.timerButton.addTarget(self, action: #selector(timerButtonTapped), for: .touchUpInside)
             cell.selectionStyle = .none
+            
             print(#function)
             return cell
         }

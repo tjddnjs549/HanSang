@@ -12,7 +12,7 @@ final class DetailView: UIView {
     lazy var detailViewTop = DetailViewTop()
     lazy var detailViewMiddle = DetailViewMiddle()
     lazy var detailViewBottom = DetailViewBottom()
-    
+
     // MARK: - properties
     
     private let scrollView: UIScrollView = {
@@ -30,6 +30,7 @@ final class DetailView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
     // MARK: - init
     
     override init(frame: CGRect) {
@@ -79,7 +80,6 @@ private extension DetailView {
             detailViewMiddle.topAnchor.constraint(equalTo: self.detailViewTop.bottomAnchor, constant: 0),
             detailViewMiddle.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
             detailViewMiddle.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
-            detailViewMiddle.bottomAnchor.constraint(equalTo: self.detailViewBottom.topAnchor, constant: 0),
             
             detailViewBottom.topAnchor.constraint(equalTo: self.detailViewMiddle.bottomAnchor, constant: 0),
             detailViewBottom.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),

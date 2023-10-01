@@ -20,7 +20,7 @@ final class DetailViewTop: UIView {
     }()
     
     private lazy var titleLabel: UILabel = {
-        let title = UILabel()
+        let title = UILabel()        
         title.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 24))
         title.text = "집에서도 미디움레어가 가능한 스테이크 레시피"
         return title
@@ -72,7 +72,7 @@ final class DetailViewTop: UIView {
     
     lazy var likeButton: UIButton = {
         let like = UIButton(type: .custom)
-        like.buttonImageMakeUI(image: "heart", selectedImage: "heart.fill", color: .red)
+        like.buttonImageMakeUI(image: "heart", selectedImage: "heart.fill", color: UIColor.red)
         return like
     }()
 
@@ -139,8 +139,8 @@ private extension DetailViewTop {
         profileNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2),
         profileNameLabel.centerYAnchor.constraint(equalTo: self.profileImageView.centerYAnchor),
         
-        likeButton.widthAnchor.constraint(equalToConstant: 20),
-        likeButton.heightAnchor.constraint(equalToConstant: 20),
+        likeButton.widthAnchor.constraint(equalToConstant: 25),
+        likeButton.heightAnchor.constraint(equalToConstant: 25),
         likeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
         likeButton.centerYAnchor.constraint(equalTo: self.profileImageView.centerYAnchor),
         
