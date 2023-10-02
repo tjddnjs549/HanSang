@@ -13,12 +13,18 @@ class LoginViewModel {
     static var loginUser: User?
 
     func fetchUserInfo() {
+        guard let id = UserDefaults.standard.string(forKey: "loggedInUserId") else { return }
+
         let request = User.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id)
 
         do {
-            SignUpViewModel.user = try context.fetch(request)
+            let users = try context.fetch(request)
+            if let user = users.first {
+                LoginViewModel.loginUser = user
+            }
         } catch {
-            print("🚨 유저 정보 불러오기 오류")
+            print("🚨 유저 정보 찾을 수 없음: \(error)")
         }
     }
 
@@ -32,15 +38,6 @@ class LoginViewModel {
         } catch {
             print("🚨 유저 정보 찾을 수 없음: \(error)")
             return nil
-        }
-    }
-
-    func saveLogInUserInfo(_ user: User) {
-        do {
-            try context.save()
-            LoginViewModel.loginUser = user
-        } catch {
-            fatalError("🚨 로그인 정보 저장 오류")
         }
     }
 }

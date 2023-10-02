@@ -10,72 +10,22 @@ import PhotosUI
 
 class MyPageViewController: UIViewController {
     private let myPageView = MyPageView()
+    private let myPageViewModel = MyPageViewModel()
     let images: [UIImage] = [
         UIImage(named: "1")!,
         UIImage(named: "2")!,
         UIImage(named: "3")!,
         UIImage(named: "4")!,
     ]
-
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-    func fetchUserInfo() {
-        let request = User.fetchRequest()
-
-        do {
-            SignUpViewModel.user = try context.fetch(request)
-        } catch {
-            print("🚨 유저 정보 불러오기 오류")
-        }
-    }
-    
-    func editUser(_ user: User, _ image: UIImage) {
-        if let imageData = image.jpegData(compressionQuality: 1.0) {
-            user.profilePicture = imageData
-        } else {
-            print("🚨 이미지 저장 에러")
-        }
-
-        do {
-            try context.save()
-            self.fetchUserInfo()
-        } catch {
-            print("🚨 유저 생성 오류")
-        }
-    }
-
-    func deleteLogInUserInfo() {
-        let request = User.fetchRequest()
-
-        do {
-            let users = try context.fetch(request)
-            for user in users {
-                context.delete(user)
-            }
-            try context.save()
-        } catch {
-            print("🚨 로그아웃 유저 정보 저장 에러")
-        }
-    }
     
     @objc func deleteAllUsers() {
-        let request = User.fetchRequest()
-
-        do {
-            let users = try context.fetch(request)
-            for user in users {
-                context.delete(user)
-            }
-            try context.save()
-            fetchUserInfo()
-        } catch {
-            print("🚨 Error: Delete all tasks")
-        }
+        myPageViewModel.deleteAllUsers()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print("로드 유저: ", LoginViewModel.loginUser?.id)
         setup()
         loadUserInfo()
     }
@@ -162,7 +112,7 @@ extension MyPageViewController: PHPickerViewControllerDelegate {
             } else if let image = image as? UIImage {
                 DispatchQueue.main.async {
                     self?.myPageView.profilePicture.image = image
-                    self?.editUser(LoginViewModel.loginUser!, image)
+                    self?.myPageViewModel.editUser(LoginViewModel.loginUser!, image)
                 }
             }
         }

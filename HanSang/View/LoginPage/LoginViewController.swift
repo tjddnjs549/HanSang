@@ -62,7 +62,7 @@ private extension LoginViewController {
         
         if let user = loginViewModel.getUserId(id) {
             if user.pw == pw {
-                loginViewModel.saveLogInUserInfo(user)
+                UserDefaults.standard.set(user.id!, forKey: "loggedInUserId")
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
 
                 if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
