@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F040ACC2AC1A3AC00719CDD /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC22AC1A3AC00719CDD /* User+CoreDataClass.swift */; };
-		3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC42AC1A3AC00719CDD /* Content+CoreDataClass.swift */; };
-		3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */; };
-		3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */; };
-		3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */; };
 		3F040ADB2AC1A99200719CDD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F040ADA2AC1A99200719CDD /* SnapKit */; };
 		3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADC2AC25DE700719CDD /* LoginView.swift */; };
 		3F040ADF2AC2645000719CDD /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADE2AC2645000719CDD /* SignUpView.swift */; };
@@ -47,14 +42,14 @@
 		FF2300E92AC3EDD600D4199E /* CostomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */; };
 		FF2300ED2AC4489A00D4199E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2300EC2AC4489A00D4199E /* SearchViewController.swift */; };
 		FF35760E2AC48AE4003FB361 /* MainPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */; };
+		FF9865932ACA5267008B69B5 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9865892ACA5267008B69B5 /* Category+CoreDataClass.swift */; };
+		FF9865952ACA5267008B69B5 /* Materials+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98658B2ACA5267008B69B5 /* Materials+CoreDataClass.swift */; };
+		FF9865972ACA5267008B69B5 /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98658D2ACA5267008B69B5 /* Recipe+CoreDataClass.swift */; };
+		FF9865992ACA5267008B69B5 /* Content+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98658F2ACA5267008B69B5 /* Content+CoreDataClass.swift */; };
+		FF98659B2ACA5267008B69B5 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9865912ACA5267008B69B5 /* User+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F040AC22AC1A3AC00719CDD /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		3F040AC42AC1A3AC00719CDD /* Content+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataClass.swift"; sourceTree = "<group>"; };
-		3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
-		3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
-		3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Materials+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3F040ADC2AC25DE700719CDD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3F040ADE2AC2645000719CDD /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		3F040AE02AC2645F00719CDD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +86,11 @@
 		FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostomCollectionViewCell.swift; sourceTree = "<group>"; };
 		FF2300EC2AC4489A00D4199E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCollectionViewCell.swift; sourceTree = "<group>"; };
+		FF9865892ACA5267008B69B5 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FF98658B2ACA5267008B69B5 /* Materials+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Materials+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FF98658D2ACA5267008B69B5 /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FF98658F2ACA5267008B69B5 /* Content+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FF9865912ACA5267008B69B5 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,11 +252,11 @@
 		637119F22AC182A200E59D1F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3F040AC22AC1A3AC00719CDD /* User+CoreDataClass.swift */,
-				3F040AC42AC1A3AC00719CDD /* Content+CoreDataClass.swift */,
-				3F040AC62AC1A3AC00719CDD /* Recipe+CoreDataClass.swift */,
-				3F040AC82AC1A3AC00719CDD /* Category+CoreDataClass.swift */,
-				3F040ACA2AC1A3AC00719CDD /* Materials+CoreDataClass.swift */,
+				FF9865892ACA5267008B69B5 /* Category+CoreDataClass.swift */,
+				FF98658B2ACA5267008B69B5 /* Materials+CoreDataClass.swift */,
+				FF98658D2ACA5267008B69B5 /* Recipe+CoreDataClass.swift */,
+				FF98658F2ACA5267008B69B5 /* Content+CoreDataClass.swift */,
+				FF9865912ACA5267008B69B5 /* User+CoreDataClass.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -392,17 +392,15 @@
 			files = (
 				FF2300E92AC3EDD600D4199E /* CostomCollectionViewCell.swift in Sources */,
 				637119EA2AC17C9500E59D1F /* CreateViewController.swift in Sources */,
-				3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */,
+				FF9865992ACA5267008B69B5 /* Content+CoreDataClass.swift in Sources */,
 				632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */,
 				63B35A122AC38266009B78D1 /* RecipeTableViewCell.swift in Sources */,
 				637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */,
-				3F040ACC2AC1A3AC00719CDD /* User+CoreDataClass.swift in Sources */,
 				637119CF2AC1793000E59D1F /* HanSang.xcdatamodeld in Sources */,
 				63945F6F2AC2EA590053792E /* Extension+UIButton.swift in Sources */,
 				E21806E02AC3E80000A2614B /* RecipeInfoView.swift in Sources */,
 				63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */,
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
-				3F040AD22AC1A3AC00719CDD /* Category+CoreDataClass.swift in Sources */,
 				FF2300E72AC3ED8E00D4199E /* MainViewController.swift in Sources */,
 				3F040AE12AC2645F00719CDD /* SignUpViewController.swift in Sources */,
 				637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */,
@@ -411,17 +409,19 @@
 				3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */,
 				637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */,
 				3F040AE62AC29B1F00719CDD /* MyPageView.swift in Sources */,
-				3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */,
 				63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */,
 				3F040AF22AC2D03000719CDD /* ColorGuide.swift in Sources */,
+				FF9865932ACA5267008B69B5 /* Category+CoreDataClass.swift in Sources */,
 				FF35760E2AC48AE4003FB361 /* MainPageCollectionViewCell.swift in Sources */,
 				3F040AEE2AC2CA1900719CDD /* MyPageCustomCell2.swift in Sources */,
-				3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */,
 				FF2300ED2AC4489A00D4199E /* SearchViewController.swift in Sources */,
 				3F040AEC2AC2B95F00719CDD /* MyPageCustomCell.swift in Sources */,
+				FF98659B2ACA5267008B69B5 /* User+CoreDataClass.swift in Sources */,
+				FF9865952ACA5267008B69B5 /* Materials+CoreDataClass.swift in Sources */,
 				637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */,
 				E21806E32AC3E8EC00A2614B /* RecipeInfoItemCollectionViewCell.swift in Sources */,
 				3F040AE42AC279C300719CDD /* MyPageView2.swift in Sources */,
+				FF9865972ACA5267008B69B5 /* Recipe+CoreDataClass.swift in Sources */,
 				3F040AF42AC3B34900719CDD /* SignUpViewModel.swift in Sources */,
 				3F040ADF2AC2645000719CDD /* SignUpView.swift in Sources */,
 				637119E82AC17C5900E59D1F /* DetailViewController.swift in Sources */,
