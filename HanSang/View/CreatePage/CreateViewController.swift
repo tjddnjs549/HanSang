@@ -40,6 +40,8 @@ class CreateViewController: UIViewController {
         tabBarController?.tabBar.isHidden = true
         view.backgroundColor = .white
         navigationItem.title = "레시피 작성"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "닫기", style: .done, target: self, action: #selector(touchUpCloseButton))
+        navigationItem.leftBarButtonItem?.tintColor = .black
         materialView.isHidden = true
     }
     
@@ -72,6 +74,13 @@ class CreateViewController: UIViewController {
             recipeInfoView.isHidden = true
             materialView.isHidden = false
         }
+    }
+    
+    @objc func touchUpCloseButton() {
+        let tabBarViewController = TabbarViewController()
+        tabBarViewController.modalPresentationStyle = .fullScreen
+        tabBarViewController.modalTransitionStyle = .crossDissolve
+        present(tabBarViewController, animated: true)
     }
     
     // MARK: - Custom Method
