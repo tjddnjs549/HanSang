@@ -48,7 +48,7 @@ class CostomCollectionViewCell: UICollectionViewCell {
     private let likeButton: UIButton = {
         let likeButton = UIButton()
         likeButton.tintColor = .systemGray
-        likeButton.setImage(UIImage(named: "like_icon"), for: .normal)
+        likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         // 좋아요 아이콘 이미지 설정
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         // 버튼 탭 액션 설정
@@ -70,7 +70,13 @@ class CostomCollectionViewCell: UICollectionViewCell {
 //        super.layoutSubviews()
 //        label.frame = CGRect(x: 5, y: myimageView.frame.size.height-50, width: myimageView.frame.size.width-10, height: 50)
 ////        label.frame = bounds
-//
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // contentView에 라운드 코너 적용
+        contentView.layer.cornerRadius = 20
+        contentView.clipsToBounds = true
+    }
 //
 //    }
     
@@ -103,11 +109,11 @@ class CostomCollectionViewCell: UICollectionViewCell {
             timeLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 2),
             timeLabel.widthAnchor.constraint(equalToConstant: 50),
             timeLabel.heightAnchor.constraint(equalToConstant: 14),
-            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
             
 //            likeButton.topAnchor.constraint(equalTo: myimageView.bottomAnchor, constant: 3),
-            likeButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 5),
-            likeButton.widthAnchor.constraint(equalToConstant: 15),
+            likeButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15),
+            likeButton.widthAnchor.constraint(equalToConstant: 17),
             likeButton.heightAnchor.constraint(equalToConstant: 15),
             likeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -7),
         ])
