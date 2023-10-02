@@ -18,6 +18,7 @@
 		3F040B042AC4754700719CDD /* FontGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040B032AC4754700719CDD /* FontGuide.swift */; };
 		3F17824E2ACACA5600F2A3DA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17824D2ACACA5600F2A3DA /* LoginViewModel.swift */; };
 		3F1782502ACADC1E00F2A3DA /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17824F2ACADC1E00F2A3DA /* MyPageViewModel.swift */; };
+		3F1782522ACAF31600F2A3DA /* BookMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1782512ACAF31600F2A3DA /* BookMarkView.swift */; };
 		632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632336D82AC1DAAF0011B024 /* DetailView.swift */; };
 		637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C42AC1793000E59D1F /* AppDelegate.swift */; };
 		637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C62AC1793000E59D1F /* SceneDelegate.swift */; };
@@ -70,6 +71,7 @@
 		3F040B032AC4754700719CDD /* FontGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontGuide.swift; sourceTree = "<group>"; };
 		3F17824D2ACACA5600F2A3DA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3F17824F2ACADC1E00F2A3DA /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		3F1782512ACAF31600F2A3DA /* BookMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkView.swift; sourceTree = "<group>"; };
 		632336D82AC1DAAF0011B024 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		637119C12AC1793000E59D1F /* HanSang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HanSang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637119C42AC1793000E59D1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 		637119E02AC179DD00E59D1F /* BookMarkPage */ = {
 			isa = PBXGroup;
 			children = (
+				3F1782512ACAF31600F2A3DA /* BookMarkView.swift */,
 				637119EB2AC17CAA00E59D1F /* BookMarkViewController.swift */,
 			);
 			path = BookMarkPage;
@@ -496,6 +499,7 @@
 				3F040AF42AC3B34900719CDD /* SignUpViewModel.swift in Sources */,
 				E27CE34B2AC54796005358EF /* MaterialCreateTableViewCell.swift in Sources */,
 				637119E82AC17C5900E59D1F /* DetailViewController.swift in Sources */,
+				3F1782522ACAF31600F2A3DA /* BookMarkView.swift in Sources */,
 				E27CE3452AC5446A005358EF /* MaterialView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
