@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 class MyPageViewController: UIViewController {
     private let myPageView = MyPageView()
@@ -25,6 +26,21 @@ class MyPageViewController: UIViewController {
             SignUpViewController.user = try context.fetch(request)
         } catch {
             print("🚨 유저 정보 불러오기 오류")
+        }
+    }
+    
+    func editUser(_ user: User, _ image: UIImage) {
+        if let imageData = image.jpegData(compressionQuality: 1.0) {
+            user.profilePicture = imageData
+        } else {
+            print("🚨 이미지 저장 에러")
+        }
+
+        do {
+            try context.save()
+            self.fetchUserInfo()
+        } catch {
+            print("🚨 유저 생성 오류")
         }
     }
 
@@ -71,6 +87,8 @@ private extension MyPageViewController {
         myPageView.collectionView.dataSource = self
         myPageView.collectionView.delegate = self
         
+        myPageView.profilePicture.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(editProfilePicture)))
+        
         if let originalImage = UIImage(named: "HANSANG") {
             let tintedImage = originalImage.withTintColor(ColorGuide.main)
             let button = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(deleteAllUsers))
@@ -78,11 +96,16 @@ private extension MyPageViewController {
             navigationItem.leftBarButtonItem = button
         }
         
-        if let gearImage = UIImage(named: "setting") {
-            let coloredGearImage = gearImage.withTintColor(ColorGuide.textHint, renderingMode: .alwaysOriginal)
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: coloredGearImage, style: .plain, target: self, action: #selector(logoutButtonTapped))
+        if let logOutImage = UIImage(systemName: "rectangle.portrait.and.arrow.right") {
+            let originalSize = logOutImage.size
+            let scaledSize = CGSize(width: originalSize.width * 0.8, height: originalSize.height * 0.8)
+            let renderer = UIGraphicsImageRenderer(size: scaledSize)
+            let scaledLogOutImage = renderer.image { _ in
+                logOutImage.draw(in: CGRect(origin: .zero, size: scaledSize))
+            }
+            let coloredLogOutImage = scaledLogOutImage.withTintColor(ColorGuide.textHint, renderingMode: .alwaysOriginal)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: coloredLogOutImage, style: .plain, target: self, action: #selector(logoutButtonTapped))
         }
-
     }
 
     func loadUserInfo() {
@@ -114,6 +137,34 @@ private extension MyPageViewController {
             let loginViewController = LoginViewController()
             let navigationController = UINavigationController(rootViewController: loginViewController)
             sceneDelegate.window?.rootViewController = navigationController
+        }
+    }
+}
+
+extension MyPageViewController: PHPickerViewControllerDelegate {
+    @objc func editProfilePicture() {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
+
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+
+        guard let selectedImage = results.first?.itemProvider else { return }
+
+        selectedImage.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+            if let error = error {
+                print("Error loading image: \(error.localizedDescription)")
+            } else if let image = image as? UIImage {
+                DispatchQueue.main.async {
+                    self?.myPageView.profilePicture.image = image
+                    self?.editUser(LoginViewController.loginUser!, image)
+                }
+            }
         }
     }
 }
