@@ -10,29 +10,68 @@ import UIKit
 class LoginView: UIView {
     private let logo: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(named: "HANSANG")
+        imageView.contentMode = .scaleAspectFit
+        imageView.snp.makeConstraints { make in
+            make.width.equalTo(105.37)
+            make.height.equalTo(12.54)
+        }
+        return imageView
+    }()
+    
+    private let loginLabel: UILabel = {
+        let label = UILabel()
+        label.text = "로그인"
+        label.font = FontGuide.size32Bold
+        label.textColor = ColorGuide.black
+        return label
+    }()
+    
+    private let simbolLogo: UIImageView = {
+        let imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
         imageView.contentMode = .scaleAspectFit
+        imageView.snp.makeConstraints { make in
+            make.width.equalTo(221)
+            make.height.equalTo(176)
+        }
         return imageView
     }()
     
     let id: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "아이디 입력"
+        textField.attributedPlaceholder = NSAttributedString(string: "아이디를 입력해주세요", attributes: [.font: FontGuide.size16])
+        textField.textColor = ColorGuide.textHint
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.layer.borderColor = ColorGuide.inputLine.cgColor
+        textField.layer.borderWidth = 1
+        textField.layer.cornerRadius = 4
+        textField.snp.makeConstraints { make in
+            make.width.equalTo(333)
+            make.height.equalTo(56)
+        }
         return textField
     }()
     
     let pw: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "비밀번호 입력"
+        textField.attributedPlaceholder = NSAttributedString(string: "비밀번호를 입력해주세요", attributes: [.font: FontGuide.size16])
+        textField.textColor = ColorGuide.textHint
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
+        textField.layer.borderColor = ColorGuide.inputLine.cgColor
+        textField.layer.borderWidth = 1
+        textField.layer.cornerRadius = 4
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.spellCheckingType = .no
         textField.textContentType = .none
+        textField.snp.makeConstraints { make in
+            make.width.equalTo(333)
+            make.height.equalTo(56)
+        }
         return textField
     }()
     
@@ -47,18 +86,28 @@ class LoginView: UIView {
     let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("로그인", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.backgroundColor = ColorGuide.yellow900
-        button.layer.cornerRadius = 10
+        button.titleLabel?.font = FontGuide.size19Bold
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = ColorGuide.main
+        button.layer.cornerRadius = 4
+        button.snp.makeConstraints { make in
+            make.width.equalTo(333)
+            make.height.equalTo(56)
+        }
         return button
     }()
     
     let signUpButton: UIButton = {
         let button = UIButton()
-        button.setTitle("회원가입", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.backgroundColor = ColorGuide.yellow900
-        button.layer.cornerRadius = 10
+        let attributedText = NSAttributedString(string: "회원가입", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        button.setAttributedTitle(attributedText, for: .normal)
+        button.titleLabel?.font = FontGuide.size16
+        button.setTitleColor(ColorGuide.black, for: .normal)
+        button.backgroundColor = .white
+        button.snp.makeConstraints { make in
+            make.width.equalTo(58)
+            make.height.equalTo(24)
+        }
         return button
     }()
     
@@ -74,49 +123,54 @@ class LoginView: UIView {
     
     private func setupUI() {
         backgroundColor = .systemBackground
+        
         addSubview(logo)
-        addSubview(id)
-        addSubview(pw)
-        addSubview(pwCheckedButton)
-        addSubview(loginButton)
-        addSubview(signUpButton)
-        
         logo.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(180)
-            make.width.height.equalTo(200)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.leading.equalTo(22.73)
         }
         
+        addSubview(loginLabel)
+        loginLabel.snp.makeConstraints { make in
+            make.top.equalTo(logo.snp.bottom).offset(43.83)
+            make.leading.equalTo(30)
+        }
+        
+        addSubview(simbolLogo)
+        simbolLogo.snp.makeConstraints { make in
+            make.top.equalTo(loginLabel.snp.bottom).offset(79)
+            make.centerX.equalToSuperview()
+        }
+        
+        addSubview(id)
         id.snp.makeConstraints { make in
-            make.top.equalTo(logo.snp.bottom).offset(30)
+            make.top.equalTo(simbolLogo.snp.bottom).offset(80)
             make.centerX.equalToSuperview()
-            make.width.equalTo(300)
         }
         
+        addSubview(pw)
         pw.snp.makeConstraints { make in
-            make.top.equalTo(id.snp.bottom).offset(20)
+            make.top.equalTo(id.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
-            make.width.equalTo(300)
         }
         
+        addSubview(pwCheckedButton)
         pwCheckedButton.snp.makeConstraints { make in
             make.centerY.equalTo(pw.snp.centerY)
             make.trailing.equalTo(pw.snp.trailing).offset(-10)
             make.width.height.equalTo(20)
         }
         
+        addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(pw.snp.bottom).offset(30)
+            make.top.equalTo(pw.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
-            make.width.equalTo(300)
-            make.height.equalTo(40)
         }
         
+        addSubview(signUpButton)
         signUpButton.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(20)
+            make.top.equalTo(loginButton.snp.bottom).offset(32)
             make.centerX.equalToSuperview()
-            make.width.equalTo(300)
-            make.height.equalTo(40)
         }
     }
 }
