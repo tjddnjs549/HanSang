@@ -9,10 +9,13 @@ import UIKit
 import SnapKit
 
 class CreateViewController: UIViewController {
-
+    
     // MARK: - Properties
     
+    private var page = 1
+    
     private let recipeInfoView = RecipeInfoView()
+    private let materialView = MaterialView()
     
     private let nextButton: UIButton = {
         $0.setTitle("다음으로", for: .normal)
@@ -34,16 +37,23 @@ class CreateViewController: UIViewController {
     // MARK: - InitUI
     
     private func configUI() {
+        tabBarController?.tabBar.isHidden = true
         view.backgroundColor = .white
         navigationItem.title = "레시피 작성"
+        materialView.isHidden = true
     }
     
     private func setupLayout() {
-        [recipeInfoView, nextButton].forEach {
+        [recipeInfoView, materialView, nextButton].forEach {
             view.addSubview($0)
         }
         
         recipeInfoView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(nextButton.snp.top).offset(10)
+        }
+        
+        materialView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(nextButton.snp.top).offset(10)
         }
@@ -58,9 +68,12 @@ class CreateViewController: UIViewController {
     //MARK: - @objc
     
     @objc func touchUpNextButton() {
-        
+        if page == 1 {
+            recipeInfoView.isHidden = true
+            materialView.isHidden = false
+        }
     }
     
     // MARK: - Custom Method
-
+    
 }
