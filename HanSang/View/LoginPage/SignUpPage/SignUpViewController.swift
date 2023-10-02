@@ -68,21 +68,6 @@ class SignUpViewController: UIViewController {
         }
     }
 
-    func deleteAllUsers() {
-        let request = User.fetchRequest()
-
-        do {
-            let users = try context.fetch(request)
-            for user in users {
-                context.delete(user)
-            }
-            try context.save()
-            fetchUserInfo()
-        } catch {
-            print("🚨 유저 정보 일괄 삭제 오류")
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 

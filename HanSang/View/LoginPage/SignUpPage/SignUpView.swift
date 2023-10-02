@@ -186,6 +186,7 @@ class SignUpView: UIView {
         label.font = FontGuide.size14
         label.textColor = ColorGuide.main
         label.textAlignment = .left
+        label.numberOfLines = 2
         label.isHidden = true
         return label
     }()

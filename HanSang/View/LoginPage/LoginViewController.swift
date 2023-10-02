@@ -9,42 +9,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
     private let loginView = LoginView()
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    static var loginUser: User?
+    private let loginViewModel = LoginViewModel()
     private var activeTextField: UITextField?
-
-    func fetchUserInfo() {
-        let request = User.fetchRequest()
-
-        do {
-            SignUpViewController.user = try context.fetch(request)
-        } catch {
-            print("🚨 유저 정보 불러오기 오류")
-        }
-    }
-
-    func getUserId(_ id: String) -> User? {
-        let request = User.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %@", id)
-
-        do {
-            let users = try context.fetch(request)
-            return users.first
-        } catch {
-            print("🚨 유저 정보 찾을 수 없음: \(error)")
-            return nil
-        }
-    }
     
-    func saveLogInUserInfo(_ user: User) {
-        do {
-            try context.save()
-            LoginViewController.loginUser = user
-        } catch {
-            fatalError("🚨 로그인 정보 저장 오류")
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -93,9 +60,9 @@ private extension LoginViewController {
     @objc func loginButtonTapped() {
         guard let id = loginView.id.text, let pw = loginView.pw.text else { return }
         
-        if let user = getUserId(id) {
+        if let user = loginViewModel.getUserId(id) {
             if user.pw == pw {
-                saveLogInUserInfo(user)
+                loginViewModel.saveLogInUserInfo(user)
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
 
                 if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
