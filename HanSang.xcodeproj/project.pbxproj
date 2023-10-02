@@ -48,13 +48,13 @@
 		E27CE34B2AC54796005358EF /* MaterialCreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27CE34A2AC54796005358EF /* MaterialCreateTableViewCell.swift */; };
 		FF2300E72AC3ED8E00D4199E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2300E62AC3ED8E00D4199E /* MainViewController.swift */; };
 		FF2300E92AC3EDD600D4199E /* CostomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */; };
-		FF2300ED2AC4489A00D4199E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2300EC2AC4489A00D4199E /* SearchViewController.swift */; };
 		FF35760E2AC48AE4003FB361 /* MainPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */; };
 		FF9865932ACA5267008B69B5 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9865892ACA5267008B69B5 /* Category+CoreDataClass.swift */; };
 		FF9865952ACA5267008B69B5 /* Materials+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98658B2ACA5267008B69B5 /* Materials+CoreDataClass.swift */; };
 		FF9865972ACA5267008B69B5 /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98658D2ACA5267008B69B5 /* Recipe+CoreDataClass.swift */; };
 		FF9865992ACA5267008B69B5 /* Content+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98658F2ACA5267008B69B5 /* Content+CoreDataClass.swift */; };
 		FF98659B2ACA5267008B69B5 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9865912ACA5267008B69B5 /* User+CoreDataClass.swift */; };
+		FF9865A02ACA6965008B69B5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98659F2ACA6965008B69B5 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,13 +100,13 @@
 		E27CE34A2AC54796005358EF /* MaterialCreateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialCreateTableViewCell.swift; sourceTree = "<group>"; };
 		FF2300E62AC3ED8E00D4199E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostomCollectionViewCell.swift; sourceTree = "<group>"; };
-		FF2300EC2AC4489A00D4199E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		FF9865892ACA5267008B69B5 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FF98658B2ACA5267008B69B5 /* Materials+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Materials+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FF98658D2ACA5267008B69B5 /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FF98658F2ACA5267008B69B5 /* Content+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FF9865912ACA5267008B69B5 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FF98659F2ACA6965008B69B5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,8 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				FF2300E62AC3ED8E00D4199E /* MainViewController.swift */,
+				FF98659F2ACA6965008B69B5 /* SearchViewController.swift */,
 				FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */,
-				FF2300EC2AC4489A00D4199E /* SearchViewController.swift */,
 				FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */,
 			);
 			path = MainPage;
@@ -450,7 +450,6 @@
 				FF2300E92AC3EDD600D4199E /* CostomCollectionViewCell.swift in Sources */,
 				637119EA2AC17C9500E59D1F /* CreateViewController.swift in Sources */,
 				FF9865992ACA5267008B69B5 /* Content+CoreDataClass.swift in Sources */,
-				3F040AD02AC1A3AC00719CDD /* Recipe+CoreDataClass.swift in Sources */,
 				638A147D2AC9C32B00483968 /* Extension+UIImage.swift in Sources */,
 				632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */,
 				3F040AFE2AC4106300719CDD /* SignUpView.swift in Sources */,
@@ -470,7 +469,6 @@
 				3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */,
 				637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */,
 				3F040AE62AC29B1F00719CDD /* MyPageView.swift in Sources */,
-				3F040AD42AC1A3AC00719CDD /* Materials+CoreDataClass.swift in Sources */,
 				E21F9EE22AC5C56700CB2D96 /* MaterialFooterView.swift in Sources */,
 				63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */,
 				637AA5A02AC8B13000DA74B3 /* DetailViewTop.swift in Sources */,
@@ -478,20 +476,16 @@
 				3F040AF22AC2D03000719CDD /* ColorGuide.swift in Sources */,
 				FF9865932ACA5267008B69B5 /* Category+CoreDataClass.swift in Sources */,
 				FF35760E2AC48AE4003FB361 /* MainPageCollectionViewCell.swift in Sources */,
-				3F040AEE2AC2CA1900719CDD /* MyPageCustomCell2.swift in Sources */,
-				FF2300ED2AC4489A00D4199E /* SearchViewController.swift in Sources */,
 				3F040B042AC4754700719CDD /* FontGuide.swift in Sources */,
-				3F040ACE2AC1A3AC00719CDD /* Content+CoreDataClass.swift in Sources */,
 				3F040AEC2AC2B95F00719CDD /* MyPageCustomCell.swift in Sources */,
 				FF98659B2ACA5267008B69B5 /* User+CoreDataClass.swift in Sources */,
 				FF9865952ACA5267008B69B5 /* Materials+CoreDataClass.swift in Sources */,
 				637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */,
 				E21806E32AC3E8EC00A2614B /* RecipeInfoItemCollectionViewCell.swift in Sources */,
-				3F040AE42AC279C300719CDD /* MyPageView2.swift in Sources */,
 				FF9865972ACA5267008B69B5 /* Recipe+CoreDataClass.swift in Sources */,
+				FF9865A02ACA6965008B69B5 /* SearchViewController.swift in Sources */,
 				639964122AC5F36A0091AEFE /* ContentDataManager.swift in Sources */,
 				3F040AF42AC3B34900719CDD /* SignUpViewModel.swift in Sources */,
-				3F040ADF2AC2645000719CDD /* SignUpView.swift in Sources */,
 				E27CE34B2AC54796005358EF /* MaterialCreateTableViewCell.swift in Sources */,
 				637119E82AC17C5900E59D1F /* DetailViewController.swift in Sources */,
 				E27CE3452AC5446A005358EF /* MaterialView.swift in Sources */,
