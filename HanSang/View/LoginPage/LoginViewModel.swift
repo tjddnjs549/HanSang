@@ -16,7 +16,7 @@ class LoginViewModel {
         let request = User.fetchRequest()
 
         do {
-            SignUpViewController.user = try context.fetch(request)
+            SignUpViewModel.user = try context.fetch(request)
         } catch {
             print("🚨 유저 정보 불러오기 오류")
         }

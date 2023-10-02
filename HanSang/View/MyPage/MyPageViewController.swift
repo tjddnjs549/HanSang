@@ -23,7 +23,7 @@ class MyPageViewController: UIViewController {
         let request = User.fetchRequest()
 
         do {
-            SignUpViewController.user = try context.fetch(request)
+            SignUpViewModel.user = try context.fetch(request)
         } catch {
             print("🚨 유저 정보 불러오기 오류")
         }
@@ -109,7 +109,7 @@ private extension MyPageViewController {
     }
 
     func loadUserInfo() {
-        if let user = LoginViewController.loginUser,
+        if let user = LoginViewModel.loginUser,
            let id = user.id,
            let nickname = user.nickname,
            let recipeCount = user.content?.count {
@@ -162,7 +162,7 @@ extension MyPageViewController: PHPickerViewControllerDelegate {
             } else if let image = image as? UIImage {
                 DispatchQueue.main.async {
                     self?.myPageView.profilePicture.image = image
-                    self?.editUser(LoginViewController.loginUser!, image)
+                    self?.editUser(LoginViewModel.loginUser!, image)
                 }
             }
         }
