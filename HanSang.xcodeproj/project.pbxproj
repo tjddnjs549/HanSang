@@ -322,9 +322,9 @@
 		637AA5A92AC8B38900DA74B3 /* DetailViewModul */ = {
 			isa = PBXGroup;
 			children = (
-				637AA5A32AC8B14900DA74B3 /* DetailViewBottom.swift */,
-				637AA5A12AC8B13F00DA74B3 /* DetailViewMiddle.swift */,
 				637AA59F2AC8B13000DA74B3 /* DetailViewTop.swift */,
+				637AA5A12AC8B13F00DA74B3 /* DetailViewMiddle.swift */,
+				637AA5A32AC8B14900DA74B3 /* DetailViewBottom.swift */,
 			);
 			path = DetailViewModul;
 			sourceTree = "<group>";

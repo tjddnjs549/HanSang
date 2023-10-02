@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewBottom: UIView {
+final class DetailViewBottom: UIView {
 
     // MARK: - properties
 
@@ -48,7 +48,7 @@ extension DetailViewBottom {
         NSLayoutConstraint.activate([
             recipeTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             recipeTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            recipeTableView.heightAnchor.constraint(equalToConstant: 300),//❗️❗️❗️❗️
+            //recipeTableView.heightAnchor.constraint(equalToConstant: 300),//❗️❗️❗️❗️
             recipeTableView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             recipeTableView.bottomAnchor.constraint(equalTo: self.recipeUdateButton.topAnchor, constant: -20),
             

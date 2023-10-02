@@ -9,6 +9,7 @@ import UIKit
 
 final class DetailView: UIView {
     
+    
     lazy var detailViewTop = DetailViewTop()
     lazy var detailViewMiddle = DetailViewMiddle()
     lazy var detailViewBottom = DetailViewBottom()
@@ -70,17 +71,23 @@ private extension DetailView {
             contentView.trailingAnchor.constraint(equalTo: self.scrollView.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 0),
             contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: 0),
-            
+        ])
+        // detailViewTop
+        NSLayoutConstraint.activate([
             detailViewTop.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0),
             detailViewTop.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
             detailViewTop.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
-            detailViewTop.bottomAnchor.constraint(equalTo: self.detailViewMiddle.topAnchor, constant: 0),
-            
-            detailViewMiddle.heightAnchor.constraint(equalToConstant: 450),
-            detailViewMiddle.topAnchor.constraint(equalTo: self.detailViewTop.bottomAnchor, constant: 0),
+        ])
+        
+        // detailViewMiddle
+        NSLayoutConstraint.activate([
+            detailViewMiddle.topAnchor.constraint(equalTo: self.detailViewTop.bottomAnchor, constant: 10),
             detailViewMiddle.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
             detailViewMiddle.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
-            
+        ])
+
+        // detailViewBottom
+        NSLayoutConstraint.activate([
             detailViewBottom.topAnchor.constraint(equalTo: self.detailViewMiddle.bottomAnchor, constant: 0),
             detailViewBottom.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
             detailViewBottom.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),

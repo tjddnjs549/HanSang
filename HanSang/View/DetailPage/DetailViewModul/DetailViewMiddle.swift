@@ -22,7 +22,7 @@ final class DetailViewMiddle: UIView {
     lazy var materialTableView: UITableView = {
         let table = UITableView()
         table.separatorStyle = .none
-        table.showsVerticalScrollIndicator = false
+        table.showsVerticalScrollIndicator = true
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -79,16 +79,15 @@ private extension DetailViewMiddle {
         for view in subView {
             self.addSubview(view)
         }
-        
         NSLayoutConstraint.activate([
             materialLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            materialLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
             materialLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
             
             materialTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             materialTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
             materialTableView.topAnchor.constraint(equalTo: self.materialLabel.bottomAnchor, constant: 20),
-            materialTableView.heightAnchor.constraint(equalToConstant: 200), //❗️❗️❗️❗️❗️
-            materialTableView.bottomAnchor.constraint(equalTo: self.recipeLabel.topAnchor, constant: -5),
+            //materialTableView.heightAnchor.constraint(equalToConstant: 200), //❗️❗️❗️❗️❗️
             
             recipeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             recipeLabel.topAnchor.constraint(equalTo: self.materialTableView.bottomAnchor, constant: 20),

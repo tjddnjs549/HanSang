@@ -16,8 +16,6 @@ final class DetailViewController: UIViewController {
     var unit: [String] =  ["1개", "2개", "3개", "4개", "5개", "6개", "7개", "8개", "8개", "8개"]
     var imageArray: [UIImage] = [UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!]
     var imageDescriptionArray: [String] = ["스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다."]
-
-    
     
     lazy var timeSlider: UISlider = {
         let slider = UISlider()
@@ -36,14 +34,21 @@ final class DetailViewController: UIViewController {
     var time: String = "60초"
     
     override func loadView() {
-        self.view = detailView
+        view = detailView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         allSetting()
-        detailView.detailViewMiddle.materialTableView.reloadData()
-        detailView.detailViewBottom.recipeTableView.reloadData()
+        print(detailView.detailViewMiddle.frame.size.height) // 0.0
+        let materialTableViewCellHeight = material.count * 30
+        detailView.detailViewMiddle.materialTableView.heightAnchor.constraint(equalToConstant: CGFloat(materialTableViewCellHeight)).isActive = true
+        let recipeTableViewCellHeight = imageDescriptionArray.count * 80
+        detailView.detailViewBottom.recipeTableView.heightAnchor.constraint(equalToConstant: CGFloat(recipeTableViewCellHeight)).isActive = true
+        DispatchQueue.main.async {
+            self.detailView.detailViewMiddle.materialTableView.reloadData()
+            self.detailView.detailViewBottom.recipeTableView.reloadData()
+        }
     }
 }
 
@@ -59,9 +64,13 @@ private extension DetailViewController {
     func tableViewSetting() {
         detailView.detailViewMiddle.materialTableView.delegate = self
         detailView.detailViewMiddle.materialTableView.dataSource = self
+        detailView.detailViewMiddle.materialTableView.estimatedRowHeight = UITableView.automaticDimension
+        detailView.detailViewMiddle.materialTableView.rowHeight = UITableView.automaticDimension
         detailView.detailViewMiddle.materialTableView.register(MaterialTableViewCell.self, forCellReuseIdentifier: "MaterialTableViewCell")
         detailView.detailViewBottom.recipeTableView.delegate = self
         detailView.detailViewBottom.recipeTableView.dataSource = self
+        detailView.detailViewBottom.recipeTableView.estimatedRowHeight = UITableView.automaticDimension
+        detailView.detailViewBottom.recipeTableView.rowHeight = UITableView.automaticDimension
         detailView.detailViewBottom.recipeTableView.register(RecipeTableViewCell.self, forCellReuseIdentifier: "RecipeTableViewCell")
     }
     func buttonTapped() {
@@ -168,4 +177,9 @@ extension DetailViewController: UITableViewDelegate {
             }
             return 0
         }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    
 }
