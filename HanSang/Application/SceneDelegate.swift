@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -13,17 +14,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        
-        let rootViewController = DetailViewController()
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-        window?.rootViewController = navigationController
-        
-        window?.makeKeyAndVisible()
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            
+            // 로그인 상태 확인
+            if isLoggedIn() {
+                // 이미 로그인된 경우 탭바 컨트롤러로 이동
+                window.rootViewController = TabbarViewController()
+            } else {
+                // 로그인 페이지로 이동
+                window.rootViewController = LoginViewController()
+            }
+            
+            self.window = window
+            window.makeKeyAndVisible()
+        }
     }
-
+    
+    private func isLoggedIn() -> Bool {
+        print(UserDefaults.standard.bool(forKey: "isLoggedIn"))
+        return UserDefaults.standard.bool(forKey: "isLoggedIn")
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
