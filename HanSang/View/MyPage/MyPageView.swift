@@ -101,22 +101,6 @@ class MyPageView: UIView {
         return imageView
     }()
     
-    let edit: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "pencil")
-        imageView.backgroundColor = ColorGuide.subButton
-        imageView.layer.cornerRadius = 12
-        imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = ColorGuide.inputLine.cgColor
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
-        imageView.isUserInteractionEnabled = true
-        imageView.snp.makeConstraints { make in
-            make.width.height.equalTo(24)
-        }
-        return imageView
-    }()
-    
     private lazy var userInfoStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [labelStackView, profilePicture])
         stackView.axis = .horizontal
@@ -158,12 +142,6 @@ class MyPageView: UIView {
         profilePicture.snp.makeConstraints { make in
             make.top.equalTo(userInfoStackView.snp.top)
             make.trailing.equalToSuperview().offset(-30)
-        }
-        
-        addSubview(edit)
-        edit.snp.makeConstraints { make in
-            make.top.equalTo(profilePicture.snp.top).offset(56)
-            make.leading.equalTo(profilePicture.snp.leading).offset(59)
         }
 
         addSubview(collectionView)

@@ -22,8 +22,8 @@ class MyPageViewController: UIViewController {
         super.viewDidLoad()
 
         print("로드 유저: ", LoginViewModel.loginUser?.id)
-        setup()
         loadUserInfo()
+        setup()
     }
 }
 

@@ -66,6 +66,7 @@ private extension LoginViewController {
         
         if let user = loginViewModel.getUserId(id) {
             if user.pw == pw {
+                LoginViewModel.loginUser = user
                 UserDefaults.standard.set(user.id!, forKey: "loggedInUserId")
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
 

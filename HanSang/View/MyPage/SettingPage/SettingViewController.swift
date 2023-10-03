@@ -50,10 +50,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let settingItem = settingsItems[indexPath.row]
         cell.configure(settingItem)
         if cell.switchControl.isOn {
-            UserDefaults.standard.set(true, forKey: "isLoggedIn")
-        } else {
             UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        } else {
+            UserDefaults.standard.set(true, forKey: "isLoggedIn")
         }
+
         return cell
     }
 
@@ -78,10 +79,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                     let navigationController = UINavigationController(rootViewController: loginViewController)
                     sceneDelegate.window?.rootViewController = navigationController
                 }
-            
-                // 로그인 상태 확인
-                let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
-                print("로그인 상태: ", isLoggedIn)
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
