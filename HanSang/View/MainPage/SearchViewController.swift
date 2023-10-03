@@ -25,6 +25,18 @@ class SearchViewController: UIViewController {
         return collectionView
     }()
     
+    private let backButton: UIButton = {
+        let backButton = UIButton()
+        backButton.tintColor = .black
+        // 아이콘 이미지 설정 및 크기 조정
+        let searchImage = UIImage(systemName: "chevron.left")
+        backButton.setImage(searchImage, for: .normal)
+        // 버튼 탭 액션 설정
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+
+        return backButton
+    }()
+    
 //    private let backButton: UIButton = {
 //        let backButton = UIButton()
 //        backButton.tintColor = .systemGray
@@ -36,6 +48,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        self.navigationController?.isNavigationBarHidden = true
 //        title = "Search"
 //        searchController.searchResultsUpdater = self
 //        navigationItem.searchController = searchController
@@ -66,6 +79,9 @@ class SearchViewController: UIViewController {
         
         self.view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(backButton)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+
 //        self.view.addSubview(backButton)
 //        backButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -75,6 +91,9 @@ class SearchViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
             collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -20),
             
+            backButton.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 65),
+            backButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 19),
+
 //            backButton.topAnchor.constraint(equalTo: self.view.topAnchor),
 //            backButton.widthAnchor.constraint(equalToConstant: 15),
 //            backButton.heightAnchor.constraint(equalToConstant: 15),
@@ -85,6 +104,21 @@ class SearchViewController: UIViewController {
 //    func contentView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        return CGSize(width: 162.63, height: 163)
 //    }
+    
+    
+    // 로그아웃 별도 페이지로 이동 예정(-> 설정 페이지 추가)
+    @objc func backButtonTapped() {
+        
+        navigationController?.popViewController(animated: true)
+//        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+//
+//        // 로그인 화면으로 이동
+//        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+//            let mainViewController = MainViewController()
+//            let navigationController = UINavigationController(rootViewController: mainViewController)
+//            sceneDelegate.window?.rootViewController = navigationController
+//        }
+    }
 }
 
 

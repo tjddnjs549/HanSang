@@ -109,7 +109,7 @@ class CostomCollectionViewCell: UICollectionViewCell {
             timeLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 2),
             timeLabel.widthAnchor.constraint(equalToConstant: 50),
             timeLabel.heightAnchor.constraint(equalToConstant: 14),
-            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             
 //            likeButton.topAnchor.constraint(equalTo: myimageView.bottomAnchor, constant: 3),
             likeButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15),
