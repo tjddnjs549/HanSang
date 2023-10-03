@@ -178,6 +178,7 @@
 				3F17824D2ACACA5600F2A3DA /* LoginViewModel.swift */,
 				3F040AF32AC3B34900719CDD /* SignUpViewModel.swift */,
 				3F17824F2ACADC1E00F2A3DA /* MyPageViewModel.swift */,
+				3F1782612ACBFE7F00F2A3DA /* EditViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -197,7 +198,6 @@
 			isa = PBXGroup;
 			children = (
 				3F17825F2ACBFC1000F2A3DA /* EditView.swift */,
-				3F1782612ACBFE7F00F2A3DA /* EditViewModel.swift */,
 				3F17825C2ACBFBE000F2A3DA /* EditViewController.swift */,
 			);
 			path = EditPage;
