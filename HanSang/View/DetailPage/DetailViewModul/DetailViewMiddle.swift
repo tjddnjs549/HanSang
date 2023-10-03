@@ -14,7 +14,7 @@ final class DetailViewMiddle: UIView {
     // MARK: - properties
     private let materialLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 20))
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size19Bold)
         label.text = "레시피 재료"
         return label
     }()
@@ -29,14 +29,14 @@ final class DetailViewMiddle: UIView {
     
     private let recipeLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 20))
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size19Bold)
         label.text = "조리 방법"
         return label
     }()
     
     private lazy var kickView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
+        view.backgroundColor = ColorGuide.inputLine
         view.clipsToBounds = true
         view.layer.cornerRadius = 10.0
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -45,14 +45,14 @@ final class DetailViewMiddle: UIView {
     
     private lazy var kickLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 18))
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size19Bold)
         label.text = "레시피 Kick!"
         return label
     }()
     
     lazy var makeKickLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 16))
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16)
         label.text = """
                     이 레시피의 킥은 이것입니다!
                     이것을 조리할 때 빼먹지말고 넣어주세요.

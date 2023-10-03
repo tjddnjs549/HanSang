@@ -11,7 +11,7 @@ final class RecipeTableViewCell: UITableViewCell {
     
     private lazy var cellIndexLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 16))
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16Bold)
         return label
     }()
     
@@ -25,19 +25,19 @@ final class RecipeTableViewCell: UITableViewCell {
     
     lazy var recipeLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 16))
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16)
         return label
     }()
     
     lazy var timerButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.buttonImageMakeUI(image: "timer.circle", selectedImage: "timer.circle.fill", color: UIColor.lightGray)
+        button.buttonImageMakeUI(image: "timer", selectedImage: "timer", color: ColorGuide.inputLine)
         return button
     }()
     
     lazy var timerLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.lightGray, font: .systemFont(ofSize: 14))
+        label.labelMakeUI(textColor: ColorGuide.inputLine, font: FontGuide.size14)
         label.text = "00:00"
         return label
     }()
@@ -102,5 +102,4 @@ extension RecipeTableViewCell {
             timerStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12)
         ])
     }
-
 }

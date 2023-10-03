@@ -13,13 +13,13 @@ final class MaterialTableViewCell: UITableViewCell {
 
     lazy var materialLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 16))
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16)
         return label
     }()
     
     lazy var unitLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 16))
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16)
         label.textAlignment = .right
         return label
     }()

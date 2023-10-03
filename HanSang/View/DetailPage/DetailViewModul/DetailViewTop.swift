@@ -21,35 +21,35 @@ final class DetailViewTop: UIView {
     
     private lazy var titleLabel: UILabel = {
         let title = UILabel()        
-        title.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 24))
+        title.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size24)
         title.text = "집에서도 미디움레어가 가능한 스테이크 레시피"
         return title
     }()
     
     private lazy var timeLabel: UILabel = {
         let time = UILabel()
-        time.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 16))
+        time.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16Bold)
         time.text = "시간:"
         return time
     }()
     
     private lazy var makeTimeLabel: UILabel = {
         let time = UILabel()
-        time.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 16))
+        time.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16)
         time.text = "1시간30분"
         return time
     }()
     
     private lazy var difficultyLabel: UILabel = {
         let difficulty = UILabel()
-        difficulty.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 16))
+        difficulty.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16Bold)
         difficulty.text = "난이도:"
         return difficulty
     }()
     
     private lazy var makeDifficultyLabel: UILabel = {
         let difficulty = UILabel()
-        difficulty.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 16))
+        difficulty.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16)
         difficulty.text = "초보"
         return difficulty
     }()
@@ -65,20 +65,20 @@ final class DetailViewTop: UIView {
     
     private lazy var profileNameLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 16))
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16Bold)
         label.text = "닉네임입니다!"
         return label
     }()
     
     lazy var likeButton: UIButton = {
         let like = UIButton(type: .custom)
-        like.buttonImageMakeUI(image: "heart", selectedImage: "heart.fill", color: UIColor.red)
+        like.buttonImageMakeUI(image: "heart", selectedImage: "heart.fill", color: ColorGuide.main)
         return like
     }()
 
     private let divider: UIView = {
         let divider = UIView()
-        divider.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        divider.backgroundColor = ColorGuide.inputLine
         divider.translatesAutoresizingMaskIntoConstraints = false
         return divider
     }()
@@ -139,8 +139,8 @@ private extension DetailViewTop {
         profileNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2),
         profileNameLabel.centerYAnchor.constraint(equalTo: self.profileImageView.centerYAnchor),
         
-        likeButton.widthAnchor.constraint(equalToConstant: 25),
-        likeButton.heightAnchor.constraint(equalToConstant: 25),
+        likeButton.widthAnchor.constraint(equalToConstant: 32),
+        likeButton.heightAnchor.constraint(equalToConstant: 28),
         likeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
         likeButton.centerYAnchor.constraint(equalTo: self.profileImageView.centerYAnchor),
         

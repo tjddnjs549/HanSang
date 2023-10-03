@@ -22,8 +22,8 @@ extension UIButton {
     }
     
     func buttonImageMakeUI(image: String, selectedImage: String, color: UIColor) {
-        self.setImage(UIImage(systemName: image)?.resized(to: CGSize(width: 30, height: 30)).withRenderingMode(.alwaysTemplate), for: .normal) //선택 x
-        self.setImage(UIImage(systemName: selectedImage)?.resized(to: CGSize(width: 40, height: 40)).withRenderingMode(.alwaysTemplate), for: .selected) // 선택 o
+        self.setImage(UIImage(systemName: image)?.resized(to: CGSize(width: 32, height: 32)).withRenderingMode(.alwaysTemplate), for: .normal) //선택 x
+        self.setImage(UIImage(systemName: selectedImage)?.resized(to: CGSize(width: 32, height: 32)).withRenderingMode(.alwaysTemplate), for: .selected) // 선택 o
         self.tintColor = color // 아이콘 색상
         self.isEnabled = true
         self.isSelected = false
