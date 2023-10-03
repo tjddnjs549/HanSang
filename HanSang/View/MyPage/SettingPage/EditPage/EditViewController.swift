@@ -17,6 +17,7 @@ class EditViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
+        loadUserInfo()
         hideKeyboard()
         registerForKeyboardNotifications()
     }
@@ -30,11 +31,30 @@ private extension EditViewController {
         editView.nicknameTextField.delegate = self
 
         editView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        editView.createButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
+        editView.editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         editView.profilePicture.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(editProfilePicture)))
         editView.pwCheckedButton.addTarget(self, action: #selector(pwCheckedButtonTapped), for: .touchUpInside)
         editView.confirmPwCheckedButton.addTarget(self, action: #selector(verifyPwCheckedButtonTapped), for: .touchUpInside)
         editView.nicknameCheckedButton.addTarget(self, action: #selector(nicknameCheckedButtonTapped), for: .touchUpInside)
+    }
+
+    func loadUserInfo() {
+        if let user = LoginViewModel.loginUser,
+           let id = user.id,
+           let pw = user.pw,
+           let confirmPw = user.pw,
+           let nickname = user.nickname {
+            if let imageData = user.profilePicture,
+               let image = UIImage(data: imageData) {
+                editView.profilePicture.image = image
+            } else {
+                editView.profilePicture.image = UIImage(named: "profile")
+            }
+            editView.idTextField.text = id
+            editView.pwTextField.text = pw
+            editView.confirmPwTextField.text = confirmPw
+            editView.nicknameTextField.text = nickname
+        }
     }
 
     func registerForKeyboardNotifications() {
@@ -147,7 +167,7 @@ extension EditViewController {
         return (existingUser != nil) ? true : false
     }
 
-    @objc func createButtonTapped() {
+    @objc func editButtonTapped() {
         guard let image = editView.profilePicture.image,
               let pw = editView.pwTextField.text,
               let nickname = editView.nicknameTextField.text
@@ -238,25 +258,25 @@ extension EditViewController: UITextFieldDelegate {
             }
         }
 
-        if isAllFieldsValid() {
-            editView.createButton.backgroundColor = ColorGuide.main
-            editView.createButton.setTitleColor(.white, for: .normal)
-            editView.createButton.isEnabled = true
+        if isAnyFieldChanged() {
+            editView.editButton.backgroundColor = ColorGuide.main
+            editView.editButton.setTitleColor(.white, for: .normal)
+            editView.editButton.isEnabled = true
         } else {
-            editView.createButton.backgroundColor = ColorGuide.inputLine
-            editView.createButton.isEnabled = false
+            editView.editButton.backgroundColor = ColorGuide.inputLine
+            editView.editButton.isEnabled = false
         }
 
         return true
     }
 
-    private func isAllFieldsValid() -> Bool {
-        if let pw = editView.pwTextField.text,
-           let confirmPw = editView.confirmPwTextField.text,
-           let nickname = editView.nicknameTextField.text
-        {
-            return !pw.isEmpty && !confirmPw.isEmpty && !nickname.isEmpty
+    private func isAnyFieldChanged() -> Bool {
+        if editView.pwTextField.isFirstResponder || editView.confirmPwTextField.isFirstResponder {
+            return !editView.pwTextField.text!.isEmpty && !editView.confirmPwTextField.text!.isEmpty
+        } else if editView.nicknameTextField.isFirstResponder {
+            return !editView.nicknameTextField.text!.isEmpty
+        } else {
+            return false
         }
-        return false
     }
 }

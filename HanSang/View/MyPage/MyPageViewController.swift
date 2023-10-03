@@ -17,11 +17,16 @@ class MyPageViewController: UIViewController {
         UIImage(named: "3")!,
         UIImage(named: "4")!,
     ]
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadUserInfo()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("로드 유저: ", LoginViewModel.loginUser?.id)
         loadUserInfo()
         setup()
     }
@@ -62,8 +67,7 @@ private extension MyPageViewController {
         if let user = LoginViewModel.loginUser,
            let id = user.id,
            let nickname = user.nickname,
-           let recipeCount = user.content?.count
-        {
+           let recipeCount = user.content?.count {
             if let imageData = user.profilePicture,
                let image = UIImage(data: imageData)
             {

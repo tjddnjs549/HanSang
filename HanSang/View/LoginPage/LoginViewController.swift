@@ -14,10 +14,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // 로그인 상태 확인
-        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
-        print("로그인 상태: ", isLoggedIn)
         
         setup()
         hideKeyboard()

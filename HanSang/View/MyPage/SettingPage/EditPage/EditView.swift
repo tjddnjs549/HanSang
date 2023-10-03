@@ -106,6 +106,7 @@ class EditView: UIView {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "아이디를 입력해주세요", attributes: [.font: FontGuide.size16])
         textField.textColor = ColorGuide.textHint
+        textField.isUserInteractionEnabled = false
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
@@ -158,7 +159,6 @@ class EditView: UIView {
     
     let pwTextFieldDescription: UILabel = {
         let label = UILabel()
-        label.text = "  🚨 필수 입력 사항입니다."
         label.font = FontGuide.size14
         label.textColor = ColorGuide.main
         label.textAlignment = .left
@@ -216,7 +216,7 @@ class EditView: UIView {
     
     let confirmPwTextFieldDescription: UILabel = {
         let label = UILabel()
-        label.text = "  🚨 필수 입력 사항입니다."
+        label.text = ""
         label.font = FontGuide.size14
         label.textColor = ColorGuide.main
         label.textAlignment = .left
@@ -270,7 +270,6 @@ class EditView: UIView {
     
     let nicknameTextFieldDescription: UILabel = {
         let label = UILabel()
-        label.text = "  🚨 필수 입력 사항입니다."
         label.font = FontGuide.size14
         label.textColor = ColorGuide.main
         label.textAlignment = .left
@@ -306,9 +305,9 @@ class EditView: UIView {
         return stackView
     }()
     
-    let createButton: UIButton = {
+    let editButton: UIButton = {
         let button = UIButton()
-        button.setTitle("확인", for: .normal)
+        button.setTitle("변경", for: .normal)
         button.titleLabel?.font = FontGuide.size19Bold
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = ColorGuide.main
@@ -404,8 +403,8 @@ private extension EditView {
             make.trailing.equalTo(nicknameTextField.snp.trailing).offset(-8)
         }
         
-        contentView.addSubview(createButton)
-        createButton.snp.makeConstraints { make in
+        contentView.addSubview(editButton)
+        editButton.snp.makeConstraints { make in
             make.top.equalTo(signUpInfoStackView.snp.bottom).offset(68)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(30)
