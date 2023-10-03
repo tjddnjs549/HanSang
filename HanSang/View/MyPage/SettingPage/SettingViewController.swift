@@ -39,7 +39,20 @@ extension SettingViewController {
     }
     
     @objc func cancelButtonTapped() {
-        myPageViewModel.deleteAllUsers()
+        let cancelAlert = UIAlertController(title: "회원탈퇴", message: "정말 탈퇴하시겠습니까?", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "확인", style: .default) { (_) in
+            self.myPageViewModel.deleteAllUsers()
+            
+            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                let loginViewController = LoginViewController()
+                let navigationController = UINavigationController(rootViewController: loginViewController)
+                sceneDelegate.window?.rootViewController = navigationController
+            }
+        }
+        let cancel = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+        cancelAlert.addAction(confirm)
+        cancelAlert.addAction(cancel)
+        present(cancelAlert, animated: false)
     }
 }
 
