@@ -9,6 +9,7 @@ import UIKit
 
 class SettingViewController: UIViewController {
     private let settingView = SettingView()
+    private let myPageViewModel = MyPageViewModel()
     private var settingsItems: [SettingItem] = []
 
     override func viewDidLoad() {
@@ -25,6 +26,7 @@ extension SettingViewController {
         settingView.tableView.delegate = self
 
         settingView.closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        settingView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
 
         let autoLoginItem = SettingItem(type: .autoLogin, title: "자동 로그인", isSwitchOn: true)
         let editProfileItem = SettingItem(type: .editProfile, title: "내 정보 변경", icon: UIImage(named: ">"), isSwitchOn: false)
@@ -34,6 +36,10 @@ extension SettingViewController {
 
     @objc func closeButtonTapped() {
         dismiss(animated: true)
+    }
+    
+    @objc func cancelButtonTapped() {
+        myPageViewModel.deleteAllUsers()
     }
 }
 
