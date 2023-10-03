@@ -3,19 +3,19 @@ import UIKit
 class TimerViewController: UIViewController {
     
     let segmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["timer", "stopwatch"])
+        let control = UISegmentedControl(items: ["Timer", "Stopwatch"])
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
     
-    let timer: UIView = {
+    let Timer: UIView = {
         let view = TimerView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let stopwatch: UIView = {
+    let Stopwatch: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -25,8 +25,8 @@ class TimerViewController: UIViewController {
     var shouldHideFirstView: Bool? {
         didSet {
             guard let shouldHideFirstView = self.shouldHideFirstView else { return }
-            self.timer.isHidden = shouldHideFirstView
-            self.stopwatch.isHidden = !self.timer.isHidden
+            self.Timer.isHidden = shouldHideFirstView
+            self.Stopwatch.isHidden = !self.Timer.isHidden
         }
     }
     
@@ -42,8 +42,8 @@ class TimerViewController: UIViewController {
         }
         
         self.view.addSubview(self.segmentedControl)
-        self.view.addSubview(self.timer)
-        self.view.addSubview(self.stopwatch)
+        self.view.addSubview(self.Timer)
+        self.view.addSubview(self.Stopwatch)
         
         NSLayoutConstraint.activate([
             self.segmentedControl.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16),
@@ -52,16 +52,16 @@ class TimerViewController: UIViewController {
             self.segmentedControl.heightAnchor.constraint(equalToConstant: 30),
         ])
         NSLayoutConstraint.activate([
-            self.timer.leftAnchor.constraint(equalTo: self.segmentedControl.leftAnchor),
-            self.timer.rightAnchor.constraint(equalTo: self.segmentedControl.rightAnchor),
-            self.timer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80),
-            self.timer.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 16),
+            self.Timer.leftAnchor.constraint(equalTo: self.segmentedControl.leftAnchor),
+            self.Timer.rightAnchor.constraint(equalTo: self.segmentedControl.rightAnchor),
+            self.Timer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80),
+            self.Timer.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 16),
         ])
         NSLayoutConstraint.activate([
-            self.stopwatch.leftAnchor.constraint(equalTo: self.timer.leftAnchor),
-            self.stopwatch.rightAnchor.constraint(equalTo: self.timer.rightAnchor),
-            self.stopwatch.bottomAnchor.constraint(equalTo: self.timer.bottomAnchor),
-            self.stopwatch.topAnchor.constraint(equalTo: self.timer.topAnchor),
+            self.Stopwatch.leftAnchor.constraint(equalTo: self.Timer.leftAnchor),
+            self.Stopwatch.rightAnchor.constraint(equalTo: self.Timer.rightAnchor),
+            self.Stopwatch.bottomAnchor.constraint(equalTo: self.Timer.bottomAnchor),
+            self.Stopwatch.topAnchor.constraint(equalTo: self.Timer.topAnchor),
         ])
         
         self.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
