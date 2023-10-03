@@ -42,6 +42,14 @@ final class DetailView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        NSLayoutConstraint.activate([
+            detailViewMiddle.heightAnchor.constraint(greaterThanOrEqualToConstant: 450),
+            detailViewBottom.heightAnchor.constraint(greaterThanOrEqualToConstant: 500)
+        ])
+
+    }
 }
 
 private extension DetailView {
@@ -78,14 +86,12 @@ private extension DetailView {
             detailViewTop.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
             detailViewTop.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
         ])
-        
         // detailViewMiddle
         NSLayoutConstraint.activate([
-            detailViewMiddle.topAnchor.constraint(equalTo: self.detailViewTop.bottomAnchor, constant: 10),
+            detailViewMiddle.topAnchor.constraint(equalTo: self.detailViewTop.bottomAnchor, constant: 0),
             detailViewMiddle.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
             detailViewMiddle.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
         ])
-
         // detailViewBottom
         NSLayoutConstraint.activate([
             detailViewBottom.topAnchor.constraint(equalTo: self.detailViewMiddle.bottomAnchor, constant: 0),

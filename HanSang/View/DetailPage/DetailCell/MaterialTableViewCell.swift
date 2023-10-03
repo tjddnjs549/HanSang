@@ -62,8 +62,10 @@ private extension MaterialTableViewCell {
         NSLayoutConstraint.activate([
             cellStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
             cellStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
-            cellStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+            cellStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4),
+            cellStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -4),
         ])
         
     }
+
 }

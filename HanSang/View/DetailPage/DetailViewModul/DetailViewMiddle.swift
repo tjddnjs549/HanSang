@@ -22,7 +22,7 @@ final class DetailViewMiddle: UIView {
     lazy var materialTableView: UITableView = {
         let table = UITableView()
         table.separatorStyle = .none
-        table.showsVerticalScrollIndicator = true
+        table.showsVerticalScrollIndicator = false
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -87,7 +87,7 @@ private extension DetailViewMiddle {
             materialTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             materialTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
             materialTableView.topAnchor.constraint(equalTo: self.materialLabel.bottomAnchor, constant: 20),
-            //materialTableView.heightAnchor.constraint(equalToConstant: 200), //❗️❗️❗️❗️❗️
+            //materialTableView.heightAnchor.constraint(equalToConstant: 100), //❗️❗️❗️❗️❗️
             
             recipeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             recipeLabel.topAnchor.constraint(equalTo: self.materialTableView.bottomAnchor, constant: 20),
@@ -95,6 +95,7 @@ private extension DetailViewMiddle {
             kickView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             kickView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
             kickView.topAnchor.constraint(equalTo: self.recipeLabel.bottomAnchor, constant: 20),
+            kickView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             
             kickLabel.leadingAnchor.constraint(equalTo: self.kickView.leadingAnchor, constant: 20),
             kickLabel.topAnchor.constraint(equalTo: self.kickView.topAnchor, constant: 15),

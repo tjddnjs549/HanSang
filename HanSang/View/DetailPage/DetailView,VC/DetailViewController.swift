@@ -12,10 +12,10 @@ final class DetailViewController: UIViewController {
 
     // MARK: - dummy
     
-    var material: [String] = ["스테이크용 소고기", "아스파라거스", "새송이 버섯", "감자", "소스", "돼지고기", "와인", "양파", "양파", "양파"]
+    var material: [String] = ["스테이크용 소고기", "아스파라거스", "새송이 버섯", "감자", "소스", "돼지고기", "돼지고기", "돼지고기"]
     var unit: [String] =  ["1개", "2개", "3개", "4개", "5개", "6개", "7개", "8개", "8개", "8개"]
-    var imageArray: [UIImage] = [UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!]
-    var imageDescriptionArray: [String] = ["스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다."]
+    var imageArray: [UIImage] = [UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!,UIImage(named: "Meet")!]
+    var imageDescriptionArray: [String] = ["스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다. 스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다. 스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다. 스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다.", "스테이크용 고기를 키친타올을 사용해 물기를 닦아낸다."] //50자 이내
     
     lazy var timeSlider: UISlider = {
         let slider = UISlider()
@@ -40,15 +40,9 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         allSetting()
-        print(detailView.detailViewMiddle.frame.size.height) // 0.0
-        let materialTableViewCellHeight = material.count * 30
-        detailView.detailViewMiddle.materialTableView.heightAnchor.constraint(equalToConstant: CGFloat(materialTableViewCellHeight)).isActive = true
-        let recipeTableViewCellHeight = imageDescriptionArray.count * 80
-        detailView.detailViewBottom.recipeTableView.heightAnchor.constraint(equalToConstant: CGFloat(recipeTableViewCellHeight)).isActive = true
-        DispatchQueue.main.async {
-            self.detailView.detailViewMiddle.materialTableView.reloadData()
-            self.detailView.detailViewBottom.recipeTableView.reloadData()
-        }
+
+        self.detailView.detailViewMiddle.materialTableView.reloadData()
+        self.detailView.detailViewBottom.recipeTableView.reloadData()
     }
 }
 
@@ -64,14 +58,14 @@ private extension DetailViewController {
     func tableViewSetting() {
         detailView.detailViewMiddle.materialTableView.delegate = self
         detailView.detailViewMiddle.materialTableView.dataSource = self
-        detailView.detailViewMiddle.materialTableView.estimatedRowHeight = UITableView.automaticDimension
-        detailView.detailViewMiddle.materialTableView.rowHeight = UITableView.automaticDimension
         detailView.detailViewMiddle.materialTableView.register(MaterialTableViewCell.self, forCellReuseIdentifier: "MaterialTableViewCell")
         detailView.detailViewBottom.recipeTableView.delegate = self
         detailView.detailViewBottom.recipeTableView.dataSource = self
-        detailView.detailViewBottom.recipeTableView.estimatedRowHeight = UITableView.automaticDimension
-        detailView.detailViewBottom.recipeTableView.rowHeight = UITableView.automaticDimension
         detailView.detailViewBottom.recipeTableView.register(RecipeTableViewCell.self, forCellReuseIdentifier: "RecipeTableViewCell")
+        detailView.detailViewMiddle.materialTableView.rowHeight = UITableView.automaticDimension
+        detailView.detailViewMiddle.materialTableView.estimatedRowHeight = 40
+        detailView.detailViewBottom.recipeTableView.rowHeight = UITableView.automaticDimension
+        detailView.detailViewBottom.recipeTableView.estimatedRowHeight = 100
     }
     func buttonTapped() {
         detailView.detailViewTop.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
@@ -159,27 +153,12 @@ extension DetailViewController: UITableViewDataSource {
             cell.recipeLabel.text = imageDescriptionArray[indexPath.row]
             cell.timerButton.addTarget(self, action: #selector(timerButtonTapped), for: .touchUpInside)
             cell.selectionStyle = .none
-            
+         
             print(#function)
             return cell
         }
        return UITableViewCell()
     }
 }
-
-
 extension DetailViewController: UITableViewDelegate {
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            if tableView == detailView.detailViewMiddle.materialTableView {
-                return 30
-            } else if tableView == detailView.detailViewBottom.recipeTableView {
-                return 80
-            }
-            return 0
-        }
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-
-    
 }
