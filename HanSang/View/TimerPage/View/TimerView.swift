@@ -25,7 +25,10 @@ class TimerView: UIView {
         
         // MARK: - 시작 버튼 설정
         startButton.setTitle("Start Timer", for: .normal)
-        startButton.backgroundColor = .orange
+        startButton.backgroundColor = .orange.withAlphaComponent(0.75)
+        startButton.layer.cornerRadius = 15
+        startButton.layer.borderWidth = 1.5
+        startButton.layer.borderColor = UIColor.systemOrange.cgColor
         startButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
         addSubview(startButton)
         startButton.snp.makeConstraints { (make) in
@@ -36,7 +39,10 @@ class TimerView: UIView {
         
         // MARK: - 중지 버튼 설정
         stopButton.setTitle("Stop Timer", for: .normal)
-        stopButton.backgroundColor = .red
+        stopButton.backgroundColor = .red.withAlphaComponent(0.75)
+        stopButton.layer.cornerRadius = 15
+        stopButton.layer.borderWidth = 1.5
+        stopButton.layer.borderColor = UIColor.systemRed.cgColor
         stopButton.addTarget(self, action: #selector(stopTimer), for: .touchUpInside)
         addSubview(stopButton)
         stopButton.snp.makeConstraints { (make) in
