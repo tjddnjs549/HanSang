@@ -23,6 +23,7 @@ class RecipeInfoItemCollectionViewCell: UICollectionViewCell {
         $0.layer.borderColor = UIColor.systemGray5.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 20
+        $0.titleLabel?.textAlignment = .center
         $0.addTarget(self, action: #selector(touchUpButton), for: .touchUpInside)
         return $0
     }(UIButton())

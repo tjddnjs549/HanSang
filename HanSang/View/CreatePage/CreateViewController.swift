@@ -21,7 +21,7 @@ class CreateViewController: UIViewController {
     private let recipeView = RecipeView()
     // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정(private 삭제) 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
     let nextButton: UIButton = {
-//        $0.isEnabled = false
+//        $0.isHidden = true
         $0.setTitle("다음으로", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.backgroundColor = .systemGray5
@@ -85,11 +85,11 @@ class CreateViewController: UIViewController {
     
     @objc func touchUpNextButton() {
         page += 1
-
         if page == 1 {
             recipeInfoView.isHidden = false
             materialView.isHidden = true
             recipeView.isHidden = true
+           
         } else if page == 2 {
             recipeInfoView.isHidden = true
             materialView.isHidden = false
@@ -149,7 +149,6 @@ extension CreateViewController: PHPickerViewControllerDelegate {
                 DispatchQueue.main.async {
                     self.recipeInfoView.imageView.image = image as? UIImage
                     self.recipeInfoView.sendSubviewToBack(self.recipeInfoView.imageAddButton)
-                    self.recipeInfoView.imageView.layer.cornerRadius = 0.0
                 }
             }
             dismiss(animated: true, completion: nil)
@@ -158,3 +157,5 @@ extension CreateViewController: PHPickerViewControllerDelegate {
         }
     }
 }
+
+
