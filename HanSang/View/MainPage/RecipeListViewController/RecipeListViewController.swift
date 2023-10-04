@@ -42,7 +42,7 @@ private extension RecipeListViewController {
         navigationController?.isNavigationBarHidden = false
         if let originalImage = UIImage(named: "<") {
             let tintedImage = originalImage.withTintColor(ColorGuide.black)
-            let button = UIBarButtonItem(image: tintedImage, style: .plain, target: nil, action: #selector(goBack))
+            let button = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(goBack))
             button.tintColor = ColorGuide.black
             navigationItem.leftBarButtonItem = button
         }
