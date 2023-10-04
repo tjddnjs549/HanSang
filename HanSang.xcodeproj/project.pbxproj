@@ -32,6 +32,8 @@
 		3FE68C282ACD8032000559CB /* Content+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE68C242ACD8032000559CB /* Content+CoreDataClass.swift */; };
 		3FE68C2A2ACD8032000559CB /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE68C262ACD8032000559CB /* User+CoreDataClass.swift */; };
 		632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632336D82AC1DAAF0011B024 /* DetailView.swift */; };
+		636B05172ACD80940045AFCB /* Content+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B05132ACD80940045AFCB /* Content+CoreDataClass.swift */; };
+		636B05192ACD80940045AFCB /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B05152ACD80940045AFCB /* User+CoreDataClass.swift */; };
 		637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C42AC1793000E59D1F /* AppDelegate.swift */; };
 		637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C62AC1793000E59D1F /* SceneDelegate.swift */; };
 		637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C82AC1793000E59D1F /* TabbarViewController.swift */; };
@@ -102,6 +104,8 @@
 		3FE68C242ACD8032000559CB /* Content+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3FE68C262ACD8032000559CB /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		632336D82AC1DAAF0011B024 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		636B05132ACD80940045AFCB /* Content+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataClass.swift"; sourceTree = "<group>"; };
+		636B05152ACD80940045AFCB /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		637119C12AC1793000E59D1F /* HanSang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HanSang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637119C42AC1793000E59D1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		637119C62AC1793000E59D1F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -569,6 +573,7 @@
 				3F17824E2ACACA5600F2A3DA /* LoginViewModel.swift in Sources */,
 				637119EE2AC17CC100E59D1F /* LoginViewController.swift in Sources */,
 				3F040AE62AC29B1F00719CDD /* MyPageView.swift in Sources */,
+				636B05172ACD80940045AFCB /* Content+CoreDataClass.swift in Sources */,
 				E21F9EE22AC5C56700CB2D96 /* MaterialFooterView.swift in Sources */,
 				3F1782602ACBFC1000F2A3DA /* EditView.swift in Sources */,
 				63B35A102AC34965009B78D1 /* MaterialTableViewCell.swift in Sources */,
@@ -588,6 +593,7 @@
 				FF9865972ACA5267008B69B5 /* Recipe+CoreDataClass.swift in Sources */,
 				FF9865A02ACA6965008B69B5 /* SearchViewController.swift in Sources */,
 				E2844CE32ACD50680026C2F2 /* RecipeInfoModel.swift in Sources */,
+				636B05192ACD80940045AFCB /* User+CoreDataClass.swift in Sources */,
 				639964122AC5F36A0091AEFE /* ContentDataManager.swift in Sources */,
 				3F17825D2ACBFBE000F2A3DA /* EditViewController.swift in Sources */,
 				E2844CDC2ACD015E0026C2F2 /* MaterialModel.swift in Sources */,
