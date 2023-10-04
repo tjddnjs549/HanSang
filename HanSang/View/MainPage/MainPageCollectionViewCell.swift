@@ -16,7 +16,7 @@ class MainPageCollectionViewCell: UICollectionViewCell {
         mpIv.contentMode = .scaleAspectFill
         mpIv.image = UIImage(systemName: "questionmark")
         mpIv.tintColor = .white
-        mpIv.layer.cornerRadius = 18
+//        mpIv.layer.cornerRadius = 18
 //        iv.frame = CGRect(x: 0, y: 0, width: 162.63, height: 121.98)
         mpIv.clipsToBounds = true
         return mpIv
@@ -26,7 +26,7 @@ class MainPageCollectionViewCell: UICollectionViewCell {
         let mpLabel = UILabel()
         mpLabel.text = "Costom"
         mpLabel.textAlignment = .left
-        mpLabel.textColor = .white
+        mpLabel.textColor = .black
         mpLabel.font = UIFont.systemFont(ofSize: 22)
         return mpLabel
     }()
@@ -35,7 +35,7 @@ class MainPageCollectionViewCell: UICollectionViewCell {
         let mpTimeLabel = UILabel()
         mpTimeLabel.text = "2시간"
         mpTimeLabel.textAlignment = .left
-        mpTimeLabel.textColor = .white
+        mpTimeLabel.textColor = .black
         mpTimeLabel.font = UIFont.systemFont(ofSize: 14)
         return mpTimeLabel
     }()
@@ -77,7 +77,7 @@ class MainPageCollectionViewCell: UICollectionViewCell {
 //    }
     
     private func setupUI() {
-        self.backgroundColor = .systemGreen
+        self.backgroundColor = .white
         
         self.addSubview(myMainPageImageView)
         myMainPageImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -113,6 +113,7 @@ class MainPageCollectionViewCell: UICollectionViewCell {
             mpLikeButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 278),
             
         ])
+        
     }
     
     override func prepareForReuse() {
