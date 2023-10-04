@@ -28,6 +28,9 @@
 		3FC71BBB2ACD4DF10083EF31 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BBA2ACD4DF10083EF31 /* RecipeListViewController.swift */; };
 		3FC71BBE2ACD4E1B0083EF31 /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BBD2ACD4E1B0083EF31 /* RecipeListView.swift */; };
 		3FC71BC02ACD5BA80083EF31 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BBF2ACD5BA80083EF31 /* TimerView.swift */; };
+		3FC71BC22ACD5F510083EF31 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BC12ACD5F510083EF31 /* MainView.swift */; };
+		3FE68C282ACD8032000559CB /* Content+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE68C242ACD8032000559CB /* Content+CoreDataClass.swift */; };
+		3FE68C2A2ACD8032000559CB /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE68C262ACD8032000559CB /* User+CoreDataClass.swift */; };
 		632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632336D82AC1DAAF0011B024 /* DetailView.swift */; };
 		637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C42AC1793000E59D1F /* AppDelegate.swift */; };
 		637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C62AC1793000E59D1F /* SceneDelegate.swift */; };
@@ -95,6 +98,9 @@
 		3FC71BBA2ACD4DF10083EF31 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		3FC71BBD2ACD4E1B0083EF31 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
 		3FC71BBF2ACD5BA80083EF31 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		3FC71BC12ACD5F510083EF31 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		3FE68C242ACD8032000559CB /* Content+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3FE68C262ACD8032000559CB /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		632336D82AC1DAAF0011B024 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		637119C12AC1793000E59D1F /* HanSang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HanSang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637119C42AC1793000E59D1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -287,6 +293,8 @@
 		637119DD2AC1798400E59D1F /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
+				3FC71BC12ACD5F510083EF31 /* MainView.swift */,
+				FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */,
 				FF2300E62AC3ED8E00D4199E /* MainViewController.swift */,
 				FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */,
 				FF98659F2ACA6965008B69B5 /* SearchViewController.swift */,
@@ -542,6 +550,7 @@
 				E23840B62ACC4A0B00F2067C /* CreateRecipeTableViewCell.swift in Sources */,
 				63945F6F2AC2EA590053792E /* Extension+UIButton.swift in Sources */,
 				E21806E02AC3E80000A2614B /* RecipeInfoView.swift in Sources */,
+				3FC71BC22ACD5F510083EF31 /* MainView.swift in Sources */,
 				63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */,
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
 				FF9865A72ACD812D008B69B5 /* User+CoreDataClass.swift in Sources */,
@@ -550,6 +559,7 @@
 				E214F6EB2ACB45EF00902DB9 /* RecipeView.swift in Sources */,
 				637AA5A22AC8B13F00DA74B3 /* DetailViewMiddle.swift in Sources */,
 				3F1782502ACADC1E00F2A3DA /* MyPageViewModel.swift in Sources */,
+				3FE68C282ACD8032000559CB /* Content+CoreDataClass.swift in Sources */,
 				3F040AE12AC2645F00719CDD /* SignUpViewController.swift in Sources */,
 				637119C92AC1793000E59D1F /* TabbarViewController.swift in Sources */,
 				637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */,
@@ -583,6 +593,7 @@
 				E2844CDC2ACD015E0026C2F2 /* MaterialModel.swift in Sources */,
 				3F040AF42AC3B34900719CDD /* SignUpViewModel.swift in Sources */,
 				3F1782562ACBEAAA00F2A3DA /* SettingViewController.swift in Sources */,
+				3FE68C2A2ACD8032000559CB /* User+CoreDataClass.swift in Sources */,
 				3F17825B2ACBF0D300F2A3DA /* SettingCustomCell.swift in Sources */,
 				E27CE34B2AC54796005358EF /* MaterialCreateTableViewCell.swift in Sources */,
 				637119E82AC17C5900E59D1F /* DetailViewController.swift in Sources */,
