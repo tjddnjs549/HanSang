@@ -59,6 +59,7 @@
 		E27CE34B2AC54796005358EF /* MaterialCreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27CE34A2AC54796005358EF /* MaterialCreateTableViewCell.swift */; };
 		E2844CDC2ACD015E0026C2F2 /* MaterialModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2844CDB2ACD015E0026C2F2 /* MaterialModel.swift */; };
 		E2844CE12ACD0C390026C2F2 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2844CE02ACD0C390026C2F2 /* RecipeModel.swift */; };
+		E2844CE32ACD50680026C2F2 /* RecipeInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2844CE22ACD50680026C2F2 /* RecipeInfoModel.swift */; };
 		FF2300E72AC3ED8E00D4199E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2300E62AC3ED8E00D4199E /* MainViewController.swift */; };
 		FF2300E92AC3EDD600D4199E /* CostomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */; };
 		FF35760E2AC48AE4003FB361 /* MainPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */; };
@@ -124,6 +125,7 @@
 		E27CE34A2AC54796005358EF /* MaterialCreateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialCreateTableViewCell.swift; sourceTree = "<group>"; };
 		E2844CDB2ACD015E0026C2F2 /* MaterialModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialModel.swift; sourceTree = "<group>"; };
 		E2844CE02ACD0C390026C2F2 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
+		E2844CE22ACD50680026C2F2 /* RecipeInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoModel.swift; sourceTree = "<group>"; };
 		FF2300E62AC3ED8E00D4199E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostomCollectionViewCell.swift; sourceTree = "<group>"; };
 		FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 			children = (
 				E2844CDB2ACD015E0026C2F2 /* MaterialModel.swift */,
 				E2844CE02ACD0C390026C2F2 /* RecipeModel.swift */,
+				E2844CE22ACD50680026C2F2 /* RecipeInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				E21806E32AC3E8EC00A2614B /* RecipeInfoItemCollectionViewCell.swift in Sources */,
 				FF9865972ACA5267008B69B5 /* Recipe+CoreDataClass.swift in Sources */,
 				FF9865A02ACA6965008B69B5 /* SearchViewController.swift in Sources */,
+				E2844CE32ACD50680026C2F2 /* RecipeInfoModel.swift in Sources */,
 				639964122AC5F36A0091AEFE /* ContentDataManager.swift in Sources */,
 				3F17825D2ACBFBE000F2A3DA /* EditViewController.swift in Sources */,
 				E2844CDC2ACD015E0026C2F2 /* MaterialModel.swift in Sources */,

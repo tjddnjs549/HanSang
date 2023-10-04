@@ -120,7 +120,7 @@ class CreateRecipeTableViewCell: UITableViewCell {
         
         recipeImageView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(10)
-            $0.leading.equalTo(countLabel.snp.trailing).offset(10)
+            $0.leading.equalTo(countLabel.snp.trailing).offset(15)
             $0.width.height.equalTo(60)
         }
         
@@ -135,7 +135,7 @@ class CreateRecipeTableViewCell: UITableViewCell {
         
         timerStackView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(10)
-            $0.leading.equalTo(recipleTextView.snp.trailing).offset(10)
+            $0.leading.equalTo(recipleTextView.snp.trailing).offset(5)
             $0.trailing.equalToSuperview().inset(10)
             $0.width.equalTo(50)
         }

@@ -1,5 +1,5 @@
 //
-//  Material.swift
+//  MaterialModel.swift
 //  HanSang
 //
 //  Created by 배은서 on 2023/10/04.
