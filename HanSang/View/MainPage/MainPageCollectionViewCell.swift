@@ -6,46 +6,58 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainPageCollectionViewCell: UICollectionViewCell {
-    
     static let identifier = "MainPageCollectionViewCell"
     
-    private let myMainPageImageView: UIImageView = {
-        let mpIv = UIImageView()
-        mpIv.contentMode = .scaleAspectFill
-        mpIv.image = UIImage(systemName: "questionmark")
-        mpIv.tintColor = .white
-        mpIv.clipsToBounds = true
-//        mpIv.layer.cornerRadius = 20
-        return mpIv
+    private let view: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 16
+        view.clipsToBounds = true
+        return view
     }()
     
-    private let mpLabel: UILabel = {
-        let mpLabel = UILabel()
-        mpLabel.text = "Costom"
-        mpLabel.textAlignment = .left
-        mpLabel.textColor = .black
-        mpLabel.font = UIFont.systemFont(ofSize: 22)
-        return mpLabel
+    private let picture: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "questionmark")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
     }()
     
-    private let mpTimeLabel: UILabel = {
-        let mpTimeLabel = UILabel()
-        mpTimeLabel.text = "2시간"
-        mpTimeLabel.textAlignment = .left
-        mpTimeLabel.textColor = ColorGuide.textHint
-        mpTimeLabel.font = UIFont.systemFont(ofSize: 14)
-        return mpTimeLabel
+    private let title: UILabel = {
+        let label = UILabel()
+        label.text = "요리명"
+        label.textAlignment = .left
+        label.font = FontGuide.size19Bold
+        label.textColor = ColorGuide.black
+        label.snp.makeConstraints { make in
+            make.height.equalTo(24)
+        }
+        return label
     }()
-        
-    private let mpLikeButton: UIButton = {
-        let mpLikeButton = UIButton()
-        mpLikeButton.tintColor = .systemGray
+    
+    private let timer: UILabel = {
+        let label = UILabel()
+        label.text = "2시간"
+        label.textAlignment = .left
+        label.font = FontGuide.size16
+        label.textColor = ColorGuide.textHint
+        label.snp.makeConstraints { make in
+            make.height.equalTo(20)
+        }
+        return label
+    }()
+    
+    private let bookMarkButton: UIButton = {
+        let button = UIButton()
+        button.tintColor = .systemGray
         let heartImage = UIImage(systemName: "heart")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 20))
-        mpLikeButton.setImage(heartImage, for: .normal)
-        mpLikeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-        return mpLikeButton
+        button.setImage(heartImage, for: .normal)
+        button.addTarget(self, action: #selector(bookMarkButtonTapped), for: .touchUpInside)
+        return button
     }()
     
     private let time: UIImageView = {
@@ -53,65 +65,71 @@ class MainPageCollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage(named: "timer")
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = ColorGuide.textHint
+        imageView.snp.makeConstraints { make in
+            make.width.height.equalTo(16)
+        }
         return imageView
     }()
-
-
-    @objc private func likeButtonTapped() {
+    
+    private lazy var timerStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [time, timer])
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 6
+        return stackView
+    }()
+    
+    @objc private func bookMarkButtonTapped() {
         // 좋아요 버튼이 탭되었을 때 수행할 동작을 여기에 추가하세요.
     }
     
-    
     public func configure(with image: UIImage) {
-        self.myMainPageImageView.image = image
-        self.setupUI()
-    }
-        
-    private func setupUI() {
-        self.backgroundColor = .white
-        self.addSubview(myMainPageImageView)
-        myMainPageImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(mpLabel)
-        mpLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(mpTimeLabel)
-        mpTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(mpLikeButton)
-        mpLikeButton.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(time)
-        time.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            myMainPageImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            myMainPageImageView.widthAnchor.constraint(equalToConstant: 306),
-            myMainPageImageView.heightAnchor.constraint(equalToConstant: 230),
-            myMainPageImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            myMainPageImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            
-            mpLabel.topAnchor.constraint(equalTo: myMainPageImageView.bottomAnchor, constant: 10),
-            mpLabel.widthAnchor.constraint(equalToConstant: 150),
-            mpLabel.heightAnchor.constraint(equalToConstant: 23),
-            mpLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            
-            mpTimeLabel.topAnchor.constraint(equalTo: mpLabel.bottomAnchor, constant: 5),
-            mpTimeLabel.widthAnchor.constraint(equalToConstant: 50),
-            mpTimeLabel.heightAnchor.constraint(equalToConstant: 14),
-            mpTimeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 33),
-            
-            mpLikeButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -14),
-            mpLikeButton.widthAnchor.constraint(equalToConstant: 30),
-            mpLikeButton.heightAnchor.constraint(equalToConstant: 30),
-            mpLikeButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 230),
-            
-            time.topAnchor.constraint(equalTo: mpLabel.bottomAnchor, constant: 6),
-            time.widthAnchor.constraint(equalToConstant: 12),
-            time.heightAnchor.constraint(equalToConstant: 12),
-            time.trailingAnchor.constraint(equalTo: mpTimeLabel.leadingAnchor, constant: -8),
-
-        ])
+        picture.image = image
+        setupUI()
     }
     
     override func prepareForReuse() {
         super .prepareForReuse()
-        self.myMainPageImageView.image = nil
+        self.picture.image = nil
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        contentView.snp.makeConstraints { make in
+            make.height.equalTo(241.6)
+        }
+    }
+}
+
+extension MainPageCollectionViewCell {
+    func setupUI() {
+        contentView.addSubview(view)
+        view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        view.addSubview(picture)
+        picture.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(160)
+        }
+        
+        view.addSubview(title)
+        title.snp.makeConstraints { make in
+            make.top.equalTo(picture.snp.bottom).offset(15)
+            make.leading.equalToSuperview().offset(15)
+        }
+        
+        view.addSubview(bookMarkButton)
+        bookMarkButton.snp.makeConstraints { make in
+            make.top.equalTo(title.snp.top).offset(5)
+            make.trailing.equalToSuperview().offset(-15)
+        }
+        
+        view.addSubview(timerStackView)
+        timerStackView.snp.makeConstraints { make in
+            make.top.equalTo(title.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(15)
+        }
     }
 }
