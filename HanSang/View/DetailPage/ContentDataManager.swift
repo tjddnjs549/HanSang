@@ -77,20 +77,22 @@ final class ContentDataManager {
     }
     
     // MARK: - [Create] 코어데이터에 데이터 생성하기 (두번째 페이지에서 Material 저장)
-    func saveMaterialData(content: Content?, material: String, unit: String) {
-        guard let content = content, let context = content.managedObjectContext else { return }
-        if let materialEntity = NSEntityDescription.entity(forEntityName: "Materials", in: context),
-           let materialData = NSManagedObject(entity: materialEntity, insertInto: context) as? Materials {
-            
-            materialData.material = material
-            materialData.unit = unit
-            content.addToMaterials(materialData)
-            
-            do {
-                try context.save()
-                print("Material 데이터 저장 성공")
-            } catch {
-                print("Material 데이터 저장 실패")
+    func saveMaterialData(content: Content?, materials: [Materials]) {
+        for material in materials {
+            guard let content = content, let context = content.managedObjectContext else { return }
+            if let materialEntity = NSEntityDescription.entity(forEntityName: "Materials", in: context),
+               let materialData = NSManagedObject(entity: materialEntity, insertInto: context) as? Materials {
+                
+                materialData.material = material.material
+                materialData.unit = material.unit
+                content.addToMaterials(materialData)
+                
+                do {
+                    try context.save()
+                    print("Material 데이터 저장 성공")
+                } catch {
+                    print("Material 데이터 저장 실패")
+                }
             }
         }
     }

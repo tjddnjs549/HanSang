@@ -7,8 +7,10 @@
 
 import UIKit
 import SnapKit
+import PhotosUI
 
 class CreateViewController: UIViewController {
+    
     
     // MARK: - Properties
     
@@ -17,8 +19,9 @@ class CreateViewController: UIViewController {
     private let recipeInfoView = RecipeInfoView()
     private let materialView = MaterialView()
     private let recipeView = RecipeView()
-    
-    private let nextButton: UIButton = {
+    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정(private 삭제) 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+    let nextButton: UIButton = {
+//        $0.isEnabled = false
         $0.setTitle("다음으로", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.backgroundColor = .systemGray5
@@ -33,6 +36,8 @@ class CreateViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
+        registerNotification()
+        recipeInfoView.imageAddButton.addTarget(self, action:  #selector(touchUpAddButton), for: .touchUpInside)
     }
     
     // MARK: - InitUI
@@ -80,7 +85,7 @@ class CreateViewController: UIViewController {
     
     @objc func touchUpNextButton() {
         page += 1
-        
+
         if page == 1 {
             recipeInfoView.isHidden = false
             materialView.isHidden = true
@@ -109,10 +114,47 @@ class CreateViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    
+    @objc func touchUpAddButton() {
+        setupImagePicker()
+    }
+    
     // MARK: - Custom Method
     
     private func registerNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: CreateRecipeTableViewCell.timerNotificationName, object: nil)
     }
+}
+extension CreateViewController: PHPickerViewControllerDelegate {
     
+    func setupImagePicker() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 0
+        configuration.filter = .any(of: [.images])
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        self.present(picker, animated: true)
+    }
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        guard !results.isEmpty else {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+        let itemProvider = results.first?.itemProvider
+        
+        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                DispatchQueue.main.async {
+                    self.recipeInfoView.imageView.image = image as? UIImage
+                    self.recipeInfoView.sendSubviewToBack(self.recipeInfoView.imageAddButton)
+                    self.recipeInfoView.imageView.layer.cornerRadius = 0.0
+                }
+            }
+            dismiss(animated: true, completion: nil)
+        } else {
+            print("ERROR❗️")
+        }
+    }
 }

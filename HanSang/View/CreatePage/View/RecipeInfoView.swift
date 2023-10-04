@@ -25,7 +25,7 @@ class RecipeInfoView: UIView {
         return $0
     }(UILabel())
     
-    private let imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         $0.backgroundColor = .clear
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.systemGray4.cgColor
@@ -33,7 +33,7 @@ class RecipeInfoView: UIView {
         return $0
     }(UIImageView())
     
-    private let imageAddButton: UIButton = {
+    lazy var imageAddButton: UIButton = {
         var config = UIButton.Configuration.plain()
         var titleAttr = AttributedString.init("사진을 추가해주세요.")
         titleAttr.font = .systemFont(ofSize: 10, weight: .light)
@@ -57,7 +57,7 @@ class RecipeInfoView: UIView {
         return $0
     }(UILabel())
     
-    private let categoryCollcetionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private lazy var categoryCollcetionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private let timeLabel: UILabel = {
         $0.text = "얼마나 걸리나요?"
@@ -89,6 +89,9 @@ class RecipeInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true)
+    }
     
     // MARK: - InitUI
     
@@ -99,10 +102,9 @@ class RecipeInfoView: UIView {
             $0.textColor = .black
             $0.font = .boldSystemFont(ofSize: 20)
         }
-        
         [categoryCollcetionView, difficultyCollectionView].forEach {
             $0.backgroundColor = .clear
-            $0.isScrollEnabled = false
+            $0.isScrollEnabled = true
             $0.showsHorizontalScrollIndicator = false
             $0.delegate = self
             $0.dataSource = self
@@ -219,3 +221,5 @@ extension RecipeInfoView: UICollectionViewDelegateFlowLayout {
         return 10
     }
 }
+
+

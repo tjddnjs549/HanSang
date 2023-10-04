@@ -170,6 +170,7 @@ class MainViewController: UIViewController {
             bobButton.translatesAutoresizingMaskIntoConstraints = false
             bobButton.widthAnchor.constraint(equalToConstant: 70).isActive = true
             bobButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+            bobButton.addTarget(self, action: #selector(bobButtonTapped), for: .touchUpInside)
             return bobButton
         }()
         
@@ -408,6 +409,13 @@ class MainViewController: UIViewController {
     @objc func searchButtonTapped() {
         navigationController?.pushViewController(SearchViewController(), animated: true)
     }
+
+    
+    @objc func bobButtonTapped() {
+        let recipeListVC = RecipeListViewController()
+        navigationController?.pushViewController(recipeListVC, animated: true)
+    }
+    
 }
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
