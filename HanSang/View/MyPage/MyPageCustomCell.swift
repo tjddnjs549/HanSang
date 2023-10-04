@@ -42,6 +42,17 @@ class MyPageCustomCell: UICollectionViewCell {
         return label
     }()
     
+    private let bookMark: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "bookMark")
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = ColorGuide.inputLine
+        imageView.snp.makeConstraints { make in
+            make.height.equalTo(12)
+        }
+        return imageView
+    }()
+    
     private let time: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "timer")
@@ -96,6 +107,12 @@ extension MyPageCustomCell {
         title.snp.makeConstraints { make in
             make.top.equalTo(picture.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(12)
+        }
+        
+        view.addSubview(bookMark)
+        bookMark.snp.makeConstraints { make in
+            make.top.equalTo(title.snp.top).offset(5)
+            make.trailing.equalToSuperview().offset(-12)
         }
         
         view.addSubview(timerStackView)

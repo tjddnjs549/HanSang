@@ -1,14 +1,14 @@
 //
-//  SignUpView.swift
+//  EditView.swift
 //  HanSang
 //
-//  Created by t2023-m0076 on 2023/09/27.
+//  Created by t2023-m0076 on 2023/10/03.
 //
 
-import SnapKit
 import UIKit
+import SnapKit
 
-class SignUpView: UIView {
+class EditView: UIView {
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -31,12 +31,12 @@ class SignUpView: UIView {
     
     private let signUpLabel: UILabel = {
         let label = UILabel()
-        label.text = "회원가입"
+        label.text = "내 정보 변경"
         label.font = FontGuide.size32Bold
         label.textColor = ColorGuide.black
         label.textAlignment = .left
         label.snp.makeConstraints { make in
-            make.width.equalTo(117)
+            make.width.equalTo(160)
             make.height.equalTo(40)
         }
         return label
@@ -106,6 +106,7 @@ class SignUpView: UIView {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "아이디를 입력해주세요", attributes: [.font: FontGuide.size16])
         textField.textColor = ColorGuide.textHint
+        textField.isUserInteractionEnabled = false
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
@@ -119,32 +120,8 @@ class SignUpView: UIView {
         return textField
     }()
     
-    let idTextFieldDescription: UILabel = {
-        let label = UILabel()
-        label.text = "  🚨 필수 입력 사항입니다."
-        label.font = FontGuide.size14
-        label.textColor = ColorGuide.main
-        label.textAlignment = .left
-        label.isHidden = true
-        return label
-    }()
-    
-    let idCheckedButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("중복확인", for: .normal)
-        button.titleLabel?.font = FontGuide.size14
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = ColorGuide.subButton
-        button.layer.cornerRadius = 4
-        button.snp.makeConstraints { make in
-            make.width.equalTo(72)
-            make.height.equalTo(40)
-        }
-        return button
-    }()
-    
     private lazy var idStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [idLabel, idTextField, idTextFieldDescription])
+        let stackView = UIStackView(arrangedSubviews: [idLabel, idTextField])
         stackView.axis = .vertical
         stackView.spacing = 9
         return stackView
@@ -182,7 +159,6 @@ class SignUpView: UIView {
     
     let pwTextFieldDescription: UILabel = {
         let label = UILabel()
-        label.text = "  🚨 필수 입력 사항입니다."
         label.font = FontGuide.size14
         label.textColor = ColorGuide.main
         label.textAlignment = .left
@@ -240,7 +216,7 @@ class SignUpView: UIView {
     
     let confirmPwTextFieldDescription: UILabel = {
         let label = UILabel()
-        label.text = "  🚨 필수 입력 사항입니다."
+        label.text = ""
         label.font = FontGuide.size14
         label.textColor = ColorGuide.main
         label.textAlignment = .left
@@ -294,7 +270,6 @@ class SignUpView: UIView {
     
     let nicknameTextFieldDescription: UILabel = {
         let label = UILabel()
-        label.text = "  🚨 필수 입력 사항입니다."
         label.font = FontGuide.size14
         label.textColor = ColorGuide.main
         label.textAlignment = .left
@@ -330,9 +305,9 @@ class SignUpView: UIView {
         return stackView
     }()
     
-    let createButton: UIButton = {
+    let editButton: UIButton = {
         let button = UIButton()
-        button.setTitle("확인", for: .normal)
+        button.setTitle("변경", for: .normal)
         button.titleLabel?.font = FontGuide.size19Bold
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = ColorGuide.main
@@ -354,7 +329,7 @@ class SignUpView: UIView {
     }
 }
 
-private extension SignUpView {
+private extension EditView {
     func setupUI() {
         backgroundColor = .systemBackground
         
@@ -408,12 +383,6 @@ private extension SignUpView {
             make.trailing.equalTo(-30)
         }
         
-        contentView.addSubview(idCheckedButton)
-        idCheckedButton.snp.makeConstraints { make in
-            make.centerY.equalTo(idTextField.snp.centerY)
-            make.trailing.equalTo(idTextField.snp.trailing).offset(-8)
-        }
-        
         contentView.addSubview(pwCheckedButton)
         pwCheckedButton.snp.makeConstraints { make in
             make.centerY.equalTo(pwTextField.snp.centerY)
@@ -434,8 +403,8 @@ private extension SignUpView {
             make.trailing.equalTo(nicknameTextField.snp.trailing).offset(-8)
         }
         
-        contentView.addSubview(createButton)
-        createButton.snp.makeConstraints { make in
+        contentView.addSubview(editButton)
+        editButton.snp.makeConstraints { make in
             make.top.equalTo(signUpInfoStackView.snp.bottom).offset(68)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(30)

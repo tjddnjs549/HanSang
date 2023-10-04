@@ -1,16 +1,15 @@
 //
-//  SignUpViewModel.swift
+//  EditViewModel.swift
 //  HanSang
 //
-//  Created by t2023-m0076 on 2023/09/27.
+//  Created by t2023-m0076 on 2023/10/03.
 //
 
 import Foundation
 import UIKit
 
-class SignUpViewModel {
+class EditViewModel {
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    static var user: [User]?
     
     func fetchUserInfo() {
         let request = User.fetchRequest()
@@ -21,7 +20,7 @@ class SignUpViewModel {
             print("🚨 유저 정보 불러오기 오류")
         }
     }
-
+    
     func getUserId(_ id: String) -> User? {
         let request = User.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id)
@@ -47,23 +46,22 @@ class SignUpViewModel {
             return nil
         }
     }
-
-    func createUser(image: UIImage?, id: String, pw: String, nickname: String) {
-        let newUser = User(context: context)
-        if let imageData = image!.jpegData(compressionQuality: 1.0) {
-            newUser.profilePicture = imageData
-            newUser.id = id
-            newUser.pw = pw
-            newUser.nickname = nickname
+    
+    func editUser(_ user: User, editImage: UIImage?, editPW: String, editNickname: String) {
+        if let imageData = editImage?.jpegData(compressionQuality: 1.0) {
+            user.profilePicture = imageData
         } else {
             print("🚨 이미지 저장 에러")
         }
+        
+        user.pw = editPW
+        user.nickname = editNickname
 
         do {
             try context.save()
         } catch {
-            print("🚨 유저 생성 오류")
+            print("🚨 유저 수정 오류")
         }
     }
-    
+
 }
