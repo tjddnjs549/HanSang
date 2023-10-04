@@ -84,7 +84,7 @@ class CreateRecipeTableViewCell: UITableViewCell {
     
     private func setupLayout() {
         [countLabel, recipleTextView, timerStackView].forEach {
-            addSubview($0)
+            contentView.addSubview($0)
         }
         
         countLabel.snp.makeConstraints {

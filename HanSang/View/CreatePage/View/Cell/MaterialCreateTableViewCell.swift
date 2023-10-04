@@ -74,7 +74,7 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     private func setupLayout() {
         [deleteButton, materialStackView].forEach {
-            addSubview($0)
+            contentView.addSubview($0)
         }
         
         deleteButton.snp.makeConstraints {

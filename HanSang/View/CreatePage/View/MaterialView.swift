@@ -12,7 +12,7 @@ class MaterialView: UIView {
     
     // MARK: - Properties
     
-    private let materialList: [Materials] = []
+    private var materialList: [Material] = []
     
     private let messageLabel: UILabel = {
         $0.text =
@@ -95,7 +95,8 @@ extension MaterialView: UITableViewDataSource {
         cell.selectionStyle = .none
         
         cell.touchedDeleteButton = {
-            // 재료 삭제
+            self.materialList.remove(at: indexPath.row)
+            self.materialCreateTableView.reloadData()
         }
         
         return cell
@@ -112,7 +113,8 @@ extension MaterialView: UITableViewDelegate {
         else { return nil }
 
         footerView.touchedAddButton = {
-            // 재료 추가
+            self.materialList.append(Material(material: "", unit: ""))
+            self.materialCreateTableView.reloadData()
         }
 
         return footerView
