@@ -14,28 +14,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        if let windowScene = scene as? UIWindowScene {
-//            let window = UIWindow(windowScene: windowScene)
-//            
-//            // 로그인 상태 확인
-//            if isLoggedIn() {
-//                // 이미 로그인된 경우 탭바 컨트롤러로 이동
-//                window.rootViewController = TabbarViewController()
-//            } else {
-//                // 로그인 페이지로 이동
-//                window.rootViewController = LoginViewController()
-//            }
-//            
-//            self.window = window
-//            window.makeKeyAndVisible()
-//        }
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
-        let detailViewController = DetailViewController()
-        let navigationController = UINavigationController(rootViewController: detailViewController)
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
-        self.window = window
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            
+            // 로그인 상태 확인
+            if isLoggedIn() {
+                // 이미 로그인된 경우 탭바 컨트롤러로 이동
+                window.rootViewController = TabbarViewController()
+            } else {
+                // 로그인 페이지로 이동
+                window.rootViewController = LoginViewController()
+            }
+            
+            self.window = window
+            window.makeKeyAndVisible()
+        }
     }
     
     private func isLoggedIn() -> Bool {

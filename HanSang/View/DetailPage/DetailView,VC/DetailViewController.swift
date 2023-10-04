@@ -22,7 +22,6 @@ final class DetailViewController: UIViewController {
         let slider = UISlider()
         slider.minimumValue = 0
         slider.maximumValue = 60 //❗️
-        slider.value = 60 //❗️
         slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
@@ -30,7 +29,6 @@ final class DetailViewController: UIViewController {
     
     private let timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "20 초"
         label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16Bold)
         return label
     }()
@@ -102,17 +100,17 @@ extension DetailViewController {
     }
     
     @objc func timerButtonTapped() {
-        let alertController = UIAlertController(title: "타이머", message: "\(timerLabel)", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
         
         alertController.view.addSubview(timeSlider)
         alertController.view.addSubview(timerLabel)
+        
         NSLayoutConstraint.activate([
-            timerLabel.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 20),
-            timerLabel.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 20),
-            timerLabel.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -20),
+            timerLabel.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 10),
+            timerLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
             timeSlider.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 10),
             timeSlider.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -10),
-            timeSlider.topAnchor.constraint(equalTo: timerLabel.topAnchor, constant: 30),
+            timeSlider.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 20)
         ])
         
         let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
@@ -123,14 +121,17 @@ extension DetailViewController {
         present(alertController, animated: true, completion: nil)
         
         self.timer?.invalidate()
-        self.number = 60
-        
-        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.doSomethingAfter1Second), userInfo: nil, repeats: true) // 타이머 시작
+        self.number = 60 //❗️
+        UIView.animate(withDuration: TimeInterval(number)) {
+            self.timeSlider.setValue(60.0, animated: true) //❗️
+        } completion: { _ in
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.doSomethingAfter1Second), userInfo: nil, repeats: true)
+        }
     }
     @objc func doSomethingAfter1Second() {
         if number > 0 {
             number -= 1
-            timeSlider.value = Float(number) / 60.0 // 슬라이더 값을 갱신하여 1초씩 감소
+            timeSlider.value = Float(number)
             timerLabel.text = "\(number) 초"
         } else {
             number = 0
