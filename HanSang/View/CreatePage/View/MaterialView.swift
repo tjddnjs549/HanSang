@@ -12,7 +12,7 @@ class MaterialView: UIView {
     
     // MARK: - Properties
     
-    private var materialList: [Material] = []
+    private var materialList: [MaterialModel] = []
     
     private let messageLabel: UILabel = {
         $0.text =
@@ -113,7 +113,7 @@ extension MaterialView: UITableViewDelegate {
         else { return nil }
 
         footerView.touchedAddButton = {
-            self.materialList.append(Material(material: "", unit: ""))
+            self.materialList.append(MaterialModel(material: "", unit: ""))
             self.materialCreateTableView.reloadData()
         }
 

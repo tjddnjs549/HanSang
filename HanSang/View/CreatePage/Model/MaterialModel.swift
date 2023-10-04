@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Material {
+struct MaterialModel {
     let material: String
     let unit: String
 }

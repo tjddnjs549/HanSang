@@ -33,6 +33,7 @@ class CreateViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
+        registerNotification()
     }
     
     // MARK: - InitUI

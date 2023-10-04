@@ -12,6 +12,8 @@ class RecipeView: UIView {
 
     // MARK: - Properties
     
+    private var recipeList: [RecipeModel] = []
+    
     private let messageLabel: UILabel = {
         $0.text =
                 """
@@ -80,7 +82,11 @@ class RecipeView: UIView {
 
 extension RecipeView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        if recipeList.isEmpty {
+            return 1
+        } else {
+            return recipeList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -104,7 +110,8 @@ extension RecipeView: UITableViewDelegate {
         else { return nil }
 
         footerView.touchedAddButton = {
-            // 재료 추가
+            self.recipeList.append(RecipeModel(descriptions: "", image: nil, timer: ""))
+            self.recipeTableView.reloadData()
         }
 
         return footerView
@@ -113,4 +120,11 @@ extension RecipeView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 60
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                recipeList.remove(at: indexPath.row)
+                recipeTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
 }
