@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import PhotosUI
 
 class RecipeInfoView: UIView {
     
@@ -25,7 +26,7 @@ class RecipeInfoView: UIView {
         return $0
     }(UILabel())
     
-    private let imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         $0.backgroundColor = .clear
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.systemGray4.cgColor
@@ -33,7 +34,7 @@ class RecipeInfoView: UIView {
         return $0
     }(UIImageView())
     
-    private let imageAddButton: UIButton = {
+    lazy var imageAddButton: UIButton = {
         var config = UIButton.Configuration.plain()
         var titleAttr = AttributedString.init("사진을 추가해주세요.")
         titleAttr.font = .systemFont(ofSize: 10, weight: .light)
@@ -89,6 +90,9 @@ class RecipeInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true)
+    }
     
     // MARK: - InitUI
     
@@ -219,3 +223,5 @@ extension RecipeInfoView: UICollectionViewDelegateFlowLayout {
         return 10
     }
 }
+
+
