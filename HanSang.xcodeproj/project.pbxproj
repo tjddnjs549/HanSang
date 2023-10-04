@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B05FF212ACAC4B6006BA170 /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B05FF202ACAC4B6006BA170 /* StopwatchView.swift */; };
+		1B22ACF12ACCBC9B001432F7 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B22ACF02ACCBC9B001432F7 /* TimerView.swift */; };
 		3F040ADB2AC1A99200719CDD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F040ADA2AC1A99200719CDD /* SnapKit */; };
 		3F040ADD2AC25DE700719CDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040ADC2AC25DE700719CDD /* LoginView.swift */; };
 		3F040AE12AC2645F00719CDD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F040AE02AC2645F00719CDD /* SignUpViewController.swift */; };
@@ -58,6 +60,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B05FF202ACAC4B6006BA170 /* StopwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
+		1B22ACF02ACCBC9B001432F7 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		3F040ADC2AC25DE700719CDD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3F040AE02AC2645F00719CDD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3F040AE52AC29B1F00719CDD /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
@@ -121,6 +125,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B22ACF22ACCC5A9001432F7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B22ACF02ACCBC9B001432F7 /* TimerView.swift */,
+				1B05FF202ACAC4B6006BA170 /* StopwatchView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		3F040AD62AC1A3D700719CDD /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +271,7 @@
 		637119EF2AC180C500E59D1F /* TimerPage */ = {
 			isa = PBXGroup;
 			children = (
+				1B22ACF22ACCC5A9001432F7 /* View */,
 				637119F02AC180DF00E59D1F /* TimerViewController.swift */,
 			);
 			path = TimerPage;
@@ -453,6 +467,7 @@
 				638A147D2AC9C32B00483968 /* Extension+UIImage.swift in Sources */,
 				632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */,
 				3F040AFE2AC4106300719CDD /* SignUpView.swift in Sources */,
+				1B22ACF12ACCBC9B001432F7 /* TimerView.swift in Sources */,
 				63B35A122AC38266009B78D1 /* RecipeTableViewCell.swift in Sources */,
 				637119EC2AC17CAA00E59D1F /* BookMarkViewController.swift in Sources */,
 				637119CF2AC1793000E59D1F /* HanSang.xcdatamodeld in Sources */,
@@ -460,6 +475,7 @@
 				E21806E02AC3E80000A2614B /* RecipeInfoView.swift in Sources */,
 				63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */,
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
+				1B05FF212ACAC4B6006BA170 /* StopwatchView.swift in Sources */,
 				FF2300E72AC3ED8E00D4199E /* MainViewController.swift in Sources */,
 				637AA5A22AC8B13F00DA74B3 /* DetailViewMiddle.swift in Sources */,
 				3F040AE12AC2645F00719CDD /* SignUpViewController.swift in Sources */,
