@@ -36,7 +36,7 @@ class SearchViewController: UIViewController {
         let cancel = UIBarButtonItem(systemItem: .cancel, primaryAction: UIAction(handler: { _ in
         }))
         self.navigationItem.rightBarButtonItem = cancel
-        
+        self.navigationItem.hidesSearchBarWhenScrolling = false
         let searchbar = UISearchBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 10, height: 50))
         searchbar.sizeToFit()
         
@@ -63,7 +63,7 @@ class SearchViewController: UIViewController {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 120),
             collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-//            collectionView.heightAnchor.constraint(equalToConstant: 300),
+            collectionView.heightAnchor.constraint(equalToConstant: 300),
             collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 28),
             collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -28),
 
