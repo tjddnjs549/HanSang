@@ -7,13 +7,12 @@
 
 import UIKit
 import SnapKit
-import PhotosUI
 
 class RecipeInfoView: UIView {
     
     // MARK: - Properties
     
-    private let categoryList = [" 🍚 \n  밥", " 🍝 \n  면", " 🍞 \n  빵", " 🍺 \n  술", " 🍴 \n기타"]
+    private let categoryList = [" 🍚\n  밥", " 🥘\n찌개", "🍝\n 면", "  🍩\n베이킹", "🍷\n 술", " 🍕\n분식", " 🍲\n  찜"," 🍴\n기타"]
     private let difficultyList = ["왕초보", "초보", "중수", "고수"]
     
     private let recipeLabel: UILabel = {
@@ -58,7 +57,7 @@ class RecipeInfoView: UIView {
         return $0
     }(UILabel())
     
-    private let categoryCollcetionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private lazy var categoryCollcetionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private let timeLabel: UILabel = {
         $0.text = "얼마나 걸리나요?"
@@ -103,10 +102,9 @@ class RecipeInfoView: UIView {
             $0.textColor = .black
             $0.font = .boldSystemFont(ofSize: 20)
         }
-        
         [categoryCollcetionView, difficultyCollectionView].forEach {
             $0.backgroundColor = .clear
-            $0.isScrollEnabled = false
+            $0.isScrollEnabled = true
             $0.showsHorizontalScrollIndicator = false
             $0.delegate = self
             $0.dataSource = self
