@@ -12,7 +12,7 @@ class MaterialView: UIView {
     
     // MARK: - Properties
     
-    private var materialList: [MaterialModel] = []
+    private var materialList: [MaterialModel] = [MaterialModel(material: "", unit: "")]
     
     private let messageLabel: UILabel = {
         $0.text =
@@ -81,11 +81,7 @@ class MaterialView: UIView {
 
 extension MaterialView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if materialList.isEmpty {
-            return 1
-        } else {
-            return materialList.count
-        }
+        return materialList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

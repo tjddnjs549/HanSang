@@ -46,7 +46,7 @@ class CreateRecipeTableViewCell: UITableViewCell {
     }(UIButton())
 
     private let recipleTextView: UITextView = {
-        $0.font = .systemFont(ofSize: 10)
+        $0.font = .systemFont(ofSize: 15)
         $0.textColor = .black
         $0.layer.cornerRadius = 10
         $0.layer.borderWidth = 1

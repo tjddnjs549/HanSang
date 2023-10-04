@@ -12,7 +12,7 @@ class RecipeView: UIView {
 
     // MARK: - Properties
     
-    private var recipeList: [RecipeModel] = []
+    private var recipeList: [RecipeModel] = [RecipeModel(descriptions: "", image: nil, timer: "")]
     
     private let messageLabel: UILabel = {
         $0.text =
@@ -82,11 +82,7 @@ class RecipeView: UIView {
 
 extension RecipeView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if recipeList.isEmpty {
-            return 1
-        } else {
-            return recipeList.count
-        }
+        return recipeList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
