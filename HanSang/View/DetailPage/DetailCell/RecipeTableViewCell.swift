@@ -9,6 +9,8 @@ import UIKit
 
 final class RecipeTableViewCell: UITableViewCell {
     
+    static let identifier = "RecipeTableViewCell"
+    
     private lazy var cellIndexLabel: UILabel = {
         let label = UILabel()
         label.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 16))
