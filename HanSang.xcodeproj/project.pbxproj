@@ -27,6 +27,7 @@
 		3F1782622ACBFE7F00F2A3DA /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1782612ACBFE7F00F2A3DA /* EditViewModel.swift */; };
 		3FC71BBB2ACD4DF10083EF31 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BBA2ACD4DF10083EF31 /* RecipeListViewController.swift */; };
 		3FC71BBE2ACD4E1B0083EF31 /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BBD2ACD4E1B0083EF31 /* RecipeListView.swift */; };
+		3FC71BC02ACD5BA80083EF31 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BBF2ACD5BA80083EF31 /* TimerView.swift */; };
 		632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632336D82AC1DAAF0011B024 /* DetailView.swift */; };
 		637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C42AC1793000E59D1F /* AppDelegate.swift */; };
 		637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C62AC1793000E59D1F /* SceneDelegate.swift */; };
@@ -93,6 +94,7 @@
 		3F1782612ACBFE7F00F2A3DA /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
 		3FC71BBA2ACD4DF10083EF31 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		3FC71BBD2ACD4E1B0083EF31 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
+		3FC71BBF2ACD5BA80083EF31 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		632336D82AC1DAAF0011B024 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		637119C12AC1793000E59D1F /* HanSang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HanSang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637119C42AC1793000E59D1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -286,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				FF2300E62AC3ED8E00D4199E /* MainViewController.swift */,
-				FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */,
 				FF98659F2ACA6965008B69B5 /* SearchViewController.swift */,
 				FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */,
 				FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */,
@@ -327,6 +328,7 @@
 		637119EF2AC180C500E59D1F /* TimerPage */ = {
 			isa = PBXGroup;
 			children = (
+				3FC71BBF2ACD5BA80083EF31 /* TimerView.swift */,
 				637119F02AC180DF00E59D1F /* TimerViewController.swift */,
 			);
 			path = TimerPage;
@@ -543,6 +545,7 @@
 				E21806E02AC3E80000A2614B /* RecipeInfoView.swift in Sources */,
 				63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */,
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
+				3FC71BC02ACD5BA80083EF31 /* TimerView.swift in Sources */,
 				FF2300E72AC3ED8E00D4199E /* MainViewController.swift in Sources */,
 				E214F6EB2ACB45EF00902DB9 /* RecipeView.swift in Sources */,
 				637AA5A22AC8B13F00DA74B3 /* DetailViewMiddle.swift in Sources */,

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MaterialCreateTableViewCell: UITableViewCell {
+class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     // MARK: - Properties
     
