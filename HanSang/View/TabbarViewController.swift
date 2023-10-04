@@ -43,36 +43,36 @@ class TabbarViewController: UITabBarController {
         self.tabBar.layer.borderWidth = 1
         self.tabBar.layer.borderColor = #colorLiteral(red: 0.9176470588, green: 0.9176470588, blue: 0.9176470588, alpha: 1)
         
-        self.tabBar.tintColor = .systemYellow
+        self.tabBar.tintColor = ColorGuide.main
 
         // 홈
         self.tabBar.items![0].imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
         self.tabBar.items![0].image = UIImage(systemName: "house.circle")?.withRenderingMode(.alwaysOriginal).withTintColor(.black)
-        self.tabBar.items![0].selectedImage = UIImage(systemName: "house.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.systemYellow)
+        self.tabBar.items![0].selectedImage = UIImage(systemName: "house.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(ColorGuide.main)
         self.tabBar.items![0].title = "홈"
         
         // 타이머
         self.tabBar.items![1].imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
         self.tabBar.items![1].image = UIImage(systemName: "timer.circle")?.withRenderingMode(.alwaysOriginal).withTintColor(.black)
-        self.tabBar.items![1].selectedImage = UIImage(systemName: "timer.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.systemYellow)
+        self.tabBar.items![1].selectedImage = UIImage(systemName: "timer.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(ColorGuide.main)
         self.tabBar.items![1].title = "타이머"
         
         // 추가
         self.tabBar.items![2].imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
         self.tabBar.items![2].image = UIImage(systemName: "plus.circle")?.withRenderingMode(.alwaysOriginal).withTintColor(.black)
-        self.tabBar.items![2].selectedImage = UIImage(systemName: "plus.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.systemYellow)
+        self.tabBar.items![2].selectedImage = UIImage(systemName: "plus.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(ColorGuide.main)
         self.tabBar.items![2].title = "추가"
         
         // 북마크
         self.tabBar.items![3].imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
         self.tabBar.items![3].image = UIImage(systemName: "heart.circle")?.withRenderingMode(.alwaysOriginal).withTintColor(.black)
-        self.tabBar.items![3].selectedImage = UIImage(systemName: "heart.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.systemYellow)
+        self.tabBar.items![3].selectedImage = UIImage(systemName: "heart.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(ColorGuide.main)
         self.tabBar.items![3].title = "북마크"
         
         // 마이페이지
         self.tabBar.items![4].imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
         self.tabBar.items![4].image = UIImage(systemName: "person.crop.circle")?.withRenderingMode(.alwaysOriginal).withTintColor(.black)
-        self.tabBar.items![4].selectedImage = UIImage(systemName: "person.crop.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.systemYellow)
+        self.tabBar.items![4].selectedImage = UIImage(systemName: "person.crop.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(ColorGuide.main)
         self.tabBar.items![4].title = "마이페이지"
     }
 }

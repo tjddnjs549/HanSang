@@ -2,7 +2,7 @@
 //  Content+CoreDataClass.swift
 //  HanSang
 //
-//  Created by 박성원 on 2023/10/04.
+//  Created by t2023-m0076 on 2023/10/04.
 //
 //
 
