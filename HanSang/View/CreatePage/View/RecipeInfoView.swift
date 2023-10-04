@@ -12,7 +12,7 @@ class RecipeInfoView: UIView {
     
     // MARK: - Properties
     
-    private let categoryList = [" 🍚 \n  밥", " 🍝 \n  면", " 🍞 \n  빵", " 🍺 \n  술", " 🍴 \n기타"]
+    private let categoryList = [" 🍚 \n  밥", " 🥘 \n  찌개", " 🍝 \n  면", " 🍩 \n  베이킹", " 🍷 \n  술", " 🍕 \n분식"," 🍲 \n찜", " 🍴 \n기타"]
     private let difficultyList = ["왕초보", "초보", "중수", "고수"]
     
     private let recipeLabel: UILabel = {

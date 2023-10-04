@@ -21,10 +21,6 @@ class SearchViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(CostomCollectionViewCell.self, forCellWithReuseIdentifier: CostomCollectionViewCell.identifier)
-        collectionView.layer.shadowColor = UIColor.black.cgColor
-        collectionView.layer.shadowOffset = CGSize(width: 0, height: 2.5)
-        collectionView.layer.shadowOpacity = 0.5
-        collectionView.layer.shadowRadius = 4
         return collectionView
     }()
     
@@ -38,7 +34,6 @@ class SearchViewController: UIViewController {
         self.navigationItem.searchController = searchController
         
         let cancel = UIBarButtonItem(systemItem: .cancel, primaryAction: UIAction(handler: { _ in
-            // cancel action
         }))
         self.navigationItem.rightBarButtonItem = cancel
         
@@ -62,6 +57,18 @@ class SearchViewController: UIViewController {
         
     private func setupUI() {
         self.view.backgroundColor = .white
+        self.view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 120),
+            collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+//            collectionView.heightAnchor.constraint(equalToConstant: 300),
+            collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 28),
+            collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -28),
+
+    ])
+        
     }
     
     @objc func backButtonTapped() {
@@ -84,37 +91,61 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         
         let image = self.images[indexPath.row]
         cell.configure(with: image)
+        cell.configure(with: image)
+        cell.layer.borderWidth = 1.0
+        cell.layer.borderColor = ColorGuide.inputLine.cgColor
+        cell.layer.cornerRadius = 12
+        cell.layer.masksToBounds = true
+        cell.layer.shadowColor = ColorGuide.textHint.cgColor
+        cell.layer.shadowOpacity = 1
+        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
+        cell.layer.shadowRadius = 12
+
         return cell
     }
 }
 
-extension  SearchViewController: UICollectionViewDelegateFlowLayout {
-    
+//extension  SearchViewController: UICollectionViewDelegateFlowLayout {
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        print(self.view.frame.width)
+//        let size = (self.view.frame.width-60)/2
+//        return CGSize(width: size, height: size)
+//    }
+//
+//    // Vertical Specing
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        20
+//    }
+//
+////    // Horizontal Specing
+////    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+////        8
+////    }
+//
+////    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+////        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+////    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        return CGSize(width: 200, height: 77)
+//    }
+//
+//
+//
+//}
+
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print(self.view.frame.width)
-        let size = (self.view.frame.width-60)/2
-        return CGSize(width: size, height: size)
+        let size = (view.bounds.size.width - 76) / 2
+        return CGSize(width: size, height: 182)
     }
-    
-    // Vertical Specing
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        20
+        return 15
     }
-    
-//    // Horizontal Specing
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        8
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: 200, height: 77)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: 200, height: 200)
     }
 }

@@ -126,9 +126,9 @@ class MainViewController: UIViewController {
             mainLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 19),
             
             categoryLabel.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 528),
-            categoryLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
+            categoryLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 28),
             
-            categoryLabel2.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 528),
+            categoryLabel2.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 529),
             categoryLabel2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 100),
 
             logoImage.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 70),
@@ -399,7 +399,6 @@ class MainViewController: UIViewController {
         stackView2.translatesAutoresizingMaskIntoConstraints = false
         stackView2.backgroundColor = .white
         stackView2.axis = .horizontal
-//        stackView2.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 650).isActive = true
         stackView2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
         stackView2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30).isActive = true
         stackView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,constant: -110).isActive = true
