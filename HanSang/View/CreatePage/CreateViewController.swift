@@ -36,6 +36,7 @@ class CreateViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
+        registerNotification()
         recipeInfoView.imageAddButton.addTarget(self, action:  #selector(touchUpAddButton), for: .touchUpInside)
     }
     

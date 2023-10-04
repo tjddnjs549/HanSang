@@ -11,8 +11,8 @@ import SnapKit
 class MaterialView: UIView {
     
     // MARK: - Properties
-    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정(var) 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
-     var materialList: [Material] = []
+
+    private var materialList: [MaterialModel] = [MaterialModel(material: "", unit: "")]
     
     private let messageLabel: UILabel = {
         $0.text =
@@ -81,11 +81,7 @@ class MaterialView: UIView {
 
 extension MaterialView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if materialList.isEmpty {
-            return 1
-        } else {
-            return materialList.count
-        }
+        return materialList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,9 +93,7 @@ extension MaterialView: UITableViewDataSource {
         // 재료 삭제
         cell.touchedDeleteButton = {
             self.materialList.remove(at: indexPath.row)
-            cell.materialTextField.text = nil
-            cell.amountTextField.text = nil
-            tableView.reloadData()
+            self.materialCreateTableView.reloadData()
         }
         return cell
     }
@@ -114,9 +108,8 @@ extension MaterialView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MaterialFooterView.identifier) as? MaterialFooterView
         else { return nil }
-        // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+      
         footerView.touchedAddButton = {
-            
             // 재료명, 용량 모두 기입 시 추가
             var targetIndexPath: IndexPath
             if self.materialList.isEmpty {
@@ -130,7 +123,7 @@ extension MaterialView: UITableViewDelegate {
                 let materialAmount = cell.amountTextField.text ?? ""
                 
                 if !materialName.isEmpty && !materialAmount.isEmpty {
-                    let newMaterial = Material(name: materialName, amount: materialAmount)
+                    let newMaterial = MaterialModel(material: materialName, unit: materialAmount)
                     self.materialList.append(newMaterial)
                     tableView.reloadData()
                 } else {
@@ -144,11 +137,4 @@ extension MaterialView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 60
     }
-}
-
-
-// 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 추가 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
-struct Material {
-    var name: String
-    var amount: String
 }
