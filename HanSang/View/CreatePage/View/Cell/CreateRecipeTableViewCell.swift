@@ -44,13 +44,16 @@ class CreateRecipeTableViewCell: UITableViewCell {
         $0.tintColor = .systemGray4
         return $0
     }(UIButton())
-
-    private let recipleTextView: UITextView = {
-        $0.font = .systemFont(ofSize: 15)
-        $0.textColor = .black
+    
+    private lazy var recipleTextView: UITextView = {
+        $0.font = .systemFont(ofSize: 13)
+        $0.text = "조리 방법을 자세하게 알려주세요."
+        $0.textColor = .systemGray4
         $0.layer.cornerRadius = 10
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.systemGray4.cgColor
+        $0.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
+        $0.delegate = self
         return $0
     }(UITextView())
     
@@ -197,5 +200,19 @@ class CreateRecipeTableViewCell: UITableViewCell {
     
     func setCount(_ count: Int) {
         countLabel.text = "\(count)"
+    }
+}
+
+extension CreateRecipeTableViewCell: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.textColor = .black
+        textView.text = nil
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "조리 방법을 자세하게 알려주세요."
+            textView.textColor = .systemGray4
+        }
     }
 }
