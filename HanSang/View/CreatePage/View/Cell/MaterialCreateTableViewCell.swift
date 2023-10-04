@@ -15,6 +15,8 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     static let identifier = "MaterialCreateTableViewCell"
     
     var touchedDeleteButton: (() -> ())?
+    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+    var textDidChange: ((String, String) -> Void)?
     
     private let deleteButton: UIButton = {
         $0.setImage(UIImage(systemName: "minus.circle"), for: .normal)
@@ -22,14 +24,14 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
         $0.addTarget(self, action: #selector(touchUpDeleteButton), for: .touchUpInside)
         return $0
     }(UIButton())
-    
-    private let materialTextField: UITextField = {
+    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정(private 삭제) 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+    let materialTextField: UITextField = {
         $0.borderStyle = .roundedRect
         $0.placeholder = "재료명"
         return $0
     }(UITextField())
-    
-    private let amountTextField: UITextField = {
+    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정(private 삭제) 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+    let amountTextField: UITextField = {
         $0.borderStyle = .roundedRect
         $0.placeholder = "용량"
         return $0
@@ -56,10 +58,26 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configUI()
         setupLayout()
+        // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 추가 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+        setup()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 추가 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+    @objc private func textFieldDidChange() {
+        textDidChange?(materialTextField.text ?? "", amountTextField.text ?? "")
+    }
+    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 추가 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 추가 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+    private func setup() {
+        materialTextField.delegate = self
+        amountTextField.delegate = self
     }
     
     // MARK: - InitUI
@@ -74,7 +92,7 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     private func setupLayout() {
         [deleteButton, materialStackView].forEach {
-            addSubview($0)
+            contentView.addSubview($0)
         }
         
         deleteButton.snp.makeConstraints {

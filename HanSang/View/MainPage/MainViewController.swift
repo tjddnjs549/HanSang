@@ -317,6 +317,7 @@ class MainViewController: UIViewController {
             bobButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
             bobButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
 //            bobButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 40)
+            bobButton.addTarget(self, action: #selector(bobButtonTapped), for: .touchUpInside)
             return bobButton
         }()
         
@@ -507,6 +508,11 @@ class MainViewController: UIViewController {
     
     @objc func searchButtonTapped() {
         navigationController?.pushViewController(SearchViewController(), animated: true)
+    }
+    
+    @objc func bobButtonTapped() {
+        let recipeListVC = RecipeListViewController()
+        navigationController?.pushViewController(recipeListVC, animated: true)
     }
     
 }

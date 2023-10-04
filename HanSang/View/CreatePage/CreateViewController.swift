@@ -17,8 +17,9 @@ class CreateViewController: UIViewController {
     private let recipeInfoView = RecipeInfoView()
     private let materialView = MaterialView()
     private let recipeView = RecipeView()
-    
-    private let nextButton: UIButton = {
+    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정(private 삭제) 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+    let nextButton: UIButton = {
+//        $0.isEnabled = false
         $0.setTitle("다음으로", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.backgroundColor = .systemGray5
@@ -80,7 +81,7 @@ class CreateViewController: UIViewController {
     
     @objc func touchUpNextButton() {
         page += 1
-        
+
         if page == 1 {
             recipeInfoView.isHidden = false
             materialView.isHidden = true
@@ -114,5 +115,4 @@ class CreateViewController: UIViewController {
     private func registerNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: CreateRecipeTableViewCell.timerNotificationName, object: nil)
     }
-    
 }

@@ -25,6 +25,8 @@
 		3F17825D2ACBFBE000F2A3DA /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17825C2ACBFBE000F2A3DA /* EditViewController.swift */; };
 		3F1782602ACBFC1000F2A3DA /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17825F2ACBFC1000F2A3DA /* EditView.swift */; };
 		3F1782622ACBFE7F00F2A3DA /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1782612ACBFE7F00F2A3DA /* EditViewModel.swift */; };
+		3FC71BBB2ACD4DF10083EF31 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BBA2ACD4DF10083EF31 /* RecipeListViewController.swift */; };
+		3FC71BBE2ACD4E1B0083EF31 /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BBD2ACD4E1B0083EF31 /* RecipeListView.swift */; };
 		632336D92AC1DAAF0011B024 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632336D82AC1DAAF0011B024 /* DetailView.swift */; };
 		637119C52AC1793000E59D1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C42AC1793000E59D1F /* AppDelegate.swift */; };
 		637119C72AC1793000E59D1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637119C62AC1793000E59D1F /* SceneDelegate.swift */; };
@@ -86,6 +88,8 @@
 		3F17825C2ACBFBE000F2A3DA /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		3F17825F2ACBFC1000F2A3DA /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		3F1782612ACBFE7F00F2A3DA /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
+		3FC71BBA2ACD4DF10083EF31 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
+		3FC71BBD2ACD4E1B0083EF31 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
 		632336D82AC1DAAF0011B024 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		637119C12AC1793000E59D1F /* HanSang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HanSang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637119C42AC1793000E59D1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -207,6 +211,15 @@
 			path = EditPage;
 			sourceTree = "<group>";
 		};
+		3FC71BBC2ACD4DF50083EF31 /* RecipeListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3FC71BBD2ACD4E1B0083EF31 /* RecipeListView.swift */,
+				3FC71BBA2ACD4DF10083EF31 /* RecipeListViewController.swift */,
+			);
+			path = RecipeListViewController;
+			sourceTree = "<group>";
+		};
 		637119B82AC1793000E59D1F = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +283,7 @@
 				FF98659F2ACA6965008B69B5 /* SearchViewController.swift */,
 				FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */,
 				FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */,
+				3FC71BBC2ACD4DF50083EF31 /* RecipeListViewController */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -533,7 +547,9 @@
 				FF9865932ACA5267008B69B5 /* Category+CoreDataClass.swift in Sources */,
 				FF35760E2AC48AE4003FB361 /* MainPageCollectionViewCell.swift in Sources */,
 				3F040B042AC4754700719CDD /* FontGuide.swift in Sources */,
+				3FC71BBE2ACD4E1B0083EF31 /* RecipeListView.swift in Sources */,
 				3F040AEC2AC2B95F00719CDD /* MyPageCustomCell.swift in Sources */,
+				3FC71BBB2ACD4DF10083EF31 /* RecipeListViewController.swift in Sources */,
 				FF98659B2ACA5267008B69B5 /* User+CoreDataClass.swift in Sources */,
 				FF9865952ACA5267008B69B5 /* Materials+CoreDataClass.swift in Sources */,
 				637119F12AC180DF00E59D1F /* TimerViewController.swift in Sources */,
