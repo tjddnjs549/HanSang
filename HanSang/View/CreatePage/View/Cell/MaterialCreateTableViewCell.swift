@@ -46,7 +46,6 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        materialTextField.isEnabled = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -67,7 +66,6 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     private func configUI() {
         backgroundColor = .clear
-        amountTextField.delegate = self
         
         [materialTextField, amountTextField].forEach {
             materialStackView.addArrangedSubview($0)

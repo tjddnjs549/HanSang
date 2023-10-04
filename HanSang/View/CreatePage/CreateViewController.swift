@@ -16,6 +16,7 @@ class CreateViewController: UIViewController {
     
     private let recipeInfoView = RecipeInfoView()
     private let materialView = MaterialView()
+    private let recipeView = RecipeView()
     
     private let nextButton: UIButton = {
         $0.setTitle("다음으로", for: .normal)
@@ -39,12 +40,17 @@ class CreateViewController: UIViewController {
     private func configUI() {
         tabBarController?.tabBar.isHidden = true
         view.backgroundColor = .white
+        
         navigationItem.title = "레시피 작성"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "닫기", style: .done, target: self, action: #selector(touchUpCloseButton))
+        navigationItem.leftBarButtonItem?.tintColor = .black
+        
         materialView.isHidden = true
+        recipeView.isHidden = true
     }
     
     private func setupLayout() {
-        [recipeInfoView, materialView, nextButton].forEach {
+        [recipeInfoView, materialView, recipeView, nextButton].forEach {
             view.addSubview($0)
         }
         
@@ -54,6 +60,11 @@ class CreateViewController: UIViewController {
         }
         
         materialView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(nextButton.snp.top).offset(10)
+        }
+        
+        recipeView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(nextButton.snp.top).offset(10)
         }
@@ -68,12 +79,40 @@ class CreateViewController: UIViewController {
     //MARK: - @objc
     
     @objc func touchUpNextButton() {
+        page += 1
+        
         if page == 1 {
+            recipeInfoView.isHidden = false
+            materialView.isHidden = true
+            recipeView.isHidden = true
+        } else if page == 2 {
             recipeInfoView.isHidden = true
             materialView.isHidden = false
+            recipeView.isHidden = true
+        } else {
+            nextButton.setTitle("작성완료", for: .normal)
+            recipeInfoView.isHidden = true
+            materialView.isHidden = true
+            recipeView.isHidden = false
         }
     }
     
+    @objc func touchUpCloseButton() {
+        let tabBarViewController = TabbarViewController()
+        tabBarViewController.modalPresentationStyle = .fullScreen
+        tabBarViewController.modalTransitionStyle = .crossDissolve
+        present(tabBarViewController, animated: true)
+    }
+    
+    @objc func handleNotification(_ notification: Notification) {
+        guard let alert = notification.object as? UIAlertController else { return }
+        present(alert, animated: true)
+    }
+    
     // MARK: - Custom Method
+    
+    private func registerNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: CreateRecipeTableViewCell.timerNotificationName, object: nil)
+    }
     
 }
