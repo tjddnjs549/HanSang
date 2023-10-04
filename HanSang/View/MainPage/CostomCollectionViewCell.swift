@@ -25,7 +25,7 @@ class CostomCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Costom"
         label.textAlignment = .left
-        label.textColor = .white
+        label.textColor = .black
 //        label.text = sizeThatFits(30)
         return label
     }()
@@ -34,7 +34,7 @@ class CostomCollectionViewCell: UICollectionViewCell {
         let timeLabel = UILabel()
         timeLabel.text = "2시간"
         timeLabel.textAlignment = .left
-        timeLabel.textColor = .white
+        timeLabel.textColor = .black
         timeLabel.font = UIFont.systemFont(ofSize: 13)
         return timeLabel
     }()
@@ -81,7 +81,7 @@ class CostomCollectionViewCell: UICollectionViewCell {
 //    }
     
     private func setupUI() {
-        self.backgroundColor = .systemGreen
+        self.backgroundColor = .white
         
         self.addSubview(myimageView)
         myimageView.translatesAutoresizingMaskIntoConstraints = false

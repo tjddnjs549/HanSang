@@ -22,20 +22,24 @@ class SearchViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(CostomCollectionViewCell.self, forCellWithReuseIdentifier: CostomCollectionViewCell.identifier)
+        collectionView.layer.shadowColor = UIColor.black.cgColor // 그림자의 색상 설정
+        collectionView.layer.shadowOffset = CGSize(width: 0, height: 2.5) // 그림자의 오프셋 설정 (X, Y)
+        collectionView.layer.shadowOpacity = 0.5 // 그림자의 투명도 설정 (0.0 ~ 1.0)
+        collectionView.layer.shadowRadius = 4 // 그림자의 블러 반경 설정
         return collectionView
     }()
     
-    private let backButton: UIButton = {
-        let backButton = UIButton()
-        backButton.tintColor = .black
-        // 아이콘 이미지 설정 및 크기 조정
-        let searchImage = UIImage(systemName: "chevron.left")
-        backButton.setImage(searchImage, for: .normal)
-        // 버튼 탭 액션 설정
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-
-        return backButton
-    }()
+//    private let backButton: UIButton = {
+//        let backButton = UIButton()
+//        backButton.tintColor = .black
+//        // 아이콘 이미지 설정 및 크기 조정
+//        let searchImage = UIImage(systemName: "chevron.left")
+//        backButton.setImage(searchImage, for: .normal)
+//        // 버튼 탭 액션 설정
+//        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+//
+//        return backButton
+//    }()
     
 //    private let backButton: UIButton = {
 //        let backButton = UIButton()
@@ -48,7 +52,22 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
-        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = false
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        self.navigationItem.searchController = searchController
+        
+        let cancel = UIBarButtonItem(systemItem: .cancel, primaryAction: UIAction(handler: { _ in
+            // cancel action
+        }))
+        self.navigationItem.rightBarButtonItem = cancel
+        
+        let searchbar = UISearchBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 10, height: 50))
+        searchbar.sizeToFit()
+        
+        searchbar.placeholder = "Search User"
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchbar)
+        
 //        title = "Search"
 //        searchController.searchResultsUpdater = self
 //        navigationItem.searchController = searchController
@@ -77,28 +96,28 @@ class SearchViewController: UIViewController {
     private func setupUI() {
         self.view.backgroundColor = .white
         
-        self.view.addSubview(collectionView)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(backButton)
-        backButton.translatesAutoresizingMaskIntoConstraints = false
+//        self.view.addSubview(collectionView)
+//        collectionView.translatesAutoresizingMaskIntoConstraints = false
+//        self.view.addSubview(backButton)
+//        backButton.translatesAutoresizingMaskIntoConstraints = false
 
 //        self.view.addSubview(backButton)
 //        backButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -20),
+//        NSLayoutConstraint.activate([
+//            collectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100),
+//            collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+//            collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+//            collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -20),
             
-            backButton.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 65),
-            backButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 19),
+//            backButton.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 65),
+//            backButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 19),
 
 //            backButton.topAnchor.constraint(equalTo: self.view.topAnchor),
 //            backButton.widthAnchor.constraint(equalToConstant: 15),
 //            backButton.heightAnchor.constraint(equalToConstant: 15),
 //            backButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
-        ])
+//        ])
     }
     
 //    func contentView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

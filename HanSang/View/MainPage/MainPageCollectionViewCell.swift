@@ -113,6 +113,7 @@ class MainPageCollectionViewCell: UICollectionViewCell {
             mpLikeButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 278),
             
         ])
+        
     }
     
     override func prepareForReuse() {

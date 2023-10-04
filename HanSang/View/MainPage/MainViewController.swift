@@ -527,7 +527,12 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         let image = self.images[indexPath.row]
         cell.configure(with: image)
         cell.layer.cornerRadius = 20
-        cell.layer.masksToBounds = true
+        cell.layer.masksToBounds = false
+        cell.layer.shadowColor = UIColor.black.cgColor // 그림자의 색상 설정
+        cell.layer.shadowOffset = CGSize(width: 0, height: 2.5) // 그림자의 오프셋 설정 (X, Y)
+        cell.layer.shadowOpacity = 0.5 // 그림자의 투명도 설정 (0.0 ~ 1.0)
+        cell.layer.shadowRadius = 4 // 그림자의 블러 반경 설정
+
         return cell
     }
 }
