@@ -4,8 +4,7 @@
 //
 //  Created by 박성원 on 2023/09/25.
 //
-// 1. 타이머 구현
-// 2.
+
 import UIKit
 import AudioToolbox
 

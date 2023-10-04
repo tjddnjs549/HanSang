@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
+class MaterialCreateTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
@@ -24,8 +24,10 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
         $0.addTarget(self, action: #selector(touchUpDeleteButton), for: .touchUpInside)
         return $0
     }(UIButton())
+
     // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정(private 삭제) 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
     let materialTextField: UITextField = {
+
         $0.borderStyle = .roundedRect
         $0.placeholder = "재료명"
         return $0
@@ -92,7 +94,7 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     private func setupLayout() {
         [deleteButton, materialStackView].forEach {
-            contentView.addSubview($0)
+            self.contentView.addSubview($0)
         }
         
         deleteButton.snp.makeConstraints {
