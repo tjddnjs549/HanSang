@@ -214,7 +214,17 @@ final class ContentDataManager {
         }
     }
     
-    // MARK: - 북마크 설정한 데이터 얻기
+    // MARK: - 북마크 설정 및 데이터 얻기
+    func toggleBookmark(content: Content) {
+        content.bookmark = !content.bookmark
+        
+        do {
+            try context?.save()
+            print("북마크 업데이트 성공")
+        } catch {
+            print("북마크 업데이트 실패: \(error.localizedDescription)")
+        }
+    }
     
     func getContentBookmark() -> [Content] {
         return self.getContentListFromCoreData().filter { $0.bookmark == true }

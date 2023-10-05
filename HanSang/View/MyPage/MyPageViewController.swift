@@ -104,11 +104,7 @@ extension MyPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         
         let content = userContents[indexPath.row]
-        if let data = content.picture, let image = UIImage(data: data) {
-            cell.configure(image, content.title ?? "", content.time ?? "")
-        } else {
-            print("🚨 User Content 불러오기 오류")
-        }
+        cell.configure(content)
         
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor

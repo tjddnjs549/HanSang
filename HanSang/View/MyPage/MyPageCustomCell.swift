@@ -10,6 +10,8 @@ import UIKit
 
 class MyPageCustomCell: UICollectionViewCell {
     static let identifier = "myPageCustomCell"
+    
+    private var content: Content?
     private var isBookmarked = false
     
     private let view: UIView = {
@@ -87,22 +89,30 @@ class MyPageCustomCell: UICollectionViewCell {
         return stackView
     }()
     
-    public func configure(_ image: UIImage, _ titleText: String, _ timerText: String) {
-        picture.image = image
-        title.text = titleText
-        timer.text = timerText
+    public func configure(_ content: Content) {
+        self.content = content
+        if let data = content.picture, let image = UIImage(data: data) {
+            picture.image = image
+        }
+        title.text = content.title
+        timer.text = content.time
         setupUI()
     }
     
     @objc func bookMarkTapped() {
+        guard let content = self.content else {
+            return
+        }
+        
         isBookmarked.toggle()
         configureBookmarkImage()
-            
+        ContentDataManager.shared.toggleBookmark(content: content)
+
         if let collectionView = self.superview as? UICollectionView {
             collectionView.reloadData()
         }
     }
-    
+
     private func configureBookmarkImage() {
         if isBookmarked {
             self.bookMark.image = UIImage(named: "bookMark.fill")

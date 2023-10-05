@@ -8,24 +8,14 @@
 import UIKit
 
 class RecipeListViewController: UIViewController {
-    var pageTitle: String = ""
     private let recipeListView = RecipeListView()
-    let images: [UIImage] = [
-        UIImage(named: "1")!,
-        UIImage(named: "2")!,
-        UIImage(named: "3")!,
-        UIImage(named: "4")!,
-        UIImage(named: "5")!,
-        UIImage(named: "6")!,
-        UIImage(named: "7")!,
-        UIImage(named: "1")!,
-        UIImage(named: "2")!,
-        UIImage(named: "3")!,
-        UIImage(named: "4")!,
-        UIImage(named: "5")!,
-        UIImage(named: "6")!,
-        UIImage(named: "7")!,
-    ]
+    var pageTitle: String = ""
+    
+    var categoryContents: [Content] = [] {
+        didSet {
+            recipeListView.collectionView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,23 +47,21 @@ private extension RecipeListViewController {
 
 extension RecipeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return categoryContents.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as? MyPageCustomCell else {
             fatalError()
         }
-        let image = images[indexPath.row]
-        cell.configure(image, "요리명", "1시간")
+        
+        let content = categoryContents[indexPath.row]
+        cell.configure(content)
+        
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
-        cell.layer.shadowColor = ColorGuide.textHint.cgColor
-        cell.layer.shadowOpacity = 1
-        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
-        cell.layer.shadowRadius = 12
         return cell
     }
 }
