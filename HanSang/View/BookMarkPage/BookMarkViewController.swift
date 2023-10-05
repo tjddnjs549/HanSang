@@ -18,7 +18,7 @@ class BookMarkViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupBookmarkedContents()
+        setupBookmarkedContents()        
     }
 
     override func viewDidLoad() {

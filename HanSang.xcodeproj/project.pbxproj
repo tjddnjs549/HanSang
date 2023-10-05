@@ -243,6 +243,15 @@
 			path = RecipeListViewController;
 			sourceTree = "<group>";
 		};
+		3FE68C372ACECA84000559CB /* SearchPage */ = {
+			isa = PBXGroup;
+			children = (
+				FF98659F2ACA6965008B69B5 /* SearchViewController.swift */,
+				FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */,
+			);
+			path = SearchPage;
+			sourceTree = "<group>";
+		};
 		637119B82AC1793000E59D1F = {
 			isa = PBXGroup;
 			children = (
@@ -305,8 +314,7 @@
 				3FC71BC12ACD5F510083EF31 /* MainView.swift */,
 				FF2300E62AC3ED8E00D4199E /* MainViewController.swift */,
 				FF35760D2AC48AE4003FB361 /* MainPageCollectionViewCell.swift */,
-				FF98659F2ACA6965008B69B5 /* SearchViewController.swift */,
-				FF2300E82AC3EDD600D4199E /* CostomCollectionViewCell.swift */,
+				3FE68C372ACECA84000559CB /* SearchPage */,
 				3FC71BBC2ACD4DF50083EF31 /* RecipeListViewController */,
 			);
 			path = MainPage;

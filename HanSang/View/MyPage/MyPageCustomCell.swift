@@ -12,7 +12,7 @@ class MyPageCustomCell: UICollectionViewCell {
     static let identifier = "myPageCustomCell"
     
     private var content: Content?
-    private var isBookmarked = false
+    var isBookmarked = false
     
     private let view: UIView = {
         let view = UIView()
@@ -45,17 +45,15 @@ class MyPageCustomCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var bookMark: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "bookMark")
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = ColorGuide.inputLine
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookMarkTapped)))
-        imageView.snp.makeConstraints { make in
+    let bookmark: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "bookMark"), for: .normal)
+        button.addTarget(self, action: #selector(bookmarkTapped), for: .touchUpInside)
+        button.snp.makeConstraints { make in
+            make.width.equalTo(13.82)
             make.height.equalTo(12)
         }
-        return imageView
+        return button
     }()
     
     private let time: UIImageView = {
@@ -96,29 +94,33 @@ class MyPageCustomCell: UICollectionViewCell {
         }
         title.text = content.title
         timer.text = content.time
+        isBookmarked = content.bookmark
+        updateBookmarkButtonImage()
+        
         setupUI()
     }
     
-    @objc func bookMarkTapped() {
+    @objc func bookmarkTapped() {
         guard let content = self.content else {
             return
         }
         
         isBookmarked.toggle()
-        configureBookmarkImage()
         ContentDataManager.shared.toggleBookmark(content: content)
+        updateBookmarkButtonImage()
 
         if let collectionView = self.superview as? UICollectionView {
             collectionView.reloadData()
         }
     }
-
-    private func configureBookmarkImage() {
-        if isBookmarked {
-            self.bookMark.image = UIImage(named: "bookMark.fill")
-        } else {
-            self.bookMark.image = UIImage(named: "bookMark")
-        }
+    
+    func updateBookmarkButtonImage() {
+        let normalImage = UIImage(named: "bookMark")
+        let selectedImage = UIImage(named: "bookMark.fill")
+        bookmark.setImage(normalImage, for: .normal)
+        bookmark.setImage(selectedImage, for: .selected)
+        
+        bookmark.isSelected = isBookmarked
     }
 }
 
@@ -141,8 +143,8 @@ extension MyPageCustomCell {
             make.leading.equalToSuperview().offset(12)
         }
         
-        view.addSubview(bookMark)
-        bookMark.snp.makeConstraints { make in
+        view.addSubview(bookmark)
+        bookmark.snp.makeConstraints { make in
             make.top.equalTo(title.snp.top).offset(5)
             make.trailing.equalToSuperview().offset(-12)
         }
