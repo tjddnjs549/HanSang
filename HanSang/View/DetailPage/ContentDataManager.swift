@@ -121,9 +121,10 @@ final class ContentDataManager {
             print("Recipe 데이터 저장 실패")
         }
     }
-    
-    func saveRecipe(content: RecipeInfoModel, materials: [MaterialModel], recipes: [RecipeModel]) {
+    // 🧨 수정
+    func saveRecipe(content: RecipeInfoModel, materials: [MaterialModel], recipes: [RecipeModel], user: User) {
         guard let contentData = saveContentData(content: content) else { return }
+        contentData.user = user
         saveMaterialData(content: contentData, materials: materials)
         saveRecipeData(content: contentData, recipes: recipes)
     }

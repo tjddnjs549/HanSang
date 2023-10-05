@@ -87,8 +87,10 @@ class MyPageCustomCell: UICollectionViewCell {
         return stackView
     }()
     
-    public func configure(_ image: UIImage) {
+    public func configure(_ image: UIImage, _ titleText: String, _ timerText: String) {
         picture.image = image
+        title.text = titleText
+        timer.text = timerText
         setupUI()
     }
     

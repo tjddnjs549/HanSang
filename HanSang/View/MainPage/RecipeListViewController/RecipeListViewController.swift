@@ -65,7 +65,7 @@ extension RecipeListViewController: UICollectionViewDelegate, UICollectionViewDa
             fatalError()
         }
         let image = images[indexPath.row]
-        cell.configure(image)
+        cell.configure(image, "요리명", "1시간")
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
