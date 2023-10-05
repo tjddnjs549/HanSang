@@ -26,7 +26,7 @@ class RecipeView: UIView {
         return $0
     }(UILabel())
     
-    private lazy var recipeTableView: UITableView = {
+    lazy var recipeTableView: UITableView = {
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.dataSource = self
