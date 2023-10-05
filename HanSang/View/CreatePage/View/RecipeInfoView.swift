@@ -224,14 +224,14 @@ class RecipeInfoView: UIView {
             category = ""
         }
     }
-    
+    // 🧨 수정
     func getRecipeInfo() -> RecipeInfoModel {
         return RecipeInfoModel(
             date: Date(),
-            title: recipeLabel.text ?? "",
+            title: recipeTextField.text ?? "",
             image: imageView.image ?? UIImage(),
             category: category,
-            time: timeLabel.text ?? "",
+            time: timeTextField.text ?? "",
             difficulty: difficulty,
             kick: "")
     }

@@ -121,9 +121,10 @@ final class ContentDataManager {
             print("Recipe 데이터 저장 실패")
         }
     }
-    
-    func saveRecipe(content: RecipeInfoModel, materials: [MaterialModel], recipes: [RecipeModel]) {
+    // 🧨 수정
+    func saveRecipe(content: RecipeInfoModel, materials: [MaterialModel], recipes: [RecipeModel], user: User) {
         guard let contentData = saveContentData(content: content) else { return }
+        contentData.user = user
         saveMaterialData(content: contentData, materials: materials)
         saveRecipeData(content: contentData, recipes: recipes)
     }
@@ -213,7 +214,17 @@ final class ContentDataManager {
         }
     }
     
-    // MARK: - 북마크 설정한 데이터 얻기
+    // MARK: - 북마크 설정 및 데이터 얻기
+    func toggleBookmark(content: Content) {
+        content.bookmark = !content.bookmark
+        
+        do {
+            try context?.save()
+            print("북마크 업데이트 성공")
+        } catch {
+            print("북마크 업데이트 실패: \(error.localizedDescription)")
+        }
+    }
     
     func getContentBookmark() -> [Content] {
         return self.getContentListFromCoreData().filter { $0.bookmark == true }
