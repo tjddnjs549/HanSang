@@ -11,7 +11,7 @@ class SearchViewController: UIViewController {
 //, UISearchResultsUpdating {
 
     // MARK: - varibles
-    private var images: [UIImage] = []
+    private var images: [Content] = []
     
     // MARK: - UI Components
     private let collectionView: UICollectionView = {
@@ -50,15 +50,7 @@ class SearchViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = customBackButton
 
 
-        for _ in 0...25 {
-            images.append(UIImage(named: "1")!)
-            images.append(UIImage(named: "2")!)
-            images.append(UIImage(named: "3")!)
-            images.append(UIImage(named: "4")!)
-            images.append(UIImage(named: "5")!)
-            images.append(UIImage(named: "6")!)
-            images.append(UIImage(named: "7")!)
-        }
+        
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
     }
@@ -103,10 +95,6 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
-        cell.layer.shadowColor = ColorGuide.textHint.cgColor
-        cell.layer.shadowOpacity = 1
-        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
-        cell.layer.shadowRadius = 12
 
         return cell
     }
