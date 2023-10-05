@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import PhotosUI
 
 class RecipeInfoView: UIView {
     
@@ -14,6 +15,11 @@ class RecipeInfoView: UIView {
     
     private let categoryList = [" 🍚 \n  밥", " 🥘 \n  찌개", " 🍝 \n  면", " 🍩 \n  베이킹", " 🍷 \n  술", " 🍕 \n분식"," 🍲 \n찜", " 🍴 \n기타"]
     private let difficultyList = ["왕초보", "초보", "중수", "고수"]
+    private var category: String = ""
+    private var difficulty: String = ""
+    
+    var presentViewController: ((_ picker: PHPickerViewController) -> ())?
+    var dismissViewController: (() -> ())?
     
     private let recipeLabel: UILabel = {
         $0.text =
@@ -25,7 +31,7 @@ class RecipeInfoView: UIView {
         return $0
     }(UILabel())
     
-    lazy var imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         $0.backgroundColor = .clear
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.systemGray4.cgColor
@@ -33,7 +39,7 @@ class RecipeInfoView: UIView {
         return $0
     }(UIImageView())
     
-    lazy var imageAddButton: UIButton = {
+    private lazy var imageAddButton: UIButton = {
         var config = UIButton.Configuration.plain()
         var titleAttr = AttributedString.init("사진을 추가해주세요.")
         titleAttr.font = .systemFont(ofSize: 10, weight: .light)
@@ -43,6 +49,7 @@ class RecipeInfoView: UIView {
         config.imagePadding = 15
         $0.configuration = config
         $0.tintColor = .systemGray4
+        $0.addTarget(self, action:  #selector(touchUpAddButton), for: .touchUpInside)
         return $0
     }(UIButton())
     
@@ -102,6 +109,7 @@ class RecipeInfoView: UIView {
             $0.textColor = .black
             $0.font = .boldSystemFont(ofSize: 20)
         }
+        
         [categoryCollcetionView, difficultyCollectionView].forEach {
             $0.backgroundColor = .clear
             $0.isScrollEnabled = true
@@ -176,14 +184,53 @@ class RecipeInfoView: UIView {
         }
     }
     
+    //MARK: - @objc
+    
+    @objc func touchUpAddButton() {
+        setupImagePicker()
+    }
+    
     // MARK: - Custom Method
+    
+    private func setCategory(_ index: Int) {
+        switch index {
+        case 0:
+            category = "밥"
+        case 1:
+            category = "찌개"
+        case 2:
+            category = "면"
+        case 3:
+            category = "베이킹"
+        case 4:
+            category = "술"
+        case 5:
+            category = "분식"
+        case 6:
+            category = "찜"
+        case 7:
+            category = "기타"
+        default:
+            category = ""
+        }
+    }
+    
+    func getRecipeInfo() -> RecipeInfoModel {
+        return RecipeInfoModel(
+            date: Date(),
+            title: recipeLabel.text ?? "",
+            image: imageView.image ?? UIImage(),
+            category: category,
+            time: timeLabel.text ?? "",
+            difficulty: difficulty,
+            kick: "")
+    }
     
 }
 
 //MARK: - UICollectionViewDataSource
 
 extension RecipeInfoView: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == categoryCollcetionView {
             return categoryList.count
@@ -198,8 +245,10 @@ extension RecipeInfoView: UICollectionViewDataSource {
         
         if collectionView == categoryCollcetionView {
             cell.setup(title: categoryList[indexPath.row])
+            setCategory(indexPath.row)
         } else {
             cell.setup(title: difficultyList[indexPath.row])
+            difficulty = difficultyList[indexPath.row]
         }
         
         return cell
@@ -221,5 +270,41 @@ extension RecipeInfoView: UICollectionViewDelegateFlowLayout {
         return 10
     }
 }
+
+//MARK: - PHPickerViewControllerDelegate
+ 
+extension RecipeInfoView: PHPickerViewControllerDelegate {
+    func setupImagePicker() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 0
+        configuration.filter = .any(of: [.images])
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        NotificationCenter.default.post(name: NotificationName.present, object: picker)
+    }
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        guard !results.isEmpty else {
+            NotificationCenter.default.post(name: NotificationName.dismiss, object: nil)
+            return
+        }
+        let itemProvider = results.first?.itemProvider
+        
+        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                DispatchQueue.main.async {
+                    self.imageView.image = image as? UIImage
+                    self.sendSubviewToBack(self.imageAddButton)
+                    self.imageView.layer.cornerRadius = 0.0
+                }
+            }
+            NotificationCenter.default.post(name: NotificationName.dismiss, object: nil)
+        } else {
+            print("ERROR❗️")
+        }
+    }
+}
+
 
 

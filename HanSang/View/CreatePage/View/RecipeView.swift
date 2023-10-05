@@ -12,7 +12,7 @@ class RecipeView: UIView {
 
     // MARK: - Properties
     
-    private var recipeList: [RecipeModel] = [RecipeModel(descriptions: "", image: nil, timer: "")]
+    var recipeList: [RecipeModel] = [RecipeModel(descriptions: "", image: nil, timer: "")]
     
     private let messageLabel: UILabel = {
         $0.text =
@@ -49,6 +49,10 @@ class RecipeView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        endEditing(true)
     }
     
     // MARK: - InitUI
@@ -106,8 +110,18 @@ extension RecipeView: UITableViewDelegate {
         else { return nil }
 
         footerView.touchedAddButton = {
-            self.recipeList.append(RecipeModel(descriptions: "", image: nil, timer: ""))
-            self.recipeTableView.reloadData()
+            let targetIndexPath = IndexPath(row: self.recipeList.count - 1, section: 0)
+            
+            if let cell = tableView.cellForRow(at: targetIndexPath) as? CreateRecipeTableViewCell {
+                if cell.isAllFilled() {
+                    self.recipeList[targetIndexPath.row] = cell.getRecipe()
+                    let newRecipe = RecipeModel(descriptions: "", image: nil, timer: "")
+                    self.recipeList.append(newRecipe)
+                    tableView.reloadData()
+                } else {
+                    // Alert 띄워서 모두 기입 안내
+                }
+            }
         }
 
         return footerView

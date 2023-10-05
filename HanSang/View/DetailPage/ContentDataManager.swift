@@ -57,65 +57,75 @@ final class ContentDataManager {
     }
     
     // MARK: - [Create] 코어데이터에 데이터 생성하기 (첫번째 페이지에서 Content저장)
-    func saveContentData(title: String, difficulty: String, kick: String, picture: Data, time: String, category: String) {
-        if let context = context {
-            if let entity = NSEntityDescription.entity(forEntityName: self.modelName, in: context) {
-                if let contentData = NSManagedObject(entity: entity, insertInto: context) as? Content {
-                    contentData.id = UUID()
-                    contentData.date = Date()
-                    contentData.title = title
-                    contentData.difficulty = difficulty
-                    contentData.kick = kick
-                    contentData.picture = picture
-                    contentData.time = time
-                    contentData.category?.category = category
-                    appDelegate?.saveContext()
-                    print("Content 데이터 저장")
-                }
-            }
+    func saveContentData(content: RecipeInfoModel) -> Content? {
+        if let context = context,
+           let entity = NSEntityDescription.entity(forEntityName: self.modelName, in: context),
+           let contentData = NSManagedObject(entity: entity, insertInto: context) as? Content,
+           let imageData = content.image.jpegData(compressionQuality: 1.0) {
+            contentData.id = UUID()
+            contentData.date = content.date
+            contentData.title = content.title
+            contentData.difficulty = content.difficulty
+            contentData.kick = content.kick
+            contentData.picture = imageData
+            contentData.time = content.time
+            contentData.category?.category = content.category
+            appDelegate?.saveContext()
+            print("Content 데이터 저장")
+            
+            return contentData
+        } else {
+            return nil
         }
     }
     
     // MARK: - [Create] 코어데이터에 데이터 생성하기 (두번째 페이지에서 Material 저장)
-    func saveMaterialData(content: Content?, materials: [Materials]) {
+    func saveMaterialData(content: Content, materials: [MaterialModel]) {
+        guard let context = context else { return }
+        
         for material in materials {
-            guard let content = content, let context = content.managedObjectContext else { return }
             if let materialEntity = NSEntityDescription.entity(forEntityName: "Materials", in: context),
                let materialData = NSManagedObject(entity: materialEntity, insertInto: context) as? Materials {
-                
                 materialData.material = material.material
                 materialData.unit = material.unit
                 content.addToMaterials(materialData)
-                
-                do {
-                    try context.save()
-                    print("Material 데이터 저장 성공")
-                } catch {
-                    print("Material 데이터 저장 실패")
-                }
             }
+        }
+        
+        do {
+            try context.save()
+            print("Material 데이터 저장 성공")
+        } catch {
+            print("Material 데이터 저장 실패")
         }
     }
     
     // MARK: - [Create] 코어데이터에 데이터 생성하기 (세번째 페이지에서 Recipe 저장)
-    func saveRecipeData(content: Content?, image: Data, description: String, timer: String) {
-        guard let content = content, let context = content.managedObjectContext else { return }
+    func saveRecipeData(content: Content, recipes: [RecipeModel]) {
+        guard let context = context else { return }
         
-        if let RecipeEntity = NSEntityDescription.entity(forEntityName: "Recipe", in: context),
-           let RecipeData = NSManagedObject(entity: RecipeEntity, insertInto: context) as? Recipe {
-            
-            RecipeData.images = image
-            RecipeData.descriptions = description
-            RecipeData.timer = timer
-            content.addToRecipe(RecipeData)
-            
-            do {
-                try context.save()
-                print("Recipe 데이터 저장 성공")
-            } catch {
-                print("Recipe 데이터 저장 실패")
+        for recipe in recipes {
+            if let recipeEntity = NSEntityDescription.entity(forEntityName: "Recipe", in: context),
+               let recipeData = NSManagedObject(entity: recipeEntity, insertInto: context) as? Recipe {
+                recipeData.descriptions = recipe.descriptions
+                recipeData.images = recipe.image?.jpegData(compressionQuality: 1.0)
+                recipeData.timer = recipe.timer
+                content.addToRecipe(recipeData)
             }
         }
+        
+        do {
+            try context.save()
+            print("Recipe 데이터 저장 성공")
+        } catch {
+            print("Recipe 데이터 저장 실패")
+        }
+    }
+    
+    func saveRecipe(content: RecipeInfoModel, materials: [MaterialModel], recipes: [RecipeModel]) {
+        guard let contentData = saveContentData(content: content) else { return }
+        saveMaterialData(content: contentData, materials: materials)
+        saveRecipeData(content: contentData, recipes: recipes)
     }
     
     
