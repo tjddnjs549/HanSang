@@ -11,7 +11,11 @@ class SearchViewController: UIViewController {
 //, UISearchResultsUpdating {
 
     // MARK: - varibles
-    private var images: [UIImage] = []
+    var searchContents: [Content] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     // MARK: - UI Components
     private let collectionView: UICollectionView = {
@@ -20,7 +24,7 @@ class SearchViewController: UIViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(CostomCollectionViewCell.self, forCellWithReuseIdentifier: CostomCollectionViewCell.identifier)
+        collectionView.register(MyPageCustomCell.self, forCellWithReuseIdentifier: MyPageCustomCell.identifier)
         return collectionView
     }()
     
@@ -39,18 +43,16 @@ class SearchViewController: UIViewController {
         self.navigationItem.hidesSearchBarWhenScrolling = false
         let searchbar = UISearchBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 10, height: 50))
         searchbar.sizeToFit()
-        
         searchbar.placeholder = "Search User"
+        // Create a custom back button item
+        let chevronLeft = UIImage(systemName: "chevron.left")
+        let customBackButton = UIBarButtonItem(image: chevronLeft, style: .plain, target: self, action: #selector(backButtonTapped))
+        customBackButton.tintColor = ColorGuide.textHint
+        cancel.tintColor = ColorGuide.textHint
 
-        for _ in 0...25 {
-            images.append(UIImage(named: "1")!)
-            images.append(UIImage(named: "2")!)
-            images.append(UIImage(named: "3")!)
-            images.append(UIImage(named: "4")!)
-            images.append(UIImage(named: "5")!)
-            images.append(UIImage(named: "6")!)
-            images.append(UIImage(named: "7")!)
-        }
+        // Set the custom back button as the left navigation bar button item
+        self.navigationItem.leftBarButtonItem = customBackButton
+        
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
     }
@@ -66,9 +68,7 @@ class SearchViewController: UIViewController {
             collectionView.heightAnchor.constraint(equalToConstant: 300),
             collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 28),
             collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -28),
-
-    ])
-        
+        ])
     }
     
     @objc func backButtonTapped() {
@@ -79,61 +79,26 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.images.count
+        return searchContents.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CostomCollectionViewCell.identifier, for: indexPath) as?
-                CostomCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as?
+                MyPageCustomCell else {
             fatalError("Failed to dequeue CostomCollectionViewCell in MainViewController")
         }
         
-        let image = self.images[indexPath.row]
-        cell.configure(with: image)
-        cell.configure(with: image)
+        let content = searchContents[indexPath.row]
+        cell.configure(content)
+        
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
-        cell.layer.shadowColor = ColorGuide.textHint.cgColor
-        cell.layer.shadowOpacity = 1
-        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
-        cell.layer.shadowRadius = 12
-
         return cell
     }
 }
-
-//extension  SearchViewController: UICollectionViewDelegateFlowLayout {
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        print(self.view.frame.width)
-//        let size = (self.view.frame.width-60)/2
-//        return CGSize(width: size, height: size)
-//    }
-//
-//    // Vertical Specing
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        20
-//    }
-//
-////    // Horizontal Specing
-////    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-////        8
-////    }
-//
-////    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-////        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-////    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        return CGSize(width: 200, height: 77)
-//    }
-//
-//
-//
-//}
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -146,6 +111,6 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 200, height: 77)
+        return CGSize(width: 200, height: 0)
     }
 }
