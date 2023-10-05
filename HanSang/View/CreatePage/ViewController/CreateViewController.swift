@@ -94,11 +94,11 @@ class CreateViewController: UIViewController {
         }
         
         page += 1
-
         if page == 1 {
             recipeInfoView.isHidden = false
             materialView.isHidden = true
             recipeView.isHidden = true
+           
         } else if page == 2 {
             recipeInfoView.isHidden = true
             materialView.isHidden = false

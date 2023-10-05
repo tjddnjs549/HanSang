@@ -12,8 +12,7 @@ import PhotosUI
 class RecipeInfoView: UIView {
     
     // MARK: - Properties
-    
-    private let categoryList = [" 🍚 \n  밥", " 🥘 \n  찌개", " 🍝 \n  면", " 🍩 \n  베이킹", " 🍷 \n  술", " 🍕 \n분식"," 🍲 \n찜", " 🍴 \n기타"]
+    private let categoryList = ["🍚 \n밥", "🥘 \n찌개", "🍝 \n면", "🍩 \n베이킹", "🍷 \n술", "🍕 \n분식","🍲 \n찜", "🍴 \n기타"]
     private let difficultyList = ["왕초보", "초보", "중수", "고수"]
     private var category: String = ""
     private var difficulty: String = ""
@@ -36,6 +35,7 @@ class RecipeInfoView: UIView {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.systemGray4.cgColor
         $0.layer.cornerRadius = 20
+        $0.clipsToBounds = true
         return $0
     }(UIImageView())
     
@@ -53,7 +53,7 @@ class RecipeInfoView: UIView {
         return $0
     }(UIButton())
     
-    private let recipeTextField: UITextField = {
+    lazy var recipeTextField: UITextField = {
         $0.borderStyle = .roundedRect
         $0.placeholder = "레시피 이름을 입력해주세요."
         return $0
@@ -64,14 +64,21 @@ class RecipeInfoView: UIView {
         return $0
     }(UILabel())
     
-    private lazy var categoryCollcetionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    
+    private lazy var categoryCollcetionView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let categoryHorizontal = UICollectionViewFlowLayout()
+        categoryHorizontal.scrollDirection = .horizontal
+        collection.collectionViewLayout = categoryHorizontal
+        return collection
+    }()
     
     private let timeLabel: UILabel = {
         $0.text = "얼마나 걸리나요?"
         return $0
     }(UILabel())
     
-    private let timeTextField: UITextField = {
+    lazy var timeTextField: UITextField = {
         $0.borderStyle = .roundedRect
         $0.placeholder = "소요시간을 입력해주세요."
         return $0
@@ -104,7 +111,6 @@ class RecipeInfoView: UIView {
     
     private func configUI() {
         backgroundColor = .white
-        
         [recipeLabel, categoryLabel, timeLabel, difficultyLabel].forEach {
             $0.textColor = .black
             $0.font = .boldSystemFont(ofSize: 20)
@@ -250,7 +256,6 @@ extension RecipeInfoView: UICollectionViewDataSource {
             cell.setup(title: difficultyList[indexPath.row])
             difficulty = difficultyList[indexPath.row]
         }
-        
         return cell
     }
 }
@@ -269,6 +274,7 @@ extension RecipeInfoView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
+   
 }
 
 //MARK: - PHPickerViewControllerDelegate

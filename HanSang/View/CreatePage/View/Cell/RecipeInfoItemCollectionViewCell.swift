@@ -14,8 +14,19 @@ class RecipeInfoItemCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "RecipeInfoItemCollectionViewCell"
     
-    private var isButtonSelected = false
+    var isButtonSelected = false
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                self.button.layer.borderColor = UIColor.red.cgColor
+                self.button.layer.borderWidth = 2.0
+            } else {
+                self.button.layer.borderColor = UIColor.blue.cgColor
+                self.button.layer.borderWidth = 2.0
+            }
+        }
+    }
     private let button: UIButton = {
         $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.numberOfLines = 2
@@ -23,7 +34,8 @@ class RecipeInfoItemCollectionViewCell: UICollectionViewCell {
         $0.layer.borderColor = UIColor.systemGray5.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 20
-        $0.addTarget(self, action: #selector(touchUpButton), for: .touchUpInside)
+        $0.titleLabel?.textAlignment = .center
+        //$0.addTarget(self, action: #selector(touchUpButton), for: .touchUpInside) //❗️❗️❗️❗️
         return $0
     }(UIButton())
     
@@ -46,7 +58,7 @@ class RecipeInfoItemCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupLayout() {
-        addSubview(button)
+        self.contentView.addSubview(button)
         
         button.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -54,11 +66,11 @@ class RecipeInfoItemCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - @objc
-    
-    @objc func touchUpButton() {
-        button.layer.borderColor = isButtonSelected ? UIColor.black.cgColor : UIColor.systemGray5.cgColor
-        isButtonSelected.toggle()
-    }
+    //❗️❗️❗️❗️
+//    @objc func touchUpButton() {
+//        button.layer.borderColor = isButtonSelected ? UIColor.black.cgColor : UIColor.systemGray5.cgColor
+//        isButtonSelected.toggle()
+//    }
     
     // MARK: - Custom Method
     

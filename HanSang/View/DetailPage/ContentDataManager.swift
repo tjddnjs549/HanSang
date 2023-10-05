@@ -212,4 +212,10 @@ final class ContentDataManager {
             }
         }
     }
+    
+    // MARK: - 북마크 설정한 데이터 얻기
+    
+    func getContentBookmark() -> [Content] {
+        return self.getContentListFromCoreData().filter { $0.bookmark == true }
+    }
 }
