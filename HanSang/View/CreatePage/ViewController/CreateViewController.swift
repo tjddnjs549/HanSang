@@ -92,6 +92,7 @@ class CreateViewController: UIViewController {
                 recipes: recipeView.recipeList)
             let tabBarController = TabbarViewController()
             tabBarController.modalPresentationStyle = .fullScreen
+            tabBarController.modalTransitionStyle = .crossDissolve
             present(tabBarController, animated: true)
         }
         

@@ -29,7 +29,6 @@
 		3F1782622ACBFE7F00F2A3DA /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1782612ACBFE7F00F2A3DA /* EditViewModel.swift */; };
 		3FC71BBB2ACD4DF10083EF31 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BBA2ACD4DF10083EF31 /* RecipeListViewController.swift */; };
 		3FC71BBE2ACD4E1B0083EF31 /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BBD2ACD4E1B0083EF31 /* RecipeListView.swift */; };
-		3FC71BC02ACD5BA80083EF31 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BBF2ACD5BA80083EF31 /* TimerView.swift */; };
 		3FC71BC22ACD5F510083EF31 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC71BC12ACD5F510083EF31 /* MainView.swift */; };
 		3FE68C312ACD886A000559CB /* Content+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE68C2D2ACD886A000559CB /* Content+CoreDataClass.swift */; };
 		3FE68C332ACD886A000559CB /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE68C2F2ACD886A000559CB /* User+CoreDataClass.swift */; };
@@ -100,7 +99,6 @@
 		3F1782612ACBFE7F00F2A3DA /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
 		3FC71BBA2ACD4DF10083EF31 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		3FC71BBD2ACD4E1B0083EF31 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
-		3FC71BBF2ACD5BA80083EF31 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		3FC71BC12ACD5F510083EF31 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3FE68C2D2ACD886A000559CB /* Content+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3FE68C2F2ACD886A000559CB /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -347,7 +345,6 @@
 			isa = PBXGroup;
 			children = (
 				1B22ACF22ACCC5A9001432F7 /* View */,
-				3FC71BBF2ACD5BA80083EF31 /* TimerView.swift */,
 				637119F02AC180DF00E59D1F /* TimerViewController.swift */,
 			);
 			path = TimerPage;
@@ -576,7 +573,6 @@
 				63945F6D2AC2B20B0053792E /* Extension+UILabel.swift in Sources */,
 				637119E62AC17C0E00E59D1F /* MyPageViewController.swift in Sources */,
 				1B05FF212ACAC4B6006BA170 /* StopwatchView.swift in Sources */,
-				3FC71BC02ACD5BA80083EF31 /* TimerView.swift in Sources */,
 				FF2300E72AC3ED8E00D4199E /* MainViewController.swift in Sources */,
 				E214F6EB2ACB45EF00902DB9 /* RecipeView.swift in Sources */,
 				637AA5A22AC8B13F00DA74B3 /* DetailViewMiddle.swift in Sources */,
