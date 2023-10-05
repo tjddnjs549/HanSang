@@ -37,6 +37,7 @@ class RecipeInfoView: UIView {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.systemGray4.cgColor
         $0.layer.cornerRadius = 20
+        $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         return $0
     }(UIImageView())

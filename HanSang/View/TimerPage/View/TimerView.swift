@@ -95,8 +95,11 @@ class TimerView: UIView {
     
     @objc func updateTime() {
         if remainingTime > 0 {
+            let hours = Int(remainingTime) / 3600
+            let minutes = (Int(remainingTime) % 3600) / 60
+            let seconds = Int(remainingTime) % 60
+            timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
             remainingTime -= 1
-            updateTimerLabel()
         } else {
             // MARK: - 타이머 종료
             timer?.invalidate()
@@ -113,8 +116,9 @@ class TimerView: UIView {
     }
     
     func updateTimerLabel() {
-        let minutes = Int(remainingTime) / 60
+        let hours = Int(remainingTime) / 3600
+        let minutes = (Int(remainingTime) % 3600) / 60
         let seconds = Int(remainingTime) % 60
-        timerLabel.text = String(format: "%02d:%02d", minutes, seconds)
+        timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }

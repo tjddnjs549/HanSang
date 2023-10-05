@@ -28,6 +28,8 @@ class CreateRecipeTableViewCell: UITableViewCell {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.systemGray4.cgColor
         $0.layer.cornerRadius = 10
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
         return $0
     }(UIImageView())
     
@@ -263,7 +265,6 @@ extension CreateRecipeTableViewCell: PHPickerViewControllerDelegate {
                 DispatchQueue.main.async {
                     self.recipeImageView.image = image as? UIImage
                     self.contentView.sendSubviewToBack(self.imageAddButton)
-                    self.recipeImageView.layer.cornerRadius = 0.0
                 }
             }
             NotificationCenter.default.post(name: NotificationName.dismiss, object: nil)
