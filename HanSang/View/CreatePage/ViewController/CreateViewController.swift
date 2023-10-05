@@ -90,6 +90,7 @@ class CreateViewController: UIViewController {
                 content: recipeInfoView.getRecipeInfo(),
                 materials: materialView.materialList,
                 recipes: recipeView.recipeList)
+            print("List:\(coreDataManager.getContentListFromCoreData())")
             return
         }
         

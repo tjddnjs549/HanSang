@@ -10,6 +10,14 @@ import AudioToolbox
 
 final class DetailViewController: UIViewController {
     
+    var content: Content? {
+        didSet {
+            
+        }
+    }
+    
+    
+    
     // MARK: - dummy
     
     var material: [String] = ["스테이크용 소고기", "아스파라거스", "새송이 버섯", "감자", "소스", "돼지고기", "돼지고기", "돼지고기"]

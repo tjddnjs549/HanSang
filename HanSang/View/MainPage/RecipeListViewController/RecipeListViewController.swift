@@ -10,6 +10,8 @@ import UIKit
 class RecipeListViewController: UIViewController {
     var pageTitle: String = ""
     private let recipeListView = RecipeListView()
+    private let dataManager = ContentDataManager.shared
+
     let images: [UIImage] = [
         UIImage(named: "1")!,
         UIImage(named: "2")!,
@@ -55,7 +57,7 @@ private extension RecipeListViewController {
     }
 }
 
-extension RecipeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension RecipeListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
@@ -64,6 +66,9 @@ extension RecipeListViewController: UICollectionViewDelegate, UICollectionViewDa
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as? MyPageCustomCell else {
             fatalError()
         }
+        //❗️❗️❗️❗️❗️ 수정 (데이터 저장이 잘 될 시 이걸로 보여줌)❗️❗️❗️❗️❗️❗️❗️❗️
+        //❗️let data = dataManager.SelectrdCategoryContentList(category: pageTitle)[indexPath.row]
+        
         let image = images[indexPath.row]
         cell.configure(image)
         cell.layer.borderWidth = 1.0
@@ -87,4 +92,13 @@ extension RecipeListViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
          return 16
      }
+}
+
+extension RecipeListViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        //detailVC.content = dataManager.SelectrdCategoryContentList(category: pageTitle)[indexPath.item]
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
