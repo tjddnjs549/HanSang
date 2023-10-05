@@ -15,16 +15,16 @@ class CreateViewController: UIViewController {
     // MARK: - Properties
     
     private var page = 1
+    private let coreDataManager = ContentDataManager.shared
     
     private let recipeInfoView = RecipeInfoView()
     private let materialView = MaterialView()
     private let recipeView = RecipeView()
-    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정(private 삭제) 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+    
     let nextButton: UIButton = {
-//        $0.isEnabled = false
         $0.setTitle("다음으로", for: .normal)
         $0.setTitleColor(.black, for: .normal)
-        $0.backgroundColor = .systemGray5
+        $0.backgroundColor = ColorGuide.yellow900
         $0.layer.cornerRadius = 15
         $0.addTarget(self, action: #selector(touchUpNextButton), for: .touchUpInside)
         return $0
@@ -37,7 +37,6 @@ class CreateViewController: UIViewController {
         configUI()
         setupLayout()
         registerNotification()
-        recipeInfoView.imageAddButton.addTarget(self, action:  #selector(touchUpAddButton), for: .touchUpInside)
     }
     
     // MARK: - InitUI
@@ -52,6 +51,8 @@ class CreateViewController: UIViewController {
         
         materialView.isHidden = true
         recipeView.isHidden = true
+        
+        setupRecipeInfoView()
     }
     
     private func setupLayout() {
@@ -84,6 +85,14 @@ class CreateViewController: UIViewController {
     //MARK: - @objc
     
     @objc func touchUpNextButton() {
+        if page == 3 {
+            coreDataManager.saveRecipe(
+                content: recipeInfoView.getRecipeInfo(),
+                materials: materialView.materialList,
+                recipes: recipeView.recipeList)
+            return
+        }
+        
         page += 1
         if page == 1 {
             recipeInfoView.isHidden = false
@@ -109,53 +118,36 @@ class CreateViewController: UIViewController {
         present(tabBarViewController, animated: true)
     }
     
-    @objc func handleNotification(_ notification: Notification) {
+    @objc func handleTimerNotification(_ notification: Notification) {
         guard let alert = notification.object as? UIAlertController else { return }
         present(alert, animated: true)
     }
     
+    @objc func handelPresentNotification(_ notification: Notification) {
+        guard let picker = notification.object as? PHPickerViewController else { return }
+        present(picker, animated: true)
+    }
     
-    @objc func touchUpAddButton() {
-        setupImagePicker()
+    @objc func handelDismissNotification(_ notification: Notification) {
+        dismiss(animated: true)
     }
     
     // MARK: - Custom Method
     
     private func registerNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: CreateRecipeTableViewCell.timerNotificationName, object: nil)
-    }
-}
-extension CreateViewController: PHPickerViewControllerDelegate {
-    
-    func setupImagePicker() {
-        var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 0
-        configuration.filter = .any(of: [.images])
-        
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = self
-        self.present(picker, animated: true)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleTimerNotification), name: NotificationName.timer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handelPresentNotification), name: NotificationName.present, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handelDismissNotification), name: NotificationName.dismiss, object: nil)
     }
     
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        guard !results.isEmpty else {
-            dismiss(animated: true, completion: nil)
-            return
+    private func setupRecipeInfoView() {
+        recipeInfoView.presentViewController = { picker in
+            self.present(picker, animated: true)
         }
-        let itemProvider = results.first?.itemProvider
         
-        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
-                DispatchQueue.main.async {
-                    self.recipeInfoView.imageView.image = image as? UIImage
-                    self.recipeInfoView.sendSubviewToBack(self.recipeInfoView.imageAddButton)
-                }
-            }
-            dismiss(animated: true, completion: nil)
-        } else {
-            print("ERROR❗️")
+        recipeInfoView.dismissViewController = {
+            self.dismiss(animated: true)
         }
     }
 }
-
 
