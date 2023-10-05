@@ -292,7 +292,7 @@ final class ContentDataManager {
         return self.getContentListFromCoreData().filter { $0.bookmark == true }
     }
     
-    func SelectedCategoryContentList(category: String) -> [Content] {
+    func selectedCategoryContentList(category: String) -> [Content] {
         return self.getContentListFromCoreData().filter { $0.category?.category == category }
     }
     

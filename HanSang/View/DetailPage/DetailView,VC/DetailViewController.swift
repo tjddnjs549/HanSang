@@ -12,7 +12,20 @@ final class DetailViewController: UIViewController {
     
     var content: Content? {
         didSet {
-            
+            if let imageData = content?.picture, let image = UIImage(data: imageData) {
+                detailView.detailViewTop.foodImageView.image = image
+            } else {
+                detailView.detailViewTop.foodImageView.image = nil
+            }
+            detailView.detailViewTop.titleLabel.text = content?.title
+            detailView.detailViewTop.makeTimeLabel.text = content?.time
+            detailView.detailViewTop.makeDifficultyLabel.text = content?.difficulty
+            if let imageData = content?.user?.profilePicture, let image = UIImage(data: imageData) {
+                detailView.detailViewTop.profileImageView.image = image
+            } else {
+                detailView.detailViewTop.profileImageView.image = nil
+            }
+            detailView.detailViewTop.profileNameLabel.text = content?.user?.nickname
         }
     }
     
@@ -84,7 +97,7 @@ private extension DetailViewController {
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
-        let deletedButton = UIBarButtonItem(image: UIImage(contentsOfFile: "trash.fill")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(deletedButtonTapped))
+        let deletedButton = UIBarButtonItem(image: UIImage(systemName: "trash")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(deletedButtonTapped))
         
         navigationItem.rightBarButtonItem = deletedButton
         
@@ -109,6 +122,10 @@ private extension DetailViewController {
     func buttonTapped() {
         detailView.detailViewTop.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         detailView.detailViewBottom.recipeUdateButton.addTarget(self, action: #selector(contentUpdateButtonTapped), for: .touchUpInside)
+    }
+    
+    func itemSetting() {
+        
     }
 }
 
@@ -168,10 +185,17 @@ extension DetailViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    @objc func deletedButtonTapped() {
-    }
+    
     @objc func backButtonTapped() {
+
+        self.navigationController?.popViewController(animated: true)
     }
+    
+    
+    @objc func deletedButtonTapped() {
+        
+    }
+    
 }
 // MARK: - table UITableViewDelegate / UITableViewDataSource
 

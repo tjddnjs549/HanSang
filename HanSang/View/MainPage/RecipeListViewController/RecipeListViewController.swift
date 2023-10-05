@@ -43,7 +43,7 @@ private extension RecipeListViewController {
     }
     
     func loadCategoryContentsList() {
-        categoryContents = ContentDataManager.shared.getCategoryContents(category: pageTitle) ?? []
+        categoryContents = ContentDataManager.shared.getCategoryContents(category: pageTitle)?.reversed() ?? []
     }
     
     @objc func goBack() {
@@ -88,7 +88,7 @@ extension RecipeListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailViewController()
-        //detailVC.content = dataManager.SelectrdCategoryContentList(category: pageTitle)[indexPath.item]
+        detailVC.content = dataManager.selectedCategoryContentList(category: pageTitle)[indexPath.item]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
