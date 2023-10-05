@@ -75,12 +75,19 @@ class TimerView: UIView {
         remainingTime = selectedTime
         updateTimerLabel()
         
-        // MARK: - 타이머 시작
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        // MARK: - 기존 타이머 초기화
+        if timer != nil {
+            timer?.invalidate()
+            timer = nil
+        }
         
-        // MARK: - 시작 버튼 비활성화, 중지 버튼 활성화
-        startButton.isEnabled = false
-        stopButton.isEnabled = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
+                
+                // MARK: = 시작 버튼 비활성화, 중지 버튼 활성화
+                self.startButton.isEnabled = false
+                self.stopButton.isEnabled = true
+            }
     }
     
     @objc func stopTimer() {
@@ -94,20 +101,22 @@ class TimerView: UIView {
     }
     
     @objc func updateTime() {
-        if remainingTime > 0 {
+        if remainingTime >= 1 {
+            remainingTime -= 1
             let hours = Int(remainingTime) / 3600
             let minutes = (Int(remainingTime) % 3600) / 60
             let seconds = Int(remainingTime) % 60
             timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-            remainingTime -= 1
-        } else {
-            // MARK: - 타이머 종료
+        } else if remainingTime == 0 {
+            timerLabel.text = "00:00:00"
+            
+            // 타이머 종료
             timer?.invalidate()
             timer = nil
             startButton.isEnabled = true
             stopButton.isEnabled = false
             
-            // MARK: - 알림 표시
+            // 알림 표시
             let alert = UIAlertController(title: "타이머 완료", message: "설정한 시간이 끝났습니다.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
             alert.addAction(okAction)
@@ -116,9 +125,14 @@ class TimerView: UIView {
     }
     
     func updateTimerLabel() {
-        let hours = Int(remainingTime) / 3600
-        let minutes = (Int(remainingTime) % 3600) / 60
-        let seconds = Int(remainingTime) % 60
-        timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        if remainingTime >= 1 {
+            let hours = Int(remainingTime) / 3600
+            let minutes = (Int(remainingTime) % 3600) / 60
+            let seconds = Int(remainingTime) % 60
+            timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+              remainingTime -= 0
+          } else {
+            timerLabel.text = "00:00:00"
+          }
     }
 }
