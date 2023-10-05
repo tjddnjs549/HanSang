@@ -90,7 +90,9 @@ class CreateViewController: UIViewController {
                 content: recipeInfoView.getRecipeInfo(),
                 materials: materialView.materialList,
                 recipes: recipeView.recipeList)
-            return
+            let tabBarController = TabbarViewController()
+            tabBarController.modalPresentationStyle = .fullScreen
+            present(tabBarController, animated: true)
         }
         
         page += 1
