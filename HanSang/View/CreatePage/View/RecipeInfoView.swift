@@ -256,7 +256,6 @@ extension RecipeInfoView: UICollectionViewDataSource {
         if collectionView == categoryCollcetionView {
             cell.categoryLabel.text = categoryList[indexPath.row]
             setCategory(indexPath.row)
-//            print("ss: \(indexPath.row)")
         } else {
             cell.categoryLabel.text = difficultyList[indexPath.row]
             difficulty = difficultyList[indexPath.row]

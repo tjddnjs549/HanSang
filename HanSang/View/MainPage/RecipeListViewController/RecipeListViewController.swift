@@ -66,8 +66,6 @@ extension RecipeListViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as? MyPageCustomCell else {
             fatalError()
         }
-        //❗️❗️❗️❗️❗️ 수정 (데이터 저장이 잘 될 시 이걸로 보여줌)❗️❗️❗️❗️❗️❗️❗️❗️
-        //❗️let data = dataManager.SelectrdCategoryContentList(category: pageTitle)[indexPath.row]
         
         let image = images[indexPath.row]
         cell.configure(image)
