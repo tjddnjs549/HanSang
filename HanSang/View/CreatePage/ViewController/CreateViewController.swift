@@ -99,6 +99,9 @@ class CreateViewController: UIViewController {
             recipeInfoView.isHidden = false
             materialView.isHidden = true
             recipeView.isHidden = true
+            
+            //테스트 코드
+            
            
         } else if page == 2 {
             recipeInfoView.isHidden = true

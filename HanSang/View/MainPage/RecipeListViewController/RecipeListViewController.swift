@@ -22,6 +22,7 @@ class RecipeListViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+        loadCategoryContentsList()
     }
 }
 
@@ -39,6 +40,10 @@ private extension RecipeListViewController {
             button.tintColor = ColorGuide.black
             navigationItem.leftBarButtonItem = button
         }
+    }
+    
+    func loadCategoryContentsList() {
+        categoryContents = ContentDataManager.shared.getCategoryContents(category: pageTitle) ?? []
     }
     
     @objc func goBack() {
