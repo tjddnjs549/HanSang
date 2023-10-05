@@ -83,43 +83,31 @@ class CreateViewController: UIViewController {
     }
     
     //MARK: - @objc
-    // 🧨 수정
     @objc func touchUpNextButton() {
         if page == 3 {
+            setLastData()
             coreDataManager.saveRecipe(
                 content: recipeInfoView.getRecipeInfo(),
                 materials: materialView.materialList,
                 recipes: recipeView.recipeList,
                 user: LoginViewModel.loginUser!)
-            return
+    
+            presentTabBar()
         }
         
         page += 1
         if page == 1 {
-            recipeInfoView.isHidden = false
-            materialView.isHidden = true
-            recipeView.isHidden = true
-            
-            //테스트 코드
-            
-           
+            setupView(false, true, true)
         } else if page == 2 {
-            recipeInfoView.isHidden = true
-            materialView.isHidden = false
-            recipeView.isHidden = true
+            setupView(true, false, true)
         } else {
             nextButton.setTitle("작성완료", for: .normal)
-            recipeInfoView.isHidden = true
-            materialView.isHidden = true
-            recipeView.isHidden = false
+            setupView(true, true, false)
         }
     }
     
     @objc func touchUpCloseButton() {
-        let tabBarViewController = TabbarViewController()
-        tabBarViewController.modalPresentationStyle = .fullScreen
-        tabBarViewController.modalTransitionStyle = .crossDissolve
-        present(tabBarViewController, animated: true)
+        presentTabBar()
     }
     
     @objc func handleTimerNotification(_ notification: Notification) {
@@ -152,6 +140,31 @@ class CreateViewController: UIViewController {
         recipeInfoView.dismissViewController = {
             self.dismiss(animated: true)
         }
+    }
+    
+    private func setLastData() {
+        let materialLastIndex = materialView.materialList.count - 1
+        guard let materialCell = materialView.materialCreateTableView.cellForRow(at: IndexPath(row: materialLastIndex, section: 0)) as? MaterialCreateTableViewCell
+        else { return }
+        materialView.materialList[materialLastIndex] = materialCell.getMaterial()
+        
+        let recipeLastIndex = recipeView.recipeList.count - 1
+        guard let recipeCell = recipeView.recipeTableView.cellForRow(at: IndexPath(row: recipeLastIndex, section: 0)) as? CreateRecipeTableViewCell
+        else { return }
+        recipeView.recipeList[recipeLastIndex] = recipeCell.getRecipe()
+    }
+    
+    private func presentTabBar() {
+        let tabBarController = TabbarViewController()
+        tabBarController.modalPresentationStyle = .fullScreen
+        tabBarController.modalTransitionStyle = .crossDissolve
+        present(tabBarController, animated: true)
+    }
+    
+    private func setupView(_ recipeInfoViewIsHidden: Bool, _ materialViewIsHidden: Bool, _ recipeViewIsHidden: Bool) {
+        recipeInfoView.isHidden = recipeInfoViewIsHidden
+        materialView.isHidden = materialViewIsHidden
+        recipeView.isHidden = recipeViewIsHidden
     }
 }
 

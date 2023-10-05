@@ -30,7 +30,6 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="uom-qT-f1e" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Y00-9T-qpk"/>
                 <constraint firstItem="uom-qT-f1e" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="qqQ-F5-uMq"/>
@@ -44,9 +43,6 @@
     </objects>
     <resources>
         <image name="plus.circle" catalog="system" width="128" height="123"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

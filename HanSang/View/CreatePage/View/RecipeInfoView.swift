@@ -233,7 +233,7 @@ class RecipeInfoView: UIView {
             print(category)
         }
     }
-    // 🧨 수정
+    
     func getRecipeInfo() -> RecipeInfoModel {
         return RecipeInfoModel(
             date: Date(),

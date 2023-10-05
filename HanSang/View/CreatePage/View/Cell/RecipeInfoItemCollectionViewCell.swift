@@ -27,6 +27,7 @@ class RecipeInfoItemCollectionViewCell: UICollectionViewCell {
             }
         }
     }
+    
     lazy var categoryLabel: UILabel = {
         let label = UILabel()
         label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size14)
@@ -54,7 +55,7 @@ class RecipeInfoItemCollectionViewCell: UICollectionViewCell {
         backgroundColor = .clear
         self.categoryLabel.layer.borderColor = ColorGuide.inputLine.cgColor
         self.categoryLabel.layer.borderWidth = 1.5
-        self.categoryLabel.layer.cornerRadius = 15.0
+        self.categoryLabel.layer.cornerRadius = 20
     }
     
     private func setupLayout() {
