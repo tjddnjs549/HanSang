@@ -10,9 +10,11 @@ import SnapKit
 
 class RecipeInfoView: UIView {
     
+    
     // MARK: - Properties
     private let categoryList = ["🍚 \n밥", "🥘 \n찌개", "🍝 \n면", "🍩 \n베이킹", "🍷 \n술", "🍕 \n분식","🍲 \n찜", "🍴 \n기타"]
     private let difficultyList = ["왕초보", "초보", "중수", "고수"]
+    var selectedIndexPath: IndexPath?
     private let recipeLabel: UILabel = {
         $0.text =
                 """
@@ -107,11 +109,12 @@ class RecipeInfoView: UIView {
             $0.textColor = .black
             $0.font = .boldSystemFont(ofSize: 20)
         }
-     
+        
         [categoryCollcetionView, difficultyCollectionView].forEach {
             $0.backgroundColor = .clear
             $0.isScrollEnabled = true
             $0.showsHorizontalScrollIndicator = false
+            $0.allowsMultipleSelection = false
             $0.delegate = self
             $0.dataSource = self
             $0.register(RecipeInfoItemCollectionViewCell.self, forCellWithReuseIdentifier: RecipeInfoItemCollectionViewCell.identifier)
@@ -202,14 +205,9 @@ extension RecipeInfoView: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
         
         if collectionView == categoryCollcetionView {
-            cell.setup(title: categoryList[indexPath.row])
-            if indexPath.item == 0 {
-                cell.isSelected = true
-                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
-                
-            }
+            cell.categoryLabel.text = categoryList[indexPath.row]
         } else {
-            cell.setup(title: difficultyList[indexPath.row])
+            cell.categoryLabel.text = difficultyList[indexPath.row]
         }
         return cell
     }
@@ -229,20 +227,15 @@ extension RecipeInfoView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
-   
+    
 }
 
 extension RecipeInfoView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(#function)
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeInfoItemCollectionViewCell.identifier, for: indexPath) as? RecipeInfoItemCollectionViewCell else { return }
-        if collectionView == categoryCollcetionView {
-            if indexPath.item == 0 {
-                cell.isButtonSelected = true
-                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
-            }
+        selectedIndexPath = indexPath
+        if let cell = collectionView.cellForItem(at: indexPath) as? RecipeInfoItemCollectionViewCell {
+            cell.isSelected = true
         }
-
     }
 }
 

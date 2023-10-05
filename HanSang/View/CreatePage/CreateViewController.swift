@@ -21,7 +21,7 @@ class CreateViewController: UIViewController {
     private let recipeView = RecipeView()
     // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정(private 삭제) 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
     let nextButton: UIButton = {
-        $0.isEnabled = false
+//        $0.isEnabled = false
         $0.setTitle("다음으로", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.backgroundColor = .systemGray5
