@@ -149,7 +149,7 @@ class MyPageView: UIView {
             make.top.equalTo(userInfoStackView.snp.bottom).offset(40)
             make.leading.equalToSuperview().offset(30)
             make.trailing.equalToSuperview().offset(-30)
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(layoutMarginsGuide.snp.bottom)
         }
     }
 }

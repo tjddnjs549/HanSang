@@ -39,7 +39,7 @@ class StopwatchView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        setupUI()
+        
     }
 
     private func setupUI() {
@@ -79,6 +79,8 @@ class StopwatchView: UIView {
         timer.invalidate()
         isRunning = false
         elapsedTime = 0.0
+        minute = 0
+        hour = 0
         updateTimeLabel()
         startStopButton.setTitle("Start", for: .normal)
     }
@@ -98,10 +100,9 @@ class StopwatchView: UIView {
 
     private func updateTimeLabel() {
         let seconds = Int(elapsedTime)
-        var minutes = /*Double((seconds / 4))*/minute
+        let minutes = minute
         let hours = seconds / 3600
         let tenthsOfSecond = Int((elapsedTime * 10).truncatingRemainder(dividingBy: 10))
-        print(minutes)
 
         timeLabel.text = String(format: "%02d:%02d:%02d.%01d", hours, minutes, seconds, tenthsOfSecond)
     }
