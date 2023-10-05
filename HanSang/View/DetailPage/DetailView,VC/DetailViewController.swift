@@ -71,8 +71,29 @@ private extension DetailViewController {
     func allSetting() {
         tableViewSetting()
         buttonTapped()
+        naviBarSetting()
     }
     
+    private func naviBarSetting() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .clear
+        appearance.shadowColor = .none
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationController?.navigationBar.tintColor = ColorGuide.main
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        let deletedButton = UIBarButtonItem(image: UIImage(contentsOfFile: "trash.fill")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(deletedButtonTapped))
+        
+        navigationItem.rightBarButtonItem = deletedButton
+        
+        let backButton = UIBarButtonItem(title: "닫기", style: .done, target: self, action: #selector(backButtonTapped))
+        
+        backButton.tintColor = ColorGuide.main
+        navigationItem.leftBarButtonItem = backButton
+        
+    }
     func tableViewSetting() {
         detailView.detailViewMiddle.materialTableView.delegate = self
         detailView.detailViewMiddle.materialTableView.dataSource = self
@@ -146,6 +167,10 @@ extension DetailViewController {
             AudioServicesPlaySystemSound(SystemSoundID(1000))
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    @objc func deletedButtonTapped() {
+    }
+    @objc func backButtonTapped() {
     }
 }
 // MARK: - table UITableViewDelegate / UITableViewDataSource

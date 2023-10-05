@@ -288,6 +288,7 @@ extension RecipeInfoView: UICollectionViewDelegate {
             cell.isSelected = true
             setCategory(indexPath.row)
             print("selected: \(indexPath.row)")
+            category = cell.categoryLabel.text ?? ""
         }
     }
 }
