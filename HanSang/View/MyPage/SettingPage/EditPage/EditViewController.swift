@@ -173,22 +173,13 @@ extension EditViewController {
             return
         }
 
-        let isNicknameNotModified = (nickname == LoginViewModel.loginUser?.nickname)
+        if let user = LoginViewModel.loginUser {
+            editViewModel.editUser(user, editImage: image, editPW: pw, editNickname: nickname)
+            editViewModel.fetchUserInfo()
 
-        if isNicknameNotModified || !isNicknameAlreadyRegistered(nickname) {
-            editView.nicknameTextFieldDescription.isHidden = true
-
-            if let user = LoginViewModel.loginUser {
-                editViewModel.editUser(user, editImage: image, editPW: pw, editNickname: nickname)
-                editViewModel.fetchUserInfo()
-
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true)
-                }
+            DispatchQueue.main.async {
+                self.dismiss(animated: true)
             }
-        } else {
-            editView.nicknameTextFieldDescription.text = "이미 존재하는 닉네임입니다."
-            editView.nicknameTextFieldDescription.isHidden = false
         }
     }
 }

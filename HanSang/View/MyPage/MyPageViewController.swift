@@ -17,6 +17,12 @@ class MyPageViewController: UIViewController {
             myPageView.collectionView.reloadData()
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadUserInfo()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
