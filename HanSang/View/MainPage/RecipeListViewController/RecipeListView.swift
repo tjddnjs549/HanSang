@@ -8,7 +8,7 @@
 import UIKit
 
 class RecipeListView: UIView {
-    private let RecipeListLabel: UILabel = {
+    let recipeListLabel: UILabel = {
         let label = UILabel()
         label.text = "밥"
         label.font = FontGuide.size32Bold
@@ -39,8 +39,8 @@ class RecipeListView: UIView {
     private func setupUI() {
         backgroundColor = .systemBackground
         
-        addSubview(RecipeListLabel)
-        RecipeListLabel.snp.makeConstraints { make in
+        addSubview(recipeListLabel)
+        recipeListLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(24)
             make.leading.equalTo(30)
         }
@@ -49,7 +49,7 @@ class RecipeListView: UIView {
         collectionView.snp.makeConstraints { make in
             make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(30)
             make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-30)
-            make.top.equalTo(RecipeListLabel.snp.bottom).offset(30)
+            make.top.equalTo(recipeListLabel.snp.bottom).offset(30)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
         }
     }
