@@ -19,7 +19,8 @@ class StopwatchView: UIView {
     private lazy var startStopButton: UIButton = {
         let button = UIButton()
         button.setTitle("Start", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
+        button.backgroundColor = ColorGuide.main.withAlphaComponent(0.75)
+        button.layer.cornerRadius = 15
         button.addTarget(self, action: #selector(startStopButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -27,7 +28,8 @@ class StopwatchView: UIView {
     private lazy var resetButton: UIButton = {
         let button = UIButton()
         button.setTitle("Reset", for: .normal)
-        button.setTitleColor(.systemRed, for: .normal)
+        button.backgroundColor = ColorGuide.textHint.withAlphaComponent(0.75)
+        button.layer.cornerRadius = 15
         button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -49,17 +51,21 @@ class StopwatchView: UIView {
 
         timeLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-50)
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalTo(216)
         }
 
         startStopButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview().offset(-80)
             make.top.equalTo(timeLabel.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.4)
         }
 
         resetButton.snp.makeConstraints { make in
-            make.top.equalTo(startStopButton.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
+            make.centerX.equalToSuperview().offset(80)
+            make.top.equalTo(timeLabel.snp.bottom).offset(20)
+            make.width.equalToSuperview().multipliedBy(0.4)
         }
     }
 
