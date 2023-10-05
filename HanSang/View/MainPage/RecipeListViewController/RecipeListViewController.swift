@@ -18,6 +18,7 @@ class RecipeListViewController: UIViewController {
             recipeListView.collectionView.reloadData()
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

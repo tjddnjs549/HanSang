@@ -11,7 +11,11 @@ class SearchViewController: UIViewController {
 //, UISearchResultsUpdating {
 
     // MARK: - varibles
-    private var images: [UIImage] = []
+    var searchContents: [Content] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     // MARK: - UI Components
     private let collectionView: UICollectionView = {
@@ -48,17 +52,7 @@ class SearchViewController: UIViewController {
 
         // Set the custom back button as the left navigation bar button item
         self.navigationItem.leftBarButtonItem = customBackButton
-
-
-        for _ in 0...25 {
-            images.append(UIImage(named: "1")!)
-            images.append(UIImage(named: "2")!)
-            images.append(UIImage(named: "3")!)
-            images.append(UIImage(named: "4")!)
-            images.append(UIImage(named: "5")!)
-            images.append(UIImage(named: "6")!)
-            images.append(UIImage(named: "7")!)
-        }
+        
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
     }
@@ -74,9 +68,7 @@ class SearchViewController: UIViewController {
             collectionView.heightAnchor.constraint(equalToConstant: 300),
             collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 28),
             collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -28),
-
-    ])
-        
+        ])
     }
     
     @objc func backButtonTapped() {
@@ -87,7 +79,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.images.count
+        return searchContents.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -97,17 +89,13 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
             fatalError("Failed to dequeue CostomCollectionViewCell in MainViewController")
         }
         
-        let image = images[indexPath.row]
-        cell.configure(image)
+        let content = searchContents[indexPath.row]
+        cell.configure(content)
+        
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
-        cell.layer.shadowColor = ColorGuide.textHint.cgColor
-        cell.layer.shadowOpacity = 1
-        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
-        cell.layer.shadowRadius = 12
-
         return cell
     }
 }
