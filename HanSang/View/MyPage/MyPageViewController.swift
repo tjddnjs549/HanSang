@@ -87,7 +87,7 @@ private extension MyPageViewController {
     func loadUserContents() {
         if let user = LoginViewModel.loginUser {
             if let contents = myPageViewModel.getContentForUser(user) {
-                userContents = contents
+                userContents = contents.reversed()
             }
         }
     }
