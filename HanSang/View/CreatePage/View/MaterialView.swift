@@ -12,7 +12,7 @@ class MaterialView: UIView {
     
     // MARK: - Properties
 
-    private var materialList: [MaterialModel] = [MaterialModel(material: "", unit: "")]
+    var materialList: [MaterialModel] = [MaterialModel(material: "", unit: "")]
     
     private let messageLabel: UILabel = {
         $0.text =
@@ -89,7 +89,7 @@ extension MaterialView: UITableViewDataSource {
         else { return UITableViewCell() }
         
         cell.selectionStyle = .none
-        // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+        
         // 재료 삭제
         cell.touchedDeleteButton = {
             self.materialList.remove(at: indexPath.row)
@@ -111,19 +111,15 @@ extension MaterialView: UITableViewDelegate {
       
         footerView.touchedAddButton = {
             // 재료명, 용량 모두 기입 시 추가
-            var targetIndexPath: IndexPath
-            if self.materialList.isEmpty {
-                targetIndexPath = IndexPath(row: 0, section: 0)
-            } else {
-                targetIndexPath = IndexPath(row: self.materialList.count - 1, section: 0)
-            }
+            let targetIndexPath = IndexPath(row: self.materialList.count - 1, section: 0)
             
             if let cell = tableView.cellForRow(at: targetIndexPath) as? MaterialCreateTableViewCell {
                 let materialName = cell.materialTextField.text ?? ""
                 let materialAmount = cell.amountTextField.text ?? ""
                 
                 if !materialName.isEmpty && !materialAmount.isEmpty {
-                    let newMaterial = MaterialModel(material: materialName, unit: materialAmount)
+                    self.materialList[targetIndexPath.row] = MaterialModel(material: materialName, unit: materialAmount)
+                    let newMaterial = MaterialModel(material: "", unit: "")
                     self.materialList.append(newMaterial)
                     tableView.reloadData()
                 } else {

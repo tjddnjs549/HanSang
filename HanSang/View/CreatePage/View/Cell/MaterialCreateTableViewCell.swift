@@ -8,14 +8,13 @@
 import UIKit
 import SnapKit
 
-class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
+class MaterialCreateTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
     static let identifier = "MaterialCreateTableViewCell"
     
     var touchedDeleteButton: (() -> ())?
-    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
     var textDidChange: ((String, String) -> Void)?
     
     private let deleteButton: UIButton = {
@@ -25,14 +24,12 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
         return $0
     }(UIButton())
 
-    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정(private 삭제) 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
     let materialTextField: UITextField = {
-
         $0.borderStyle = .roundedRect
         $0.placeholder = "재료명"
         return $0
     }(UITextField())
-    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 수정(private 삭제) 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
+    
     let amountTextField: UITextField = {
         $0.borderStyle = .roundedRect
         $0.placeholder = "용량"
@@ -60,26 +57,11 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configUI()
         setupLayout()
-        // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 추가 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
-        setup()
+        setupTextField()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 추가 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
-    @objc private func textFieldDidChange() {
-        textDidChange?(materialTextField.text ?? "", amountTextField.text ?? "")
-    }
-    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 추가 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    // 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎 추가 🍎🍎🍎🍎🍎🍎🍎🍎🍎🍎
-    private func setup() {
-        materialTextField.delegate = self
-        amountTextField.delegate = self
     }
     
     // MARK: - InitUI
@@ -114,5 +96,27 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @objc private func touchUpDeleteButton() {
         touchedDeleteButton?()
+    }
+    
+    @objc private func textFieldDidChange() {
+        textDidChange?(materialTextField.text ?? "", amountTextField.text ?? "")
+    }
+    
+    //MARK: - Custom Method
+    
+    private func setupTextField() {
+        materialTextField.delegate = self
+        amountTextField.delegate = self
+    }
+    
+    func getMaterial() -> MaterialModel {
+        return MaterialModel(material: materialTextField.text ?? "", unit: amountTextField.text ?? "")
+    }
+}
+
+extension MaterialCreateTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
