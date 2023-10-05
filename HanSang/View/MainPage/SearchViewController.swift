@@ -11,7 +11,12 @@ class SearchViewController: UIViewController {
 //, UISearchResultsUpdating {
 
     // MARK: - varibles
-    private var images: [Content] = []
+
+    var searchContents: [Content] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     // MARK: - UI Components
     private let collectionView: UICollectionView = {
@@ -48,8 +53,6 @@ class SearchViewController: UIViewController {
 
         // Set the custom back button as the left navigation bar button item
         self.navigationItem.leftBarButtonItem = customBackButton
-
-
         
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -66,9 +69,7 @@ class SearchViewController: UIViewController {
             collectionView.heightAnchor.constraint(equalToConstant: 300),
             collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 28),
             collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -28),
-
-    ])
-        
+        ])
     }
     
     @objc func backButtonTapped() {
@@ -79,7 +80,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.images.count
+        return searchContents.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -89,8 +90,9 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
             fatalError("Failed to dequeue CostomCollectionViewCell in MainViewController")
         }
         
-        let image = images[indexPath.row]
-        cell.configure(image)
+        let content = searchContents[indexPath.row]
+        cell.configure(content)
+        
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
