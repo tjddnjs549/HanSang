@@ -206,32 +206,41 @@ class RecipeInfoView: UIView {
         switch index {
         case 0:
             category = "밥"
+            print(category)
         case 1:
             category = "찌개"
+            print(category)
         case 2:
             category = "면"
+            print(category)
         case 3:
             category = "베이킹"
+            print(category)
         case 4:
             category = "술"
+            print(category)
         case 5:
             category = "분식"
+            print(category)
         case 6:
             category = "찜"
+            print(category)
         case 7:
             category = "기타"
+            print(category)
         default:
             category = ""
+            print(category)
         }
     }
     
     func getRecipeInfo() -> RecipeInfoModel {
         return RecipeInfoModel(
             date: Date(),
-            title: recipeLabel.text ?? "",
+            title: recipeTextField.text ?? "",
             image: imageView.image ?? UIImage(),
             category: category,
-            time: timeLabel.text ?? "",
+            time: timeTextField.text ?? "",
             difficulty: difficulty,
             kick: "")
     }
@@ -255,7 +264,6 @@ extension RecipeInfoView: UICollectionViewDataSource {
         
         if collectionView == categoryCollcetionView {
             cell.categoryLabel.text = categoryList[indexPath.row]
-            setCategory(indexPath.row)
         } else {
             cell.categoryLabel.text = difficultyList[indexPath.row]
             difficulty = difficultyList[indexPath.row]
@@ -285,7 +293,15 @@ extension RecipeInfoView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         if let cell = collectionView.cellForItem(at: indexPath) as? RecipeInfoItemCollectionViewCell {
-            cell.isSelected = true
+            if collectionView == categoryCollcetionView {
+                cell.isSelected = true
+                setCategory(indexPath.row)
+                print("선택한 카테고리: , \(cell.categoryLabel.text)")
+                print("selected: \(indexPath.row)")
+            } else {
+                cell.isSelected = true
+                difficulty = difficultyList[indexPath.row]
+            }
         }
     }
 }

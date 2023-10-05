@@ -83,15 +83,15 @@ class CreateViewController: UIViewController {
     }
     
     //MARK: - @objc
-    
     @objc func touchUpNextButton() {
         if page == 3 {
             setLastData()
             coreDataManager.saveRecipe(
                 content: recipeInfoView.getRecipeInfo(),
                 materials: materialView.materialList,
-                recipes: recipeView.recipeList)
-            
+                recipes: recipeView.recipeList,
+                user: LoginViewModel.loginUser!)
+    
             presentTabBar()
         }
         

@@ -56,6 +56,21 @@ final class ContentDataManager {
         return category
     }
     
+    // MARK: - [Create] 코어데이터에 카테고리 생성하기
+    func saveCategory(categoryName: String) -> Category? {
+        if let context = context,
+           let entity = NSEntityDescription.entity(forEntityName: "Category", in: context),
+           let categoryData = NSManagedObject(entity: entity, insertInto: context) as? Category {
+            categoryData.id = UUID()
+            categoryData.category = categoryName
+            appDelegate?.saveContext()
+            print("카테고리 데이터 저장 성공")
+            return categoryData
+        } else {
+            return nil
+        }
+    }
+    
     // MARK: - [Create] 코어데이터에 데이터 생성하기 (첫번째 페이지에서 Content저장)
     func saveContentData(content: RecipeInfoModel) -> Content? {
         if let context = context,
@@ -69,7 +84,12 @@ final class ContentDataManager {
             contentData.kick = content.kick
             contentData.picture = imageData
             contentData.time = content.time
-            contentData.category?.category = content.category
+            
+            let categoryName = content.category
+            if let category = saveCategory(categoryName: categoryName) {
+                contentData.category = category
+            }
+            
             appDelegate?.saveContext()
             print("Content 데이터 저장")
             
@@ -121,11 +141,54 @@ final class ContentDataManager {
             print("Recipe 데이터 저장 실패")
         }
     }
-    
-    func saveRecipe(content: RecipeInfoModel, materials: [MaterialModel], recipes: [RecipeModel]) {
+    // 🧨 수정
+    func saveRecipe(content: RecipeInfoModel, materials: [MaterialModel], recipes: [RecipeModel], user: User) {
         guard let contentData = saveContentData(content: content) else { return }
+        contentData.user = user
         saveMaterialData(content: contentData, materials: materials)
         saveRecipeData(content: contentData, recipes: recipes)
+        //테스트 코드
+        if let test = ContentDataManager.shared.getContentListFromCoreData().first {
+            if let title = test.title,
+               let category = test.category?.category,
+               let time = test.time,
+               let difficulty = test.difficulty,
+               let materials = test.materials?.allObjects as? [Materials],
+               let recipes = test.recipe?.allObjects as? [Recipe] {
+                var materialsString = ""
+                for material in materials {
+                    if let materialName = material.material, let unit = material.unit {
+                        materialsString.append("\(materialName) (\(unit)), ")
+                    }
+                }
+                if !materialsString.isEmpty {
+                    materialsString.removeLast(2) // 마지막 ", " 제거
+                }
+                
+                var recipesString = ""
+                for recipe in recipes {
+                    if let description = recipe.descriptions, let timer = recipe.timer {
+                        recipesString.append("\(description) (\(timer)), ")
+                    }
+                }
+                if !recipesString.isEmpty {
+                    recipesString.removeLast(2) // 마지막 ", " 제거
+                }
+                
+                print("""
+                      ===========================
+                      요리명: \(title)
+                      카테고리: \(category)
+                      소요시간: \(time)
+                      난이도: \(difficulty)
+                      재료: \(materialsString)
+                      요리순서: \(recipesString)
+                      ===========================
+                      """)
+            }
+        } else {
+            print("저장된 Content 데이터가 없습니다.")
+        }
     }
     
     
@@ -213,9 +276,36 @@ final class ContentDataManager {
         }
     }
     
-    // MARK: - 북마크 설정한 데이터 얻기
+    // MARK: - 북마크 설정 및 데이터 얻기
+    func toggleBookmark(content: Content) {
+        content.bookmark = !content.bookmark
+        
+        do {
+            try context?.save()
+            print("북마크 업데이트 성공")
+        } catch {
+            print("북마크 업데이트 실패: \(error.localizedDescription)")
+        }
+    }
     
     func getContentBookmark() -> [Content] {
         return self.getContentListFromCoreData().filter { $0.bookmark == true }
+    }
+    
+    func selectedCategoryContentList(category: String) -> [Content] {
+        return self.getContentListFromCoreData().filter { $0.category?.category == category }
+    }
+    
+    func getCategoryContents(category: String) -> [Content]? {
+        let request = NSFetchRequest<Content>(entityName: "Content")
+        request.predicate = NSPredicate(format: "category.category == %@", category)
+
+        do {
+            let contents = try context?.fetch(request)
+            return contents
+        } catch {
+            print("🚨 카테고리 정보 찾을 수 없음: \(error)")
+            return nil
+        }
     }
 }

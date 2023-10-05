@@ -8,29 +8,21 @@
 import UIKit
 
 class RecipeListViewController: UIViewController {
-    var pageTitle: String = ""
     private let recipeListView = RecipeListView()
-    let images: [UIImage] = [
-        UIImage(named: "1")!,
-        UIImage(named: "2")!,
-        UIImage(named: "3")!,
-        UIImage(named: "4")!,
-        UIImage(named: "5")!,
-        UIImage(named: "6")!,
-        UIImage(named: "7")!,
-        UIImage(named: "1")!,
-        UIImage(named: "2")!,
-        UIImage(named: "3")!,
-        UIImage(named: "4")!,
-        UIImage(named: "5")!,
-        UIImage(named: "6")!,
-        UIImage(named: "7")!,
-    ]
-
+    private let dataManager = ContentDataManager.shared
+  
+    var pageTitle: String = ""
+    
+    var categoryContents: [Content] = [] {
+        didSet {
+            recipeListView.collectionView.reloadData()
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
+        loadCategoryContentsList()
     }
 }
 
@@ -50,30 +42,33 @@ private extension RecipeListViewController {
         }
     }
     
+    func loadCategoryContentsList() {
+        categoryContents = ContentDataManager.shared.getCategoryContents(category: pageTitle)?.reversed() ?? []
+    }
+    
     @objc func goBack() {
         navigationController?.popViewController(animated: true)
     }
 }
 
-extension RecipeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension RecipeListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return categoryContents.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as? MyPageCustomCell else {
             fatalError()
         }
-        let image = images[indexPath.row]
-        cell.configure(image)
+
+    
+        let content = categoryContents[indexPath.row]
+        cell.configure(content)
+
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
-        cell.layer.shadowColor = ColorGuide.textHint.cgColor
-        cell.layer.shadowOpacity = 1
-        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
-        cell.layer.shadowRadius = 12
         return cell
     }
 }
@@ -87,4 +82,13 @@ extension RecipeListViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
          return 16
      }
+}
+
+extension RecipeListViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        detailVC.content = dataManager.selectedCategoryContentList(category: pageTitle)[indexPath.item]
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }

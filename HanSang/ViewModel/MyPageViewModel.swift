@@ -11,6 +11,7 @@ import UIKit
 class MyPageViewModel {
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    // MARK: - User Model
     func fetchUserInfo() {
         let request = User.fetchRequest()
 
@@ -65,4 +66,17 @@ class MyPageViewModel {
         }
     }
     
+    // MARK: - Content Model
+    func getContentForUser(_ user: User) -> [Content]? {
+        let request = Content.fetchRequest()
+        request.predicate = NSPredicate(format: "user == %@", user)
+
+        do {
+            let content = try context.fetch(request)
+            return content
+        } catch {
+            print("🚨 유저 작성 레시피 불러오기 오류: \(error.localizedDescription)")
+            return nil
+        }
+    }
 }

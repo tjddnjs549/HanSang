@@ -10,6 +10,27 @@ import AudioToolbox
 
 final class DetailViewController: UIViewController {
     
+    var content: Content? {
+        didSet {
+            if let imageData = content?.picture, let image = UIImage(data: imageData) {
+                detailView.detailViewTop.foodImageView.image = image
+            } else {
+                detailView.detailViewTop.foodImageView.image = nil
+            }
+            detailView.detailViewTop.titleLabel.text = content?.title
+            detailView.detailViewTop.makeTimeLabel.text = content?.time
+            detailView.detailViewTop.makeDifficultyLabel.text = content?.difficulty
+            if let imageData = content?.user?.profilePicture, let image = UIImage(data: imageData) {
+                detailView.detailViewTop.profileImageView.image = image
+            } else {
+                detailView.detailViewTop.profileImageView.image = nil
+            }
+            detailView.detailViewTop.profileNameLabel.text = content?.user?.nickname
+        }
+    }
+    
+    
+    
     // MARK: - dummy
     
     var material: [String] = ["스테이크용 소고기", "아스파라거스", "새송이 버섯", "감자", "소스", "돼지고기", "돼지고기", "돼지고기"]
@@ -63,8 +84,29 @@ private extension DetailViewController {
     func allSetting() {
         tableViewSetting()
         buttonTapped()
+        naviBarSetting()
     }
     
+    private func naviBarSetting() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .clear
+        appearance.shadowColor = .none
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationController?.navigationBar.tintColor = ColorGuide.main
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        let deletedButton = UIBarButtonItem(image: UIImage(systemName: "trash")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(deletedButtonTapped))
+        
+        navigationItem.rightBarButtonItem = deletedButton
+        
+        let backButton = UIBarButtonItem(title: "닫기", style: .done, target: self, action: #selector(backButtonTapped))
+        
+        backButton.tintColor = ColorGuide.main
+        navigationItem.leftBarButtonItem = backButton
+        
+    }
     func tableViewSetting() {
         detailView.detailViewMiddle.materialTableView.delegate = self
         detailView.detailViewMiddle.materialTableView.dataSource = self
@@ -80,6 +122,10 @@ private extension DetailViewController {
     func buttonTapped() {
         detailView.detailViewTop.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         detailView.detailViewBottom.recipeUdateButton.addTarget(self, action: #selector(contentUpdateButtonTapped), for: .touchUpInside)
+    }
+    
+    func itemSetting() {
+        
     }
 }
 
@@ -139,6 +185,17 @@ extension DetailViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
+    
+    @objc func backButtonTapped() {
+
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+    @objc func deletedButtonTapped() {
+        
+    }
+    
 }
 // MARK: - table UITableViewDelegate / UITableViewDataSource
 
