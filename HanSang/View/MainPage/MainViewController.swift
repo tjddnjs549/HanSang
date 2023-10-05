@@ -27,6 +27,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        categoryButtonAction()
     }
 }
 
@@ -53,17 +54,59 @@ private extension MainViewController {
             let coloredSettingImage = scaledSettingImage.withTintColor(ColorGuide.textHint, renderingMode: .alwaysOriginal)
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: coloredSettingImage, style: .plain, target: self, action: #selector(searchButtonTapped))
         }
+    }
+    
+    func categoryButtonAction() {
+        mainView.riceButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        mainView.soupButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        mainView.noodleButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        mainView.breadButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        mainView.alcoholButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        mainView.pizzaButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        mainView.steameddishButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        mainView.othersButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
         
-        mainView.riceButton.addTarget(self, action: #selector(riceButtonTapped), for: .touchUpInside)
+        mainView.riceButton.tag = 1
+        mainView.soupButton.tag = 2
+        mainView.noodleButton.tag = 3
+        mainView.breadButton.tag = 4
+        mainView.alcoholButton.tag = 5
+        mainView.pizzaButton.tag = 6
+        mainView.steameddishButton.tag = 7
+        mainView.othersButton.tag = 8
+    }
+    
+    @objc func categoryButtonTapped(_ sender: UIButton) {
+        var categoryTitle: String = ""
+
+        switch sender.tag {
+        case 1:
+            categoryTitle = "밥"
+        case 2:
+            categoryTitle = "찌개"
+        case 3:
+            categoryTitle = "면"
+        case 4:
+            categoryTitle = "베이킹"
+        case 5:
+            categoryTitle = "술"
+        case 6:
+            categoryTitle = "분식"
+        case 7:
+            categoryTitle = "찜"
+        case 8:
+            categoryTitle = "기타"
+        default:
+            break
+        }
+
+        let recipeListVC = RecipeListViewController()
+        recipeListVC.pageTitle = categoryTitle
+        navigationController?.pushViewController(recipeListVC, animated: true)
     }
     
     @objc func searchButtonTapped() {
         navigationController?.pushViewController(SearchViewController(), animated: true)
-    }
-    
-    @objc func riceButtonTapped() {
-        let recipeListVC = RecipeListViewController()
-        navigationController?.pushViewController(recipeListVC, animated: true)
     }
 }
 
