@@ -7,7 +7,8 @@
 
 import UIKit
 
-class RecipeListViewController: UIViewController {    
+class RecipeListViewController: UIViewController {
+    var pageTitle: String = ""
     private let recipeListView = RecipeListView()
     let images: [UIImage] = [
         UIImage(named: "1")!,
@@ -36,6 +37,7 @@ class RecipeListViewController: UIViewController {
 private extension RecipeListViewController {
     func setup() {
         view = recipeListView
+        recipeListView.recipeListLabel.text = pageTitle
         recipeListView.collectionView.dataSource = self
         recipeListView.collectionView.delegate = self
     

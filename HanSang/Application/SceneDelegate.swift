@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            print("자동로그인 여부: ", isLoggedIn())
+            
             if isLoggedIn() {
                 // 자동 로그인 가능한 경우 user ID 불러오기
                 if let loggedInUserId = loadLoggedInUserId(),

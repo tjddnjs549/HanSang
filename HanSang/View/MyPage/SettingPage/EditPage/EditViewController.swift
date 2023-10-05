@@ -64,8 +64,7 @@ private extension EditViewController {
 
     @objc func keyboardWillShow(_ notification: Notification) {
         if let userInfo = notification.userInfo,
-           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-        {
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             let keyboardHeight = keyboardFrame.height
 
             if let activeTextField = activeTextField {
@@ -142,8 +141,7 @@ extension EditViewController {
         }
     }
 
-    // MARK: - 회원가입 정규식 유효성 검사
-
+    // MARK: - 정규식 유효성 검사
     private func isValidPw(_ pw: String) -> Bool {
         // 비밀번호 정규식: 대소문자, 숫자, 특수문자 중 적어도 하나를 포함하고 4자 이상
         let pwRegex = "^(?=.*[A-Za-z\\d@$!%*?&#]).{4,}$"
@@ -175,19 +173,22 @@ extension EditViewController {
             return
         }
 
-        // 중복 확인
-        if isNicknameAlreadyRegistered(nickname) {
-            editView.nicknameTextFieldDescription.text = "이미 존재하는 닉네임입니다."
-            return
-        }
+        let isNicknameNotModified = (nickname == LoginViewModel.loginUser?.nickname)
 
-        if let user = LoginViewModel.loginUser {
-            editViewModel.editUser(user, editImage: image, editPW: pw, editNickname: nickname)
-            editViewModel.fetchUserInfo()
+        if isNicknameNotModified || !isNicknameAlreadyRegistered(nickname) {
+            editView.nicknameTextFieldDescription.isHidden = true
 
-            DispatchQueue.main.async {
-                self.dismiss(animated: true)
+            if let user = LoginViewModel.loginUser {
+                editViewModel.editUser(user, editImage: image, editPW: pw, editNickname: nickname)
+                editViewModel.fetchUserInfo()
+
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true)
+                }
             }
+        } else {
+            editView.nicknameTextFieldDescription.text = "이미 존재하는 닉네임입니다."
+            editView.nicknameTextFieldDescription.isHidden = false
         }
     }
 }
