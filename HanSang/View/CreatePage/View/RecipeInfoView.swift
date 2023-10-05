@@ -11,10 +11,8 @@ import SnapKit
 class RecipeInfoView: UIView {
     
     // MARK: - Properties
-    
     private let categoryList = ["🍚 \n밥", "🥘 \n찌개", "🍝 \n면", "🍩 \n베이킹", "🍷 \n술", "🍕 \n분식","🍲 \n찜", "🍴 \n기타"]
     private let difficultyList = ["왕초보", "초보", "중수", "고수"]
-
     private let recipeLabel: UILabel = {
         $0.text =
                 """
@@ -205,10 +203,14 @@ extension RecipeInfoView: UICollectionViewDataSource {
         
         if collectionView == categoryCollcetionView {
             cell.setup(title: categoryList[indexPath.row])
+            if indexPath.item == 0 {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+                
+            }
         } else {
             cell.setup(title: difficultyList[indexPath.row])
         }
-        
         return cell
     }
 }
@@ -227,4 +229,20 @@ extension RecipeInfoView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
+   
 }
+
+extension RecipeInfoView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(#function)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeInfoItemCollectionViewCell.identifier, for: indexPath) as? RecipeInfoItemCollectionViewCell else { return }
+        if collectionView == categoryCollcetionView {
+            if indexPath.item == 0 {
+                cell.isButtonSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            }
+        }
+
+    }
+}
+
