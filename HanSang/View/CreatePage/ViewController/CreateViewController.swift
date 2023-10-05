@@ -83,13 +83,14 @@ class CreateViewController: UIViewController {
     }
     
     //MARK: - @objc
-    
+    // 🧨 수정
     @objc func touchUpNextButton() {
         if page == 3 {
             coreDataManager.saveRecipe(
                 content: recipeInfoView.getRecipeInfo(),
                 materials: materialView.materialList,
-                recipes: recipeView.recipeList)
+                recipes: recipeView.recipeList,
+                user: LoginViewModel.loginUser!)
             return
         }
         

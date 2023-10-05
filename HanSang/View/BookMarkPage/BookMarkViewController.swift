@@ -9,27 +9,23 @@ import UIKit
 
 class BookMarkViewController: UIViewController {
     private let bookMarkView = BookMarkView()
-    let images: [UIImage] = [
-        UIImage(named: "1")!,
-        UIImage(named: "2")!,
-        UIImage(named: "3")!,
-        UIImage(named: "4")!,
-        UIImage(named: "5")!,
-        UIImage(named: "6")!,
-        UIImage(named: "7")!,
-        UIImage(named: "1")!,
-        UIImage(named: "2")!,
-        UIImage(named: "3")!,
-        UIImage(named: "4")!,
-        UIImage(named: "5")!,
-        UIImage(named: "6")!,
-        UIImage(named: "7")!,
-    ]
+    var bookmarkedContents: [Content] = [] {
+        didSet {
+            bookMarkView.collectionView.reloadData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupBookmarkedContents()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
+        setupBookmarkedContents()
     }
 }
 
@@ -46,27 +42,29 @@ private extension BookMarkViewController {
             navigationItem.leftBarButtonItem = button
         }
     }
+    
+    func setupBookmarkedContents() {
+        bookmarkedContents = ContentDataManager.shared.getContentBookmark()
+    }
 }
 
 extension BookMarkViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return bookmarkedContents.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as? MyPageCustomCell else {
             fatalError()
         }
-        let image = images[indexPath.row]
-        cell.configure(image)
+        
+        let content = bookmarkedContents[indexPath.row]
+        cell.configure(content)
+        
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
-        cell.layer.shadowColor = ColorGuide.textHint.cgColor
-        cell.layer.shadowOpacity = 1
-        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
-        cell.layer.shadowRadius = 12
         return cell
     }
 }

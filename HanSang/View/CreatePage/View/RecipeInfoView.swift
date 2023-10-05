@@ -224,14 +224,14 @@ class RecipeInfoView: UIView {
             category = ""
         }
     }
-    
+    // 🧨 수정
     func getRecipeInfo() -> RecipeInfoModel {
         return RecipeInfoModel(
             date: Date(),
-            title: recipeLabel.text ?? "",
+            title: recipeTextField.text ?? "",
             image: imageView.image ?? UIImage(),
             category: category,
-            time: timeLabel.text ?? "",
+            time: timeTextField.text ?? "",
             difficulty: difficulty,
             kick: "")
     }
@@ -256,6 +256,7 @@ extension RecipeInfoView: UICollectionViewDataSource {
         if collectionView == categoryCollcetionView {
             cell.categoryLabel.text = categoryList[indexPath.row]
             setCategory(indexPath.row)
+//            print("ss: \(indexPath.row)")
         } else {
             cell.categoryLabel.text = difficultyList[indexPath.row]
             difficulty = difficultyList[indexPath.row]
@@ -286,6 +287,8 @@ extension RecipeInfoView: UICollectionViewDelegate {
         selectedIndexPath = indexPath
         if let cell = collectionView.cellForItem(at: indexPath) as? RecipeInfoItemCollectionViewCell {
             cell.isSelected = true
+            setCategory(indexPath.row)
+            print("selected: \(indexPath.row)")
         }
     }
 }

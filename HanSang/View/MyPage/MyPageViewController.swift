@@ -11,12 +11,12 @@ import UIKit
 class MyPageViewController: UIViewController {
     private let myPageView = MyPageView()
     private let myPageViewModel = MyPageViewModel()
-    let images: [UIImage] = [
-        UIImage(named: "1")!,
-        UIImage(named: "2")!,
-        UIImage(named: "3")!,
-        UIImage(named: "4")!,
-    ]
+    
+    var userContents: [Content] = [] {
+        didSet {
+            myPageView.collectionView.reloadData()
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,6 +28,7 @@ class MyPageViewController: UIViewController {
         super.viewDidLoad()
 
         loadUserInfo()
+        loadUserContents()
         setup()
     }
 }
@@ -65,7 +66,6 @@ private extension MyPageViewController {
 
     func loadUserInfo() {
         if let user = LoginViewModel.loginUser,
-           let id = user.id,
            let nickname = user.nickname,
            let recipeCount = user.content?.count {
             if let imageData = user.profilePicture,
@@ -83,27 +83,33 @@ private extension MyPageViewController {
             }
         }
     }
+    
+    func loadUserContents() {
+        if let user = LoginViewModel.loginUser {
+            if let contents = myPageViewModel.getContentForUser(user) {
+                userContents = contents.reversed()
+            }
+        }
+    }
 }
 
 extension MyPageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return userContents.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as? MyPageCustomCell else {
             fatalError()
         }
-        let image = images[indexPath.row]
-        cell.configure(image)
+        
+        let content = userContents[indexPath.row]
+        cell.configure(content)
+        
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
-        cell.layer.shadowColor = ColorGuide.textHint.cgColor
-        cell.layer.shadowOpacity = 1
-        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
-        cell.layer.shadowRadius = 12
         return cell
     }
 }
