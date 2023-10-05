@@ -8,7 +8,7 @@
 import UIKit
 
 class RecipeListViewController: UIViewController {
-    private let recipeListView = RecipeListView()
+    let recipeListView = RecipeListView()
     private let dataManager = ContentDataManager.shared
   
     var pageTitle: String = ""

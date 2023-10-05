@@ -34,6 +34,7 @@ final class RecipeTableViewCell: UITableViewCell {
     lazy var timerButton: UIButton = {
         let button = UIButton(type: .custom)
         button.buttonImageMakeUI(image: "timer", selectedImage: "timer", color: ColorGuide.inputLine)
+        button.isUserInteractionEnabled = false
         return button
     }()
     
@@ -44,7 +45,7 @@ final class RecipeTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var timerStackView: UIStackView = {
+    lazy var timerStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [timerButton,timerLabel])
         stack.spacing = 5
         stack.axis = .vertical
@@ -96,12 +97,13 @@ extension RecipeTableViewCell {
             
             recipeLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4),
             recipeLabel.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor, constant: 8),
-            recipeLabel.trailingAnchor.constraint(equalTo: timerStackView.leadingAnchor, constant: -8),
+            recipeLabel.trailingAnchor.constraint(equalTo: timerStackView.leadingAnchor, constant: -4),
             recipeLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -4),
 
             timerStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
             timerStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
-            timerStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12)
+            timerStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
+            timerStackView.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
 }
