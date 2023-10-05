@@ -10,7 +10,7 @@ import UIKit
 final class DetailViewTop: UIView {
 
     // MARK: - properties
-    private lazy var foodImageView: UIImageView = {
+    lazy var foodImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "Food1")
         image.contentMode = .scaleAspectFit
@@ -19,7 +19,7 @@ final class DetailViewTop: UIView {
         return image
     }()
     
-    private lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let title = UILabel()        
         title.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size24)
         title.text = "집에서도 미디움레어가 가능한 스테이크 레시피"
@@ -33,7 +33,7 @@ final class DetailViewTop: UIView {
         return time
     }()
     
-    private lazy var makeTimeLabel: UILabel = {
+    lazy var makeTimeLabel: UILabel = {
         let time = UILabel()
         time.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16)
         time.text = "1시간30분"
@@ -47,14 +47,14 @@ final class DetailViewTop: UIView {
         return difficulty
     }()
     
-    private lazy var makeDifficultyLabel: UILabel = {
+    lazy var makeDifficultyLabel: UILabel = {
         let difficulty = UILabel()
         difficulty.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16)
         difficulty.text = "초보"
         return difficulty
     }()
     
-    private lazy var profileImageView: UIImageView = {
+    lazy var profileImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "profileImage")
         image.contentMode = .scaleAspectFit
@@ -63,7 +63,7 @@ final class DetailViewTop: UIView {
         return image
     }()
     
-    private lazy var profileNameLabel: UILabel = {
+    lazy var profileNameLabel: UILabel = {
         let label = UILabel()
         label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16Bold)
         label.text = "닉네임입니다!"

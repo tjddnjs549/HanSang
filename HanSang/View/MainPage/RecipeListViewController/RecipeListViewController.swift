@@ -43,7 +43,7 @@ private extension RecipeListViewController {
     }
     
     func loadCategoryContentsList() {
-        categoryContents = ContentDataManager.shared.getCategoryContents(category: pageTitle) ?? []
+        categoryContents = ContentDataManager.shared.getCategoryContents(category: pageTitle)?.reversed() ?? []
     }
     
     @objc func goBack() {
@@ -60,10 +60,11 @@ extension RecipeListViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as? MyPageCustomCell else {
             fatalError()
         }
-      
+
+    
         let content = categoryContents[indexPath.row]
         cell.configure(content)
-      
+
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
@@ -87,7 +88,7 @@ extension RecipeListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailViewController()
-        //detailVC.content = dataManager.SelectrdCategoryContentList(category: pageTitle)[indexPath.item]
+        detailVC.content = dataManager.selectedCategoryContentList(category: pageTitle)[indexPath.item]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
