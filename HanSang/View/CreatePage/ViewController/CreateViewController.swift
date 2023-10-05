@@ -30,7 +30,7 @@ class CreateViewController: UIViewController {
         return $0
     }(UIButton())
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycl
     
     override func viewDidLoad() {
         super.viewDidLoad()
