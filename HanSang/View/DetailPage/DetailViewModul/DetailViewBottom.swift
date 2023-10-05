@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewBottom: UIView {
+final class DetailViewBottom: UIView {
 
     // MARK: - properties
 
@@ -21,7 +21,7 @@ class DetailViewBottom: UIView {
     
     lazy var recipeUdateButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.buttonMakeUI(backgroundColor: UIColor.lightGray.withAlphaComponent(0.4), cornerRadius: 10.0, borderWidth: 0.0, borderColor: UIColor.clear.cgColor, setTitle: "레시피 수정하기", font: .boldSystemFont(ofSize: 20), setTitleColor: UIColor.black)
+        button.buttonMakeUI(backgroundColor: ColorGuide.main, cornerRadius: 10.0, borderWidth: 0.0, borderColor: UIColor.clear.cgColor, setTitle: "레시피 수정하기", font: FontGuide.size19Bold, setTitleColor: UIColor.white)
         return button
     }()
     
@@ -48,13 +48,12 @@ extension DetailViewBottom {
         NSLayoutConstraint.activate([
             recipeTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             recipeTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            recipeTableView.heightAnchor.constraint(equalToConstant: 300),//❗️❗️❗️❗️
+            //recipeTableView.heightAnchor.constraint(equalToConstant: 300),//❗️❗️❗️❗️
             recipeTableView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             recipeTableView.bottomAnchor.constraint(equalTo: self.recipeUdateButton.topAnchor, constant: -20),
             
             recipeUdateButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             recipeUdateButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            recipeUdateButton.topAnchor.constraint(equalTo: self.recipeTableView.bottomAnchor, constant: 30),
             recipeUdateButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         ])
     }

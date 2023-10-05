@@ -9,9 +9,11 @@ import UIKit
 
 final class RecipeTableViewCell: UITableViewCell {
     
+    static let identifier = "RecipeTableViewCell"
+    
     private lazy var cellIndexLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.black, font: .boldSystemFont(ofSize: 16))
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16Bold)
         return label
     }()
     
@@ -25,22 +27,23 @@ final class RecipeTableViewCell: UITableViewCell {
     
     lazy var recipeLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.black, font: .systemFont(ofSize: 16))
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16)
         return label
     }()
     
     lazy var timerButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.buttonImageMakeUI(image: "timer.circle", selectedImage: "timer.circle.fill", color: UIColor.lightGray)
+        button.buttonImageMakeUI(image: "timer", selectedImage: "timer", color: ColorGuide.inputLine)
         return button
     }()
     
     lazy var timerLabel: UILabel = {
         let label = UILabel()
-        label.labelMakeUI(textColor: UIColor.lightGray, font: .systemFont(ofSize: 14))
+        label.labelMakeUI(textColor: ColorGuide.inputLine, font: FontGuide.size14)
         label.text = "00:00"
         return label
     }()
+    
     private lazy var timerStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [timerButton,timerLabel])
         stack.spacing = 5
@@ -80,26 +83,25 @@ extension RecipeTableViewCell {
         cellIndexLabel.text = "\(index + 1)"
         
         NSLayoutConstraint.activate([
-            cellIndexLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            cellIndexLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4),
             cellIndexLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
-            cellIndexLabel.trailingAnchor.constraint(equalTo: self.recipeImageView.leadingAnchor, constant: -10),
+            cellIndexLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -4),
+            cellIndexLabel.widthAnchor.constraint(equalToConstant: 10),
             
-            recipeImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            recipeImageView.widthAnchor.constraint(equalToConstant: 70),
+            recipeImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4),
+            recipeImageView.leadingAnchor.constraint(equalTo: cellIndexLabel.trailingAnchor, constant: 6),
+            recipeImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -4),
             recipeImageView.heightAnchor.constraint(equalToConstant: 70),
-            recipeImageView.trailingAnchor.constraint(equalTo: self.recipeLabel.leadingAnchor, constant: -10),
+            recipeImageView.widthAnchor.constraint(equalToConstant: 70),
             
-            recipeLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            recipeLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -75),
-            
-            timerStackView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            timerStackView.leadingAnchor.constraint(equalTo: self.recipeLabel.trailingAnchor, constant: 0),
-            timerStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
-            
-            timerButton.heightAnchor.constraint(equalToConstant: 30),
-            timerLabel.heightAnchor.constraint(equalToConstant: 14)
-            
+            recipeLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4),
+            recipeLabel.leadingAnchor.constraint(equalTo: recipeImageView.trailingAnchor, constant: 8),
+            recipeLabel.trailingAnchor.constraint(equalTo: timerStackView.leadingAnchor, constant: -8),
+            recipeLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -4),
+
+            timerStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
+            timerStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
+            timerStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12)
         ])
     }
- 
 }

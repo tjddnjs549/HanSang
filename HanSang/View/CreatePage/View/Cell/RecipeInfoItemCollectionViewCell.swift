@@ -14,18 +14,27 @@ class RecipeInfoItemCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "RecipeInfoItemCollectionViewCell"
     
-    private var isButtonSelected = false
+    var isButtonSelected = false
     
-    private let button: UIButton = {
-        $0.setTitleColor(.black, for: .normal)
-        $0.titleLabel?.numberOfLines = 2
-        $0.titleLabel?.font = .systemFont(ofSize: 15)
-        $0.layer.borderColor = UIColor.systemGray5.cgColor
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 20
-        $0.addTarget(self, action: #selector(touchUpButton), for: .touchUpInside)
-        return $0
-    }(UIButton())
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                self.categoryLabel.layer.borderColor = ColorGuide.black.cgColor
+                self.categoryLabel.layer.borderWidth = 1.5
+            } else {
+                self.categoryLabel.layer.borderColor = ColorGuide.inputLine.cgColor
+                self.categoryLabel.layer.borderWidth = 1.5
+            }
+        }
+    }
+    lazy var categoryLabel: UILabel = {
+        let label = UILabel()
+        label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size14)
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        label.isUserInteractionEnabled = false
+        return label
+    }()
     
     // MARK: - Life Cycle
     
@@ -43,27 +52,25 @@ class RecipeInfoItemCollectionViewCell: UICollectionViewCell {
     
     private func configUI() {
         backgroundColor = .clear
+        self.categoryLabel.layer.borderColor = ColorGuide.inputLine.cgColor
+        self.categoryLabel.layer.borderWidth = 1.5
+        self.categoryLabel.layer.cornerRadius = 15.0
     }
     
     private func setupLayout() {
-        addSubview(button)
+        self.contentView.addSubview(categoryLabel)
         
-        button.snp.makeConstraints {
+        categoryLabel.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
     
     //MARK: - @objc
-    
-    @objc func touchUpButton() {
-        button.layer.borderColor = isButtonSelected ? UIColor.black.cgColor : UIColor.systemGray5.cgColor
-        isButtonSelected.toggle()
-    }
+
+
     
     // MARK: - Custom Method
     
-    func setup(title: String) {
-        button.setTitle(title, for: .normal)
-    }
+
 }
 

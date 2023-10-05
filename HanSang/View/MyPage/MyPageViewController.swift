@@ -5,63 +5,30 @@
 //  Created by 박성원 on 2023/09/25.
 //
 
+import PhotosUI
 import UIKit
 
 class MyPageViewController: UIViewController {
     private let myPageView = MyPageView()
+    private let myPageViewModel = MyPageViewModel()
     let images: [UIImage] = [
         UIImage(named: "1")!,
         UIImage(named: "2")!,
         UIImage(named: "3")!,
         UIImage(named: "4")!,
     ]
-
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-    func fetchUserInfo() {
-        let request = User.fetchRequest()
-
-        do {
-            SignUpViewController.user = try context.fetch(request)
-        } catch {
-            print("🚨 유저 정보 불러오기 오류")
-        }
-    }
-
-    func deleteLogInUserInfo() {
-        let request = User.fetchRequest()
-
-        do {
-            let users = try context.fetch(request)
-            for user in users {
-                context.delete(user)
-            }
-            try context.save()
-        } catch {
-            print("🚨 로그아웃 유저 정보 저장 에러")
-        }
-    }
     
-    @objc func deleteAllUsers() {
-        let request = User.fetchRequest()
-
-        do {
-            let users = try context.fetch(request)
-            for user in users {
-                context.delete(user)
-            }
-            try context.save()
-            fetchUserInfo()
-        } catch {
-            print("🚨 Error: Delete all tasks")
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadUserInfo()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setup()
         loadUserInfo()
+        setup()
     }
 }
 
@@ -70,28 +37,40 @@ private extension MyPageViewController {
         view = myPageView
         myPageView.collectionView.dataSource = self
         myPageView.collectionView.delegate = self
-        
+
         if let originalImage = UIImage(named: "HANSANG") {
             let tintedImage = originalImage.withTintColor(ColorGuide.main)
-            let button = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(deleteAllUsers))
+            let button = UIBarButtonItem(image: tintedImage, style: .plain, target: nil, action: nil)
             button.tintColor = ColorGuide.main
             navigationItem.leftBarButtonItem = button
         }
-        
-        if let gearImage = UIImage(named: "setting") {
-            let coloredGearImage = gearImage.withTintColor(ColorGuide.textHint, renderingMode: .alwaysOriginal)
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: coloredGearImage, style: .plain, target: self, action: #selector(logoutButtonTapped))
-        }
 
+        if let settingImage = UIImage(named: "setting") {
+            let originalSize = settingImage.size
+            let scaledSize = CGSize(width: originalSize.width * 0.8, height: originalSize.height * 0.8)
+            let renderer = UIGraphicsImageRenderer(size: scaledSize)
+            let scaledSettingImage = renderer.image { _ in
+                settingImage.draw(in: CGRect(origin: .zero, size: scaledSize))
+            }
+            let coloredSettingImage = scaledSettingImage.withTintColor(ColorGuide.textHint, renderingMode: .alwaysOriginal)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: coloredSettingImage, style: .plain, target: self, action: #selector(settingButtonTapped))
+        }
+    }
+
+    @objc func settingButtonTapped() {
+        let settingVC = SettingViewController()
+        settingVC.modalPresentationStyle = .fullScreen
+        present(settingVC, animated: true, completion: nil)
     }
 
     func loadUserInfo() {
-        if let user = LoginViewController.loginUser,
+        if let user = LoginViewModel.loginUser,
            let id = user.id,
            let nickname = user.nickname,
            let recipeCount = user.content?.count {
             if let imageData = user.profilePicture,
-               let image = UIImage(data: imageData) {
+               let image = UIImage(data: imageData)
+            {
                 myPageView.profilePicture.image = image
             } else {
                 myPageView.profilePicture.image = UIImage(named: "profile")
@@ -102,18 +81,6 @@ private extension MyPageViewController {
             } else {
                 myPageView.recipeCount.text = String(recipeCount)
             }
-        }
-    }
-
-    // 로그아웃 별도 페이지로 이동 예정(-> 설정 페이지 추가)
-    @objc func logoutButtonTapped() {
-        UserDefaults.standard.set(false, forKey: "isLoggedIn")
-
-        // 로그인 화면으로 이동
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            let loginViewController = LoginViewController()
-            let navigationController = UINavigationController(rootViewController: loginViewController)
-            sceneDelegate.window?.rootViewController = navigationController
         }
     }
 }
@@ -141,13 +108,13 @@ extension MyPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
- extension MyPageViewController: UICollectionViewDelegateFlowLayout {
+extension MyPageViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (view.bounds.size.width - 76)/2
+        let size = (view.bounds.size.width - 76) / 2
         return CGSize(width: size, height: 182)
-   }
-     
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-         return 16
-     }
- }
+        return 16
+    }
+}

@@ -8,13 +8,14 @@
 import UIKit
 import SnapKit
 
-class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
+class MaterialCreateTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
     static let identifier = "MaterialCreateTableViewCell"
     
     var touchedDeleteButton: (() -> ())?
+    var textDidChange: ((String, String) -> Void)?
     
     private let deleteButton: UIButton = {
         $0.setImage(UIImage(systemName: "minus.circle"), for: .normal)
@@ -22,14 +23,14 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
         $0.addTarget(self, action: #selector(touchUpDeleteButton), for: .touchUpInside)
         return $0
     }(UIButton())
-    
-    private let materialTextField: UITextField = {
+
+    let materialTextField: UITextField = {
         $0.borderStyle = .roundedRect
         $0.placeholder = "재료명"
         return $0
     }(UITextField())
     
-    private let amountTextField: UITextField = {
+    let amountTextField: UITextField = {
         $0.borderStyle = .roundedRect
         $0.placeholder = "용량"
         return $0
@@ -46,7 +47,6 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        materialTextField.isEnabled = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -57,6 +57,7 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configUI()
         setupLayout()
+        setupTextField()
     }
     
     required init?(coder: NSCoder) {
@@ -67,7 +68,6 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     private func configUI() {
         backgroundColor = .clear
-        amountTextField.delegate = self
         
         [materialTextField, amountTextField].forEach {
             materialStackView.addArrangedSubview($0)
@@ -76,7 +76,7 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     private func setupLayout() {
         [deleteButton, materialStackView].forEach {
-            addSubview($0)
+            contentView.addSubview($0)
         }
         
         deleteButton.snp.makeConstraints {
@@ -96,5 +96,27 @@ class MaterialCreateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @objc private func touchUpDeleteButton() {
         touchedDeleteButton?()
+    }
+    
+    @objc private func textFieldDidChange() {
+        textDidChange?(materialTextField.text ?? "", amountTextField.text ?? "")
+    }
+    
+    //MARK: - Custom Method
+    
+    private func setupTextField() {
+        materialTextField.delegate = self
+        amountTextField.delegate = self
+    }
+    
+    func getMaterial() -> MaterialModel {
+        return MaterialModel(material: materialTextField.text ?? "", unit: amountTextField.text ?? "")
+    }
+}
+
+extension MaterialCreateTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

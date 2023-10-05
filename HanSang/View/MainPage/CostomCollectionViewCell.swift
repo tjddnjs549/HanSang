@@ -16,7 +16,6 @@ class CostomCollectionViewCell: UICollectionViewCell {
         iv.contentMode = .scaleAspectFill
         iv.image = UIImage(systemName: "questionmark")
         iv.tintColor = .white
-//        iv.frame = CGRect(x: 0, y: 0, width: 162.63, height: 121.98)
         iv.clipsToBounds = true
         return iv
     }()
@@ -25,7 +24,7 @@ class CostomCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Costom"
         label.textAlignment = .left
-        label.textColor = .white
+        label.textColor = .black
 //        label.text = sizeThatFits(30)
         return label
     }()
@@ -34,24 +33,17 @@ class CostomCollectionViewCell: UICollectionViewCell {
         let timeLabel = UILabel()
         timeLabel.text = "2시간"
         timeLabel.textAlignment = .left
-        timeLabel.textColor = .white
+        timeLabel.textColor = .black
         timeLabel.font = UIFont.systemFont(ofSize: 13)
         return timeLabel
     }()
-    
-//    private let likeButton: UIButton = {
-//        let likeButton = UIButton()
-//
-//        return likeButton
-//    }()
-    
+        
     private let likeButton: UIButton = {
         let likeButton = UIButton()
         likeButton.tintColor = .systemGray
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        // 좋아요 아이콘 이미지 설정
-        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-        // 버튼 탭 액션 설정
+        likeButton.addTarget(self, action: #selector(likeButtonTapped),
+                             for: .touchUpInside)
         return likeButton
     }()
 
@@ -62,18 +54,11 @@ class CostomCollectionViewCell: UICollectionViewCell {
     
     public func configure(with image: UIImage) {
         self.myimageView.image = image
-//        contentView.addSubview(label)
         self.setupUI()
     }
     
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        label.frame = CGRect(x: 5, y: myimageView.frame.size.height-50, width: myimageView.frame.size.width-10, height: 50)
-////        label.frame = bounds
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        // contentView에 라운드 코너 적용
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
     }
@@ -81,8 +66,7 @@ class CostomCollectionViewCell: UICollectionViewCell {
 //    }
     
     private func setupUI() {
-        self.backgroundColor = .systemGreen
-        
+        self.backgroundColor = .white
         self.addSubview(myimageView)
         myimageView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(label)
@@ -91,9 +75,7 @@ class CostomCollectionViewCell: UICollectionViewCell {
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(likeButton)
         likeButton.translatesAutoresizingMaskIntoConstraints = false
-        
-
-        
+    
         NSLayoutConstraint.activate([
             myimageView.topAnchor.constraint(equalTo: self.topAnchor),
             myimageView.widthAnchor.constraint(equalToConstant: 162.63),
@@ -109,9 +91,8 @@ class CostomCollectionViewCell: UICollectionViewCell {
             timeLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 2),
             timeLabel.widthAnchor.constraint(equalToConstant: 50),
             timeLabel.heightAnchor.constraint(equalToConstant: 14),
-            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             
-//            likeButton.topAnchor.constraint(equalTo: myimageView.bottomAnchor, constant: 3),
             likeButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15),
             likeButton.widthAnchor.constraint(equalToConstant: 17),
             likeButton.heightAnchor.constraint(equalToConstant: 15),

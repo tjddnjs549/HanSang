@@ -11,8 +11,8 @@ import SnapKit
 class MaterialView: UIView {
     
     // MARK: - Properties
-    
-    private let materialList: [Materials] = []
+
+    var materialList: [MaterialModel] = [MaterialModel(material: "", unit: "")]
     
     private let messageLabel: UILabel = {
         $0.text =
@@ -81,11 +81,7 @@ class MaterialView: UIView {
 
 extension MaterialView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if materialList.isEmpty {
-            return 1
-        } else {
-            return materialList.count
-        }
+        return materialList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -94,12 +90,14 @@ extension MaterialView: UITableViewDataSource {
         
         cell.selectionStyle = .none
         
+        // 재료 삭제
         cell.touchedDeleteButton = {
-            // 재료 삭제
+            self.materialList.remove(at: indexPath.row)
+            self.materialCreateTableView.reloadData()
         }
-        
         return cell
     }
+    
 }
 
 
@@ -110,11 +108,25 @@ extension MaterialView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MaterialFooterView.identifier) as? MaterialFooterView
         else { return nil }
-
+      
         footerView.touchedAddButton = {
-            // 재료 추가
+            // 재료명, 용량 모두 기입 시 추가
+            let targetIndexPath = IndexPath(row: self.materialList.count - 1, section: 0)
+            
+            if let cell = tableView.cellForRow(at: targetIndexPath) as? MaterialCreateTableViewCell {
+                let materialName = cell.materialTextField.text ?? ""
+                let materialAmount = cell.amountTextField.text ?? ""
+                
+                if !materialName.isEmpty && !materialAmount.isEmpty {
+                    self.materialList[targetIndexPath.row] = MaterialModel(material: materialName, unit: materialAmount)
+                    let newMaterial = MaterialModel(material: "", unit: "")
+                    self.materialList.append(newMaterial)
+                    tableView.reloadData()
+                } else {
+                    // Alert 띄워서 재료명, 용량 모두 기입 안내
+                }
+            }
         }
-
         return footerView
     }
     
@@ -122,6 +134,3 @@ extension MaterialView: UITableViewDelegate {
         return 60
     }
 }
-
-
-

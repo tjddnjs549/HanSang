@@ -10,78 +10,8 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     private let signUpView = SignUpView()
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    static var user: [User]?
+    private let signUpViewModel = SignUpViewModel()
     private var activeTextField: UITextField?
-
-    func fetchUserInfo() {
-        let request = User.fetchRequest()
-
-        do {
-            SignUpViewController.user = try context.fetch(request)
-        } catch {
-            print("🚨 유저 정보 불러오기 오류")
-        }
-    }
-
-    func getUserId(_ id: String) -> User? {
-        let request = User.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %@", id)
-
-        do {
-            let users = try context.fetch(request)
-            return users.first
-        } catch {
-            print("🚨 유저 정보 찾을 수 없음: \(error)")
-            return nil
-        }
-    }
-
-    func getUserNickname(_ nickname: String) -> User? {
-        let request = User.fetchRequest()
-        request.predicate = NSPredicate(format: "nickname == %@", nickname)
-
-        do {
-            let users = try context.fetch(request)
-            return users.first
-        } catch {
-            print("🚨 유저 정보 찾을 수 없음: \(error)")
-            return nil
-        }
-    }
-
-    func createUser(image: UIImage?, id: String, pw: String, nickname: String) {
-        let newUser = User(context: context)
-        if let imageData = image!.jpegData(compressionQuality: 1.0) {
-            newUser.profilePicture = imageData
-            newUser.id = id
-            newUser.pw = pw
-            newUser.nickname = nickname
-        } else {
-            print("🚨 이미지 저장 에러")
-        }
-
-        do {
-            try context.save()
-        } catch {
-            print("🚨 유저 생성 오류")
-        }
-    }
-
-    func deleteAllUsers() {
-        let request = User.fetchRequest()
-
-        do {
-            let users = try context.fetch(request)
-            for user in users {
-                context.delete(user)
-            }
-            try context.save()
-            fetchUserInfo()
-        } catch {
-            print("🚨 유저 정보 일괄 삭제 오류")
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -236,12 +166,12 @@ extension SignUpViewController {
     }
 
     private func isIdAlreadyRegistered(_ id: String) -> Bool {
-        let existingUser = getUserId(id)
+        let existingUser = signUpViewModel.getUserId(id)
         return (existingUser != nil) ? true : false
     }
 
     private func isNicknameAlreadyRegistered(_ nickname: String) -> Bool {
-        let existingUser = getUserNickname(nickname)
+        let existingUser = signUpViewModel.getUserNickname(nickname)
         return (existingUser != nil) ? true : false
     }
 
@@ -265,8 +195,8 @@ extension SignUpViewController {
             return
         }
 
-        createUser(image: image, id: id, pw: pw, nickname: nickname)
-        fetchUserInfo()
+        signUpViewModel.createUser(image: image, id: id, pw: pw, nickname: nickname)
+        signUpViewModel.fetchUserInfo()
 
         // 회원가입 완료 시 로그인 페이지로 이동
         DispatchQueue.main.async {
