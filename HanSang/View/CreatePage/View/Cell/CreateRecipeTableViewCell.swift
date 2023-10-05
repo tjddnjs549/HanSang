@@ -214,8 +214,12 @@ class CreateRecipeTableViewCell: UITableViewCell {
     }
     
     func getRecipe() -> RecipeModel {
+        var descriptions = ""
+        if recipleTextView.text != "조리 방법을 자세하게 알려주세요." {
+            descriptions = recipleTextView.text ?? ""
+        }
         return RecipeModel(
-            descriptions: recipleTextView.text ?? "",
+            descriptions: descriptions,
             image: recipeImageView.image ?? UIImage(),
             timer: timer ?? "")
     }
