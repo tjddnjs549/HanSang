@@ -438,7 +438,7 @@
 		E21806DE2AC3E7DF00A2614B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E21F9EE02AC5C52600CB2D96 /* HeaderView */,
+				E21F9EE02AC5C52600CB2D96 /* FooterView */,
 				E21806E12AC3E8B400A2614B /* Cell */,
 				E21806DF2AC3E7FF00A2614B /* RecipeInfoView.swift */,
 				E27CE3442AC5446A005358EF /* MaterialView.swift */,
@@ -457,13 +457,13 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		E21F9EE02AC5C52600CB2D96 /* HeaderView */ = {
+		E21F9EE02AC5C52600CB2D96 /* FooterView */ = {
 			isa = PBXGroup;
 			children = (
 				E21F9EE12AC5C56700CB2D96 /* MaterialFooterView.swift */,
 				E21F9EE52AC5CC5600CB2D96 /* MaterialFooterView.xib */,
 			);
-			path = HeaderView;
+			path = FooterView;
 			sourceTree = "<group>";
 		};
 		E2844CDF2ACD0C260026C2F2 /* Model */ = {
