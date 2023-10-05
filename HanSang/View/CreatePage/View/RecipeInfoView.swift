@@ -313,7 +313,6 @@ extension RecipeInfoView: PHPickerViewControllerDelegate {
                 DispatchQueue.main.async {
                     self.imageView.image = image as? UIImage
                     self.sendSubviewToBack(self.imageAddButton)
-                    self.imageView.layer.cornerRadius = 0.0
                 }
             }
             NotificationCenter.default.post(name: NotificationName.dismiss, object: nil)
