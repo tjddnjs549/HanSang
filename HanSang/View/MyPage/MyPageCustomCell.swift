@@ -10,6 +10,7 @@ import UIKit
 
 class MyPageCustomCell: UICollectionViewCell {
     static let identifier = "myPageCustomCell"
+    private var isBookmarked = false
     
     private let view: UIView = {
         let view = UIView()
@@ -42,11 +43,13 @@ class MyPageCustomCell: UICollectionViewCell {
         return label
     }()
     
-    private let bookMark: UIImageView = {
+    lazy var bookMark: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "bookMark")
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = ColorGuide.inputLine
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookMarkTapped)))
         imageView.snp.makeConstraints { make in
             make.height.equalTo(12)
         }
@@ -87,6 +90,23 @@ class MyPageCustomCell: UICollectionViewCell {
     public func configure(_ image: UIImage) {
         picture.image = image
         setupUI()
+    }
+    
+    @objc func bookMarkTapped() {
+        isBookmarked.toggle()
+        configureBookmarkImage()
+            
+        if let collectionView = self.superview as? UICollectionView {
+            collectionView.reloadData()
+        }
+    }
+    
+    private func configureBookmarkImage() {
+        if isBookmarked {
+            self.bookMark.image = UIImage(named: "bookMark.fill")
+        } else {
+            self.bookMark.image = UIImage(named: "bookMark")
+        }
     }
 }
 

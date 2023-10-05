@@ -11,9 +11,11 @@ import PhotosUI
 
 class RecipeInfoView: UIView {
     
+    
     // MARK: - Properties
     private let categoryList = ["🍚 \n밥", "🥘 \n찌개", "🍝 \n면", "🍩 \n베이킹", "🍷 \n술", "🍕 \n분식","🍲 \n찜", "🍴 \n기타"]
     private let difficultyList = ["왕초보", "초보", "중수", "고수"]
+    var selectedIndexPath: IndexPath?
     private var category: String = ""
     private var difficulty: String = ""
     
@@ -120,6 +122,7 @@ class RecipeInfoView: UIView {
             $0.backgroundColor = .clear
             $0.isScrollEnabled = true
             $0.showsHorizontalScrollIndicator = false
+            $0.allowsMultipleSelection = false
             $0.delegate = self
             $0.dataSource = self
             $0.register(RecipeInfoItemCollectionViewCell.self, forCellWithReuseIdentifier: RecipeInfoItemCollectionViewCell.identifier)
@@ -250,10 +253,10 @@ extension RecipeInfoView: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
         
         if collectionView == categoryCollcetionView {
-            cell.setup(title: categoryList[indexPath.row])
+            cell.categoryLabel.text = categoryList[indexPath.row]
             setCategory(indexPath.row)
         } else {
-            cell.setup(title: difficultyList[indexPath.row])
+            cell.categoryLabel.text = difficultyList[indexPath.row]
             difficulty = difficultyList[indexPath.row]
         }
         return cell
@@ -274,9 +277,17 @@ extension RecipeInfoView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
-   
+    
 }
 
+extension RecipeInfoView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath
+        if let cell = collectionView.cellForItem(at: indexPath) as? RecipeInfoItemCollectionViewCell {
+            cell.isSelected = true
+        }
+    }
+}
 //MARK: - PHPickerViewControllerDelegate
  
 extension RecipeInfoView: PHPickerViewControllerDelegate {
