@@ -9,6 +9,8 @@ import UIKit
 
 class RecipeListViewController: UIViewController {
     private let recipeListView = RecipeListView()
+    private let dataManager = ContentDataManager.shared
+  
     var pageTitle: String = ""
     
     var categoryContents: [Content] = [] {
@@ -16,7 +18,6 @@ class RecipeListViewController: UIViewController {
             recipeListView.collectionView.reloadData()
         }
     }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,7 +46,7 @@ private extension RecipeListViewController {
     }
 }
 
-extension RecipeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension RecipeListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoryContents.count
     }
@@ -54,10 +55,10 @@ extension RecipeListViewController: UICollectionViewDelegate, UICollectionViewDa
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as? MyPageCustomCell else {
             fatalError()
         }
-        
+      
         let content = categoryContents[indexPath.row]
         cell.configure(content)
-        
+      
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
@@ -75,4 +76,13 @@ extension RecipeListViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
          return 16
      }
+}
+
+extension RecipeListViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        //detailVC.content = dataManager.SelectrdCategoryContentList(category: pageTitle)[indexPath.item]
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
