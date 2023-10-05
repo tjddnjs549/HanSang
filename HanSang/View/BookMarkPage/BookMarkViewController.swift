@@ -41,10 +41,16 @@ private extension BookMarkViewController {
             button.tintColor = ColorGuide.main
             navigationItem.leftBarButtonItem = button
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(bookmarkButtonTapped), name: Notification.Name("BookmarkButtonTapped"), object: nil)
     }
     
     func setupBookmarkedContents() {
         bookmarkedContents = ContentDataManager.shared.getContentBookmark()
+    }
+    
+    @objc func bookmarkButtonTapped() {
+        setupBookmarkedContents()
     }
 }
 

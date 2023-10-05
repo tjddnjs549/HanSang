@@ -108,7 +108,8 @@ class MyPageCustomCell: UICollectionViewCell {
         isBookmarked.toggle()
         ContentDataManager.shared.toggleBookmark(content: content)
         updateBookmarkButtonImage()
-
+        NotificationCenter.default.post(name: Notification.Name("BookmarkButtonTapped"), object: nil)
+        
         if let collectionView = self.superview as? UICollectionView {
             collectionView.reloadData()
         }
