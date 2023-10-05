@@ -16,7 +16,7 @@ class TimerViewController: UIViewController {
     }()
     
     let Stopwatch: UIView = {
-        let view = UIView()
+        let view = StopwatchView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
