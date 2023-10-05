@@ -10,6 +10,7 @@ import SnapKit
 
 class MainPageCollectionViewCell: UICollectionViewCell {
     static let identifier = "MainPageCollectionViewCell"
+    private var isBookmarked = false
     
     private let view: UIView = {
         let view = UIView()
@@ -51,13 +52,14 @@ class MainPageCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let bookMarkButton: UIButton = {
-        let button = UIButton()
-        button.tintColor = .systemGray
-        let heartImage = UIImage(systemName: "heart")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 20))
-        button.setImage(heartImage, for: .normal)
-        button.addTarget(self, action: #selector(bookMarkButtonTapped), for: .touchUpInside)
-        return button
+    lazy var bookMark: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "bookMark")
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = ColorGuide.inputLine
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookMarkTapped)))
+        return imageView
     }()
     
     private let time: UIImageView = {
@@ -79,8 +81,20 @@ class MainPageCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    @objc private func bookMarkButtonTapped() {
-        // 좋아요 버튼이 탭되었을 때 수행할 동작을 여기에 추가하세요.
+    @objc func bookMarkTapped() {
+        if let collectionView = self.superview as? UICollectionView {
+            isBookmarked.toggle()
+            configureBookmarkImage()
+            collectionView.reloadData()
+        }
+    }
+    
+    func configureBookmarkImage() {
+        if isBookmarked {
+            self.bookMark.image = UIImage(named: "bookMark.fill")
+        } else {
+            self.bookMark.image = UIImage(named: "bookMark")
+        }
     }
     
     public func configure(with image: UIImage) {
@@ -120,10 +134,12 @@ extension MainPageCollectionViewCell {
             make.leading.equalToSuperview().offset(15)
         }
         
-        view.addSubview(bookMarkButton)
-        bookMarkButton.snp.makeConstraints { make in
+        view.addSubview(bookMark)
+        bookMark.snp.makeConstraints { make in
             make.top.equalTo(title.snp.top).offset(5)
             make.trailing.equalToSuperview().offset(-15)
+            make.width.equalTo(21)
+            make.height.equalTo(18.23)
         }
         
         view.addSubview(timerStackView)
