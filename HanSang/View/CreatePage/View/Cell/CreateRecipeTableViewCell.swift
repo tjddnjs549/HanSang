@@ -7,13 +7,13 @@
 
 import UIKit
 import SnapKit
+import PhotosUI
 
 class CreateRecipeTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
     static let identifier = "CreateRecipeTableViewCell"
-    static let timerNotificationName = Notification.Name("SetTimer")
     
     var timer: String?
 
@@ -42,6 +42,7 @@ class CreateRecipeTableViewCell: UITableViewCell {
         $0.configuration = config
         $0.titleLabel?.numberOfLines = 2
         $0.tintColor = .systemGray4
+        $0.addTarget(self, action:  #selector(touchUpAddButton), for: .touchUpInside)
         return $0
     }(UIButton())
     
@@ -166,7 +167,7 @@ class CreateRecipeTableViewCell: UITableViewCell {
             alertController.addAction($0)
         }
         
-        NotificationCenter.default.post(name: CreateRecipeTableViewCell.timerNotificationName, object: alertController)
+        NotificationCenter.default.post(name: NotificationName.timer, object: alertController)
     }
     
     @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
@@ -179,6 +180,10 @@ class CreateRecipeTableViewCell: UITableViewCell {
         default:
             return
         }
+    }
+    
+    @objc func touchUpAddButton() {
+        setupImagePicker()
     }
     
     // MARK: - Custom Method
@@ -201,18 +206,69 @@ class CreateRecipeTableViewCell: UITableViewCell {
     func setCount(_ count: Int) {
         countLabel.text = "\(count)"
     }
+    
+    func isAllFilled() -> Bool {
+        return recipeImageView.image != nil && recipleTextView.text != "조리 방법을 자세하게 알려주세요."
+    }
+    
+    func getRecipe() -> RecipeModel {
+        return RecipeModel(
+            descriptions: recipleTextView.text ?? "",
+            image: recipeImageView.image ?? UIImage(),
+            timer: timer ?? "")
+    }
 }
+
+//MARK: - UITextViewDelegate
 
 extension CreateRecipeTableViewCell: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.textColor = .black
-        textView.text = nil
+        
+        if textView.text == "조리 방법을 자세하게 알려주세요." {
+            textView.text = nil
+        }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "조리 방법을 자세하게 알려주세요."
             textView.textColor = .systemGray4
+        }
+    }
+}
+
+//MARK: - PHPickerViewControllerDelegate
+ 
+extension CreateRecipeTableViewCell: PHPickerViewControllerDelegate {
+    func setupImagePicker() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 0
+        configuration.filter = .any(of: [.images])
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        NotificationCenter.default.post(name: NotificationName.present, object: picker)
+    }
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        guard !results.isEmpty else {
+            NotificationCenter.default.post(name: NotificationName.dismiss, object: nil)
+            return
+        }
+        let itemProvider = results.first?.itemProvider
+        
+        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                DispatchQueue.main.async {
+                    self.recipeImageView.image = image as? UIImage
+                    self.contentView.sendSubviewToBack(self.imageAddButton)
+                    self.recipeImageView.layer.cornerRadius = 0.0
+                }
+            }
+            NotificationCenter.default.post(name: NotificationName.dismiss, object: nil)
+        } else {
+            print("ERROR❗️")
         }
     }
 }
