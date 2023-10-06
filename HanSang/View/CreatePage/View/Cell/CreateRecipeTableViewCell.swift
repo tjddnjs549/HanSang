@@ -214,8 +214,12 @@ class CreateRecipeTableViewCell: UITableViewCell {
     }
     
     func getRecipe() -> RecipeModel {
+        var descriptions = ""
+        if recipleTextView.text != "조리 방법을 자세하게 알려주세요." {
+            descriptions = recipleTextView.text ?? ""
+        }
         return RecipeModel(
-            descriptions: recipleTextView.text ?? "",
+            descriptions: descriptions,
             image: recipeImageView.image ?? UIImage(),
             timer: timer ?? "")
     }
@@ -237,6 +241,15 @@ extension CreateRecipeTableViewCell: UITextViewDelegate {
             textView.text = "조리 방법을 자세하게 알려주세요."
             textView.textColor = .systemGray4
         }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        
+        let changedText = currentText.replacingCharacters(in: stringRange, with: text)
+        
+        return changedText.count < 50
     }
 }
 

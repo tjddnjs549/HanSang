@@ -44,8 +44,9 @@ class CreateViewController: UIViewController {
     
     let nextButton: UIButton = {
         $0.setTitle("다음으로", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.backgroundColor = ColorGuide.yellow900
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        $0.backgroundColor = ColorGuide.main
         $0.layer.cornerRadius = 15
         $0.addTarget(self, action: #selector(touchUpNextButton), for: .touchUpInside)
         return $0
