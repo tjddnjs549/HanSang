@@ -13,7 +13,7 @@ final class DetailViewTop: UIView {
     lazy var foodImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "Food1")
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
