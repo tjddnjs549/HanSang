@@ -8,23 +8,85 @@
 import UIKit
 
 class BookMarkViewController: UIViewController {
+    private let bookMarkView = BookMarkView()
+    var bookmarkedContents: [Content] = [] {
+        didSet {
+            bookMarkView.collectionView.reloadData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupBookmarkedContents()        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         
-        // Do any additional setup after loading the view.
+        setup()
+        setupBookmarkedContents()
+    }
+}
+
+private extension BookMarkViewController {
+    func setup() {
+        view = bookMarkView
+        bookMarkView.collectionView.dataSource = self
+        bookMarkView.collectionView.delegate = self
+    
+        if let originalImage = UIImage(named: "HANSANG") {
+            let tintedImage = originalImage.withTintColor(ColorGuide.main)
+            let button = UIBarButtonItem(image: tintedImage, style: .plain, target: nil, action: nil)
+            button.tintColor = ColorGuide.main
+            navigationItem.leftBarButtonItem = button
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(bookmarkButtonTapped), name: Notification.Name("BookmarkButtonTapped"), object: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupBookmarkedContents() {
+        bookmarkedContents = ContentDataManager.shared.getContentBookmark()
     }
-    */
-
+    
+    @objc func bookmarkButtonTapped() {
+        setupBookmarkedContents()
+    }
 }
+
+extension BookMarkViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return bookmarkedContents.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as? MyPageCustomCell else {
+            fatalError()
+        }
+        
+        let content = bookmarkedContents[indexPath.row]
+        cell.configure(content)
+        
+        cell.layer.borderWidth = 1.0
+        cell.layer.borderColor = ColorGuide.inputLine.cgColor
+        cell.layer.cornerRadius = 12
+        cell.layer.masksToBounds = true
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        detailVC.content = bookmarkedContents[indexPath.row]
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+
+ extension BookMarkViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = (view.bounds.size.width - 76)/2
+        return CGSize(width: size, height: 182)
+   }
+     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+         return 16
+     }
+ }

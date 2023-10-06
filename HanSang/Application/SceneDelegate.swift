@@ -5,18 +5,44 @@
 //  Created by 박성원 on 2023/09/25.
 //
 
+import CoreData
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    let loginViewModel = LoginViewModel()
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            
+            if isLoggedIn() {
+                // 자동 로그인 가능한 경우 user ID 불러오기
+                if let loggedInUserId = loadLoggedInUserId(),
+                   let user = loginViewModel.getUserId(loggedInUserId) {
+                    // 로그인 성공한 사용자 정보를 저장
+                    LoginViewModel.loginUser = user
+                    window.rootViewController = TabbarViewController()
+                } else {
+                    // 사용자 정보를 불러올 수 없는 경우 로그인 페이지로 이동
+                    window.rootViewController = LoginViewController()
+                }
+            } else {
+                // 자동 로그인이 아닌 경우 로그인 페이지로 이동
+                window.rootViewController = LoginViewController()
+            }
+            self.window = window
+            window.makeKeyAndVisible()
+        }
+    }
+
+    private func isLoggedIn() -> Bool {
+        return UserDefaults.standard.bool(forKey: "isLoggedIn")
+    }
+
+    private func loadLoggedInUserId() -> String? {
+        return UserDefaults.standard.string(forKey: "loggedInUserId")
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -49,7 +75,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-
-
 }
-
