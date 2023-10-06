@@ -28,7 +28,7 @@ private extension MainViewController {
         view = mainView
         mainView.collectionView.dataSource = self
         mainView.collectionView.delegate = self
-        content = ContentDataManager.shared.getContentListFromCoreData()
+        content = ContentDataManager.shared.getContentListFromCoreData().shuffled()
         if let originalImage = UIImage(named: "HANSANG") {
             let tintedImage = originalImage.withTintColor(ColorGuide.main)
             let button = UIBarButtonItem(image: tintedImage, style: .plain, target: nil, action: nil)
@@ -104,7 +104,7 @@ private extension MainViewController {
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return content.count
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
