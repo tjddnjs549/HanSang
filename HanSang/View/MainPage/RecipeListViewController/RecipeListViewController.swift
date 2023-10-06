@@ -94,6 +94,7 @@ extension RecipeListViewController: UICollectionViewDelegate {
     }
     
     //스크롤 시 탭바 올리거나 내리기 ❗️❗️❗️❗️❗️ (추가한 것이어서 오류나거나 멋 없으면 없애도 됩니다!)
+    /* 미적용 부분 있어서 주석처리
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         UIView.animate(withDuration: 0.3) {
             guard velocity.y != 0 else { return }
@@ -105,4 +106,5 @@ extension RecipeListViewController: UICollectionViewDelegate {
             }
         }
     }
+    */
 }

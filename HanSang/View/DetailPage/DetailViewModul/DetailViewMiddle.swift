@@ -54,9 +54,8 @@ final class DetailViewMiddle: UIView {
         let label = UILabel()
         label.labelMakeUI(textColor: ColorGuide.black, font: FontGuide.size16)
         label.text = """
-                    이 레시피의 킥은 이것입니다!
-                    이것을 조리할 때 빼먹지말고 넣어주세요.
-                    만약 없다면 oo 이것으로 대체해도 무방합니다!
+                    이 레시피의 킥은 불조절입니다!
+                    약불에서 살짝 계란을 익혀주세요!
                     """
         return label
     }()
