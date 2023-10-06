@@ -112,17 +112,17 @@ private extension MainViewController {
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return ContentDataManager.shared.getContentListFromCoreData().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainPageCollectionViewCell.identifier, for: indexPath) as?
-                MainPageCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as?
+                MyPageCustomCell else {
             fatalError("Failed to dequeue MainPageCollectionViewCell in MainViewController")
         }
         
-        let image = self.images[indexPath.row]
-        cell.configure(with: image)
+//        let image = self.images[indexPath.row]
+//        cell.configure(image)
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 16

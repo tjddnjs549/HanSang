@@ -32,7 +32,7 @@ class RecipeInfoView: UIView {
         return $0
     }(UILabel())
     
-    private lazy var imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         $0.backgroundColor = .clear
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.systemGray4.cgColor
@@ -68,7 +68,7 @@ class RecipeInfoView: UIView {
     }(UILabel())
     
     
-    private lazy var categoryCollcetionView: UICollectionView = {
+    lazy var categoryCollcetionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         let categoryHorizontal = UICollectionViewFlowLayout()
         categoryHorizontal.scrollDirection = .horizontal

@@ -79,7 +79,24 @@ class RecipeView: UIView {
     }
     
     // MARK: - Custom Method
-
+    func convertToMinutes(getSeconds: String?) -> String {
+        guard let secondsString = getSeconds, let getSeconds = Double(secondsString) else {
+            return ""
+        }
+        
+        let hours = Int(getSeconds / 3600)
+        let minutes = Int(getSeconds / 60)
+        let seconds = Int(getSeconds) % 60
+        if hours > 0 {
+            return "\(hours)시간 \(minutes)분"
+        } else if minutes > 0 && seconds != 0 {
+            return "\(minutes)분 \(seconds)초"
+        } else if seconds == 0 {
+            return "\(minutes)분"
+        } else {
+            return "\(seconds)초"
+        }
+    }
 }
 
 //MARK: - UITableViewDataSource
@@ -96,7 +113,9 @@ extension RecipeView: UITableViewDataSource {
         cell.selectionStyle = .none
         
         cell.setCount(indexPath.row + 1)
-        
+        cell.recipeImageView.image = recipeList[indexPath.row].image
+        cell.recipleTextView.text = recipeList[indexPath.row].descriptions
+        cell.timeLabel.text = convertToMinutes(getSeconds: recipeList[indexPath.row].timer)
         return cell
     }
 }

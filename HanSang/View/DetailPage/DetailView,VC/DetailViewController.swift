@@ -14,19 +14,15 @@ final class DetailViewController: UIViewController {
         didSet {
             if let imageData = content?.picture, let image = UIImage(data: imageData) {
                 detailView.detailViewTop.foodImageView.image = image
-            } else {
-                detailView.detailViewTop.foodImageView.image = nil
             }
             detailView.detailViewTop.titleLabel.text = content?.title
             detailView.detailViewTop.makeTimeLabel.text = content?.time
             detailView.detailViewTop.makeDifficultyLabel.text = content?.difficulty
             if let imageData = content?.user?.profilePicture, let image = UIImage(data: imageData) {
                 detailView.detailViewTop.profileImageView.image = image
-            } else {
-                detailView.detailViewTop.profileImageView.image = nil
             }
             detailView.detailViewTop.profileNameLabel.text = content?.user?.nickname
-        
+            detailView.detailViewTop.likeButton.isSelected = ((content?.bookmark) != nil)
         }
     }
     
@@ -120,7 +116,6 @@ private extension DetailViewController {
         material = dataManager.getMaterialsForContent(content: content)
         self.detailView.detailViewMiddle.materialTableView.reloadData()
         self.detailView.detailViewBottom.recipeTableView.reloadData()
-        print("recipeTimer: \(recipe.map{$0.timer})")
     }
     
 }
@@ -147,9 +142,8 @@ extension DetailViewController: UITableViewDataSource {
         } else if tableView == detailView.detailViewBottom.recipeTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeTableViewCell", for: indexPath) as! RecipeTableViewCell
             cell.cellMakeUI(index: indexPath.row)
-            if let imageData = recipe[indexPath.row].images, let image = UIImage(data: imageData) {
+            guard let imageData = recipe[indexPath.row].images, let image = UIImage(data: imageData) else {return UITableViewCell()}
                 cell.recipeImageView.image = image
-            } else { cell.recipeImageView.image = nil }
             
             cell.recipeLabel.text = recipe[indexPath.row].descriptions
             cell.timerLabel.text = convertToMinutes(getSeconds: recipe[indexPath.row].timer)
@@ -230,12 +224,17 @@ private extension DetailViewController {
 extension DetailViewController {
     
     @objc private func likeButtonTapped() {
+        guard let content = self.content else {
+            return
+        }
         detailView.detailViewTop.likeButton.isSelected.toggle()
         isLiked = detailView.detailViewTop.likeButton.isSelected
         print(isLiked)
+        ContentDataManager.shared.toggleBookmark(content: content)
     }
     @objc private func contentUpdateButtonTapped() {
         let createVC = CreateViewController()
+        createVC.content = content
         navigationController?.pushViewController(createVC, animated: true)
     }
     @objc private func backButtonTapped() {
