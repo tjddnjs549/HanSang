@@ -113,6 +113,11 @@ extension MyPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.layer.masksToBounds = true
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        detailVC.content = userContents[indexPath.row]
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 extension MyPageViewController: UICollectionViewDelegateFlowLayout {
