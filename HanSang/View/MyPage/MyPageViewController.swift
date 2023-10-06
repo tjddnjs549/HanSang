@@ -22,6 +22,7 @@ class MyPageViewController: UIViewController {
         super.viewWillAppear(animated)
         
         loadUserInfo()
+        loadUserContents()
     }
 
     override func viewDidLoad() {
