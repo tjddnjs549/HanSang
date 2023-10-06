@@ -92,4 +92,5 @@ extension RecipeListViewController: UICollectionViewDelegate {
         detailVC.content = dataManager.selectedCategoryContentList(category: pageTitle)[indexPath.item]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
+
 }

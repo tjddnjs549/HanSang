@@ -45,8 +45,8 @@ final class DetailView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         NSLayoutConstraint.activate([
-            detailViewMiddle.heightAnchor.constraint(greaterThanOrEqualToConstant: 450),
-            detailViewBottom.heightAnchor.constraint(greaterThanOrEqualToConstant: 500)
+            detailViewMiddle.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            detailViewBottom.heightAnchor.constraint(greaterThanOrEqualToConstant: 350)
         ])
 
     }
