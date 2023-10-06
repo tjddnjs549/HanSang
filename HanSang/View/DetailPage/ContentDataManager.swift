@@ -212,6 +212,21 @@ final class ContentDataManager {
         }
     }
     
+    // MARK: - [All Delete] 코어데이터에서 모든 데이터 삭제하기
+    func deleteAllContents() {
+        if let context = context {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.modelName)
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                try context.execute(batchDeleteRequest)
+                print("모든 Content 데이터 삭제 성공")
+            } catch {
+                print("모든 Content 데이터 삭제 실패: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     // MARK: - [Update] 코어데이터에서 Content 데이터 수정하기
     func updateContent(newData: Content) {
         guard let id = newData.id else { return }
