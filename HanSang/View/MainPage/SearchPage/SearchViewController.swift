@@ -11,6 +11,7 @@ class SearchViewController: UIViewController {
 //, UISearchResultsUpdating {
 
     // MARK: - varibles
+
     var searchContents: [Content] = [] {
         didSet {
             collectionView.reloadData()
@@ -96,6 +97,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
+
         return cell
     }
 }

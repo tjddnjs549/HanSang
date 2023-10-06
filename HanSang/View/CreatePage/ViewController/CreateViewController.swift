@@ -11,7 +11,28 @@ import PhotosUI
 
 class CreateViewController: UIViewController {
     
-    
+    var content: Content? {
+        didSet {
+            guard let contents = content else { return }
+            if let imageData = content?.picture, let image = UIImage(data: imageData) {
+                recipeInfoView.imageView.image = image
+            }
+            recipeInfoView.recipeTextField.text = content?.title
+            recipeInfoView.timeTextField.text = content?.time
+            let materials: [Materials] = ContentDataManager.shared.getMaterialsForContent(content: contents)
+            let materialModels: [MaterialModel] = materials.map { material in
+                return MaterialModel(material: material.material!, unit: material.unit!)}
+            materialView.materialList = materialModels
+            let recipes: [Recipe] = ContentDataManager.shared.getRecipesForContent(content: contents)
+            let recipeModels: [RecipeModel] = recipes.map { recipe in
+                if let imageData = recipe.images, let image = UIImage(data: imageData), let timer = recipe.timer, let des = recipe.descriptions  {
+                    return RecipeModel(descriptions: des, image: image, timer: timer)
+                }
+                return RecipeModel(descriptions: "", image: nil, timer: "")
+            }
+            recipeView.recipeList = recipeModels
+        }
+    }
     // MARK: - Properties
     
     private var page = 1
@@ -87,13 +108,22 @@ class CreateViewController: UIViewController {
     @objc func touchUpNextButton() {
         if page == 3 {
             setLastData()
-            coreDataManager.saveRecipe(
-                content: recipeInfoView.getRecipeInfo(),
-                materials: materialView.materialList,
-                recipes: recipeView.recipeList,
-                user: LoginViewModel.loginUser!)
-    
-            presentTabBar()
+            if let content = self.content {
+                if let image = recipeInfoView.imageView.image {
+                    content.picture = image.pngData()
+                }
+                content.title = recipeInfoView.recipeTextField.text
+                content.time = recipeInfoView.timeTextField.text
+                ContentDataManager.shared.updateContent(newData: content)
+            } else {
+                coreDataManager.saveRecipe(
+                    content: recipeInfoView.getRecipeInfo(),
+                    materials: materialView.materialList,
+                    recipes: recipeView.recipeList,
+                    user: LoginViewModel.loginUser!)
+                
+                presentTabBar()
+            }
         }
         
         page += 1

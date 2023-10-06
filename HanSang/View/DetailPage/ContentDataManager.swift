@@ -37,6 +37,24 @@ final class ContentDataManager {
         return content
     }
     
+    // MARK: - [Read] 코어데이터에 저장된  Material 데이터 모두 읽어오기
+    func getMaterialsForContent(content: Content) -> [Materials] {
+        var materials: [Materials] = []
+        if let contentMaterials = content.materials?.allObjects as? [Materials] {
+            materials = contentMaterials
+        }
+        return materials
+    }
+    
+    // MARK: - [Read] 코어데이터에 저장된  Recipe 데이터 모두 읽어오기
+    func getRecipesForContent(content: Content) -> [Recipe] {
+        var recipes: [Recipe] = []
+        if let contentRecipes = content.recipe?.allObjects as? [Recipe] {
+            recipes = contentRecipes
+        }
+        return recipes
+    }
+    
     // MARK: - [Read] 코어데이터에 저장된 category 데이터 모두 읽어오기
     func getCategoryListFromCoreData() -> [Category] {
         var category: [Category] = []

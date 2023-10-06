@@ -19,7 +19,7 @@ class RecipeInfoItemCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.categoryLabel.layer.borderColor = ColorGuide.black.cgColor
+                self.categoryLabel.layer.borderColor = ColorGuide.main.cgColor
                 self.categoryLabel.layer.borderWidth = 1.5
             } else {
                 self.categoryLabel.layer.borderColor = ColorGuide.inputLine.cgColor

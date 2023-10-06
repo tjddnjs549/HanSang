@@ -8,7 +8,7 @@
 import UIKit
 
 class RecipeListViewController: UIViewController {
-    private let recipeListView = RecipeListView()
+    let recipeListView = RecipeListView()
     private let dataManager = ContentDataManager.shared
   
     var pageTitle: String = ""
@@ -91,5 +91,18 @@ extension RecipeListViewController: UICollectionViewDelegate {
         let detailVC = DetailViewController()
         detailVC.content = dataManager.selectedCategoryContentList(category: pageTitle)[indexPath.item]
         self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    //스크롤 시 탭바 올리거나 내리기 ❗️❗️❗️❗️❗️ (추가한 것이어서 오류나거나 멋 없으면 없애도 됩니다!)
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        UIView.animate(withDuration: 0.3) {
+            guard velocity.y != 0 else { return }
+            if velocity.y < 0 {
+                let height = self.tabBarController?.tabBar.frame.height ?? 0.0
+                self.tabBarController?.tabBar.frame.origin = CGPoint(x: 0, y: UIScreen.main.bounds.maxY - height)
+            } else {
+                self.tabBarController?.tabBar.frame.origin = CGPoint(x: 0, y: UIScreen.main.bounds.maxY)
+            }
+        }
     }
 }

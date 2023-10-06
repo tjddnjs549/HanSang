@@ -23,7 +23,7 @@ class CreateRecipeTableViewCell: UITableViewCell {
         return $0
     }(UILabel())
     
-    private let recipeImageView: UIImageView = {
+    lazy var recipeImageView: UIImageView = {
         $0.backgroundColor = .clear
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.systemGray4.cgColor
@@ -48,7 +48,7 @@ class CreateRecipeTableViewCell: UITableViewCell {
         return $0
     }(UIButton())
     
-    private lazy var recipleTextView: UITextView = {
+    lazy var recipleTextView: UITextView = {
         $0.font = .systemFont(ofSize: 13)
         $0.text = "조리 방법을 자세하게 알려주세요."
         $0.textColor = .systemGray4
@@ -70,7 +70,7 @@ class CreateRecipeTableViewCell: UITableViewCell {
         return $0
     }(UIButton())
     
-    private let timeLabel: UILabel = {
+    let timeLabel: UILabel = {
         $0.text = "off"
         $0.font = .systemFont(ofSize: 10)
         $0.textColor = .systemGray4

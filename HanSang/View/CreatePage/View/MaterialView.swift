@@ -95,6 +95,8 @@ extension MaterialView: UITableViewDataSource {
             self.materialList.remove(at: indexPath.row)
             self.materialCreateTableView.reloadData()
         }
+        cell.materialTextField.text = materialList[indexPath.row].material
+        cell.amountTextField.text = materialList[indexPath.row].unit
         return cell
     }
     
