@@ -32,6 +32,7 @@ class MainPageCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "요리명"
         label.textAlignment = .left
+        label.numberOfLines = 1
         label.font = FontGuide.size19Bold
         label.textColor = ColorGuide.black
         label.snp.makeConstraints { make in
@@ -97,8 +98,10 @@ class MainPageCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    public func configure(with image: UIImage) {
+    public func configure(with image: UIImage, title: String, timer: String) {
         picture.image = image
+        self.title.text = title
+        self.timer.text = timer
         setupUI()
     }
     
