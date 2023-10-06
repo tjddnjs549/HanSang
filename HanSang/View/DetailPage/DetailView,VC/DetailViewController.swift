@@ -157,7 +157,7 @@ extension DetailViewController: UITableViewDataSource {
         return UITableViewCell()
     }
 }
-extension DetailViewController: UITableViewDelegate{
+extension DetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == detailView.detailViewBottom.recipeTableView {

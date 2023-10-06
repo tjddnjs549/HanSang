@@ -12,15 +12,7 @@ class MainViewController: UIViewController {
     
     // MARK: - varibles
     private let mainView = MainView()
-    private var images: [UIImage] = [
-        UIImage(named: "1")!,
-        UIImage(named: "2")!,
-        UIImage(named: "3")!,
-        UIImage(named: "4")!,
-        UIImage(named: "5")!,
-        UIImage(named: "6")!,
-        UIImage(named: "7")!,
-    ]
+    private var content: [Content] = []
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -36,7 +28,7 @@ private extension MainViewController {
         view = mainView
         mainView.collectionView.dataSource = self
         mainView.collectionView.delegate = self
-        
+        content = ContentDataManager.shared.getContentListFromCoreData().shuffled()
         if let originalImage = UIImage(named: "HANSANG") {
             let tintedImage = originalImage.withTintColor(ColorGuide.main)
             let button = UIBarButtonItem(image: tintedImage, style: .plain, target: nil, action: nil)
@@ -112,22 +104,29 @@ private extension MainViewController {
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ContentDataManager.shared.getContentListFromCoreData().count
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCustomCell.identifier, for: indexPath) as?
-                MyPageCustomCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainPageCollectionViewCell.identifier, for: indexPath) as?
+                MainPageCollectionViewCell else {
             fatalError("Failed to dequeue MainPageCollectionViewCell in MainViewController")
         }
         
-//        let image = self.images[indexPath.row]
-//        cell.configure(image)
+        let contents = self.content[indexPath.row]
+        if let imageData = contents.picture, let image = UIImage(data: imageData) {
+            cell.configure(with: image, title: contents.title!, timer: contents.time!)
+        }
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = ColorGuide.inputLine.cgColor
         cell.layer.cornerRadius = 16
         cell.layer.masksToBounds = true
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        detailVC.content = content[indexPath.row]
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
